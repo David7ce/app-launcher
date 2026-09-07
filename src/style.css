@@ -82,38 +82,46 @@ main {
   margin: 0 auto;
 }
 
+/* A regular grid gives every card in a row the same height as the tallest
+   one, so one big category forces empty space next to its shorter
+   row-mates and the page grows taller than it needs to. CSS multi-column
+   flows each card into whichever column is shortest so far instead,
+   balancing total height across columns — much less wasted vertical
+   space for a fixed set of categories that varies a lot in size. */
 #categories {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  align-items: start;
-  gap: 20px;
+  column-count: 1;
+  column-gap: 20px;
 }
 
 @media (min-width: 700px) {
   #categories {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
   }
 }
 
 @media (min-width: 1050px) {
   #categories {
-    grid-template-columns: repeat(3, 1fr);
+    column-count: 3;
   }
 }
 
 @media (min-width: 1350px) {
   #categories {
-    grid-template-columns: repeat(4, 1fr);
+    column-count: 4;
   }
 }
 
 @media (min-width: 1650px) {
   #categories {
-    grid-template-columns: repeat(5, 1fr);
+    column-count: 5;
   }
 }
 
 section.category {
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 18px 20px;
@@ -121,6 +129,9 @@ section.category {
 }
 
 section.category h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -129,10 +140,15 @@ section.category h2 {
   margin: 0 0 14px;
 }
 
+section.category h2 .category-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
-  gap: 8px 4px;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 6px 4px;
 }
 
 .tile {
@@ -166,9 +182,9 @@ section.category h2 {
 
 .tile img,
 .tile svg {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
   object-fit: contain;
   background: var(--bg);
 }
@@ -187,7 +203,6 @@ section.category h2 {
 
 #empty-state,
 #no-results {
-  grid-column: 1 / -1;
   color: var(--muted);
   padding: 40px 0;
   text-align: center;
@@ -209,12 +224,12 @@ section.category h2 {
   }
 
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
   }
 
   .tile img,
   .tile svg {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
   }
 }

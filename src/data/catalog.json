@@ -77,7 +77,7 @@
     "bin": "gcc",
     "icon": "gcc.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "geany",
@@ -196,16 +196,6 @@
     "category": "Development",
     "bin": "kate",
     "icon": "org.kde.kate.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.kdebugsettings",
-    "name": "KDebugSettings",
-    "vendor": "",
-    "category": "Development",
-    "bin": "kdebugsettings",
-    "icon": "org.kde.kdebugsettings.png",
     "hidden": false,
     "cli": false
   },
@@ -470,6 +460,16 @@
     "cli": false
   },
   {
+    "id": "win-visual-studio",
+    "name": "Visual Studio",
+    "vendor": "Microsoft",
+    "category": "Development",
+    "bin": "devenv.exe",
+    "icon": "win-visual-studio.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "code",
     "name": "Visual Studio Code",
     "vendor": "",
@@ -506,6 +506,16 @@
     "category": "Development",
     "bin": "xampp",
     "icon": "xampp.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-xcode",
+    "name": "Xcode",
+    "vendor": "Apple",
+    "category": "Development",
+    "bin": "Xcode",
+    "icon": "mac-xcode.png",
     "hidden": false,
     "cli": false
   },
@@ -660,6 +670,16 @@
     "cli": false
   },
   {
+    "id": "win-xbox",
+    "name": "Xbox",
+    "vendor": "Microsoft",
+    "category": "Games",
+    "bin": "XboxApp.exe",
+    "icon": "win-xbox.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "xemu",
     "name": "Xemu",
     "vendor": "",
@@ -810,6 +830,36 @@
     "cli": false
   },
   {
+    "id": "win-paint",
+    "name": "Paint",
+    "vendor": "Microsoft",
+    "category": "Graphics",
+    "bin": "mspaint.exe",
+    "icon": "win-paint.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-photos",
+    "name": "Photos",
+    "vendor": "Apple",
+    "category": "Graphics",
+    "bin": "Photos",
+    "icon": "mac-photos.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-preview",
+    "name": "Preview",
+    "vendor": "Apple",
+    "category": "Graphics",
+    "bin": "Preview",
+    "icon": "mac-preview.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "rapidraw",
     "name": "RapidRaw",
     "vendor": "",
@@ -940,6 +990,16 @@
     "cli": false
   },
   {
+    "id": "mac-facetime",
+    "name": "FaceTime",
+    "vendor": "Apple",
+    "category": "Internet",
+    "bin": "FaceTime",
+    "icon": "mac-facetime.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "org.mozilla.firefox",
     "name": "Firefox",
     "vendor": "",
@@ -980,26 +1040,6 @@
     "cli": false
   },
   {
-    "id": "org.kde.kdeconnect.nonplasma",
-    "name": "KDE Connect Indicator",
-    "vendor": "",
-    "category": "Internet",
-    "bin": "kdeconnect-indicator",
-    "icon": "org.kde.kdeconnect.nonplasma.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.kdeconnect.sms",
-    "name": "KDE Connect SMS",
-    "vendor": "",
-    "category": "Internet",
-    "bin": "kdeconnect-sms",
-    "icon": "org.kde.kdeconnect.sms.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "org.kde.krdc",
     "name": "KRDC",
     "vendor": "",
@@ -1030,12 +1070,52 @@
     "cli": false
   },
   {
+    "id": "mac-mail",
+    "name": "Mail",
+    "vendor": "Apple",
+    "category": "Internet",
+    "bin": "Mail",
+    "icon": "mac-mail.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-messages",
+    "name": "Messages",
+    "vendor": "Apple",
+    "category": "Internet",
+    "bin": "Messages",
+    "icon": "mac-messages.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "microsoft-edge",
     "name": "Microsoft Edge",
     "vendor": "Microsoft",
     "category": "Internet",
     "bin": "microsoft-edge-stable",
     "icon": "microsoft-edge.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-outlook",
+    "name": "Microsoft Outlook",
+    "vendor": "Microsoft",
+    "category": "Internet",
+    "bin": "OUTLOOK.EXE",
+    "icon": "win-outlook.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "teams-for-linux",
+    "name": "Microsoft Teams",
+    "vendor": "Microsoft",
+    "category": "Internet",
+    "bin": "teams-for-linux",
+    "icon": "teams-for-linux.png",
     "hidden": false,
     "cli": false
   },
@@ -1060,6 +1140,16 @@
     "cli": false
   },
   {
+    "id": "onedrive-client",
+    "name": "OneDrive",
+    "vendor": "Microsoft",
+    "category": "Internet",
+    "bin": "onedrive",
+    "icon": "onedrive-client.png",
+    "hidden": false,
+    "cli": true
+  },
+  {
     "id": "opera",
     "name": "Opera",
     "vendor": "",
@@ -1080,12 +1170,32 @@
     "cli": false
   },
   {
+    "id": "mac-safari",
+    "name": "Safari",
+    "vendor": "Apple",
+    "category": "Internet",
+    "bin": "Safari",
+    "icon": "mac-safari.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "signal",
     "name": "Signal",
     "vendor": "",
     "category": "Internet",
     "bin": "signal-desktop",
     "icon": "signal.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-skype",
+    "name": "Skype",
+    "vendor": "Microsoft",
+    "category": "Internet",
+    "bin": "Skype.exe",
+    "icon": "win-skype.png",
     "hidden": false,
     "cli": false
   },
@@ -1280,6 +1390,16 @@
     "cli": false
   },
   {
+    "id": "mac-garageband",
+    "name": "GarageBand",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "GarageBand",
+    "icon": "mac-garageband.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "handbrake",
     "name": "HandBrake",
     "vendor": "",
@@ -1306,6 +1426,16 @@
     "category": "Multimedia",
     "bin": "haruna",
     "icon": "haruna.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-imovie",
+    "name": "iMovie",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "iMovie",
+    "icon": "mac-imovie.png",
     "hidden": false,
     "cli": false
   },
@@ -1370,6 +1500,16 @@
     "cli": false
   },
   {
+    "id": "win-media-player",
+    "name": "Media Player",
+    "vendor": "Microsoft",
+    "category": "Multimedia",
+    "bin": "wmplayer.exe",
+    "icon": "win-media-player.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "mpc-hc",
     "name": "MPC-HC",
     "vendor": "",
@@ -1396,6 +1536,16 @@
     "category": "Multimedia",
     "bin": "musescore",
     "icon": "musescore.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-music",
+    "name": "Music",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "Music",
+    "icon": "mac-music.png",
     "hidden": false,
     "cli": false
   },
@@ -1470,6 +1620,26 @@
     "cli": false
   },
   {
+    "id": "mac-podcasts",
+    "name": "Podcasts",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "Podcasts",
+    "icon": "mac-podcasts.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-quicktime",
+    "name": "QuickTime Player",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "QuickTime Player",
+    "icon": "mac-quicktime.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "reaper",
     "name": "REAPER",
     "vendor": "",
@@ -1536,6 +1706,16 @@
     "category": "Multimedia",
     "bin": "tenacity",
     "icon": "tenacity.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-tv",
+    "name": "TV",
+    "vendor": "Apple",
+    "category": "Multimedia",
+    "bin": "TV",
+    "icon": "mac-tv.png",
     "hidden": false,
     "cli": false
   },
@@ -1620,6 +1800,26 @@
     "cli": false
   },
   {
+    "id": "win-calculator",
+    "name": "Calculator",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "calc.exe",
+    "icon": "win-calculator.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-calendar",
+    "name": "Calendar",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "Calendar",
+    "icon": "mac-calendar.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "calibre",
     "name": "Calibre",
     "vendor": "",
@@ -1630,22 +1830,12 @@
     "cli": false
   },
   {
-    "id": "org.kde.contactprintthemeeditor",
-    "name": "Contact Print Theme Editor",
-    "vendor": "",
+    "id": "mac-contacts",
+    "name": "Contacts",
+    "vendor": "Apple",
     "category": "Office",
-    "bin": "contactprintthemeeditor",
-    "icon": "org.kde.contactprintthemeeditor.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.contactthemeeditor",
-    "name": "Contact Theme Editor",
-    "vendor": "",
-    "category": "Office",
-    "bin": "contactthemeeditor",
-    "icon": "org.kde.contactthemeeditor.svg",
+    "bin": "Contacts",
+    "icon": "mac-contacts.png",
     "hidden": false,
     "cli": false
   },
@@ -1750,6 +1940,16 @@
     "cli": false
   },
   {
+    "id": "mac-keynote",
+    "name": "Keynote",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "Keynote",
+    "icon": "mac-keynote.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "kiwix",
     "name": "Kiwix",
     "vendor": "",
@@ -1766,16 +1966,6 @@
     "category": "Office",
     "bin": "kmail",
     "icon": "org.kde.kmail2.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.headerthemeeditor",
-    "name": "KMail Header Theme Editor",
-    "vendor": "",
-    "category": "Office",
-    "bin": "headerthemeeditor",
-    "icon": "org.kde.headerthemeeditor.svg",
     "hidden": false,
     "cli": false
   },
@@ -1860,12 +2050,62 @@
     "cli": false
   },
   {
+    "id": "win-excel",
+    "name": "Microsoft Excel",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "EXCEL.EXE",
+    "icon": "win-excel.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-powerpoint",
+    "name": "Microsoft PowerPoint",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "POWERPNT.EXE",
+    "icon": "win-powerpoint.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-word",
+    "name": "Microsoft Word",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "WINWORD.EXE",
+    "icon": "win-word.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "monero-gui",
     "name": "Monero GUI Wallet",
     "vendor": "",
     "category": "Office",
     "bin": "monero-gui",
     "icon": "monero-gui.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-notepad",
+    "name": "Notepad",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "notepad.exe",
+    "icon": "win-notepad.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-notes",
+    "name": "Notes",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "Notes",
+    "icon": "mac-notes.png",
     "hidden": false,
     "cli": false
   },
@@ -1880,6 +2120,16 @@
     "cli": false
   },
   {
+    "id": "mac-numbers",
+    "name": "Numbers",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "Numbers",
+    "icon": "mac-numbers.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "obsidian",
     "name": "Obsidian",
     "vendor": "",
@@ -1890,12 +2140,32 @@
     "cli": false
   },
   {
+    "id": "win-onenote",
+    "name": "OneNote",
+    "vendor": "Microsoft",
+    "category": "Office",
+    "bin": "ONENOTE.EXE",
+    "icon": "win-onenote.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "onlyoffice",
     "name": "OnlyOffice",
     "vendor": "",
     "category": "Office",
     "bin": "onlyoffice",
     "icon": "onlyoffice.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-pages",
+    "name": "Pages",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "Pages",
+    "icon": "mac-pages.png",
     "hidden": false,
     "cli": false
   },
@@ -1920,12 +2190,12 @@
     "cli": false
   },
   {
-    "id": "org.kde.sieveeditor",
-    "name": "Sieve Editor",
-    "vendor": "",
+    "id": "mac-reminders",
+    "name": "Reminders",
+    "vendor": "Apple",
     "category": "Office",
-    "bin": "sieveeditor",
-    "icon": "org.kde.sieveeditor.svg",
+    "bin": "Reminders",
+    "icon": "mac-reminders.png",
     "hidden": false,
     "cli": false
   },
@@ -1946,6 +2216,16 @@
     "category": "Office",
     "bin": "gnome-text-editor",
     "icon": "gnome-text-editor.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-textedit",
+    "name": "TextEdit",
+    "vendor": "Apple",
+    "category": "Office",
+    "bin": "TextEdit",
+    "icon": "mac-textedit.png",
     "hidden": false,
     "cli": false
   },
@@ -2020,6 +2300,16 @@
     "cli": false
   },
   {
+    "id": "mac-activity-monitor",
+    "name": "Activity Monitor",
+    "vendor": "Apple",
+    "category": "System",
+    "bin": "Activity Monitor",
+    "icon": "mac-activity-monitor.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "anydesk",
     "name": "AnyDesk",
     "vendor": "",
@@ -2036,6 +2326,16 @@
     "category": "System",
     "bin": "httpd",
     "icon": "apache.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-app-store",
+    "name": "App Store",
+    "vendor": "Apple",
+    "category": "System",
+    "bin": "App Store",
+    "icon": "mac-app-store.png",
     "hidden": false,
     "cli": false
   },
@@ -2090,16 +2390,6 @@
     "cli": false
   },
   {
-    "id": "org.kde.drkonqi.coredump.gui",
-    "name": "Crashed Processes Viewer",
-    "vendor": "",
-    "category": "System",
-    "bin": "drkonqi-coredump-gui",
-    "icon": "org.kde.drkonqi.coredump.gui.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "cryptomator",
     "name": "Cryptomator",
     "vendor": "",
@@ -2116,6 +2406,16 @@
     "category": "System",
     "bin": "plasma-discover",
     "icon": "org.kde.discover.svg",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-disk-utility",
+    "name": "Disk Utility",
+    "vendor": "Apple",
+    "category": "System",
+    "bin": "Disk Utility",
+    "icon": "mac-disk-utility.png",
     "hidden": false,
     "cli": false
   },
@@ -2240,36 +2540,6 @@
     "cli": false
   },
   {
-    "id": "im-chooser",
-    "name": "Input Method Selector",
-    "vendor": "",
-    "category": "System",
-    "bin": "im-chooser",
-    "icon": "im-chooser.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.kjournaldbrowser",
-    "name": "Journald Browser",
-    "vendor": "",
-    "category": "System",
-    "bin": "kjournaldbrowser",
-    "icon": "org.kde.kjournaldbrowser.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "kde-connect",
-    "name": "KDE Connect",
-    "vendor": "",
-    "category": "System",
-    "bin": "kdeconnect",
-    "icon": "kde-connect.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "org.kde.partitionmanager",
     "name": "KDE Partition Manager",
     "vendor": "",
@@ -2310,12 +2580,12 @@
     "cli": false
   },
   {
-    "id": "org.kde.kmenuedit",
-    "name": "Menu Editor",
-    "vendor": "",
+    "id": "win-store",
+    "name": "Microsoft Store",
+    "vendor": "Microsoft",
     "category": "System",
-    "bin": "kmenuedit",
-    "icon": "org.kde.kmenuedit.svg",
+    "bin": "WinStore.App.exe",
+    "icon": "win-store.png",
     "hidden": false,
     "cli": false
   },
@@ -2380,16 +2650,6 @@
     "cli": false
   },
   {
-    "id": "org.freedesktop.GnomeAbrt",
-    "name": "Problem Reporting",
-    "vendor": "",
-    "category": "System",
-    "bin": "gnome-abrt",
-    "icon": "org.freedesktop.GnomeAbrt.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "proton-vpn",
     "name": "Proton VPN",
     "vendor": "",
@@ -2440,12 +2700,12 @@
     "cli": false
   },
   {
-    "id": "setroubleshoot",
-    "name": "SELinux Troubleshooter",
-    "vendor": "",
+    "id": "win-settings",
+    "name": "Settings",
+    "vendor": "Microsoft",
     "category": "System",
-    "bin": "sealert",
-    "icon": "setroubleshoot.svg",
+    "bin": "ms-settings:",
+    "icon": "win-settings.png",
     "hidden": false,
     "cli": false
   },
@@ -2480,6 +2740,16 @@
     "cli": false
   },
   {
+    "id": "mac-system-settings",
+    "name": "System Settings",
+    "vendor": "Apple",
+    "category": "System",
+    "bin": "System Settings",
+    "icon": "mac-system-settings.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "systemsettings",
     "name": "System Settings",
     "vendor": "",
@@ -2496,6 +2766,16 @@
     "category": "System",
     "bin": "tailscale",
     "icon": "tailscale.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-task-manager",
+    "name": "Task Manager",
+    "vendor": "Microsoft",
+    "category": "System",
+    "bin": "taskmgr.exe",
+    "icon": "win-task-manager.png",
     "hidden": false,
     "cli": false
   },
@@ -2640,6 +2920,16 @@
     "cli": false
   },
   {
+    "id": "mac-automator",
+    "name": "Automator",
+    "vendor": "Apple",
+    "category": "Utilities",
+    "bin": "Automator",
+    "icon": "mac-automator.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "balena-etcher",
     "name": "Balena Etcher",
     "vendor": "",
@@ -2750,6 +3040,16 @@
     "cli": true
   },
   {
+    "id": "win-explorer",
+    "name": "File Explorer",
+    "vendor": "Microsoft",
+    "category": "Utilities",
+    "bin": "explorer.exe",
+    "icon": "win-explorer.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "org.kde.filelight",
     "name": "Filelight",
     "vendor": "",
@@ -2766,6 +3066,16 @@
     "category": "Utilities",
     "bin": "nautilus",
     "icon": "nautilus.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "mac-finder",
+    "name": "Finder",
+    "vendor": "Apple",
+    "category": "Utilities",
+    "bin": "Finder",
+    "icon": "mac-finder.png",
     "hidden": false,
     "cli": false
   },
@@ -2920,32 +3230,12 @@
     "cli": false
   },
   {
-    "id": "org.kde.akonadiimportwizard",
-    "name": "KMail Import Wizard",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": "akonadiimportwizard",
-    "icon": "org.kde.akonadiimportwizard.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "org.kde.kmouth",
     "name": "KMouth",
     "vendor": "",
     "category": "Utilities",
     "bin": "kmouth",
     "icon": "org.kde.kmouth.svg",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.kwrite",
-    "name": "KWrite",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": "kwrite",
-    "icon": "org.kde.kwrite.svg",
     "hidden": false,
     "cli": false
   },
@@ -3150,6 +3440,16 @@
     "cli": false
   },
   {
+    "id": "mac-terminal",
+    "name": "Terminal",
+    "vendor": "Apple",
+    "category": "Utilities",
+    "bin": "Terminal",
+    "icon": "mac-terminal.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "timeshift",
     "name": "Timeshift",
     "vendor": "",
@@ -3200,22 +3500,22 @@
     "cli": false
   },
   {
-    "id": "org.kde.plasma-welcome",
-    "name": "Welcome Center",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": "plasma-welcome",
-    "icon": "org.kde.plasma-welcome.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "wezterm",
     "name": "WezTerm",
     "vendor": "",
     "category": "Utilities",
     "bin": "wezterm",
     "icon": "wezterm.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-terminal",
+    "name": "Windows Terminal",
+    "vendor": "Microsoft",
+    "category": "Utilities",
+    "bin": "wt.exe",
+    "icon": "win-terminal.png",
     "hidden": false,
     "cli": false
   }

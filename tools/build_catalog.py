@@ -28,7 +28,7 @@ BIN_FIELD_PRIORITY = [
 ]
 
 # Dataset subcategories that are unambiguously terminal-only tools.
-CLI_SUBCATEGORIES = {"CLI Utility"}
+CLI_SUBCATEGORIES = {"CLI Utility", "Compiler"}
 
 # A few well-known CLI-only tools whose dataset subcategory is shared with
 # GUI apps (e.g. "System Monitor" also covers GNOME System Monitor), so the
@@ -67,9 +67,34 @@ def category_for(cat_map: dict, category: str, subcategory: str | None) -> str:
     return cat_map["by_category"][category]
 
 
-# This machine's own app-launcher shortcut shows up in the system scan
-# (it drops a .desktop file too) — self-referential, always excluded.
-SYSTEM_SCAN_EXCLUDE_IDS = {"app-launcher"}
+# Ids hidden from the final catalog regardless of which source they came
+# from: this machine's own app-launcher shortcut (self-referential, shows
+# up in the system scan since it drops a .desktop file too), near-duplicate
+# entries for something already covered by a more useful one (extra KDE
+# Connect variants, a second address-book style bin), obscure single-purpose
+# sub-editors bundled with the Kontact/KMail suite that clutter without
+# being an "important" app on their own, and a crash-reporter applet.
+# Extend by hand as more low-value clutter turns up in a system scan.
+EXCLUDED_IDS = {
+    "app-launcher",
+    "kde-connect",  # dataset-derived dupe of org.kde.kdeconnect.app, wrong bin anyway
+    "org.kde.kdeconnect.nonplasma",  # KDE Connect Indicator — same app as KDE Connect
+    "org.kde.kdeconnect.sms",  # KDE Connect SMS — same app as KDE Connect
+    "org.kde.kwrite",  # Kate covers this
+    "org.kde.contactprintthemeeditor",
+    "org.kde.contactthemeeditor",
+    "org.kde.headerthemeeditor",
+    "org.kde.sieveeditor",
+    "org.kde.akonadiimportwizard",
+    "org.freedesktop.GnomeAbrt",  # "Problem Reporting" crash applet, not a real app
+    "org.kde.drkonqi.coredump.gui",  # "Crashed Processes Viewer" — same idea, KDE's version
+    "org.kde.plasma-welcome",  # "Welcome Center" — first-run onboarding screen, not an app
+    "org.kde.kdebugsettings",  # dev-only debug-logging config, not a user app
+    "org.kde.kjournaldbrowser",  # systemd journal log viewer, sysadmin meta tool
+    "org.kde.kmenuedit",  # editor for the start menu this launcher replaces
+    "im-chooser",  # input-method setup wizard, onboarding-ish system config
+    "setroubleshoot",  # SELinux diagnostic tool, same spirit as the crash reporters above
+}
 
 
 def main() -> None:
@@ -109,7 +134,7 @@ def main() -> None:
             "bin": entry["bin"],
             "icon": entry.get("icon", f"{entry['id']}.png"),
             "hidden": False,
-            "cli": False,
+            "cli": entry.get("cli", False),
         }
 
     # Two catalog entries that launch the identical binary are the same app
@@ -130,7 +155,7 @@ def main() -> None:
     # a dataset/vendor entry for the same bin, and add anything new.
     new_from_system = 0
     for entry in system_apps:
-        if entry["id"] in SYSTEM_SCAN_EXCLUDE_IDS:
+        if entry["id"] in EXCLUDED_IDS:
             continue
         if entry["bin"] not in by_bin:
             new_from_system += 1
@@ -145,7 +170,10 @@ def main() -> None:
             "cli": False,
         }
 
-    result = sorted(by_bin.values(), key=lambda e: (e["category"], e["name"].lower()))
+    result = sorted(
+        (e for e in by_bin.values() if e["id"] not in EXCLUDED_IDS),
+        key=lambda e: (e["category"], e["name"].lower()),
+    )
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")
 

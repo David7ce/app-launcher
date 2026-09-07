@@ -11,6 +11,19 @@ const CATEGORY_ORDER = [
   "Utilities",
 ];
 
+const CATEGORY_ICONS = {
+  Development: "\u{1F4BB}", // 💻
+  Education: "\u{1F393}", // 🎓
+  Graphics: "\u{1F3A8}", // 🎨
+  Internet: "\u{1F310}", // 🌐
+  Games: "\u{1F3AE}", // 🎮
+  Multimedia: "\u{1F3AC}", // 🎬
+  Office: "\u{1F4C4}", // 📄
+  Science: "\u{1F52C}", // 🔬
+  System: "\u{2699}\u{FE0F}", // ⚙️
+  Utilities: "\u{1F9F0}", // 🧰
+};
+
 const { invoke } = window.__TAURI__.core;
 
 const categoriesEl = document.getElementById("categories");
@@ -73,7 +86,13 @@ function renderCategories(grouped) {
     section.className = "category";
 
     const heading = document.createElement("h2");
-    heading.textContent = category;
+    const icon = document.createElement("span");
+    icon.className = "category-icon";
+    icon.textContent = CATEGORY_ICONS[category] || "";
+    icon.setAttribute("aria-hidden", "true");
+    const label = document.createElement("span");
+    label.textContent = category;
+    heading.append(icon, label);
 
     const grid = document.createElement("div");
     grid.className = "grid";

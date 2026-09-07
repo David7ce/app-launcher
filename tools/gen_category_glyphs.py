@@ -7,6 +7,7 @@ zero licensing questions, zero network dependency, trivially reproducible.
 One-off script, not run by the app.
 """
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "src" / "assets" / "icons" / "category"
@@ -47,7 +48,10 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for category, (color, label) in GLYPHS.items():
         font_size = 16 if len(label) <= 3 else 13
-        svg = SVG_TEMPLATE.format(color=color, label=label, font_size=font_size)
+        # Text content in SVG is XML — a raw "<" (as in the "</>" label)
+        # would otherwise start what looks like a tag, making the file
+        # invalid XML that silently fails to render.
+        svg = SVG_TEMPLATE.format(color=color, label=escape(label), font_size=font_size)
         (OUT / f"{category}.svg").write_text(svg)
     (OUT / "cli-tool.svg").write_text(CLI_SVG)
     print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph to {OUT.relative_to(ROOT)}")
