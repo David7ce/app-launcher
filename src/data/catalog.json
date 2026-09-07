@@ -4,7 +4,10 @@
     "name": "Ansible",
     "vendor": "",
     "category": "Development",
-    "bin": "ansible",
+    "bin": {
+      "linux": "ansible",
+      "macos": "Ansible"
+    },
     "icon": "ansible.png",
     "hidden": false,
     "cli": false
@@ -14,7 +17,11 @@
     "name": "Claude Code",
     "vendor": "",
     "category": "Development",
-    "bin": "claude-code",
+    "bin": {
+      "linux": "claude-code",
+      "windows": "claude-code",
+      "macos": "Claude Code"
+    },
     "icon": "claude-code.png",
     "hidden": false,
     "cli": false
@@ -24,7 +31,11 @@
     "name": "Claude Desktop",
     "vendor": "",
     "category": "Development",
-    "bin": "claude-desktop",
+    "bin": {
+      "linux": "claude-desktop",
+      "windows": "claude-desktop",
+      "macos": "Claude"
+    },
     "icon": "claude-desktop.png",
     "hidden": false,
     "cli": false
@@ -34,7 +45,11 @@
     "name": "Codex",
     "vendor": "",
     "category": "Development",
-    "bin": "codex-bin",
+    "bin": {
+      "linux": "codex-bin",
+      "windows": "codex-bin",
+      "macos": "Codex"
+    },
     "icon": "codex.png",
     "hidden": false,
     "cli": false
@@ -44,7 +59,11 @@
     "name": "DBeaver",
     "vendor": "",
     "category": "Development",
-    "bin": "dbeaver-ce",
+    "bin": {
+      "linux": "dbeaver-ce",
+      "windows": "dbeaver-ce",
+      "macos": "Dbeaver Community"
+    },
     "icon": "dbeaver.png",
     "hidden": false,
     "cli": false
@@ -54,7 +73,11 @@
     "name": "Deno",
     "vendor": "",
     "category": "Development",
-    "bin": "deno",
+    "bin": {
+      "linux": "deno",
+      "windows": "deno",
+      "macos": "Deno"
+    },
     "icon": "deno.png",
     "hidden": false,
     "cli": false
@@ -64,7 +87,11 @@
     "name": "Dotnet Runtime",
     "vendor": "",
     "category": "Development",
-    "bin": "dotnet-runtime-6.0",
+    "bin": {
+      "linux": "dotnet-runtime-6.0",
+      "windows": "dotnet-runtime-6.0",
+      "macos": "Dotnet"
+    },
     "icon": "dotnet-runtime.png",
     "hidden": false,
     "cli": false
@@ -74,7 +101,11 @@
     "name": "GCC",
     "vendor": "",
     "category": "Development",
-    "bin": "gcc",
+    "bin": {
+      "linux": "gcc",
+      "windows": "gcc",
+      "macos": "Gcc"
+    },
     "icon": "gcc.png",
     "hidden": false,
     "cli": true
@@ -84,7 +115,11 @@
     "name": "Geany",
     "vendor": "",
     "category": "Development",
-    "bin": "geany",
+    "bin": {
+      "linux": "geany",
+      "windows": "geany",
+      "macos": "Geany"
+    },
     "icon": "geany.png",
     "hidden": false,
     "cli": false
@@ -94,7 +129,11 @@
     "name": "Git",
     "vendor": "",
     "category": "Development",
-    "bin": "git",
+    "bin": {
+      "linux": "git",
+      "windows": "git",
+      "macos": "Git"
+    },
     "icon": "git.png",
     "hidden": false,
     "cli": false
@@ -104,7 +143,11 @@
     "name": "GitHub Desktop",
     "vendor": "",
     "category": "Development",
-    "bin": "github-desktop-bin",
+    "bin": {
+      "linux": "github-desktop-bin",
+      "windows": "github-desktop-bin",
+      "macos": "Github"
+    },
     "icon": "github-desktop.png",
     "hidden": false,
     "cli": false
@@ -114,7 +157,11 @@
     "name": "Go",
     "vendor": "",
     "category": "Development",
-    "bin": "golang",
+    "bin": {
+      "linux": "golang",
+      "windows": "golang",
+      "macos": "Go"
+    },
     "icon": "go.png",
     "hidden": false,
     "cli": false
@@ -124,7 +171,11 @@
     "name": "Godot",
     "vendor": "",
     "category": "Development",
-    "bin": "godot",
+    "bin": {
+      "linux": "godot",
+      "windows": "godot",
+      "macos": "Godot"
+    },
     "icon": "godot.png",
     "hidden": false,
     "cli": false
@@ -134,7 +185,10 @@
     "name": "Gource",
     "vendor": "",
     "category": "Development",
-    "bin": "gource",
+    "bin": {
+      "linux": "gource",
+      "macos": "Gource"
+    },
     "icon": "gource.png",
     "hidden": false,
     "cli": false
@@ -144,7 +198,11 @@
     "name": "Hugo",
     "vendor": "",
     "category": "Development",
-    "bin": "hugo",
+    "bin": {
+      "linux": "hugo",
+      "windows": "hugo",
+      "macos": "Hugo"
+    },
     "icon": "hugo.png",
     "hidden": false,
     "cli": false
@@ -154,7 +212,11 @@
     "name": "Insomnia",
     "vendor": "",
     "category": "Development",
-    "bin": "insomnia",
+    "bin": {
+      "linux": "insomnia",
+      "windows": "insomnia",
+      "macos": "Insomnia"
+    },
     "icon": "insomnia.png",
     "hidden": false,
     "cli": false
@@ -164,7 +226,11 @@
     "name": "IntelliJ IDEA",
     "vendor": "",
     "category": "Development",
-    "bin": "intellij-idea-community-edition",
+    "bin": {
+      "linux": "intellij-idea-community-edition",
+      "windows": "intellij-idea-community-edition",
+      "macos": "Intellij Idea"
+    },
     "icon": "intellij-idea.png",
     "hidden": false,
     "cli": false
@@ -174,7 +240,11 @@
     "name": "Jujutsu",
     "vendor": "",
     "category": "Development",
-    "bin": "jujutsu",
+    "bin": {
+      "linux": "jujutsu",
+      "windows": "jujutsu",
+      "macos": "Jj"
+    },
     "icon": "jj.png",
     "hidden": false,
     "cli": false
@@ -184,7 +254,11 @@
     "name": "k9s",
     "vendor": "",
     "category": "Development",
-    "bin": "k9s",
+    "bin": {
+      "linux": "k9s",
+      "windows": "k9s",
+      "macos": "K9s"
+    },
     "icon": "k9s.png",
     "hidden": false,
     "cli": false
@@ -194,7 +268,9 @@
     "name": "Kate",
     "vendor": "",
     "category": "Development",
-    "bin": "kate",
+    "bin": {
+      "linux": "kate"
+    },
     "icon": "org.kde.kate.svg",
     "hidden": false,
     "cli": false
@@ -204,7 +280,11 @@
     "name": "Kubernetes",
     "vendor": "",
     "category": "Development",
-    "bin": "kubernetes-client",
+    "bin": {
+      "linux": "kubernetes-client",
+      "windows": "kubernetes-client",
+      "macos": "Kubectl"
+    },
     "icon": "kubectl.png",
     "hidden": false,
     "cli": false
@@ -214,7 +294,11 @@
     "name": "Lazygit",
     "vendor": "",
     "category": "Development",
-    "bin": "lazygit",
+    "bin": {
+      "linux": "lazygit",
+      "windows": "lazygit",
+      "macos": "Lazygit"
+    },
     "icon": "lazygit.png",
     "hidden": false,
     "cli": false
@@ -224,7 +308,11 @@
     "name": "llama.cpp",
     "vendor": "",
     "category": "Development",
-    "bin": "llama.cpp",
+    "bin": {
+      "linux": "llama.cpp",
+      "windows": "llama.cpp",
+      "macos": "Llama.cpp"
+    },
     "icon": "llama-cpp.png",
     "hidden": false,
     "cli": false
@@ -234,7 +322,11 @@
     "name": "MariaDB",
     "vendor": "",
     "category": "Development",
-    "bin": "mariadb-server",
+    "bin": {
+      "linux": "mariadb-server",
+      "windows": "mariadb-server",
+      "macos": "Mariadb"
+    },
     "icon": "mariadb.png",
     "hidden": false,
     "cli": false
@@ -244,7 +336,9 @@
     "name": "MediaWiki",
     "vendor": "",
     "category": "Development",
-    "bin": "mediawiki",
+    "bin": {
+      "linux": "mediawiki"
+    },
     "icon": "mediawiki.png",
     "hidden": false,
     "cli": false
@@ -254,7 +348,11 @@
     "name": "mitmproxy",
     "vendor": "",
     "category": "Development",
-    "bin": "mitmproxy",
+    "bin": {
+      "linux": "mitmproxy",
+      "windows": "mitmproxy",
+      "macos": "Mitmproxy"
+    },
     "icon": "mitmproxy.png",
     "hidden": false,
     "cli": false
@@ -264,7 +362,11 @@
     "name": "MongoDB",
     "vendor": "",
     "category": "Development",
-    "bin": "mongodb-org",
+    "bin": {
+      "linux": "mongodb-org",
+      "windows": "mongodb-org",
+      "macos": "Mongodb Community"
+    },
     "icon": "mongodb.png",
     "hidden": false,
     "cli": false
@@ -274,7 +376,11 @@
     "name": "Neovim",
     "vendor": "",
     "category": "Development",
-    "bin": "neovim",
+    "bin": {
+      "linux": "neovim",
+      "windows": "neovim",
+      "macos": "Neovim"
+    },
     "icon": "neovim.png",
     "hidden": false,
     "cli": false
@@ -284,7 +390,11 @@
     "name": "Node.js",
     "vendor": "",
     "category": "Development",
-    "bin": "nodejs",
+    "bin": {
+      "linux": "nodejs",
+      "windows": "nodejs",
+      "macos": "Node"
+    },
     "icon": "nodejs.png",
     "hidden": false,
     "cli": false
@@ -294,7 +404,11 @@
     "name": "Ollama",
     "vendor": "",
     "category": "Development",
-    "bin": "ollama",
+    "bin": {
+      "linux": "ollama",
+      "windows": "ollama",
+      "macos": "Ollama"
+    },
     "icon": "ollama.png",
     "hidden": false,
     "cli": false
@@ -304,7 +418,11 @@
     "name": "opencode",
     "vendor": "",
     "category": "Development",
-    "bin": "opencode-bin",
+    "bin": {
+      "linux": "opencode-bin",
+      "windows": "opencode-bin",
+      "macos": "Sst/tap/opencode"
+    },
     "icon": "opencode.png",
     "hidden": false,
     "cli": false
@@ -314,7 +432,11 @@
     "name": "OpenJDK",
     "vendor": "",
     "category": "Development",
-    "bin": "java-latest-openjdk",
+    "bin": {
+      "linux": "java-latest-openjdk",
+      "windows": "java-latest-openjdk",
+      "macos": "Openjdk"
+    },
     "icon": "openjdk.png",
     "hidden": false,
     "cli": false
@@ -324,7 +446,10 @@
     "name": "phpMyAdmin",
     "vendor": "",
     "category": "Development",
-    "bin": "phpMyAdmin",
+    "bin": {
+      "linux": "phpMyAdmin",
+      "macos": "Phpmyadmin"
+    },
     "icon": "phpmyadmin.png",
     "hidden": false,
     "cli": false
@@ -334,7 +459,11 @@
     "name": "PostgreSQL",
     "vendor": "",
     "category": "Development",
-    "bin": "postgresql-server",
+    "bin": {
+      "linux": "postgresql-server",
+      "windows": "postgresql-server",
+      "macos": "Postgresql"
+    },
     "icon": "postgresql.png",
     "hidden": false,
     "cli": false
@@ -344,7 +473,11 @@
     "name": "Postman",
     "vendor": "",
     "category": "Development",
-    "bin": "postman",
+    "bin": {
+      "linux": "postman",
+      "windows": "postman",
+      "macos": "Postman"
+    },
     "icon": "postman.png",
     "hidden": false,
     "cli": false
@@ -354,7 +487,11 @@
     "name": "PowerShell",
     "vendor": "Microsoft",
     "category": "Development",
-    "bin": "pwsh",
+    "bin": {
+      "linux": "pwsh",
+      "windows": "pwsh.exe",
+      "macos": "pwsh"
+    },
     "icon": "powershell.png",
     "hidden": false,
     "cli": false
@@ -364,7 +501,11 @@
     "name": "Python",
     "vendor": "",
     "category": "Development",
-    "bin": "python3",
+    "bin": {
+      "linux": "python3",
+      "windows": "python3",
+      "macos": "Python"
+    },
     "icon": "python.png",
     "hidden": false,
     "cli": false
@@ -374,7 +515,11 @@
     "name": "Qt Creator",
     "vendor": "",
     "category": "Development",
-    "bin": "qt-creator",
+    "bin": {
+      "linux": "qt-creator",
+      "windows": "qt-creator",
+      "macos": "Qt Creator"
+    },
     "icon": "qt.png",
     "hidden": false,
     "cli": false
@@ -384,7 +529,11 @@
     "name": "Responsively App",
     "vendor": "",
     "category": "Development",
-    "bin": "responsively-app-bin",
+    "bin": {
+      "linux": "responsively-app-bin",
+      "windows": "responsively-app-bin",
+      "macos": "Responsively"
+    },
     "icon": "responsively.png",
     "hidden": false,
     "cli": false
@@ -394,7 +543,11 @@
     "name": "Rust",
     "vendor": "",
     "category": "Development",
-    "bin": "rust",
+    "bin": {
+      "linux": "rust",
+      "windows": "rust",
+      "macos": "Rust"
+    },
     "icon": "rust.png",
     "hidden": false,
     "cli": false
@@ -404,7 +557,10 @@
     "name": "Scrapy",
     "vendor": "",
     "category": "Development",
-    "bin": "python3-scrapy",
+    "bin": {
+      "linux": "python3-scrapy",
+      "macos": "Scrapy"
+    },
     "icon": "scrapy.png",
     "hidden": false,
     "cli": false
@@ -414,7 +570,11 @@
     "name": "SQLite",
     "vendor": "",
     "category": "Development",
-    "bin": "sqlite",
+    "bin": {
+      "linux": "sqlite",
+      "windows": "sqlite",
+      "macos": "Sqlite"
+    },
     "icon": "sqlite.png",
     "hidden": false,
     "cli": false
@@ -424,7 +584,11 @@
     "name": "Sublime Text",
     "vendor": "",
     "category": "Development",
-    "bin": "sublime-text",
+    "bin": {
+      "linux": "sublime-text",
+      "windows": "sublime-text",
+      "macos": "Sublime Text"
+    },
     "icon": "sublime-text-4.png",
     "hidden": false,
     "cli": false
@@ -434,7 +598,11 @@
     "name": "Terraform",
     "vendor": "",
     "category": "Development",
-    "bin": "terraform",
+    "bin": {
+      "linux": "terraform",
+      "windows": "terraform",
+      "macos": "Terraform"
+    },
     "icon": "terraform.png",
     "hidden": false,
     "cli": false
@@ -444,7 +612,11 @@
     "name": "Unity",
     "vendor": "",
     "category": "Development",
-    "bin": "unityhub",
+    "bin": {
+      "linux": "unityhub",
+      "windows": "unityhub",
+      "macos": "Unity Hub"
+    },
     "icon": "unity.png",
     "hidden": false,
     "cli": false
@@ -454,7 +626,11 @@
     "name": "Vagrant",
     "vendor": "",
     "category": "Development",
-    "bin": "vagrant",
+    "bin": {
+      "linux": "vagrant",
+      "windows": "vagrant",
+      "macos": "Vagrant"
+    },
     "icon": "vagrant.png",
     "hidden": false,
     "cli": false
@@ -464,7 +640,9 @@
     "name": "Visual Studio",
     "vendor": "Microsoft",
     "category": "Development",
-    "bin": "devenv.exe",
+    "bin": {
+      "windows": "devenv.exe"
+    },
     "icon": "win-visual-studio.png",
     "hidden": false,
     "cli": false
@@ -474,7 +652,11 @@
     "name": "Visual Studio Code",
     "vendor": "",
     "category": "Development",
-    "bin": "code",
+    "bin": {
+      "linux": "code",
+      "windows": "Code.exe",
+      "macos": "Visual Studio Code"
+    },
     "icon": "code.png",
     "hidden": false,
     "cli": false
@@ -484,7 +666,11 @@
     "name": "VSCodium",
     "vendor": "",
     "category": "Development",
-    "bin": "codium",
+    "bin": {
+      "linux": "codium",
+      "windows": "codium",
+      "macos": "Vscodium"
+    },
     "icon": "vscodium.png",
     "hidden": false,
     "cli": false
@@ -494,7 +680,11 @@
     "name": "Wordpress",
     "vendor": "",
     "category": "Development",
-    "bin": "wordpress",
+    "bin": {
+      "linux": "wordpress",
+      "windows": "wordpress",
+      "macos": "Wordpresscom"
+    },
     "icon": "wordpress.png",
     "hidden": false,
     "cli": false
@@ -504,7 +694,10 @@
     "name": "XAMPP",
     "vendor": "",
     "category": "Development",
-    "bin": "xampp",
+    "bin": {
+      "linux": "xampp",
+      "windows": "xampp"
+    },
     "icon": "xampp.png",
     "hidden": false,
     "cli": false
@@ -514,7 +707,9 @@
     "name": "Xcode",
     "vendor": "Apple",
     "category": "Development",
-    "bin": "Xcode",
+    "bin": {
+      "macos": "Xcode"
+    },
     "icon": "mac-xcode.png",
     "hidden": false,
     "cli": false
@@ -524,7 +719,11 @@
     "name": "Zed",
     "vendor": "",
     "category": "Development",
-    "bin": "zed",
+    "bin": {
+      "linux": "zed",
+      "windows": "zed",
+      "macos": "Zed"
+    },
     "icon": "zed.png",
     "hidden": false,
     "cli": false
@@ -534,7 +733,11 @@
     "name": "Gramps",
     "vendor": "",
     "category": "Education",
-    "bin": "gramps",
+    "bin": {
+      "linux": "gramps",
+      "windows": "gramps",
+      "macos": "Gramps"
+    },
     "icon": "gramps.png",
     "hidden": false,
     "cli": false
@@ -544,7 +747,11 @@
     "name": "Dolphin Emulator",
     "vendor": "",
     "category": "Games",
-    "bin": "dolphin-emu",
+    "bin": {
+      "linux": "dolphin-emu",
+      "windows": "dolphin-emu",
+      "macos": "Dolphin"
+    },
     "icon": "dolphin-emu.png",
     "hidden": false,
     "cli": false
@@ -554,7 +761,11 @@
     "name": "DuckStation",
     "vendor": "",
     "category": "Games",
-    "bin": "duckstation",
+    "bin": {
+      "linux": "duckstation",
+      "windows": "duckstation",
+      "macos": "Duckstation"
+    },
     "icon": "duckstation.png",
     "hidden": false,
     "cli": false
@@ -564,7 +775,11 @@
     "name": "Heroic",
     "vendor": "",
     "category": "Games",
-    "bin": "com.heroicgameslauncher.hgl",
+    "bin": {
+      "linux": "com.heroicgameslauncher.hgl",
+      "windows": "com.heroicgameslauncher.hgl",
+      "macos": "Heroic"
+    },
     "icon": "heroic-games-launcher.png",
     "hidden": false,
     "cli": false
@@ -574,7 +789,9 @@
     "name": "KMahjongg",
     "vendor": "",
     "category": "Games",
-    "bin": "kmahjongg",
+    "bin": {
+      "linux": "kmahjongg"
+    },
     "icon": "org.kde.kmahjongg.svg",
     "hidden": false,
     "cli": false
@@ -584,7 +801,9 @@
     "name": "KMines",
     "vendor": "",
     "category": "Games",
-    "bin": "kmines",
+    "bin": {
+      "linux": "kmines"
+    },
     "icon": "org.kde.kmines.png",
     "hidden": false,
     "cli": false
@@ -594,7 +813,9 @@
     "name": "KPatience",
     "vendor": "",
     "category": "Games",
-    "bin": "kpat",
+    "bin": {
+      "linux": "kpat"
+    },
     "icon": "org.kde.kpat.svg",
     "hidden": false,
     "cli": false
@@ -604,7 +825,9 @@
     "name": "Lucas Chess",
     "vendor": "",
     "category": "Games",
-    "bin": "lucaschess",
+    "bin": {
+      "linux": "lucaschess"
+    },
     "icon": "lucaschess.png",
     "hidden": false,
     "cli": false
@@ -614,7 +837,10 @@
     "name": "Lutris",
     "vendor": "",
     "category": "Games",
-    "bin": "lutris",
+    "bin": {
+      "linux": "lutris",
+      "macos": "Lutris"
+    },
     "icon": "lutris.png",
     "hidden": false,
     "cli": false
@@ -624,7 +850,11 @@
     "name": "melonDS",
     "vendor": "",
     "category": "Games",
-    "bin": "melonds",
+    "bin": {
+      "linux": "melonds",
+      "windows": "melonds",
+      "macos": "Melonds"
+    },
     "icon": "melonds.png",
     "hidden": false,
     "cli": false
@@ -634,7 +864,10 @@
     "name": "PCSX2",
     "vendor": "",
     "category": "Games",
-    "bin": "pcsx2",
+    "bin": {
+      "linux": "pcsx2",
+      "macos": "Pcsx2"
+    },
     "icon": "pcsx2.png",
     "hidden": false,
     "cli": false
@@ -644,7 +877,11 @@
     "name": "PPSSPP",
     "vendor": "",
     "category": "Games",
-    "bin": "ppsspp",
+    "bin": {
+      "linux": "ppsspp",
+      "windows": "ppsspp",
+      "macos": "Ppsspp"
+    },
     "icon": "ppsspp.png",
     "hidden": false,
     "cli": false
@@ -654,7 +891,11 @@
     "name": "RetroArch",
     "vendor": "",
     "category": "Games",
-    "bin": "retroarch",
+    "bin": {
+      "linux": "retroarch",
+      "windows": "retroarch",
+      "macos": "Retroarch"
+    },
     "icon": "retroarch.png",
     "hidden": false,
     "cli": false
@@ -664,7 +905,11 @@
     "name": "Steam",
     "vendor": "",
     "category": "Games",
-    "bin": "steam",
+    "bin": {
+      "linux": "steam",
+      "windows": "steam",
+      "macos": "Steam"
+    },
     "icon": "steam.png",
     "hidden": false,
     "cli": false
@@ -674,7 +919,9 @@
     "name": "Xbox",
     "vendor": "Microsoft",
     "category": "Games",
-    "bin": "XboxApp.exe",
+    "bin": {
+      "windows": "XboxApp.exe"
+    },
     "icon": "win-xbox.png",
     "hidden": false,
     "cli": false
@@ -684,7 +931,10 @@
     "name": "Xemu",
     "vendor": "",
     "category": "Games",
-    "bin": "xemu",
+    "bin": {
+      "linux": "xemu",
+      "windows": "xemu"
+    },
     "icon": "xemu.png",
     "hidden": false,
     "cli": false
@@ -694,7 +944,11 @@
     "name": "Blender",
     "vendor": "",
     "category": "Graphics",
-    "bin": "blender",
+    "bin": {
+      "linux": "blender",
+      "windows": "blender",
+      "macos": "Blender"
+    },
     "icon": "blender.png",
     "hidden": false,
     "cli": false
@@ -704,7 +958,11 @@
     "name": "Darktable",
     "vendor": "",
     "category": "Graphics",
-    "bin": "darktable",
+    "bin": {
+      "linux": "darktable",
+      "windows": "darktable",
+      "macos": "Darktable"
+    },
     "icon": "darktable.png",
     "hidden": false,
     "cli": false
@@ -714,7 +972,11 @@
     "name": "digiKam",
     "vendor": "",
     "category": "Graphics",
-    "bin": "digikam",
+    "bin": {
+      "linux": "digikam",
+      "windows": "digikam",
+      "macos": "Digikam"
+    },
     "icon": "digikam.png",
     "hidden": false,
     "cli": false
@@ -724,7 +986,11 @@
     "name": "FreeCAD",
     "vendor": "",
     "category": "Graphics",
-    "bin": "freecad",
+    "bin": {
+      "linux": "freecad",
+      "windows": "freecad",
+      "macos": "Freecad"
+    },
     "icon": "freecad.png",
     "hidden": false,
     "cli": false
@@ -734,7 +1000,11 @@
     "name": "GIMP",
     "vendor": "",
     "category": "Graphics",
-    "bin": "gimp",
+    "bin": {
+      "linux": "gimp",
+      "windows": "gimp",
+      "macos": "Gimp"
+    },
     "icon": "gimp.png",
     "hidden": false,
     "cli": false
@@ -744,7 +1014,9 @@
     "name": "Gwenview",
     "vendor": "",
     "category": "Graphics",
-    "bin": "gwenview",
+    "bin": {
+      "linux": "gwenview"
+    },
     "icon": "org.kde.gwenview.svg",
     "hidden": false,
     "cli": false
@@ -754,7 +1026,9 @@
     "name": "Image Viewer",
     "vendor": "GNOME",
     "category": "Graphics",
-    "bin": "loupe",
+    "bin": {
+      "linux": "loupe"
+    },
     "icon": "loupe.png",
     "hidden": false,
     "cli": false
@@ -764,7 +1038,11 @@
     "name": "ImageMagick",
     "vendor": "",
     "category": "Graphics",
-    "bin": "ImageMagick",
+    "bin": {
+      "linux": "ImageMagick",
+      "windows": "ImageMagick",
+      "macos": "Imagemagick"
+    },
     "icon": "imagemagick.png",
     "hidden": false,
     "cli": false
@@ -774,7 +1052,11 @@
     "name": "Inkscape",
     "vendor": "",
     "category": "Graphics",
-    "bin": "inkscape",
+    "bin": {
+      "linux": "inkscape",
+      "windows": "inkscape",
+      "macos": "Inkscape"
+    },
     "icon": "inkscape.png",
     "hidden": false,
     "cli": false
@@ -784,7 +1066,9 @@
     "name": "KolourPaint",
     "vendor": "",
     "category": "Graphics",
-    "bin": "kolourpaint",
+    "bin": {
+      "linux": "kolourpaint"
+    },
     "icon": "org.kde.kolourpaint.svg",
     "hidden": false,
     "cli": false
@@ -794,7 +1078,11 @@
     "name": "Krita",
     "vendor": "",
     "category": "Graphics",
-    "bin": "krita",
+    "bin": {
+      "linux": "krita",
+      "windows": "krita",
+      "macos": "Krita"
+    },
     "icon": "krita.png",
     "hidden": false,
     "cli": false
@@ -804,7 +1092,10 @@
     "name": "Mandelbulber2",
     "vendor": "",
     "category": "Graphics",
-    "bin": "mandelbulber2",
+    "bin": {
+      "linux": "mandelbulber2",
+      "windows": "mandelbulber2"
+    },
     "icon": "mandelbulber.png",
     "hidden": false,
     "cli": false
@@ -814,7 +1105,11 @@
     "name": "MyPaint",
     "vendor": "",
     "category": "Graphics",
-    "bin": "mypaint",
+    "bin": {
+      "linux": "mypaint",
+      "windows": "mypaint",
+      "macos": "Mypaint"
+    },
     "icon": "mypaint.png",
     "hidden": false,
     "cli": false
@@ -824,7 +1119,9 @@
     "name": "Okular",
     "vendor": "",
     "category": "Graphics",
-    "bin": "okular",
+    "bin": {
+      "linux": "okular"
+    },
     "icon": "org.kde.okular.svg",
     "hidden": false,
     "cli": false
@@ -834,7 +1131,9 @@
     "name": "Paint",
     "vendor": "Microsoft",
     "category": "Graphics",
-    "bin": "mspaint.exe",
+    "bin": {
+      "windows": "mspaint.exe"
+    },
     "icon": "win-paint.png",
     "hidden": false,
     "cli": false
@@ -844,7 +1143,9 @@
     "name": "Photos",
     "vendor": "Apple",
     "category": "Graphics",
-    "bin": "Photos",
+    "bin": {
+      "macos": "Photos"
+    },
     "icon": "mac-photos.png",
     "hidden": false,
     "cli": false
@@ -854,7 +1155,9 @@
     "name": "Preview",
     "vendor": "Apple",
     "category": "Graphics",
-    "bin": "Preview",
+    "bin": {
+      "macos": "Preview"
+    },
     "icon": "mac-preview.png",
     "hidden": false,
     "cli": false
@@ -864,7 +1167,10 @@
     "name": "RapidRaw",
     "vendor": "",
     "category": "Graphics",
-    "bin": "rapidraw",
+    "bin": {
+      "linux": "rapidraw",
+      "windows": "rapidraw"
+    },
     "icon": "rapidraw.png",
     "hidden": false,
     "cli": false
@@ -874,7 +1180,11 @@
     "name": "RawTherapee",
     "vendor": "",
     "category": "Graphics",
-    "bin": "rawtherapee",
+    "bin": {
+      "linux": "rawtherapee",
+      "windows": "rawtherapee",
+      "macos": "Rawtherapee"
+    },
     "icon": "rawtherapee.png",
     "hidden": false,
     "cli": false
@@ -884,7 +1194,9 @@
     "name": "Shotwell",
     "vendor": "",
     "category": "Graphics",
-    "bin": "shotwell",
+    "bin": {
+      "linux": "shotwell"
+    },
     "icon": "shotwell.png",
     "hidden": false,
     "cli": false
@@ -894,7 +1206,9 @@
     "name": "Skanpage",
     "vendor": "",
     "category": "Graphics",
-    "bin": "skanpage",
+    "bin": {
+      "linux": "skanpage"
+    },
     "icon": "org.kde.skanpage.svg",
     "hidden": false,
     "cli": false
@@ -904,7 +1218,9 @@
     "name": "StabilityMatrix",
     "vendor": "",
     "category": "Graphics",
-    "bin": "stabilitymatrix",
+    "bin": {
+      "linux": "stabilitymatrix"
+    },
     "icon": "stability-matrix.png",
     "hidden": false,
     "cli": false
@@ -914,7 +1230,11 @@
     "name": "Upscayl",
     "vendor": "",
     "category": "Graphics",
-    "bin": "upscayl",
+    "bin": {
+      "linux": "upscayl",
+      "windows": "upscayl",
+      "macos": "Upscayl"
+    },
     "icon": "upscayl.png",
     "hidden": false,
     "cli": false
@@ -924,7 +1244,11 @@
     "name": "XnView MP",
     "vendor": "",
     "category": "Graphics",
-    "bin": "xnviewmp",
+    "bin": {
+      "linux": "xnviewmp",
+      "windows": "xnviewmp",
+      "macos": "Xnviewmp"
+    },
     "icon": "xnview.png",
     "hidden": false,
     "cli": false
@@ -934,7 +1258,9 @@
     "name": "Akregator",
     "vendor": "",
     "category": "Internet",
-    "bin": "akregator",
+    "bin": {
+      "linux": "akregator"
+    },
     "icon": "org.kde.akregator.svg",
     "hidden": false,
     "cli": false
@@ -944,7 +1270,11 @@
     "name": "Brave",
     "vendor": "",
     "category": "Internet",
-    "bin": "brave-browser",
+    "bin": {
+      "linux": "brave-browser",
+      "windows": "brave-browser",
+      "macos": "Brave Browser"
+    },
     "icon": "brave.png",
     "hidden": false,
     "cli": false
@@ -954,7 +1284,11 @@
     "name": "Chromium",
     "vendor": "",
     "category": "Internet",
-    "bin": "chromium",
+    "bin": {
+      "linux": "chromium",
+      "windows": "chromium",
+      "macos": "Chromium"
+    },
     "icon": "chromium.png",
     "hidden": false,
     "cli": false
@@ -964,7 +1298,11 @@
     "name": "Discord",
     "vendor": "",
     "category": "Internet",
-    "bin": "discord",
+    "bin": {
+      "linux": "discord",
+      "windows": "discord",
+      "macos": "Discord"
+    },
     "icon": "discord.png",
     "hidden": false,
     "cli": false
@@ -974,7 +1312,11 @@
     "name": "Element",
     "vendor": "",
     "category": "Internet",
-    "bin": "element-desktop",
+    "bin": {
+      "linux": "element-desktop",
+      "windows": "element-desktop",
+      "macos": "Element"
+    },
     "icon": "element.png",
     "hidden": false,
     "cli": false
@@ -984,7 +1326,9 @@
     "name": "Evolution",
     "vendor": "",
     "category": "Internet",
-    "bin": "evolution",
+    "bin": {
+      "linux": "evolution"
+    },
     "icon": "evolution.png",
     "hidden": false,
     "cli": false
@@ -994,7 +1338,9 @@
     "name": "FaceTime",
     "vendor": "Apple",
     "category": "Internet",
-    "bin": "FaceTime",
+    "bin": {
+      "macos": "FaceTime"
+    },
     "icon": "mac-facetime.png",
     "hidden": false,
     "cli": false
@@ -1004,7 +1350,11 @@
     "name": "Firefox",
     "vendor": "",
     "category": "Internet",
-    "bin": "firefox",
+    "bin": {
+      "linux": "firefox",
+      "windows": "firefox.exe",
+      "macos": "Firefox"
+    },
     "icon": "org.mozilla.firefox.png",
     "hidden": false,
     "cli": false
@@ -1014,7 +1364,11 @@
     "name": "Google Chrome",
     "vendor": "",
     "category": "Internet",
-    "bin": "google-chrome",
+    "bin": {
+      "linux": "google-chrome",
+      "windows": "google-chrome",
+      "macos": "Google Chrome"
+    },
     "icon": "google-chrome.png",
     "hidden": false,
     "cli": false
@@ -1024,7 +1378,10 @@
     "name": "Jitsi Meet",
     "vendor": "",
     "category": "Internet",
-    "bin": "jitsi-meet-desktop-bin",
+    "bin": {
+      "linux": "jitsi-meet-desktop-bin",
+      "macos": "Jitsi Meet"
+    },
     "icon": "jitsi-meet.png",
     "hidden": false,
     "cli": false
@@ -1034,7 +1391,9 @@
     "name": "KDE Connect",
     "vendor": "",
     "category": "Internet",
-    "bin": "kdeconnect-app",
+    "bin": {
+      "linux": "kdeconnect-app"
+    },
     "icon": "org.kde.kdeconnect.app.svg",
     "hidden": false,
     "cli": false
@@ -1044,7 +1403,9 @@
     "name": "KRDC",
     "vendor": "",
     "category": "Internet",
-    "bin": "krdc",
+    "bin": {
+      "linux": "krdc"
+    },
     "icon": "org.kde.krdc.svg",
     "hidden": false,
     "cli": false
@@ -1054,7 +1415,9 @@
     "name": "Krfb",
     "vendor": "",
     "category": "Internet",
-    "bin": "krfb",
+    "bin": {
+      "linux": "krfb"
+    },
     "icon": "org.kde.krfb.svg",
     "hidden": false,
     "cli": false
@@ -1064,7 +1427,11 @@
     "name": "LibreWolf",
     "vendor": "",
     "category": "Internet",
-    "bin": "librewolf",
+    "bin": {
+      "linux": "librewolf",
+      "windows": "librewolf",
+      "macos": "Librewolf"
+    },
     "icon": "librewolf.png",
     "hidden": false,
     "cli": false
@@ -1074,7 +1441,9 @@
     "name": "Mail",
     "vendor": "Apple",
     "category": "Internet",
-    "bin": "Mail",
+    "bin": {
+      "macos": "Mail"
+    },
     "icon": "mac-mail.png",
     "hidden": false,
     "cli": false
@@ -1084,7 +1453,9 @@
     "name": "Messages",
     "vendor": "Apple",
     "category": "Internet",
-    "bin": "Messages",
+    "bin": {
+      "macos": "Messages"
+    },
     "icon": "mac-messages.png",
     "hidden": false,
     "cli": false
@@ -1094,7 +1465,11 @@
     "name": "Microsoft Edge",
     "vendor": "Microsoft",
     "category": "Internet",
-    "bin": "microsoft-edge-stable",
+    "bin": {
+      "linux": "microsoft-edge-stable",
+      "windows": "msedge.exe",
+      "macos": "Microsoft Edge"
+    },
     "icon": "microsoft-edge.png",
     "hidden": false,
     "cli": false
@@ -1104,7 +1479,9 @@
     "name": "Microsoft Outlook",
     "vendor": "Microsoft",
     "category": "Internet",
-    "bin": "OUTLOOK.EXE",
+    "bin": {
+      "windows": "OUTLOOK.EXE"
+    },
     "icon": "win-outlook.png",
     "hidden": false,
     "cli": false
@@ -1114,7 +1491,9 @@
     "name": "Microsoft Teams",
     "vendor": "Microsoft",
     "category": "Internet",
-    "bin": "teams-for-linux",
+    "bin": {
+      "linux": "teams-for-linux"
+    },
     "icon": "teams-for-linux.png",
     "hidden": false,
     "cli": false
@@ -1124,7 +1503,11 @@
     "name": "Mumble",
     "vendor": "",
     "category": "Internet",
-    "bin": "mumble",
+    "bin": {
+      "linux": "mumble",
+      "windows": "mumble",
+      "macos": "Mumble"
+    },
     "icon": "mumble.png",
     "hidden": false,
     "cli": false
@@ -1134,7 +1517,9 @@
     "name": "NeoChat",
     "vendor": "",
     "category": "Internet",
-    "bin": "neochat",
+    "bin": {
+      "linux": "neochat"
+    },
     "icon": "org.kde.neochat.svg",
     "hidden": false,
     "cli": false
@@ -1144,7 +1529,11 @@
     "name": "OneDrive",
     "vendor": "Microsoft",
     "category": "Internet",
-    "bin": "onedrive",
+    "bin": {
+      "linux": "onedrive",
+      "windows": "OneDrive.exe",
+      "macos": "OneDrive"
+    },
     "icon": "onedrive-client.png",
     "hidden": false,
     "cli": true
@@ -1154,7 +1543,11 @@
     "name": "Opera",
     "vendor": "",
     "category": "Internet",
-    "bin": "opera-stable",
+    "bin": {
+      "linux": "opera-stable",
+      "windows": "opera-stable",
+      "macos": "Opera"
+    },
     "icon": "opera.png",
     "hidden": false,
     "cli": false
@@ -1164,7 +1557,9 @@
     "name": "PIM Data Exporter",
     "vendor": "",
     "category": "Internet",
-    "bin": "pimdataexporter",
+    "bin": {
+      "linux": "pimdataexporter"
+    },
     "icon": "org.kde.pimdataexporter.svg",
     "hidden": false,
     "cli": false
@@ -1174,7 +1569,9 @@
     "name": "Safari",
     "vendor": "Apple",
     "category": "Internet",
-    "bin": "Safari",
+    "bin": {
+      "macos": "Safari"
+    },
     "icon": "mac-safari.png",
     "hidden": false,
     "cli": false
@@ -1184,7 +1581,11 @@
     "name": "Signal",
     "vendor": "",
     "category": "Internet",
-    "bin": "signal-desktop",
+    "bin": {
+      "linux": "signal-desktop",
+      "windows": "signal-desktop",
+      "macos": "Signal"
+    },
     "icon": "signal.png",
     "hidden": false,
     "cli": false
@@ -1194,7 +1595,9 @@
     "name": "Skype",
     "vendor": "Microsoft",
     "category": "Internet",
-    "bin": "Skype.exe",
+    "bin": {
+      "windows": "Skype.exe"
+    },
     "icon": "win-skype.png",
     "hidden": false,
     "cli": false
@@ -1204,7 +1607,11 @@
     "name": "Slack",
     "vendor": "",
     "category": "Internet",
-    "bin": "slack",
+    "bin": {
+      "linux": "slack",
+      "windows": "slack",
+      "macos": "Slack"
+    },
     "icon": "slack.png",
     "hidden": false,
     "cli": false
@@ -1214,7 +1621,11 @@
     "name": "Telegram",
     "vendor": "",
     "category": "Internet",
-    "bin": "telegram-desktop",
+    "bin": {
+      "linux": "telegram-desktop",
+      "windows": "telegram-desktop",
+      "macos": "Telegram Desktop"
+    },
     "icon": "telegram.png",
     "hidden": false,
     "cli": false
@@ -1224,7 +1635,11 @@
     "name": "Thunderbird",
     "vendor": "",
     "category": "Internet",
-    "bin": "thunderbird",
+    "bin": {
+      "linux": "thunderbird",
+      "windows": "thunderbird",
+      "macos": "Thunderbird"
+    },
     "icon": "thunderbird.png",
     "hidden": false,
     "cli": false
@@ -1234,7 +1649,11 @@
     "name": "Tor Browser",
     "vendor": "",
     "category": "Internet",
-    "bin": "torbrowser-launcher",
+    "bin": {
+      "linux": "torbrowser-launcher",
+      "windows": "torbrowser-launcher",
+      "macos": "Tor Browser"
+    },
     "icon": "tor-browser.png",
     "hidden": false,
     "cli": false
@@ -1244,7 +1663,11 @@
     "name": "Ungoogled Chromium",
     "vendor": "",
     "category": "Internet",
-    "bin": "ungoogled-chromium",
+    "bin": {
+      "linux": "ungoogled-chromium",
+      "windows": "ungoogled-chromium",
+      "macos": "Ungoogled Chromium"
+    },
     "icon": "ungoogled-chromium.png",
     "hidden": false,
     "cli": false
@@ -1254,7 +1677,11 @@
     "name": "Vivaldi",
     "vendor": "",
     "category": "Internet",
-    "bin": "vivaldi-stable",
+    "bin": {
+      "linux": "vivaldi-stable",
+      "windows": "vivaldi-stable",
+      "macos": "Vivaldi"
+    },
     "icon": "vivaldi.png",
     "hidden": false,
     "cli": false
@@ -1264,7 +1691,11 @@
     "name": "WhatsApp",
     "vendor": "",
     "category": "Internet",
-    "bin": "whatsapp-for-linux",
+    "bin": {
+      "linux": "whatsapp-for-linux",
+      "windows": "whatsapp-for-linux",
+      "macos": "Whatsapp"
+    },
     "icon": "whatsapp.png",
     "hidden": false,
     "cli": false
@@ -1274,7 +1705,11 @@
     "name": "Zen Browser",
     "vendor": "",
     "category": "Internet",
-    "bin": "zen-browser-bin",
+    "bin": {
+      "linux": "zen-browser-bin",
+      "windows": "zen-browser-bin",
+      "macos": "Zen"
+    },
     "icon": "zen-browser.png",
     "hidden": false,
     "cli": false
@@ -1284,7 +1719,11 @@
     "name": "Zoom",
     "vendor": "",
     "category": "Internet",
-    "bin": "zoom-client",
+    "bin": {
+      "linux": "zoom-client",
+      "windows": "zoom-client",
+      "macos": "Zoom"
+    },
     "icon": "zoom.png",
     "hidden": false,
     "cli": false
@@ -1294,7 +1733,10 @@
     "name": "Ardour",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "ardour",
+    "bin": {
+      "linux": "ardour",
+      "macos": "Ardour"
+    },
     "icon": "ardour.png",
     "hidden": false,
     "cli": false
@@ -1304,7 +1746,11 @@
     "name": "Audacious",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "audacious",
+    "bin": {
+      "linux": "audacious",
+      "windows": "audacious",
+      "macos": "Audacious"
+    },
     "icon": "audacious.png",
     "hidden": false,
     "cli": false
@@ -1314,7 +1760,11 @@
     "name": "Audacity",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "audacity",
+    "bin": {
+      "linux": "audacity",
+      "windows": "audacity",
+      "macos": "Audacity"
+    },
     "icon": "audacity.png",
     "hidden": false,
     "cli": false
@@ -1324,7 +1774,10 @@
     "name": "AudioRelay",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "audiorelay",
+    "bin": {
+      "linux": "audiorelay",
+      "windows": "audiorelay"
+    },
     "icon": "audiorelay.png",
     "hidden": false,
     "cli": false
@@ -1334,7 +1787,9 @@
     "name": "Audiveris",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "audiveris",
+    "bin": {
+      "linux": "audiveris"
+    },
     "icon": "audiveris.png",
     "hidden": false,
     "cli": false
@@ -1344,7 +1799,11 @@
     "name": "Bitwig Studio",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "bitwig-studio",
+    "bin": {
+      "linux": "bitwig-studio",
+      "windows": "bitwig-studio",
+      "macos": "Bitwig Studio"
+    },
     "icon": "bitwig-studio.png",
     "hidden": false,
     "cli": false
@@ -1354,7 +1813,9 @@
     "name": "DaVinci Resolve",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "davinci-resolve",
+    "bin": {
+      "linux": "davinci-resolve"
+    },
     "icon": "davinci-resolve.png",
     "hidden": false,
     "cli": false
@@ -1364,7 +1825,9 @@
     "name": "Dragon Player",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "dragon",
+    "bin": {
+      "linux": "dragon"
+    },
     "icon": "org.kde.dragonplayer.svg",
     "hidden": false,
     "cli": false
@@ -1374,7 +1837,10 @@
     "name": "Elisa",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "elisa",
+    "bin": {
+      "linux": "elisa",
+      "windows": "elisa"
+    },
     "icon": "org.kde.elisa.svg",
     "hidden": false,
     "cli": false
@@ -1384,7 +1850,11 @@
     "name": "FFmpeg",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "ffmpeg-free",
+    "bin": {
+      "linux": "ffmpeg-free",
+      "windows": "ffmpeg-free",
+      "macos": "Ffmpeg"
+    },
     "icon": "ffmpeg.png",
     "hidden": false,
     "cli": false
@@ -1394,7 +1864,9 @@
     "name": "GarageBand",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "GarageBand",
+    "bin": {
+      "macos": "GarageBand"
+    },
     "icon": "mac-garageband.png",
     "hidden": false,
     "cli": false
@@ -1404,7 +1876,11 @@
     "name": "HandBrake",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "handbrake",
+    "bin": {
+      "linux": "handbrake",
+      "windows": "handbrake",
+      "macos": "Handbrake"
+    },
     "icon": "handbrake.png",
     "hidden": false,
     "cli": false
@@ -1414,7 +1890,11 @@
     "name": "Handy",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "handy-bin",
+    "bin": {
+      "linux": "handy-bin",
+      "windows": "handy-bin",
+      "macos": "Handy"
+    },
     "icon": "handy.png",
     "hidden": false,
     "cli": false
@@ -1424,7 +1904,10 @@
     "name": "Haruna",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "haruna",
+    "bin": {
+      "linux": "haruna",
+      "windows": "haruna"
+    },
     "icon": "haruna.png",
     "hidden": false,
     "cli": false
@@ -1434,7 +1917,9 @@
     "name": "iMovie",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "iMovie",
+    "bin": {
+      "macos": "iMovie"
+    },
     "icon": "mac-imovie.png",
     "hidden": false,
     "cli": false
@@ -1444,7 +1929,10 @@
     "name": "IPTVnator",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "iptvnator",
+    "bin": {
+      "linux": "iptvnator",
+      "windows": "iptvnator"
+    },
     "icon": "iptvnator.png",
     "hidden": false,
     "cli": false
@@ -1454,7 +1942,10 @@
     "name": "Jellyfin Media Player",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "jellyfin",
+    "bin": {
+      "linux": "jellyfin",
+      "windows": "jellyfin"
+    },
     "icon": "jellyfin-client.png",
     "hidden": false,
     "cli": false
@@ -1464,7 +1955,9 @@
     "name": "Kamoso",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "kamoso",
+    "bin": {
+      "linux": "kamoso"
+    },
     "icon": "org.kde.kamoso.svg",
     "hidden": false,
     "cli": false
@@ -1474,7 +1967,11 @@
     "name": "Kdenlive",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "kdenlive",
+    "bin": {
+      "linux": "kdenlive",
+      "windows": "kdenlive",
+      "macos": "Kdenlive"
+    },
     "icon": "kdenlive.png",
     "hidden": false,
     "cli": false
@@ -1484,7 +1981,11 @@
     "name": "Kodi",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "kodi",
+    "bin": {
+      "linux": "kodi",
+      "windows": "kodi",
+      "macos": "Kodi"
+    },
     "icon": "kodi.png",
     "hidden": false,
     "cli": false
@@ -1494,7 +1995,11 @@
     "name": "LMMS",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "lmms",
+    "bin": {
+      "linux": "lmms",
+      "windows": "lmms",
+      "macos": "Lmms"
+    },
     "icon": "lmms.png",
     "hidden": false,
     "cli": false
@@ -1504,7 +2009,9 @@
     "name": "Media Player",
     "vendor": "Microsoft",
     "category": "Multimedia",
-    "bin": "wmplayer.exe",
+    "bin": {
+      "windows": "wmplayer.exe"
+    },
     "icon": "win-media-player.png",
     "hidden": false,
     "cli": false
@@ -1514,7 +2021,10 @@
     "name": "MPC-HC",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "mpc-hc",
+    "bin": {
+      "linux": "mpc-hc",
+      "windows": "mpc-hc"
+    },
     "icon": "mpc-hc.png",
     "hidden": false,
     "cli": false
@@ -1524,7 +2034,11 @@
     "name": "MPV",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "mpv",
+    "bin": {
+      "linux": "mpv",
+      "windows": "mpv",
+      "macos": "Mpv"
+    },
     "icon": "mpv.png",
     "hidden": false,
     "cli": false
@@ -1534,7 +2048,11 @@
     "name": "MuseScore",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "musescore",
+    "bin": {
+      "linux": "musescore",
+      "windows": "musescore",
+      "macos": "Musescore"
+    },
     "icon": "musescore.png",
     "hidden": false,
     "cli": false
@@ -1544,7 +2062,9 @@
     "name": "Music",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "Music",
+    "bin": {
+      "macos": "Music"
+    },
     "icon": "mac-music.png",
     "hidden": false,
     "cli": false
@@ -1554,7 +2074,10 @@
     "name": "MusicBee",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "musicbee",
+    "bin": {
+      "linux": "musicbee",
+      "windows": "musicbee"
+    },
     "icon": "musicbee.png",
     "hidden": false,
     "cli": false
@@ -1564,7 +2087,11 @@
     "name": "OBS Studio",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "obs-studio",
+    "bin": {
+      "linux": "obs-studio",
+      "windows": "obs-studio",
+      "macos": "Obs"
+    },
     "icon": "obs-studio.png",
     "hidden": false,
     "cli": false
@@ -1574,7 +2101,11 @@
     "name": "Ocenaudio",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "ocenaudio",
+    "bin": {
+      "linux": "ocenaudio",
+      "windows": "ocenaudio",
+      "macos": "Ocenaudio"
+    },
     "icon": "ocenaudio.png",
     "hidden": false,
     "cli": false
@@ -1584,7 +2115,11 @@
     "name": "OpenShot",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "openshot",
+    "bin": {
+      "linux": "openshot",
+      "windows": "openshot",
+      "macos": "Openshot"
+    },
     "icon": "openshot.png",
     "hidden": false,
     "cli": false
@@ -1594,7 +2129,9 @@
     "name": "Pear Desktop (YT-Music)",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "pear-desktop",
+    "bin": {
+      "linux": "pear-desktop"
+    },
     "icon": "pear-desktop.png",
     "hidden": false,
     "cli": false
@@ -1604,7 +2141,9 @@
     "name": "PlayTorrioMov",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "PlayTorrioMov",
+    "bin": {
+      "linux": "PlayTorrioMov"
+    },
     "icon": "playtorriomov.png",
     "hidden": false,
     "cli": false
@@ -1614,7 +2153,11 @@
     "name": "Plex",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "plexmediaserver",
+    "bin": {
+      "linux": "plexmediaserver",
+      "windows": "plexmediaserver",
+      "macos": "Plex"
+    },
     "icon": "plex.png",
     "hidden": false,
     "cli": false
@@ -1624,7 +2167,9 @@
     "name": "Podcasts",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "Podcasts",
+    "bin": {
+      "macos": "Podcasts"
+    },
     "icon": "mac-podcasts.png",
     "hidden": false,
     "cli": false
@@ -1634,7 +2179,9 @@
     "name": "QuickTime Player",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "QuickTime Player",
+    "bin": {
+      "macos": "QuickTime Player"
+    },
     "icon": "mac-quicktime.png",
     "hidden": false,
     "cli": false
@@ -1644,7 +2191,11 @@
     "name": "REAPER",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "reaper",
+    "bin": {
+      "linux": "reaper",
+      "windows": "reaper",
+      "macos": "Reaper"
+    },
     "icon": "reaper.png",
     "hidden": false,
     "cli": false
@@ -1654,7 +2205,11 @@
     "name": "Shotcut",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "shotcut",
+    "bin": {
+      "linux": "shotcut",
+      "windows": "shotcut",
+      "macos": "Shotcut"
+    },
     "icon": "shotcut.png",
     "hidden": false,
     "cli": false
@@ -1664,7 +2219,9 @@
     "name": "Speech Note",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "dsnote",
+    "bin": {
+      "linux": "dsnote"
+    },
     "icon": "speech-note.png",
     "hidden": false,
     "cli": false
@@ -1674,7 +2231,11 @@
     "name": "Spotify",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "spotify-client",
+    "bin": {
+      "linux": "spotify-client",
+      "windows": "spotify-client",
+      "macos": "Spotify"
+    },
     "icon": "spotify.png",
     "hidden": false,
     "cli": false
@@ -1684,7 +2245,10 @@
     "name": "Strawberry",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "strawberry",
+    "bin": {
+      "linux": "strawberry",
+      "macos": "Strawberry"
+    },
     "icon": "strawberry.png",
     "hidden": false,
     "cli": false
@@ -1694,7 +2258,11 @@
     "name": "Stremio",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "stremio",
+    "bin": {
+      "linux": "stremio",
+      "windows": "stremio",
+      "macos": "Stremio"
+    },
     "icon": "stremio.png",
     "hidden": false,
     "cli": false
@@ -1704,7 +2272,11 @@
     "name": "Tenacity",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "tenacity",
+    "bin": {
+      "linux": "tenacity",
+      "windows": "tenacity",
+      "macos": "Tenacity"
+    },
     "icon": "tenacity.png",
     "hidden": false,
     "cli": false
@@ -1714,7 +2286,9 @@
     "name": "TV",
     "vendor": "Apple",
     "category": "Multimedia",
-    "bin": "TV",
+    "bin": {
+      "macos": "TV"
+    },
     "icon": "mac-tv.png",
     "hidden": false,
     "cli": false
@@ -1724,7 +2298,11 @@
     "name": "VLC",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "vlc",
+    "bin": {
+      "linux": "vlc",
+      "windows": "vlc",
+      "macos": "Vlc"
+    },
     "icon": "vlc.png",
     "hidden": false,
     "cli": false
@@ -1734,7 +2312,10 @@
     "name": "Whisper.cpp",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "whisper-cpp",
+    "bin": {
+      "linux": "whisper-cpp",
+      "macos": "Whisper Cpp"
+    },
     "icon": "whisper-cpp.png",
     "hidden": false,
     "cli": false
@@ -1744,7 +2325,11 @@
     "name": "yt-dlp",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "yt-dlp",
+    "bin": {
+      "linux": "yt-dlp",
+      "windows": "yt-dlp",
+      "macos": "Yt Dlp"
+    },
     "icon": "yt-dlp.png",
     "hidden": false,
     "cli": false
@@ -1754,7 +2339,11 @@
     "name": "ytDownloader",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "youtube-dl",
+    "bin": {
+      "linux": "youtube-dl",
+      "windows": "youtube-dl",
+      "macos": "Youtube Dl"
+    },
     "icon": "ytdownloader.png",
     "hidden": false,
     "cli": false
@@ -1764,7 +2353,11 @@
     "name": "YTMDesktop",
     "vendor": "",
     "category": "Multimedia",
-    "bin": "ytdownloader",
+    "bin": {
+      "linux": "ytdownloader",
+      "windows": "ytdownloader",
+      "macos": "Ytmdesktop Youtube Music"
+    },
     "icon": "ytmdesktop.png",
     "hidden": false,
     "cli": false
@@ -1774,7 +2367,11 @@
     "name": "ActivityWatch",
     "vendor": "",
     "category": "Office",
-    "bin": "activitywatch-bin",
+    "bin": {
+      "linux": "activitywatch-bin",
+      "windows": "activitywatch-bin",
+      "macos": "Activitywatch"
+    },
     "icon": "activitywatch.png",
     "hidden": false,
     "cli": false
@@ -1784,7 +2381,11 @@
     "name": "Anytype",
     "vendor": "",
     "category": "Office",
-    "bin": "anytype",
+    "bin": {
+      "linux": "anytype",
+      "windows": "anytype",
+      "macos": "Anytype"
+    },
     "icon": "anytype.png",
     "hidden": false,
     "cli": false
@@ -1794,7 +2395,9 @@
     "name": "Calculator",
     "vendor": "GNOME",
     "category": "Office",
-    "bin": "gnome-calculator",
+    "bin": {
+      "linux": "gnome-calculator"
+    },
     "icon": "gnome-calculator.png",
     "hidden": false,
     "cli": false
@@ -1804,7 +2407,9 @@
     "name": "Calculator",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "calc.exe",
+    "bin": {
+      "windows": "calc.exe"
+    },
     "icon": "win-calculator.png",
     "hidden": false,
     "cli": false
@@ -1814,7 +2419,9 @@
     "name": "Calendar",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Calendar",
+    "bin": {
+      "macos": "Calendar"
+    },
     "icon": "mac-calendar.png",
     "hidden": false,
     "cli": false
@@ -1824,7 +2431,11 @@
     "name": "Calibre",
     "vendor": "",
     "category": "Office",
-    "bin": "calibre",
+    "bin": {
+      "linux": "calibre",
+      "windows": "calibre",
+      "macos": "Calibre"
+    },
     "icon": "calibre.png",
     "hidden": false,
     "cli": false
@@ -1834,7 +2445,9 @@
     "name": "Contacts",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Contacts",
+    "bin": {
+      "macos": "Contacts"
+    },
     "icon": "mac-contacts.png",
     "hidden": false,
     "cli": false
@@ -1844,7 +2457,10 @@
     "name": "DeepL",
     "vendor": "",
     "category": "Office",
-    "bin": "deepl",
+    "bin": {
+      "linux": "deepl",
+      "windows": "deepl"
+    },
     "icon": "deepl.png",
     "hidden": false,
     "cli": false
@@ -1854,7 +2470,11 @@
     "name": "draw.io",
     "vendor": "",
     "category": "Office",
-    "bin": "drawio",
+    "bin": {
+      "linux": "drawio",
+      "windows": "drawio",
+      "macos": "Drawio"
+    },
     "icon": "drawio.png",
     "hidden": false,
     "cli": false
@@ -1864,7 +2484,11 @@
     "name": "Electrum",
     "vendor": "",
     "category": "Office",
-    "bin": "electrum",
+    "bin": {
+      "linux": "electrum",
+      "windows": "electrum",
+      "macos": "Electrum"
+    },
     "icon": "electrum.png",
     "hidden": false,
     "cli": false
@@ -1874,7 +2498,11 @@
     "name": "Espanso",
     "vendor": "",
     "category": "Office",
-    "bin": "espanso",
+    "bin": {
+      "linux": "espanso",
+      "windows": "espanso",
+      "macos": "Espanso"
+    },
     "icon": "espanso.png",
     "hidden": false,
     "cli": false
@@ -1884,7 +2512,10 @@
     "name": "Foliate",
     "vendor": "",
     "category": "Office",
-    "bin": "foliate",
+    "bin": {
+      "linux": "foliate",
+      "macos": "Foliate"
+    },
     "icon": "foliate.png",
     "hidden": false,
     "cli": false
@@ -1894,7 +2525,10 @@
     "name": "Freeplane",
     "vendor": "",
     "category": "Office",
-    "bin": "freeplane",
+    "bin": {
+      "linux": "freeplane",
+      "windows": "freeplane"
+    },
     "icon": "freeplane.png",
     "hidden": false,
     "cli": false
@@ -1904,7 +2538,11 @@
     "name": "GnuCash",
     "vendor": "",
     "category": "Office",
-    "bin": "gnucash",
+    "bin": {
+      "linux": "gnucash",
+      "windows": "gnucash",
+      "macos": "Gnucash"
+    },
     "icon": "gnucash.png",
     "hidden": false,
     "cli": false
@@ -1914,7 +2552,10 @@
     "name": "HomeBank",
     "vendor": "",
     "category": "Office",
-    "bin": "homebank",
+    "bin": {
+      "linux": "homebank",
+      "windows": "homebank"
+    },
     "icon": "homebank.png",
     "hidden": false,
     "cli": false
@@ -1924,7 +2565,11 @@
     "name": "Joplin",
     "vendor": "",
     "category": "Office",
-    "bin": "joplin-desktop",
+    "bin": {
+      "linux": "joplin-desktop",
+      "windows": "joplin-desktop",
+      "macos": "Joplin"
+    },
     "icon": "joplin.png",
     "hidden": false,
     "cli": false
@@ -1934,7 +2579,9 @@
     "name": "KAddressBook",
     "vendor": "",
     "category": "Office",
-    "bin": "kaddressbook",
+    "bin": {
+      "linux": "kaddressbook"
+    },
     "icon": "org.kde.kaddressbook.svg",
     "hidden": false,
     "cli": false
@@ -1944,7 +2591,9 @@
     "name": "Keynote",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Keynote",
+    "bin": {
+      "macos": "Keynote"
+    },
     "icon": "mac-keynote.png",
     "hidden": false,
     "cli": false
@@ -1954,7 +2603,11 @@
     "name": "Kiwix",
     "vendor": "",
     "category": "Office",
-    "bin": "kiwix",
+    "bin": {
+      "linux": "kiwix",
+      "windows": "kiwix",
+      "macos": "Kiwix"
+    },
     "icon": "kiwix.png",
     "hidden": false,
     "cli": false
@@ -1964,7 +2617,9 @@
     "name": "KMail",
     "vendor": "",
     "category": "Office",
-    "bin": "kmail",
+    "bin": {
+      "linux": "kmail"
+    },
     "icon": "org.kde.kmail2.svg",
     "hidden": false,
     "cli": false
@@ -1974,7 +2629,9 @@
     "name": "Kontact",
     "vendor": "",
     "category": "Office",
-    "bin": "kontact",
+    "bin": {
+      "linux": "kontact"
+    },
     "icon": "org.kde.kontact.svg",
     "hidden": false,
     "cli": false
@@ -1984,7 +2641,10 @@
     "name": "Koodo Reader",
     "vendor": "",
     "category": "Office",
-    "bin": "koodoreader",
+    "bin": {
+      "linux": "koodoreader",
+      "windows": "koodoreader"
+    },
     "icon": "koodoreader.png",
     "hidden": false,
     "cli": false
@@ -1994,7 +2654,10 @@
     "name": "KOReader",
     "vendor": "",
     "category": "Office",
-    "bin": "koreader",
+    "bin": {
+      "linux": "koreader",
+      "macos": "Koreader"
+    },
     "icon": "koreader.png",
     "hidden": false,
     "cli": false
@@ -2004,7 +2667,9 @@
     "name": "KOrganizer",
     "vendor": "",
     "category": "Office",
-    "bin": "korganizer",
+    "bin": {
+      "linux": "korganizer"
+    },
     "icon": "org.kde.korganizer.svg",
     "hidden": false,
     "cli": false
@@ -2014,7 +2679,9 @@
     "name": "KTnef",
     "vendor": "",
     "category": "Office",
-    "bin": "ktnef",
+    "bin": {
+      "linux": "ktnef"
+    },
     "icon": "org.kde.ktnef.svg",
     "hidden": false,
     "cli": false
@@ -2024,7 +2691,11 @@
     "name": "Ledger Live",
     "vendor": "",
     "category": "Office",
-    "bin": "ledger-live-bin",
+    "bin": {
+      "linux": "ledger-live-bin",
+      "windows": "ledger-live-bin",
+      "macos": "Ledger Live"
+    },
     "icon": "ledger-live.png",
     "hidden": false,
     "cli": false
@@ -2034,7 +2705,11 @@
     "name": "LibreOffice Writer",
     "vendor": "",
     "category": "Office",
-    "bin": "libreoffice",
+    "bin": {
+      "linux": "libreoffice",
+      "windows": "libreoffice",
+      "macos": "Libreoffice"
+    },
     "icon": "libreoffice-writer.svg",
     "hidden": false,
     "cli": false
@@ -2044,7 +2719,11 @@
     "name": "Logseq",
     "vendor": "",
     "category": "Office",
-    "bin": "logseq-desktop-bin",
+    "bin": {
+      "linux": "logseq-desktop-bin",
+      "windows": "logseq-desktop-bin",
+      "macos": "Logseq"
+    },
     "icon": "logseq.png",
     "hidden": false,
     "cli": false
@@ -2054,7 +2733,9 @@
     "name": "Microsoft Excel",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "EXCEL.EXE",
+    "bin": {
+      "windows": "EXCEL.EXE"
+    },
     "icon": "win-excel.png",
     "hidden": false,
     "cli": false
@@ -2064,7 +2745,9 @@
     "name": "Microsoft PowerPoint",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "POWERPNT.EXE",
+    "bin": {
+      "windows": "POWERPNT.EXE"
+    },
     "icon": "win-powerpoint.png",
     "hidden": false,
     "cli": false
@@ -2074,7 +2757,9 @@
     "name": "Microsoft Word",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "WINWORD.EXE",
+    "bin": {
+      "windows": "WINWORD.EXE"
+    },
     "icon": "win-word.png",
     "hidden": false,
     "cli": false
@@ -2084,7 +2769,9 @@
     "name": "Monero GUI Wallet",
     "vendor": "",
     "category": "Office",
-    "bin": "monero-gui",
+    "bin": {
+      "linux": "monero-gui"
+    },
     "icon": "monero-gui.png",
     "hidden": false,
     "cli": false
@@ -2094,7 +2781,9 @@
     "name": "Notepad",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "notepad.exe",
+    "bin": {
+      "windows": "notepad.exe"
+    },
     "icon": "win-notepad.png",
     "hidden": false,
     "cli": false
@@ -2104,7 +2793,9 @@
     "name": "Notes",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Notes",
+    "bin": {
+      "macos": "Notes"
+    },
     "icon": "mac-notes.png",
     "hidden": false,
     "cli": false
@@ -2114,7 +2805,11 @@
     "name": "Notion",
     "vendor": "",
     "category": "Office",
-    "bin": "notion-desktop",
+    "bin": {
+      "linux": "notion-desktop",
+      "windows": "notion-desktop",
+      "macos": "Notion"
+    },
     "icon": "notion.png",
     "hidden": false,
     "cli": false
@@ -2124,7 +2819,9 @@
     "name": "Numbers",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Numbers",
+    "bin": {
+      "macos": "Numbers"
+    },
     "icon": "mac-numbers.png",
     "hidden": false,
     "cli": false
@@ -2134,7 +2831,11 @@
     "name": "Obsidian",
     "vendor": "",
     "category": "Office",
-    "bin": "obsidian",
+    "bin": {
+      "linux": "obsidian",
+      "windows": "obsidian",
+      "macos": "Obsidian"
+    },
     "icon": "obsidian.png",
     "hidden": false,
     "cli": false
@@ -2144,7 +2845,9 @@
     "name": "OneNote",
     "vendor": "Microsoft",
     "category": "Office",
-    "bin": "ONENOTE.EXE",
+    "bin": {
+      "windows": "ONENOTE.EXE"
+    },
     "icon": "win-onenote.png",
     "hidden": false,
     "cli": false
@@ -2154,7 +2857,11 @@
     "name": "OnlyOffice",
     "vendor": "",
     "category": "Office",
-    "bin": "onlyoffice",
+    "bin": {
+      "linux": "onlyoffice",
+      "windows": "onlyoffice",
+      "macos": "Onlyoffice"
+    },
     "icon": "onlyoffice.png",
     "hidden": false,
     "cli": false
@@ -2164,7 +2871,9 @@
     "name": "Pages",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Pages",
+    "bin": {
+      "macos": "Pages"
+    },
     "icon": "mac-pages.png",
     "hidden": false,
     "cli": false
@@ -2174,7 +2883,11 @@
     "name": "Pandoc",
     "vendor": "",
     "category": "Office",
-    "bin": "pandoc",
+    "bin": {
+      "linux": "pandoc",
+      "windows": "pandoc",
+      "macos": "Pandoc"
+    },
     "icon": "pandoc.png",
     "hidden": false,
     "cli": false
@@ -2184,7 +2897,11 @@
     "name": "Qalculate!",
     "vendor": "",
     "category": "Office",
-    "bin": "qalculate",
+    "bin": {
+      "linux": "qalculate",
+      "windows": "qalculate",
+      "macos": "Qalculate Gtk"
+    },
     "icon": "qalculate.png",
     "hidden": false,
     "cli": false
@@ -2194,7 +2911,9 @@
     "name": "Reminders",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "Reminders",
+    "bin": {
+      "macos": "Reminders"
+    },
     "icon": "mac-reminders.png",
     "hidden": false,
     "cli": false
@@ -2204,7 +2923,10 @@
     "name": "Taskwarrior",
     "vendor": "",
     "category": "Office",
-    "bin": "task",
+    "bin": {
+      "linux": "task",
+      "macos": "Task"
+    },
     "icon": "taskwarrior.png",
     "hidden": false,
     "cli": false
@@ -2214,7 +2936,9 @@
     "name": "Text Editor",
     "vendor": "GNOME",
     "category": "Office",
-    "bin": "gnome-text-editor",
+    "bin": {
+      "linux": "gnome-text-editor"
+    },
     "icon": "gnome-text-editor.png",
     "hidden": false,
     "cli": false
@@ -2224,7 +2948,9 @@
     "name": "TextEdit",
     "vendor": "Apple",
     "category": "Office",
-    "bin": "TextEdit",
+    "bin": {
+      "macos": "TextEdit"
+    },
     "icon": "mac-textedit.png",
     "hidden": false,
     "cli": false
@@ -2234,7 +2960,9 @@
     "name": "Trilium Notes",
     "vendor": "",
     "category": "Office",
-    "bin": "trilium-bin",
+    "bin": {
+      "linux": "trilium-bin"
+    },
     "icon": "trilium.png",
     "hidden": false,
     "cli": false
@@ -2244,7 +2972,11 @@
     "name": "Zotero",
     "vendor": "",
     "category": "Office",
-    "bin": "zotero-bin",
+    "bin": {
+      "linux": "zotero-bin",
+      "windows": "zotero-bin",
+      "macos": "Zotero"
+    },
     "icon": "zotero.png",
     "hidden": false,
     "cli": false
@@ -2254,7 +2986,11 @@
     "name": "GeoGebra",
     "vendor": "",
     "category": "Science",
-    "bin": "geogebra",
+    "bin": {
+      "linux": "geogebra",
+      "windows": "geogebra",
+      "macos": "Geogebra"
+    },
     "icon": "geogebra.png",
     "hidden": false,
     "cli": false
@@ -2264,7 +3000,11 @@
     "name": "Google Earth",
     "vendor": "",
     "category": "Science",
-    "bin": "flathub-com.google.EarthPro",
+    "bin": {
+      "linux": "flathub-com.google.EarthPro",
+      "windows": "flathub-com.google.EarthPro",
+      "macos": "Google Earth Pro"
+    },
     "icon": "google-earth.png",
     "hidden": false,
     "cli": false
@@ -2274,7 +3014,11 @@
     "name": "Kstars",
     "vendor": "",
     "category": "Science",
-    "bin": "kstars",
+    "bin": {
+      "linux": "kstars",
+      "windows": "kstars",
+      "macos": "Kstars"
+    },
     "icon": "kstars.png",
     "hidden": false,
     "cli": false
@@ -2284,7 +3028,11 @@
     "name": "QGIS",
     "vendor": "",
     "category": "Science",
-    "bin": "qgis",
+    "bin": {
+      "linux": "qgis",
+      "windows": "qgis",
+      "macos": "Qgis"
+    },
     "icon": "qgis.png",
     "hidden": false,
     "cli": false
@@ -2294,7 +3042,11 @@
     "name": "Stellarium",
     "vendor": "",
     "category": "Science",
-    "bin": "stellarium",
+    "bin": {
+      "linux": "stellarium",
+      "windows": "stellarium",
+      "macos": "Stellarium"
+    },
     "icon": "stellarium.png",
     "hidden": false,
     "cli": false
@@ -2304,7 +3056,9 @@
     "name": "Activity Monitor",
     "vendor": "Apple",
     "category": "System",
-    "bin": "Activity Monitor",
+    "bin": {
+      "macos": "Activity Monitor"
+    },
     "icon": "mac-activity-monitor.png",
     "hidden": false,
     "cli": false
@@ -2314,7 +3068,11 @@
     "name": "AnyDesk",
     "vendor": "",
     "category": "System",
-    "bin": "anydesk",
+    "bin": {
+      "linux": "anydesk",
+      "windows": "anydesk",
+      "macos": "Anydesk"
+    },
     "icon": "anydesk.png",
     "hidden": false,
     "cli": false
@@ -2324,7 +3082,11 @@
     "name": "Apache",
     "vendor": "",
     "category": "System",
-    "bin": "httpd",
+    "bin": {
+      "linux": "httpd",
+      "windows": "httpd",
+      "macos": "Httpd"
+    },
     "icon": "apache.png",
     "hidden": false,
     "cli": false
@@ -2334,7 +3096,9 @@
     "name": "App Store",
     "vendor": "Apple",
     "category": "System",
-    "bin": "App Store",
+    "bin": {
+      "macos": "App Store"
+    },
     "icon": "mac-app-store.png",
     "hidden": false,
     "cli": false
@@ -2344,7 +3108,11 @@
     "name": "Bitwarden",
     "vendor": "",
     "category": "System",
-    "bin": "bitwarden",
+    "bin": {
+      "linux": "bitwarden",
+      "windows": "bitwarden",
+      "macos": "Bitwarden"
+    },
     "icon": "bitwarden.png",
     "hidden": false,
     "cli": false
@@ -2354,7 +3122,11 @@
     "name": "BleachBit",
     "vendor": "",
     "category": "System",
-    "bin": "bleachbit",
+    "bin": {
+      "linux": "bleachbit",
+      "windows": "bleachbit",
+      "macos": "Bleachbit"
+    },
     "icon": "bleachbit.png",
     "hidden": false,
     "cli": false
@@ -2364,7 +3136,9 @@
     "name": "Bottles",
     "vendor": "",
     "category": "System",
-    "bin": "bottles",
+    "bin": {
+      "linux": "bottles"
+    },
     "icon": "bottles.png",
     "hidden": false,
     "cli": false
@@ -2374,7 +3148,10 @@
     "name": "Boxes",
     "vendor": "",
     "category": "System",
-    "bin": "gnome-boxes",
+    "bin": {
+      "linux": "gnome-boxes",
+      "macos": "Gnome Boxes"
+    },
     "icon": "gnome-boxes.png",
     "hidden": false,
     "cli": false
@@ -2384,7 +3161,11 @@
     "name": "btop++",
     "vendor": "",
     "category": "System",
-    "bin": "btop",
+    "bin": {
+      "linux": "btop",
+      "windows": "btop",
+      "macos": "Btop"
+    },
     "icon": "btop.svg",
     "hidden": false,
     "cli": false
@@ -2394,7 +3175,11 @@
     "name": "Cryptomator",
     "vendor": "",
     "category": "System",
-    "bin": "cryptomator",
+    "bin": {
+      "linux": "cryptomator",
+      "windows": "cryptomator",
+      "macos": "Cryptomator"
+    },
     "icon": "cryptomator.png",
     "hidden": false,
     "cli": false
@@ -2404,7 +3189,9 @@
     "name": "Discover",
     "vendor": "",
     "category": "System",
-    "bin": "plasma-discover",
+    "bin": {
+      "linux": "plasma-discover"
+    },
     "icon": "org.kde.discover.svg",
     "hidden": false,
     "cli": false
@@ -2414,7 +3201,9 @@
     "name": "Disk Utility",
     "vendor": "Apple",
     "category": "System",
-    "bin": "Disk Utility",
+    "bin": {
+      "macos": "Disk Utility"
+    },
     "icon": "mac-disk-utility.png",
     "hidden": false,
     "cli": false
@@ -2424,7 +3213,9 @@
     "name": "Disks",
     "vendor": "GNOME",
     "category": "System",
-    "bin": "gnome-disks",
+    "bin": {
+      "linux": "gnome-disks"
+    },
     "icon": "gnome-disks.png",
     "hidden": false,
     "cli": false
@@ -2434,7 +3225,10 @@
     "name": "Distrobox",
     "vendor": "",
     "category": "System",
-    "bin": "distrobox",
+    "bin": {
+      "linux": "distrobox",
+      "macos": "Distrobox"
+    },
     "icon": "distrobox.png",
     "hidden": false,
     "cli": false
@@ -2444,7 +3238,11 @@
     "name": "Docker",
     "vendor": "",
     "category": "System",
-    "bin": "docker",
+    "bin": {
+      "linux": "docker",
+      "windows": "docker",
+      "macos": "Docker"
+    },
     "icon": "docker.png",
     "hidden": false,
     "cli": false
@@ -2454,7 +3252,9 @@
     "name": "Dolphin",
     "vendor": "",
     "category": "System",
-    "bin": "dolphin",
+    "bin": {
+      "linux": "dolphin"
+    },
     "icon": "org.kde.dolphin.svg",
     "hidden": false,
     "cli": false
@@ -2464,7 +3264,11 @@
     "name": "fastfetch",
     "vendor": "",
     "category": "System",
-    "bin": "fastfetch",
+    "bin": {
+      "linux": "fastfetch",
+      "windows": "fastfetch",
+      "macos": "Fastfetch"
+    },
     "icon": "fastfetch.png",
     "hidden": false,
     "cli": true
@@ -2474,7 +3278,9 @@
     "name": "Fedora Media Writer",
     "vendor": "",
     "category": "System",
-    "bin": "mediawriter",
+    "bin": {
+      "linux": "mediawriter"
+    },
     "icon": "org.fedoraproject.MediaWriter.png",
     "hidden": false,
     "cli": false
@@ -2484,7 +3290,11 @@
     "name": "FileZilla",
     "vendor": "",
     "category": "System",
-    "bin": "filezilla",
+    "bin": {
+      "linux": "filezilla",
+      "windows": "filezilla",
+      "macos": "Filezilla"
+    },
     "icon": "filezilla.png",
     "hidden": false,
     "cli": false
@@ -2494,7 +3304,9 @@
     "name": "Firewall",
     "vendor": "",
     "category": "System",
-    "bin": "firewall-config",
+    "bin": {
+      "linux": "firewall-config"
+    },
     "icon": "firewall-config.svg",
     "hidden": false,
     "cli": false
@@ -2504,7 +3316,9 @@
     "name": "GnuPG Log Viewer",
     "vendor": "",
     "category": "System",
-    "bin": "kwatchgnupg",
+    "bin": {
+      "linux": "kwatchgnupg"
+    },
     "icon": "org.kde.kwatchgnupg.svg",
     "hidden": false,
     "cli": false
@@ -2514,7 +3328,9 @@
     "name": "gparted",
     "vendor": "",
     "category": "System",
-    "bin": "gparted",
+    "bin": {
+      "linux": "gparted"
+    },
     "icon": "gparted.png",
     "hidden": false,
     "cli": false
@@ -2524,7 +3340,10 @@
     "name": "htop",
     "vendor": "",
     "category": "System",
-    "bin": "htop",
+    "bin": {
+      "linux": "htop",
+      "macos": "Htop"
+    },
     "icon": "htop.png",
     "hidden": false,
     "cli": true
@@ -2534,7 +3353,9 @@
     "name": "Info Center",
     "vendor": "",
     "category": "System",
-    "bin": "kinfocenter",
+    "bin": {
+      "linux": "kinfocenter"
+    },
     "icon": "org.kde.kinfocenter.svg",
     "hidden": false,
     "cli": false
@@ -2544,7 +3365,9 @@
     "name": "KDE Partition Manager",
     "vendor": "",
     "category": "System",
-    "bin": "partitionmanager",
+    "bin": {
+      "linux": "partitionmanager"
+    },
     "icon": "org.kde.partitionmanager.svg",
     "hidden": false,
     "cli": false
@@ -2554,7 +3377,11 @@
     "name": "KeePassXC",
     "vendor": "",
     "category": "System",
-    "bin": "keepassxc",
+    "bin": {
+      "linux": "keepassxc",
+      "windows": "keepassxc",
+      "macos": "Keepassxc"
+    },
     "icon": "keepassxc.png",
     "hidden": false,
     "cli": false
@@ -2564,7 +3391,9 @@
     "name": "Konsole",
     "vendor": "",
     "category": "System",
-    "bin": "konsole",
+    "bin": {
+      "linux": "konsole"
+    },
     "icon": "org.kde.konsole.svg",
     "hidden": false,
     "cli": false
@@ -2574,7 +3403,9 @@
     "name": "KWalletManager",
     "vendor": "",
     "category": "System",
-    "bin": "kwalletmanager5",
+    "bin": {
+      "linux": "kwalletmanager5"
+    },
     "icon": "org.kde.kwalletmanager.svg",
     "hidden": false,
     "cli": false
@@ -2584,7 +3415,9 @@
     "name": "Microsoft Store",
     "vendor": "Microsoft",
     "category": "System",
-    "bin": "WinStore.App.exe",
+    "bin": {
+      "windows": "WinStore.App.exe"
+    },
     "icon": "win-store.png",
     "hidden": false,
     "cli": false
@@ -2594,7 +3427,11 @@
     "name": "Mullvad VPN",
     "vendor": "",
     "category": "System",
-    "bin": "mullvad-vpn",
+    "bin": {
+      "linux": "mullvad-vpn",
+      "windows": "mullvad-vpn",
+      "macos": "Mullvadvpn"
+    },
     "icon": "mullvad-vpn.png",
     "hidden": false,
     "cli": false
@@ -2604,7 +3441,11 @@
     "name": "Nginx",
     "vendor": "",
     "category": "System",
-    "bin": "nginx",
+    "bin": {
+      "linux": "nginx",
+      "windows": "nginx",
+      "macos": "Nginx"
+    },
     "icon": "nginx.png",
     "hidden": false,
     "cli": false
@@ -2614,7 +3455,11 @@
     "name": "Nmap",
     "vendor": "",
     "category": "System",
-    "bin": "nmap",
+    "bin": {
+      "linux": "nmap",
+      "windows": "nmap",
+      "macos": "Nmap"
+    },
     "icon": "nmap.png",
     "hidden": false,
     "cli": false
@@ -2624,7 +3469,9 @@
     "name": "Pi-hole",
     "vendor": "",
     "category": "System",
-    "bin": "pi-hole-core",
+    "bin": {
+      "linux": "pi-hole-core"
+    },
     "icon": "pi-hole.png",
     "hidden": false,
     "cli": false
@@ -2634,7 +3481,10 @@
     "name": "PlayOnLinux",
     "vendor": "",
     "category": "System",
-    "bin": "playonlinux",
+    "bin": {
+      "linux": "playonlinux",
+      "macos": "Playonlinux"
+    },
     "icon": "playonlinux.png",
     "hidden": false,
     "cli": false
@@ -2644,7 +3494,11 @@
     "name": "Podman",
     "vendor": "",
     "category": "System",
-    "bin": "podman",
+    "bin": {
+      "linux": "podman",
+      "windows": "podman",
+      "macos": "Podman"
+    },
     "icon": "podman.png",
     "hidden": false,
     "cli": false
@@ -2654,7 +3508,11 @@
     "name": "Proton VPN",
     "vendor": "",
     "category": "System",
-    "bin": "protonvpn",
+    "bin": {
+      "linux": "protonvpn",
+      "windows": "protonvpn",
+      "macos": "Protonvpn"
+    },
     "icon": "proton-vpn.png",
     "hidden": false,
     "cli": false
@@ -2664,7 +3522,10 @@
     "name": "ProtonUp-Qt",
     "vendor": "",
     "category": "System",
-    "bin": "protonup-qt",
+    "bin": {
+      "linux": "protonup-qt",
+      "windows": "protonup-qt"
+    },
     "icon": "proton-qt.png",
     "hidden": false,
     "cli": false
@@ -2674,7 +3535,11 @@
     "name": "QEMU",
     "vendor": "",
     "category": "System",
-    "bin": "qemu",
+    "bin": {
+      "linux": "qemu",
+      "windows": "qemu",
+      "macos": "Qemu"
+    },
     "icon": "qemu.png",
     "hidden": false,
     "cli": false
@@ -2684,7 +3549,11 @@
     "name": "RustDesk",
     "vendor": "",
     "category": "System",
-    "bin": "rustdesk-bin",
+    "bin": {
+      "linux": "rustdesk-bin",
+      "windows": "rustdesk-bin",
+      "macos": "Rustdesk"
+    },
     "icon": "rustdesk.png",
     "hidden": false,
     "cli": false
@@ -2694,7 +3563,11 @@
     "name": "Scrcpy",
     "vendor": "",
     "category": "System",
-    "bin": "scrcpy",
+    "bin": {
+      "linux": "scrcpy",
+      "windows": "scrcpy",
+      "macos": "Scrcpy"
+    },
     "icon": "scrcpy.png",
     "hidden": false,
     "cli": false
@@ -2704,7 +3577,9 @@
     "name": "Settings",
     "vendor": "Microsoft",
     "category": "System",
-    "bin": "ms-settings:",
+    "bin": {
+      "windows": "ms-settings:"
+    },
     "icon": "win-settings.png",
     "hidden": false,
     "cli": false
@@ -2714,7 +3589,9 @@
     "name": "Software",
     "vendor": "GNOME",
     "category": "System",
-    "bin": "gnome-software",
+    "bin": {
+      "linux": "gnome-software"
+    },
     "icon": "gnome-software.png",
     "hidden": false,
     "cli": false
@@ -2724,7 +3601,9 @@
     "name": "System Monitor",
     "vendor": "GNOME",
     "category": "System",
-    "bin": "gnome-system-monitor",
+    "bin": {
+      "linux": "gnome-system-monitor"
+    },
     "icon": "gnome-system-monitor.png",
     "hidden": false,
     "cli": false
@@ -2734,7 +3613,9 @@
     "name": "System Monitor",
     "vendor": "",
     "category": "System",
-    "bin": "plasma-systemmonitor",
+    "bin": {
+      "linux": "plasma-systemmonitor"
+    },
     "icon": "org.kde.plasma-systemmonitor.svg",
     "hidden": false,
     "cli": false
@@ -2744,7 +3625,9 @@
     "name": "System Settings",
     "vendor": "Apple",
     "category": "System",
-    "bin": "System Settings",
+    "bin": {
+      "macos": "System Settings"
+    },
     "icon": "mac-system-settings.png",
     "hidden": false,
     "cli": false
@@ -2754,7 +3637,9 @@
     "name": "System Settings",
     "vendor": "",
     "category": "System",
-    "bin": "systemsettings",
+    "bin": {
+      "linux": "systemsettings"
+    },
     "icon": "systemsettings.svg",
     "hidden": false,
     "cli": false
@@ -2764,7 +3649,11 @@
     "name": "Tailscale",
     "vendor": "",
     "category": "System",
-    "bin": "tailscale",
+    "bin": {
+      "linux": "tailscale",
+      "windows": "tailscale",
+      "macos": "Tailscale"
+    },
     "icon": "tailscale.png",
     "hidden": false,
     "cli": false
@@ -2774,7 +3663,9 @@
     "name": "Task Manager",
     "vendor": "Microsoft",
     "category": "System",
-    "bin": "taskmgr.exe",
+    "bin": {
+      "windows": "taskmgr.exe"
+    },
     "icon": "win-task-manager.png",
     "hidden": false,
     "cli": false
@@ -2784,7 +3675,11 @@
     "name": "TeamViewer",
     "vendor": "",
     "category": "System",
-    "bin": "teamviewer",
+    "bin": {
+      "linux": "teamviewer",
+      "windows": "teamviewer",
+      "macos": "Teamviewer"
+    },
     "icon": "teamviewer.png",
     "hidden": false,
     "cli": false
@@ -2794,7 +3689,11 @@
     "name": "VeraCrypt",
     "vendor": "",
     "category": "System",
-    "bin": "veracrypt",
+    "bin": {
+      "linux": "veracrypt",
+      "windows": "veracrypt",
+      "macos": "Veracrypt"
+    },
     "icon": "veracrypt.png",
     "hidden": false,
     "cli": false
@@ -2804,7 +3703,9 @@
     "name": "Virt Manager",
     "vendor": "",
     "category": "System",
-    "bin": "virt-manager",
+    "bin": {
+      "linux": "virt-manager"
+    },
     "icon": "virt-manager.png",
     "hidden": false,
     "cli": false
@@ -2814,7 +3715,11 @@
     "name": "VirtualBox",
     "vendor": "",
     "category": "System",
-    "bin": "VirtualBox",
+    "bin": {
+      "linux": "VirtualBox",
+      "windows": "VirtualBox",
+      "macos": "Virtualbox"
+    },
     "icon": "virtualbox.png",
     "hidden": false,
     "cli": false
@@ -2824,7 +3729,9 @@
     "name": "VMware Workstation",
     "vendor": "",
     "category": "System",
-    "bin": "vmware-workstation-player",
+    "bin": {
+      "linux": "vmware-workstation-player"
+    },
     "icon": "vmware.png",
     "hidden": false,
     "cli": false
@@ -2834,7 +3741,9 @@
     "name": "WayDroid",
     "vendor": "",
     "category": "System",
-    "bin": "waydroid-git",
+    "bin": {
+      "linux": "waydroid-git"
+    },
     "icon": "waydroid.png",
     "hidden": false,
     "cli": false
@@ -2844,7 +3753,11 @@
     "name": "Windscribe",
     "vendor": "",
     "category": "System",
-    "bin": "windscribe-cli",
+    "bin": {
+      "linux": "windscribe-cli",
+      "windows": "windscribe-cli",
+      "macos": "Windscribe"
+    },
     "icon": "windscribe.png",
     "hidden": false,
     "cli": false
@@ -2854,7 +3767,10 @@
     "name": "Wine",
     "vendor": "",
     "category": "System",
-    "bin": "wine",
+    "bin": {
+      "linux": "wine",
+      "macos": "Wine"
+    },
     "icon": "wine.png",
     "hidden": false,
     "cli": false
@@ -2864,7 +3780,11 @@
     "name": "WireGuard",
     "vendor": "",
     "category": "System",
-    "bin": "wireguard-tools",
+    "bin": {
+      "linux": "wireguard-tools",
+      "windows": "wireguard-tools",
+      "macos": "Wireguard Tools"
+    },
     "icon": "wireguard.png",
     "hidden": false,
     "cli": false
@@ -2874,7 +3794,11 @@
     "name": "Wireshark",
     "vendor": "",
     "category": "System",
-    "bin": "wireshark",
+    "bin": {
+      "linux": "wireshark",
+      "windows": "wireshark",
+      "macos": "Wireshark"
+    },
     "icon": "wireshark.png",
     "hidden": false,
     "cli": false
@@ -2884,7 +3808,10 @@
     "name": "Xen",
     "vendor": "",
     "category": "System",
-    "bin": "xen",
+    "bin": {
+      "linux": "xen",
+      "windows": "xen"
+    },
     "icon": "xen.png",
     "hidden": false,
     "cli": false
@@ -2894,7 +3821,11 @@
     "name": "7-Zip",
     "vendor": "",
     "category": "Utilities",
-    "bin": "p7zip",
+    "bin": {
+      "linux": "p7zip",
+      "windows": "p7zip",
+      "macos": "P7zip"
+    },
     "icon": "7zip.png",
     "hidden": false,
     "cli": false
@@ -2904,7 +3835,11 @@
     "name": "Alacritty",
     "vendor": "",
     "category": "Utilities",
-    "bin": "alacritty",
+    "bin": {
+      "linux": "alacritty",
+      "windows": "alacritty",
+      "macos": "Alacritty"
+    },
     "icon": "alacritty.png",
     "hidden": false,
     "cli": false
@@ -2914,7 +3849,9 @@
     "name": "Ark",
     "vendor": "",
     "category": "Utilities",
-    "bin": "ark",
+    "bin": {
+      "linux": "ark"
+    },
     "icon": "org.kde.ark.svg",
     "hidden": false,
     "cli": false
@@ -2924,7 +3861,9 @@
     "name": "Automator",
     "vendor": "Apple",
     "category": "Utilities",
-    "bin": "Automator",
+    "bin": {
+      "macos": "Automator"
+    },
     "icon": "mac-automator.png",
     "hidden": false,
     "cli": false
@@ -2934,7 +3873,11 @@
     "name": "Balena Etcher",
     "vendor": "",
     "category": "Utilities",
-    "bin": "etcher",
+    "bin": {
+      "linux": "etcher",
+      "windows": "etcher",
+      "macos": "Balenaetcher"
+    },
     "icon": "balena-etcher.png",
     "hidden": false,
     "cli": false
@@ -2944,7 +3887,11 @@
     "name": "bat",
     "vendor": "",
     "category": "Utilities",
-    "bin": "bat",
+    "bin": {
+      "linux": "bat",
+      "windows": "bat",
+      "macos": "Bat"
+    },
     "icon": "bat.png",
     "hidden": false,
     "cli": true
@@ -2954,7 +3901,10 @@
     "name": "Borg",
     "vendor": "",
     "category": "Utilities",
-    "bin": "borgbackup",
+    "bin": {
+      "linux": "borgbackup",
+      "macos": "Borgbackup"
+    },
     "icon": "borg.png",
     "hidden": false,
     "cli": false
@@ -2964,7 +3914,11 @@
     "name": "cURL",
     "vendor": "",
     "category": "Utilities",
-    "bin": "curl",
+    "bin": {
+      "linux": "curl",
+      "windows": "curl",
+      "macos": "Curl"
+    },
     "icon": "curl.png",
     "hidden": false,
     "cli": true
@@ -2974,7 +3928,11 @@
     "name": "Dropbox",
     "vendor": "",
     "category": "Utilities",
-    "bin": "nautilus-dropbox",
+    "bin": {
+      "linux": "nautilus-dropbox",
+      "windows": "nautilus-dropbox",
+      "macos": "Dropbox"
+    },
     "icon": "dropbox.png",
     "hidden": false,
     "cli": false
@@ -2984,7 +3942,11 @@
     "name": "Dua",
     "vendor": "",
     "category": "Utilities",
-    "bin": "dua-cli",
+    "bin": {
+      "linux": "dua-cli",
+      "windows": "dua-cli",
+      "macos": "Dua Cli"
+    },
     "icon": "dua-cli.png",
     "hidden": false,
     "cli": true
@@ -2994,7 +3956,11 @@
     "name": "Dust",
     "vendor": "",
     "category": "Utilities",
-    "bin": "dust",
+    "bin": {
+      "linux": "dust",
+      "windows": "dust",
+      "macos": "Dust"
+    },
     "icon": "dust.png",
     "hidden": false,
     "cli": true
@@ -3004,7 +3970,9 @@
     "name": "Eagle-Mode",
     "vendor": "",
     "category": "Utilities",
-    "bin": "eaglemode",
+    "bin": {
+      "linux": "eaglemode"
+    },
     "icon": "eaglemode.png",
     "hidden": false,
     "cli": false
@@ -3014,7 +3982,9 @@
     "name": "Emoji Selector",
     "vendor": "",
     "category": "Utilities",
-    "bin": "plasma-emojier",
+    "bin": {
+      "linux": "plasma-emojier"
+    },
     "icon": "org.kde.plasma.emojier.png",
     "hidden": false,
     "cli": false
@@ -3024,7 +3994,11 @@
     "name": "eza",
     "vendor": "",
     "category": "Utilities",
-    "bin": "eza",
+    "bin": {
+      "linux": "eza",
+      "windows": "eza",
+      "macos": "Eza"
+    },
     "icon": "eza.png",
     "hidden": false,
     "cli": true
@@ -3034,7 +4008,11 @@
     "name": "fd",
     "vendor": "",
     "category": "Utilities",
-    "bin": "fd-find",
+    "bin": {
+      "linux": "fd-find",
+      "windows": "fd-find",
+      "macos": "Fd"
+    },
     "icon": "fd.png",
     "hidden": false,
     "cli": true
@@ -3044,7 +4022,9 @@
     "name": "File Explorer",
     "vendor": "Microsoft",
     "category": "Utilities",
-    "bin": "explorer.exe",
+    "bin": {
+      "windows": "explorer.exe"
+    },
     "icon": "win-explorer.png",
     "hidden": false,
     "cli": false
@@ -3054,7 +4034,9 @@
     "name": "Filelight",
     "vendor": "",
     "category": "Utilities",
-    "bin": "filelight",
+    "bin": {
+      "linux": "filelight"
+    },
     "icon": "org.kde.filelight.svg",
     "hidden": false,
     "cli": false
@@ -3064,7 +4046,9 @@
     "name": "Files",
     "vendor": "GNOME",
     "category": "Utilities",
-    "bin": "nautilus",
+    "bin": {
+      "linux": "nautilus"
+    },
     "icon": "nautilus.png",
     "hidden": false,
     "cli": false
@@ -3074,7 +4058,9 @@
     "name": "Finder",
     "vendor": "Apple",
     "category": "Utilities",
-    "bin": "Finder",
+    "bin": {
+      "macos": "Finder"
+    },
     "icon": "mac-finder.png",
     "hidden": false,
     "cli": false
@@ -3084,7 +4070,11 @@
     "name": "Flameshot",
     "vendor": "",
     "category": "Utilities",
-    "bin": "flameshot",
+    "bin": {
+      "linux": "flameshot",
+      "windows": "flameshot",
+      "macos": "Flameshot"
+    },
     "icon": "flameshot.png",
     "hidden": false,
     "cli": false
@@ -3094,7 +4084,10 @@
     "name": "FreeFileSync",
     "vendor": "",
     "category": "Utilities",
-    "bin": "freefilesync",
+    "bin": {
+      "linux": "freefilesync",
+      "macos": "Freefilesync"
+    },
     "icon": "freefilesync.png",
     "hidden": false,
     "cli": false
@@ -3104,7 +4097,11 @@
     "name": "fzf",
     "vendor": "",
     "category": "Utilities",
-    "bin": "fzf",
+    "bin": {
+      "linux": "fzf",
+      "windows": "fzf",
+      "macos": "Fzf"
+    },
     "icon": "fzf.png",
     "hidden": false,
     "cli": true
@@ -3114,7 +4111,10 @@
     "name": "Ghostty",
     "vendor": "",
     "category": "Utilities",
-    "bin": "ghostty",
+    "bin": {
+      "linux": "ghostty",
+      "macos": "Ghostty"
+    },
     "icon": "ghostty.png",
     "hidden": false,
     "cli": false
@@ -3124,7 +4124,11 @@
     "name": "GPXSee",
     "vendor": "",
     "category": "Utilities",
-    "bin": "gpxsee",
+    "bin": {
+      "linux": "gpxsee",
+      "windows": "gpxsee",
+      "macos": "Gpxsee"
+    },
     "icon": "gpxsee.png",
     "hidden": false,
     "cli": false
@@ -3134,7 +4138,9 @@
     "name": "Help Center",
     "vendor": "",
     "category": "Utilities",
-    "bin": "khelpcenter",
+    "bin": {
+      "linux": "khelpcenter"
+    },
     "icon": "org.kde.khelpcenter.svg",
     "hidden": false,
     "cli": false
@@ -3144,7 +4150,10 @@
     "name": "Home Assistant",
     "vendor": "",
     "category": "Utilities",
-    "bin": "home-assistant-snap",
+    "bin": {
+      "linux": "home-assistant-snap",
+      "macos": "Homeassistant Cli"
+    },
     "icon": "home-assistant.png",
     "hidden": false,
     "cli": false
@@ -3154,7 +4163,11 @@
     "name": "Instaloader",
     "vendor": "",
     "category": "Utilities",
-    "bin": "instaloader",
+    "bin": {
+      "linux": "instaloader",
+      "windows": "instaloader",
+      "macos": "Instaloader"
+    },
     "icon": "instaloader.png",
     "hidden": false,
     "cli": false
@@ -3164,7 +4177,11 @@
     "name": "jq",
     "vendor": "",
     "category": "Utilities",
-    "bin": "jq",
+    "bin": {
+      "linux": "jq",
+      "windows": "jq",
+      "macos": "Jq"
+    },
     "icon": "jq.png",
     "hidden": false,
     "cli": true
@@ -3174,7 +4191,9 @@
     "name": "KCalc",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kcalc",
+    "bin": {
+      "linux": "kcalc"
+    },
     "icon": "org.kde.kcalc.svg",
     "hidden": false,
     "cli": false
@@ -3184,7 +4203,9 @@
     "name": "KCharSelect",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kcharselect",
+    "bin": {
+      "linux": "kcharselect"
+    },
     "icon": "org.kde.kcharselect.svg",
     "hidden": false,
     "cli": false
@@ -3194,7 +4215,9 @@
     "name": "KFind",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kfind",
+    "bin": {
+      "linux": "kfind"
+    },
     "icon": "org.kde.kfind.svg",
     "hidden": false,
     "cli": false
@@ -3204,7 +4227,9 @@
     "name": "KGpg",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kgpg",
+    "bin": {
+      "linux": "kgpg"
+    },
     "icon": "org.kde.kgpg.svg",
     "hidden": false,
     "cli": false
@@ -3214,7 +4239,10 @@
     "name": "Kitty",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kitty",
+    "bin": {
+      "linux": "kitty",
+      "macos": "Kitty"
+    },
     "icon": "kitty.png",
     "hidden": false,
     "cli": false
@@ -3224,7 +4252,9 @@
     "name": "Kleopatra",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kleopatra",
+    "bin": {
+      "linux": "kleopatra"
+    },
     "icon": "org.kde.kleopatra.svg",
     "hidden": false,
     "cli": false
@@ -3234,7 +4264,9 @@
     "name": "KMouth",
     "vendor": "",
     "category": "Utilities",
-    "bin": "kmouth",
+    "bin": {
+      "linux": "kmouth"
+    },
     "icon": "org.kde.kmouth.svg",
     "hidden": false,
     "cli": false
@@ -3244,7 +4276,10 @@
     "name": "MEGAsync",
     "vendor": "",
     "category": "Utilities",
-    "bin": "megasync",
+    "bin": {
+      "linux": "megasync",
+      "windows": "megasync"
+    },
     "icon": "mega.png",
     "hidden": false,
     "cli": false
@@ -3254,7 +4289,11 @@
     "name": "meld",
     "vendor": "",
     "category": "Utilities",
-    "bin": "meld",
+    "bin": {
+      "linux": "meld",
+      "windows": "meld",
+      "macos": "Meld"
+    },
     "icon": "meld.png",
     "hidden": false,
     "cli": false
@@ -3264,7 +4303,11 @@
     "name": "MusicBrainz Picard",
     "vendor": "",
     "category": "Utilities",
-    "bin": "picard",
+    "bin": {
+      "linux": "picard",
+      "windows": "picard",
+      "macos": "Picard"
+    },
     "icon": "musicbrainz-picard.png",
     "hidden": false,
     "cli": false
@@ -3274,7 +4317,11 @@
     "name": "Nextcloud Desktop",
     "vendor": "",
     "category": "Utilities",
-    "bin": "nextcloud-client",
+    "bin": {
+      "linux": "nextcloud-client",
+      "windows": "nextcloud-client",
+      "macos": "Nextcloud"
+    },
     "icon": "nextcloud-desktop.png",
     "hidden": false,
     "cli": false
@@ -3284,7 +4331,11 @@
     "name": "OnionShare",
     "vendor": "",
     "category": "Utilities",
-    "bin": "onionshare",
+    "bin": {
+      "linux": "onionshare",
+      "windows": "onionshare",
+      "macos": "Onionshare"
+    },
     "icon": "onionshare.png",
     "hidden": false,
     "cli": false
@@ -3294,7 +4345,10 @@
     "name": "OpenRGB",
     "vendor": "",
     "category": "Utilities",
-    "bin": "openrgb",
+    "bin": {
+      "linux": "openrgb",
+      "windows": "openrgb"
+    },
     "icon": "openrgb.png",
     "hidden": false,
     "cli": false
@@ -3304,7 +4358,11 @@
     "name": "PuTTY",
     "vendor": "",
     "category": "Utilities",
-    "bin": "putty",
+    "bin": {
+      "linux": "putty",
+      "windows": "putty",
+      "macos": "Putty"
+    },
     "icon": "putty.png",
     "hidden": false,
     "cli": false
@@ -3314,7 +4372,11 @@
     "name": "qBittorrent",
     "vendor": "",
     "category": "Utilities",
-    "bin": "qbittorrent",
+    "bin": {
+      "linux": "qbittorrent",
+      "windows": "qbittorrent",
+      "macos": "Qbittorrent"
+    },
     "icon": "qbittorrent.png",
     "hidden": false,
     "cli": false
@@ -3324,7 +4386,9 @@
     "name": "Qrca",
     "vendor": "",
     "category": "Utilities",
-    "bin": "qrca",
+    "bin": {
+      "linux": "qrca"
+    },
     "icon": "org.kde.qrca.svg",
     "hidden": false,
     "cli": false
@@ -3334,7 +4398,11 @@
     "name": "Rclone",
     "vendor": "",
     "category": "Utilities",
-    "bin": "rclone",
+    "bin": {
+      "linux": "rclone",
+      "windows": "rclone",
+      "macos": "Rclone"
+    },
     "icon": "rclone.png",
     "hidden": false,
     "cli": false
@@ -3344,7 +4412,10 @@
     "name": "Redshift",
     "vendor": "",
     "category": "Utilities",
-    "bin": "redshift",
+    "bin": {
+      "linux": "redshift",
+      "macos": "Redshift"
+    },
     "icon": "redshift.png",
     "hidden": false,
     "cli": false
@@ -3354,7 +4425,11 @@
     "name": "ripgrep",
     "vendor": "",
     "category": "Utilities",
-    "bin": "ripgrep",
+    "bin": {
+      "linux": "ripgrep",
+      "windows": "ripgrep",
+      "macos": "Ripgrep"
+    },
     "icon": "ripgrep.png",
     "hidden": false,
     "cli": true
@@ -3364,7 +4439,10 @@
     "name": "Rsync",
     "vendor": "",
     "category": "Utilities",
-    "bin": "rsync",
+    "bin": {
+      "linux": "rsync",
+      "macos": "Rsync"
+    },
     "icon": "rsync.png",
     "hidden": false,
     "cli": true
@@ -3374,7 +4452,9 @@
     "name": "Shutter",
     "vendor": "",
     "category": "Utilities",
-    "bin": "shutter",
+    "bin": {
+      "linux": "shutter"
+    },
     "icon": "shutter.png",
     "hidden": false,
     "cli": false
@@ -3384,7 +4464,9 @@
     "name": "Spectacle",
     "vendor": "",
     "category": "Utilities",
-    "bin": "spectacle",
+    "bin": {
+      "linux": "spectacle"
+    },
     "icon": "org.kde.spectacle.svg",
     "hidden": false,
     "cli": false
@@ -3394,7 +4476,11 @@
     "name": "Starship",
     "vendor": "",
     "category": "Utilities",
-    "bin": "starship",
+    "bin": {
+      "linux": "starship",
+      "windows": "starship",
+      "macos": "Starship"
+    },
     "icon": "starship.png",
     "hidden": false,
     "cli": false
@@ -3404,7 +4490,11 @@
     "name": "Stretchly",
     "vendor": "",
     "category": "Utilities",
-    "bin": "stretchly",
+    "bin": {
+      "linux": "stretchly",
+      "windows": "stretchly",
+      "macos": "Stretchly"
+    },
     "icon": "stretchly.png",
     "hidden": false,
     "cli": false
@@ -3414,7 +4504,11 @@
     "name": "Superfile",
     "vendor": "",
     "category": "Utilities",
-    "bin": "superfile",
+    "bin": {
+      "linux": "superfile",
+      "windows": "superfile",
+      "macos": "Superfile"
+    },
     "icon": "superfile.png",
     "hidden": false,
     "cli": false
@@ -3424,7 +4518,11 @@
     "name": "Syncthing",
     "vendor": "",
     "category": "Utilities",
-    "bin": "syncthing",
+    "bin": {
+      "linux": "syncthing",
+      "windows": "syncthing",
+      "macos": "Syncthing"
+    },
     "icon": "syncthing.png",
     "hidden": false,
     "cli": false
@@ -3434,7 +4532,9 @@
     "name": "Terminal",
     "vendor": "GNOME",
     "category": "Utilities",
-    "bin": "gnome-terminal",
+    "bin": {
+      "linux": "gnome-terminal"
+    },
     "icon": "gnome-terminal.png",
     "hidden": false,
     "cli": false
@@ -3444,7 +4544,9 @@
     "name": "Terminal",
     "vendor": "Apple",
     "category": "Utilities",
-    "bin": "Terminal",
+    "bin": {
+      "macos": "Terminal"
+    },
     "icon": "mac-terminal.png",
     "hidden": false,
     "cli": false
@@ -3454,7 +4556,9 @@
     "name": "Timeshift",
     "vendor": "",
     "category": "Utilities",
-    "bin": "timeshift",
+    "bin": {
+      "linux": "timeshift"
+    },
     "icon": "timeshift.png",
     "hidden": false,
     "cli": false
@@ -3464,7 +4568,10 @@
     "name": "tmux",
     "vendor": "",
     "category": "Utilities",
-    "bin": "tmux",
+    "bin": {
+      "linux": "tmux",
+      "macos": "Tmux"
+    },
     "icon": "tmux.png",
     "hidden": false,
     "cli": true
@@ -3474,7 +4581,11 @@
     "name": "Transmission",
     "vendor": "",
     "category": "Utilities",
-    "bin": "transmission",
+    "bin": {
+      "linux": "transmission",
+      "windows": "transmission",
+      "macos": "Transmission"
+    },
     "icon": "transmission.png",
     "hidden": false,
     "cli": false
@@ -3484,7 +4595,11 @@
     "name": "Tree",
     "vendor": "",
     "category": "Utilities",
-    "bin": "tree",
+    "bin": {
+      "linux": "tree",
+      "windows": "tree",
+      "macos": "Tree"
+    },
     "icon": "tree.png",
     "hidden": false,
     "cli": true
@@ -3494,7 +4609,10 @@
     "name": "Ventoy",
     "vendor": "",
     "category": "Utilities",
-    "bin": "ventoy-bin",
+    "bin": {
+      "linux": "ventoy-bin",
+      "windows": "ventoy-bin"
+    },
     "icon": "ventoy.png",
     "hidden": false,
     "cli": false
@@ -3504,7 +4622,11 @@
     "name": "WezTerm",
     "vendor": "",
     "category": "Utilities",
-    "bin": "wezterm",
+    "bin": {
+      "linux": "wezterm",
+      "windows": "wezterm",
+      "macos": "Wezterm"
+    },
     "icon": "wezterm.png",
     "hidden": false,
     "cli": false
@@ -3514,7 +4636,9 @@
     "name": "Windows Terminal",
     "vendor": "Microsoft",
     "category": "Utilities",
-    "bin": "wt.exe",
+    "bin": {
+      "windows": "wt.exe"
+    },
     "icon": "win-terminal.png",
     "hidden": false,
     "cli": false

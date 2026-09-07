@@ -1,72 +1,584 @@
 {
-  "_comment": "Hand-written entries not covered by desktop-pkgs.json: KDE/GNOME desktop-environment apps, apps that ship a real Linux binary, plus (as of Phase 1.3) placeholder Apple/Microsoft entries for apps that do NOT exist on Linux. Those placeholders are intentionally inert here: `bin` holds the macOS/Windows name (e.g. what `open -a` or the .exe would be called), which will never resolve via `which` on Linux, so they simply never show up (matches the existing 'only show installed' behavior for free). They exist as groundwork for Phase 2 (Windows/macOS support), which will need to restructure `bin` into a per-OS field anyway.",
+  "_comment": "Hand-written entries not covered by desktop-pkgs.json: KDE/GNOME desktop-environment apps, apps that ship a real Linux binary, plus placeholder Apple/Microsoft entries for apps that don't exist on every OS. `bin` is a per-OS object ({\"linux\": ..., \"windows\": ..., \"macos\": ...}); any key can be omitted, meaning the app doesn't exist on that OS, so is_installed returns false for it there with no extra logic needed. Most Apple/Microsoft entries only have one key (mac-* -> macos, win-* -> windows) since they're single-platform. microsoft-edge/powershell/onedrive-client are the few entries with a real, hand-verified triple across all three OSes -- unverified on actual Windows/macOS hardware, but the names themselves are well-known.",
   "apps": [
-    { "id": "dolphin", "name": "Dolphin", "vendor": "KDE", "category": "Utilities", "bin": "dolphin" },
-    { "id": "konsole", "name": "Konsole", "vendor": "KDE", "category": "Utilities", "bin": "konsole", "icon": "konsole.svg" },
-    { "id": "kate", "name": "Kate", "vendor": "KDE", "category": "Development", "bin": "kate", "icon": "kate.svg" },
-    { "id": "okular", "name": "Okular", "vendor": "KDE", "category": "Office", "bin": "okular", "icon": "okular.svg" },
-    { "id": "spectacle", "name": "Spectacle", "vendor": "KDE", "category": "Utilities", "bin": "spectacle", "icon": "spectacle.svg" },
-    { "id": "kcalc", "name": "KCalc", "vendor": "KDE", "category": "Office", "bin": "kcalc", "icon": "kcalc.svg" },
-
-    { "id": "nautilus", "name": "Files", "vendor": "GNOME", "category": "Utilities", "bin": "nautilus" },
-    { "id": "gnome-terminal", "name": "Terminal", "vendor": "GNOME", "category": "Utilities", "bin": "gnome-terminal" },
-    { "id": "gnome-text-editor", "name": "Text Editor", "vendor": "GNOME", "category": "Office", "bin": "gnome-text-editor" },
-    { "id": "gnome-calculator", "name": "Calculator", "vendor": "GNOME", "category": "Office", "bin": "gnome-calculator" },
-    { "id": "loupe", "name": "Image Viewer", "vendor": "GNOME", "category": "Graphics", "bin": "loupe" },
-    { "id": "gnome-software", "name": "Software", "vendor": "GNOME", "category": "System", "bin": "gnome-software" },
-    { "id": "gnome-disks", "name": "Disks", "vendor": "GNOME", "category": "System", "bin": "gnome-disks" },
-    { "id": "gnome-system-monitor", "name": "System Monitor", "vendor": "GNOME", "category": "System", "bin": "gnome-system-monitor" },
-
-    { "id": "microsoft-edge", "name": "Microsoft Edge", "vendor": "Microsoft", "category": "Internet", "bin": "microsoft-edge-stable" },
-    { "id": "powershell", "name": "PowerShell", "vendor": "Microsoft", "category": "Development", "bin": "pwsh" },
-    { "id": "teams-for-linux", "name": "Microsoft Teams", "vendor": "Microsoft", "category": "Internet", "bin": "teams-for-linux" },
-    { "id": "onedrive-client", "name": "OneDrive", "vendor": "Microsoft", "category": "Internet", "bin": "onedrive", "cli": true },
-
-    { "id": "win-notepad", "name": "Notepad", "vendor": "Microsoft", "category": "Office", "bin": "notepad.exe" },
-    { "id": "win-paint", "name": "Paint", "vendor": "Microsoft", "category": "Graphics", "bin": "mspaint.exe" },
-    { "id": "win-calculator", "name": "Calculator", "vendor": "Microsoft", "category": "Office", "bin": "calc.exe" },
-    { "id": "win-explorer", "name": "File Explorer", "vendor": "Microsoft", "category": "Utilities", "bin": "explorer.exe" },
-    { "id": "win-terminal", "name": "Windows Terminal", "vendor": "Microsoft", "category": "Utilities", "bin": "wt.exe" },
-    { "id": "win-task-manager", "name": "Task Manager", "vendor": "Microsoft", "category": "System", "bin": "taskmgr.exe" },
-    { "id": "win-settings", "name": "Settings", "vendor": "Microsoft", "category": "System", "bin": "ms-settings:" },
-    { "id": "win-word", "name": "Microsoft Word", "vendor": "Microsoft", "category": "Office", "bin": "WINWORD.EXE" },
-    { "id": "win-excel", "name": "Microsoft Excel", "vendor": "Microsoft", "category": "Office", "bin": "EXCEL.EXE" },
-    { "id": "win-powerpoint", "name": "Microsoft PowerPoint", "vendor": "Microsoft", "category": "Office", "bin": "POWERPNT.EXE" },
-    { "id": "win-outlook", "name": "Microsoft Outlook", "vendor": "Microsoft", "category": "Internet", "bin": "OUTLOOK.EXE" },
-    { "id": "win-onenote", "name": "OneNote", "vendor": "Microsoft", "category": "Office", "bin": "ONENOTE.EXE" },
-    { "id": "win-skype", "name": "Skype", "vendor": "Microsoft", "category": "Internet", "bin": "Skype.exe" },
-    { "id": "win-xbox", "name": "Xbox", "vendor": "Microsoft", "category": "Games", "bin": "XboxApp.exe" },
-    { "id": "win-media-player", "name": "Media Player", "vendor": "Microsoft", "category": "Multimedia", "bin": "wmplayer.exe" },
-    { "id": "win-visual-studio", "name": "Visual Studio", "vendor": "Microsoft", "category": "Development", "bin": "devenv.exe" },
-    { "id": "win-store", "name": "Microsoft Store", "vendor": "Microsoft", "category": "System", "bin": "WinStore.App.exe" },
-
-    { "id": "mac-safari", "name": "Safari", "vendor": "Apple", "category": "Internet", "bin": "Safari" },
-    { "id": "mac-finder", "name": "Finder", "vendor": "Apple", "category": "Utilities", "bin": "Finder" },
-    { "id": "mac-mail", "name": "Mail", "vendor": "Apple", "category": "Internet", "bin": "Mail" },
-    { "id": "mac-calendar", "name": "Calendar", "vendor": "Apple", "category": "Office", "bin": "Calendar" },
-    { "id": "mac-notes", "name": "Notes", "vendor": "Apple", "category": "Office", "bin": "Notes" },
-    { "id": "mac-reminders", "name": "Reminders", "vendor": "Apple", "category": "Office", "bin": "Reminders" },
-    { "id": "mac-contacts", "name": "Contacts", "vendor": "Apple", "category": "Office", "bin": "Contacts" },
-    { "id": "mac-preview", "name": "Preview", "vendor": "Apple", "category": "Graphics", "bin": "Preview" },
-    { "id": "mac-photos", "name": "Photos", "vendor": "Apple", "category": "Graphics", "bin": "Photos" },
-    { "id": "mac-music", "name": "Music", "vendor": "Apple", "category": "Multimedia", "bin": "Music" },
-    { "id": "mac-tv", "name": "TV", "vendor": "Apple", "category": "Multimedia", "bin": "TV" },
-    { "id": "mac-podcasts", "name": "Podcasts", "vendor": "Apple", "category": "Multimedia", "bin": "Podcasts" },
-    { "id": "mac-garageband", "name": "GarageBand", "vendor": "Apple", "category": "Multimedia", "bin": "GarageBand" },
-    { "id": "mac-imovie", "name": "iMovie", "vendor": "Apple", "category": "Multimedia", "bin": "iMovie" },
-    { "id": "mac-pages", "name": "Pages", "vendor": "Apple", "category": "Office", "bin": "Pages" },
-    { "id": "mac-numbers", "name": "Numbers", "vendor": "Apple", "category": "Office", "bin": "Numbers" },
-    { "id": "mac-keynote", "name": "Keynote", "vendor": "Apple", "category": "Office", "bin": "Keynote" },
-    { "id": "mac-facetime", "name": "FaceTime", "vendor": "Apple", "category": "Internet", "bin": "FaceTime" },
-    { "id": "mac-messages", "name": "Messages", "vendor": "Apple", "category": "Internet", "bin": "Messages" },
-    { "id": "mac-textedit", "name": "TextEdit", "vendor": "Apple", "category": "Office", "bin": "TextEdit" },
-    { "id": "mac-quicktime", "name": "QuickTime Player", "vendor": "Apple", "category": "Multimedia", "bin": "QuickTime Player" },
-    { "id": "mac-xcode", "name": "Xcode", "vendor": "Apple", "category": "Development", "bin": "Xcode" },
-    { "id": "mac-terminal", "name": "Terminal", "vendor": "Apple", "category": "Utilities", "bin": "Terminal" },
-    { "id": "mac-system-settings", "name": "System Settings", "vendor": "Apple", "category": "System", "bin": "System Settings" },
-    { "id": "mac-app-store", "name": "App Store", "vendor": "Apple", "category": "System", "bin": "App Store" },
-    { "id": "mac-activity-monitor", "name": "Activity Monitor", "vendor": "Apple", "category": "System", "bin": "Activity Monitor" },
-    { "id": "mac-disk-utility", "name": "Disk Utility", "vendor": "Apple", "category": "System", "bin": "Disk Utility" },
-    { "id": "mac-automator", "name": "Automator", "vendor": "Apple", "category": "Utilities", "bin": "Automator" }
+    {
+      "id": "dolphin",
+      "name": "Dolphin",
+      "vendor": "KDE",
+      "category": "Utilities",
+      "bin": {
+        "linux": "dolphin"
+      }
+    },
+    {
+      "id": "konsole",
+      "name": "Konsole",
+      "vendor": "KDE",
+      "category": "Utilities",
+      "bin": {
+        "linux": "konsole"
+      },
+      "icon": "konsole.svg"
+    },
+    {
+      "id": "kate",
+      "name": "Kate",
+      "vendor": "KDE",
+      "category": "Development",
+      "bin": {
+        "linux": "kate"
+      },
+      "icon": "kate.svg"
+    },
+    {
+      "id": "okular",
+      "name": "Okular",
+      "vendor": "KDE",
+      "category": "Office",
+      "bin": {
+        "linux": "okular"
+      },
+      "icon": "okular.svg"
+    },
+    {
+      "id": "spectacle",
+      "name": "Spectacle",
+      "vendor": "KDE",
+      "category": "Utilities",
+      "bin": {
+        "linux": "spectacle"
+      },
+      "icon": "spectacle.svg"
+    },
+    {
+      "id": "kcalc",
+      "name": "KCalc",
+      "vendor": "KDE",
+      "category": "Office",
+      "bin": {
+        "linux": "kcalc"
+      },
+      "icon": "kcalc.svg"
+    },
+    {
+      "id": "nautilus",
+      "name": "Files",
+      "vendor": "GNOME",
+      "category": "Utilities",
+      "bin": {
+        "linux": "nautilus"
+      }
+    },
+    {
+      "id": "gnome-terminal",
+      "name": "Terminal",
+      "vendor": "GNOME",
+      "category": "Utilities",
+      "bin": {
+        "linux": "gnome-terminal"
+      }
+    },
+    {
+      "id": "gnome-text-editor",
+      "name": "Text Editor",
+      "vendor": "GNOME",
+      "category": "Office",
+      "bin": {
+        "linux": "gnome-text-editor"
+      }
+    },
+    {
+      "id": "gnome-calculator",
+      "name": "Calculator",
+      "vendor": "GNOME",
+      "category": "Office",
+      "bin": {
+        "linux": "gnome-calculator"
+      }
+    },
+    {
+      "id": "loupe",
+      "name": "Image Viewer",
+      "vendor": "GNOME",
+      "category": "Graphics",
+      "bin": {
+        "linux": "loupe"
+      }
+    },
+    {
+      "id": "gnome-software",
+      "name": "Software",
+      "vendor": "GNOME",
+      "category": "System",
+      "bin": {
+        "linux": "gnome-software"
+      }
+    },
+    {
+      "id": "gnome-disks",
+      "name": "Disks",
+      "vendor": "GNOME",
+      "category": "System",
+      "bin": {
+        "linux": "gnome-disks"
+      }
+    },
+    {
+      "id": "gnome-system-monitor",
+      "name": "System Monitor",
+      "vendor": "GNOME",
+      "category": "System",
+      "bin": {
+        "linux": "gnome-system-monitor"
+      }
+    },
+    {
+      "id": "microsoft-edge",
+      "name": "Microsoft Edge",
+      "vendor": "Microsoft",
+      "category": "Internet",
+      "bin": {
+        "linux": "microsoft-edge-stable",
+        "windows": "msedge.exe",
+        "macos": "Microsoft Edge"
+      }
+    },
+    {
+      "id": "powershell",
+      "name": "PowerShell",
+      "vendor": "Microsoft",
+      "category": "Development",
+      "bin": {
+        "linux": "pwsh",
+        "windows": "pwsh.exe",
+        "macos": "pwsh"
+      }
+    },
+    {
+      "id": "teams-for-linux",
+      "name": "Microsoft Teams",
+      "vendor": "Microsoft",
+      "category": "Internet",
+      "bin": {
+        "linux": "teams-for-linux"
+      }
+    },
+    {
+      "id": "onedrive-client",
+      "name": "OneDrive",
+      "vendor": "Microsoft",
+      "category": "Internet",
+      "bin": {
+        "linux": "onedrive",
+        "windows": "OneDrive.exe",
+        "macos": "OneDrive"
+      },
+      "cli": true
+    },
+    {
+      "id": "win-notepad",
+      "name": "Notepad",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "notepad.exe"
+      }
+    },
+    {
+      "id": "win-paint",
+      "name": "Paint",
+      "vendor": "Microsoft",
+      "category": "Graphics",
+      "bin": {
+        "windows": "mspaint.exe"
+      }
+    },
+    {
+      "id": "win-calculator",
+      "name": "Calculator",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "calc.exe"
+      }
+    },
+    {
+      "id": "win-explorer",
+      "name": "File Explorer",
+      "vendor": "Microsoft",
+      "category": "Utilities",
+      "bin": {
+        "windows": "explorer.exe"
+      }
+    },
+    {
+      "id": "win-terminal",
+      "name": "Windows Terminal",
+      "vendor": "Microsoft",
+      "category": "Utilities",
+      "bin": {
+        "windows": "wt.exe"
+      }
+    },
+    {
+      "id": "win-task-manager",
+      "name": "Task Manager",
+      "vendor": "Microsoft",
+      "category": "System",
+      "bin": {
+        "windows": "taskmgr.exe"
+      }
+    },
+    {
+      "id": "win-settings",
+      "name": "Settings",
+      "vendor": "Microsoft",
+      "category": "System",
+      "bin": {
+        "windows": "ms-settings:"
+      }
+    },
+    {
+      "id": "win-word",
+      "name": "Microsoft Word",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "WINWORD.EXE"
+      }
+    },
+    {
+      "id": "win-excel",
+      "name": "Microsoft Excel",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "EXCEL.EXE"
+      }
+    },
+    {
+      "id": "win-powerpoint",
+      "name": "Microsoft PowerPoint",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "POWERPNT.EXE"
+      }
+    },
+    {
+      "id": "win-outlook",
+      "name": "Microsoft Outlook",
+      "vendor": "Microsoft",
+      "category": "Internet",
+      "bin": {
+        "windows": "OUTLOOK.EXE"
+      }
+    },
+    {
+      "id": "win-onenote",
+      "name": "OneNote",
+      "vendor": "Microsoft",
+      "category": "Office",
+      "bin": {
+        "windows": "ONENOTE.EXE"
+      }
+    },
+    {
+      "id": "win-skype",
+      "name": "Skype",
+      "vendor": "Microsoft",
+      "category": "Internet",
+      "bin": {
+        "windows": "Skype.exe"
+      }
+    },
+    {
+      "id": "win-xbox",
+      "name": "Xbox",
+      "vendor": "Microsoft",
+      "category": "Games",
+      "bin": {
+        "windows": "XboxApp.exe"
+      }
+    },
+    {
+      "id": "win-media-player",
+      "name": "Media Player",
+      "vendor": "Microsoft",
+      "category": "Multimedia",
+      "bin": {
+        "windows": "wmplayer.exe"
+      }
+    },
+    {
+      "id": "win-visual-studio",
+      "name": "Visual Studio",
+      "vendor": "Microsoft",
+      "category": "Development",
+      "bin": {
+        "windows": "devenv.exe"
+      }
+    },
+    {
+      "id": "win-store",
+      "name": "Microsoft Store",
+      "vendor": "Microsoft",
+      "category": "System",
+      "bin": {
+        "windows": "WinStore.App.exe"
+      }
+    },
+    {
+      "id": "mac-safari",
+      "name": "Safari",
+      "vendor": "Apple",
+      "category": "Internet",
+      "bin": {
+        "macos": "Safari"
+      }
+    },
+    {
+      "id": "mac-finder",
+      "name": "Finder",
+      "vendor": "Apple",
+      "category": "Utilities",
+      "bin": {
+        "macos": "Finder"
+      }
+    },
+    {
+      "id": "mac-mail",
+      "name": "Mail",
+      "vendor": "Apple",
+      "category": "Internet",
+      "bin": {
+        "macos": "Mail"
+      }
+    },
+    {
+      "id": "mac-calendar",
+      "name": "Calendar",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Calendar"
+      }
+    },
+    {
+      "id": "mac-notes",
+      "name": "Notes",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Notes"
+      }
+    },
+    {
+      "id": "mac-reminders",
+      "name": "Reminders",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Reminders"
+      }
+    },
+    {
+      "id": "mac-contacts",
+      "name": "Contacts",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Contacts"
+      }
+    },
+    {
+      "id": "mac-preview",
+      "name": "Preview",
+      "vendor": "Apple",
+      "category": "Graphics",
+      "bin": {
+        "macos": "Preview"
+      }
+    },
+    {
+      "id": "mac-photos",
+      "name": "Photos",
+      "vendor": "Apple",
+      "category": "Graphics",
+      "bin": {
+        "macos": "Photos"
+      }
+    },
+    {
+      "id": "mac-music",
+      "name": "Music",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "Music"
+      }
+    },
+    {
+      "id": "mac-tv",
+      "name": "TV",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "TV"
+      }
+    },
+    {
+      "id": "mac-podcasts",
+      "name": "Podcasts",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "Podcasts"
+      }
+    },
+    {
+      "id": "mac-garageband",
+      "name": "GarageBand",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "GarageBand"
+      }
+    },
+    {
+      "id": "mac-imovie",
+      "name": "iMovie",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "iMovie"
+      }
+    },
+    {
+      "id": "mac-pages",
+      "name": "Pages",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Pages"
+      }
+    },
+    {
+      "id": "mac-numbers",
+      "name": "Numbers",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Numbers"
+      }
+    },
+    {
+      "id": "mac-keynote",
+      "name": "Keynote",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "Keynote"
+      }
+    },
+    {
+      "id": "mac-facetime",
+      "name": "FaceTime",
+      "vendor": "Apple",
+      "category": "Internet",
+      "bin": {
+        "macos": "FaceTime"
+      }
+    },
+    {
+      "id": "mac-messages",
+      "name": "Messages",
+      "vendor": "Apple",
+      "category": "Internet",
+      "bin": {
+        "macos": "Messages"
+      }
+    },
+    {
+      "id": "mac-textedit",
+      "name": "TextEdit",
+      "vendor": "Apple",
+      "category": "Office",
+      "bin": {
+        "macos": "TextEdit"
+      }
+    },
+    {
+      "id": "mac-quicktime",
+      "name": "QuickTime Player",
+      "vendor": "Apple",
+      "category": "Multimedia",
+      "bin": {
+        "macos": "QuickTime Player"
+      }
+    },
+    {
+      "id": "mac-xcode",
+      "name": "Xcode",
+      "vendor": "Apple",
+      "category": "Development",
+      "bin": {
+        "macos": "Xcode"
+      }
+    },
+    {
+      "id": "mac-terminal",
+      "name": "Terminal",
+      "vendor": "Apple",
+      "category": "Utilities",
+      "bin": {
+        "macos": "Terminal"
+      }
+    },
+    {
+      "id": "mac-system-settings",
+      "name": "System Settings",
+      "vendor": "Apple",
+      "category": "System",
+      "bin": {
+        "macos": "System Settings"
+      }
+    },
+    {
+      "id": "mac-app-store",
+      "name": "App Store",
+      "vendor": "Apple",
+      "category": "System",
+      "bin": {
+        "macos": "App Store"
+      }
+    },
+    {
+      "id": "mac-activity-monitor",
+      "name": "Activity Monitor",
+      "vendor": "Apple",
+      "category": "System",
+      "bin": {
+        "macos": "Activity Monitor"
+      }
+    },
+    {
+      "id": "mac-disk-utility",
+      "name": "Disk Utility",
+      "vendor": "Apple",
+      "category": "System",
+      "bin": {
+        "macos": "Disk Utility"
+      }
+    },
+    {
+      "id": "mac-automator",
+      "name": "Automator",
+      "vendor": "Apple",
+      "category": "Utilities",
+      "bin": {
+        "macos": "Automator"
+      }
+    }
   ]
 }

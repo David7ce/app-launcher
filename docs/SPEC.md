@@ -20,7 +20,7 @@ Flat JSON array, one object per app. This file is the **single source of truth**
   "name": "Firefox",
   "vendor": "Mozilla",
   "category": "Internet",
-  "bin": "firefox",
+  "bin": { "linux": "firefox", "windows": "firefox.exe", "macos": "Firefox" },
   "icon": "firefox.png",
   "hidden": false,
   "cli": false
@@ -33,7 +33,7 @@ Flat JSON array, one object per app. This file is the **single source of truth**
 | `name` | Display title on the tile |
 | `vendor` | Provenance only (Mozilla, KDE, GNOME, Microsoft, Apple, etc.) — not used for grouping in v1, kept for future "by company" view if ever wanted |
 | `category` | One of the 10 fixed categories above |
-| `bin` | Executable name checked on `$PATH` and used to launch |
+| `bin` | Per-OS launch identifier, keyed `linux`/`windows`/`macos` — **any key can be absent**, meaning the app doesn't exist on that OS. On Linux/Windows it's the executable name checked on `$PATH`; on macOS it's the `.app` bundle's display name (no `$PATH` for GUI apps there — see "Cross-platform support" below) |
 | `icon` | Filename under `src/assets/icons/` (PNG or SVG); if missing at runtime, frontend falls back to `assets/icons/category/<category>.svg` |
 | `hidden` | Manual override to hide an entry without deleting it |
 | `cli` | Terminal-only tool (no real GUI icon will ever exist for it) — frontend shows the dedicated `assets/icons/category/cli-tool.svg` glyph instead of trying `icon`/category fallback, so it reads as "no icon expected" rather than "icon missing by accident" |
@@ -41,7 +41,7 @@ Flat JSON array, one object per app. This file is the **single source of truth**
 ## Data sources for seeding the catalog
 
 - `tools/sources/desktop-pkgs.json` — vendored snapshot of the user-supplied dataset (originally `https://raw.githubusercontent.com/interneto/tui-toolbox-installer/refs/heads/main/interneto_install/data/desktop-pkgs.json`). ~250 apps, each with `name`, `category`, `subcategory`, and package identifiers across 11 package managers (apt, pacman, AUR, dnf, emerge, flatpak, snap, brew, winget, nix, freebsd pkg). For Linux `bin` values, prefer the apt/pacman/flatpak id (usually equals the package name; a handful will need manual correction where the binary name differs from the package name).
-- `tools/sources/vendor_apps.json` — hand-written entries not covered by the dataset above: KDE apps (Dolphin, Konsole, Kate, Okular, Spectacle, KCalc), GNOME apps (Files/Nautilus, Console, Text Editor, Calculator, Loupe), Microsoft/Apple apps that ship a real Linux binary (Edge, PowerShell) — Apple has essentially none on Linux; included mainly so the catalog format has real examples of `vendor` diversity for a possible future "by company" grouping. An entry can set an explicit `"icon"` (e.g. `"konsole.svg"`) to override the default `<id>.png` guess — used for the KDE apps, see the icon pipeline note below. This file (and its breeze-icons downloads) is now mostly a **portability fallback**: it's what a fresh clone has before anyone runs the system scan below on their own machine.
+- `tools/sources/vendor_apps.json` — hand-written entries not covered by the dataset above: KDE apps (Dolphin, Konsole, Kate, Okular, Spectacle, KCalc), GNOME apps (Files/Nautilus, Console, Text Editor, Calculator, Loupe), and ~65 Microsoft/Apple entries (`win-*`/`mac-*` ids, most single-platform placeholders; Edge/PowerShell/OneDrive have a real, hand-verified triple across all three OSes). Each entry's `bin` is already the per-OS object described above. An entry can set an explicit `"icon"` (e.g. `"konsole.svg"`) to override the default `<id>.png` guess — used for the KDE apps, see the icon pipeline note below. This file (and its breeze-icons downloads) is now mostly a **portability fallback**: it's what a fresh clone has before anyone runs the system scan below on their own machine.
 - `tools/sources/category_map.json` — one-time mapping table from the dataset's own `category`/`subcategory` strings to our 10 labels. Built by dumping the dataset's unique category values once and assigning each by hand.
 - `tools/sources/system_apps.json` — **generated**, not hand-written: the output of `tools/scan_system_apps.py` scanning this machine's actual installed `.desktop` files (see "System app scan" below). Machine-specific, regenerate after installing new software.
 
@@ -51,15 +51,15 @@ A final pass drops anything in `EXCLUDED_IDS` (in `build_catalog.py`), applied a
 
 ### Apple/Microsoft placeholder entries
 
-`vendor_apps.json` also carries `mac-*` and `win-*` ids for common Apple and Microsoft apps that don't exist on Linux (Safari, Finder, Pages... / Notepad, Paint, Microsoft Word...). These are groundwork for Phase 2, not functional now: `bin` holds the macOS app name (as `open -a "<name>"` would use it) or the Windows executable name, neither of which can ever resolve via `which` on Linux — so "only show installed" hides every one of them for free, with zero runtime cost. Verified none accidentally collide with a real Linux binary. When Phase 2 actually adds Windows/macOS support, `bin` will need to become a per-OS field and these entries will need real launch commands — until then, treat them as inert placeholder data, not tested functionality.
+`vendor_apps.json` also carries `mac-*` and `win-*` ids for common Apple and Microsoft apps that don't exist on every OS (Safari, Finder, Pages... / Notepad, Paint, Microsoft Word...). Most only have one key in their `bin` object (`{"macos": "Safari"}` or `{"windows": "notepad.exe"}`) — genuinely single-platform apps, not a gap. On Linux, `is_installed` returns `false` for these immediately since there's no `linux` key at all, so they stay correctly hidden there with zero cost. See "Cross-platform support" below for the Windows/macOS implementation itself, which is unverified on real hardware.
 
 ## System app scan — `tools/scan_system_apps.py`
 
 The curated dataset only knows ~250 well-known apps, which undercounts what's actually installed on a real desktop. Every Linux desktop already has a complete, authoritative list of that: the XDG `.desktop` files each installed package drops into `/usr/share/applications` (plus `/usr/local/share/applications`, `~/.local/share/applications`, and the flatpak/snap equivalents). Each one already carries a `Name=`, a `Categories=` (the same freedesktop vocabulary our 10 categories map from — see `FREEDESKTOP_CATEGORY_MAP`), an `Exec=` (first token, with field codes like `%f`/`%U` stripped, becomes `bin`), and an `Icon=` that the *active icon theme* resolves to a real file already on disk. Reading this is strictly better than guessing: no classification heuristics needed, no network calls, and it's exactly what KDE/GNOME's own app menu shows.
 
-- Icon resolution: an absolute `Icon=` path is used directly; a theme icon name is searched across `~/.local/share/icons`, `~/.icons`, `/usr/share/icons`, `/usr/local/share/icons` — trying the machine's actual active theme first (read via `kreadconfig6`/`kreadconfig5 --file kdeglobals --group Icons --key Theme`, e.g. `breeze-dark`), then `breeze`, `Adwaita`, `hicolor` — checking both real-world directory layouts seen in practice (hicolor-style `<size>/apps/<name>.<ext>` and breeze-style `apps/<size>/<name>.<ext>`), then `/usr/share/pixmaps/<name>.<ext>` as a last resort.
+- Icon resolution: an absolute `Icon=` path is used directly; a theme icon name is searched across `~/.local/share/icons`, `~/.icons`, `/usr/share/icons`, `/usr/local/share/icons` — trying the machine's actual active theme first (KDE via `kreadconfig6`/`kreadconfig5 --file kdeglobals --group Icons --key Theme`, e.g. `breeze-dark`; GNOME via `gsettings get org.gnome.desktop.interface icon-theme`, each skipped safely if its tool isn't installed), then `breeze`, `Adwaita`, `hicolor` — checking both real-world directory layouts seen in practice (hicolor-style `<size>/apps/<name>.<ext>` and breeze-style `apps/<size>/<name>.<ext>`), then `/usr/share/pixmaps/<name>.<ext>` as a last resort. Only the KDE path has actually been exercised (this machine); the GNOME check is written to degrade safely but is otherwise unverified.
 - Every resolved icon is copied into `src/assets/icons/` — the **one shared icon folder**, same as every other source — named `<desktop-file-id><ext>`, so the lookup happens once per install and the running app just reads a local file like any other entry; re-running the scan skips files already copied.
-- Merge priority in `build_catalog.py`: dataset → vendor_apps.json → **system_apps.json wins last**, keyed by `bin`. A system-scanned Dolphin/Konsole/Kate/etc. replaces the dataset/vendor guess with the real local name and icon; anything with no prior entry for that `bin` is added as new. On this development machine this took the catalog from 268 to 322 entries (54 new, ~18 upgraded with a real icon).
+- Merge priority in `build_catalog.py`: dataset → vendor_apps.json → **system_apps.json wins last**, keyed by `bin["linux"]`. A system-scanned Dolphin/Konsole/Kate/etc. replaces the dataset/vendor guess's Linux name+icon+category; anything with no prior entry for that bin is added as new. Critically, this is a **merge into the existing `bin` object, not a wholesale replacement** — a dataset entry's `windows`/`macos` guess is preserved and only the `linux` key gets overwritten with the system-scanned value (this was a real bug initially: Firefox and VS Code's Windows/macOS bins were getting silently dropped because the system-scanned Linux entry was replacing the whole object). On this development machine this took the catalog from 268 to 322 entries (54 new, ~18 upgraded with a real icon), then to 352 after Phase 1.3 curation.
 - This machine's own `app-launcher.desktop` shortcut also shows up in the scan (self-referential) and is explicitly excluded (`EXCLUDED_IDS`, shared with the general curation list — see "Data sources" above).
 - Known limitation, not yet handled: a `.desktop` file with `Terminal=true` (mostly TUI tools that still ship a menu entry, e.g. `btop`) gets scanned and given a real icon, but `launch_app` spawns the bin directly with no terminal attached — clicking it won't show anything useful. Not fixed yet since it wasn't the ask that prompted this scan; flagged in `ROADMAP.md`.
 
@@ -84,12 +84,21 @@ Explicitly **not used for bulk/automated fetching**: SVGRepo — its icons are a
 
 `tools/sync_icons.py` implements steps 1–2 automatically and prints a "still missing" list for manual handling via 3–4.
 
-## Rust backend — `src-tauri/src/main.rs`
+## Rust backend — `src-tauri/src/lib.rs`
 
-Two Tauri commands, intentionally minimal:
+Two Tauri commands, intentionally minimal, both taking a `PlatformBin { linux: Option<String>, windows: Option<String>, macos: Option<String> }` (deserialized straight from the catalog entry's `bin` object — the frontend never needs to know which OS it's running on, it just forwards `entry.bin` as-is):
 
-- `is_installed(bin: String) -> bool` — resolves `bin` against `$PATH` using the `which` crate. Called once per catalog entry from the frontend at startup (not a system scan — a targeted lookup against a known, finite list of ids from `catalog.json`).
-- `launch_app(bin: String) -> Result<(), String>` — `std::process::Command::new(bin).spawn()`; any error is returned as a string for the frontend to display, never a panic/crash.
+- `is_installed(bin: PlatformBin) -> bool` — `bin.for_current_os()` (matches on `std::env::consts::OS`) returns `None` → `false` immediately with no further check. Otherwise: Linux/Windows both resolve via `which::which(name)` (cross-platform, Windows-aware — checks `PATHEXT` so a bare `"git"` resolves `git.exe`); macOS checks for a `<name>.app` bundle under `/Applications`, `/System/Applications`, `$HOME/Applications` via plain `Path::exists()` (no `$PATH` for GUI apps there). Called once per catalog entry from the frontend at startup (not a system scan — a targeted lookup against a known, finite list of ids from `catalog.json`).
+- `launch_app(bin: PlatformBin) -> Result<(), String>` — Linux/Windows: `std::process::Command::new(name).spawn()`; macOS: `Command::new("open").args(["-a", name]).spawn()` (the standard way to launch an app by name regardless of its exact path). Any error is returned as a string for the frontend to display, never a panic/crash.
+
+## Cross-platform support (Windows/macOS) — implemented, unverified on real hardware
+
+This machine is Fedora + KDE only; there is no Windows or macOS box to build or run on. The Rust logic above and the `bin` heuristics below were written carefully and compile cleanly, but **have never been executed on Windows or macOS** — treat them as a reviewed-but-untested first pass, not confirmed working.
+
+- **`tools/build_catalog.py` bin heuristics for dataset entries** (desktop-pkgs.json already carries `windows_winget`/`macos_brew` ids, which are package identifiers, not executable/app names): if `windows_winget` is present, guess the Windows bin is the *same string* as the Linux bin (many CLI/dev tools share an identical binary name cross-platform; wrong for plenty of GUI apps — same "guess, hand-fix later" spirit as the existing Linux bin guess). If `macos_brew` is present, title-case the brew slug as a guess at the `.app` display name (`visual-studio-code` → `Visual Studio Code`; wrong for acronyms like `vlc` → `Vlc` instead of `VLC`). A small `BIN_OVERRIDES` dict hand-corrects the apps worth getting exactly right (currently Firefox, VS Code).
+- **Known, documented gaps, not attempted**: Windows resolution is `$PATH`-only, so it misses apps only reachable via Start Menu shortcuts, the registry `App Paths` key, or UWP/Store packages (`shell:AppsFolder`). macOS resolution requires an exact, case-sensitive `<name>.app` in one of three fixed directories — no Spotlight/`mdfind` fuzzy matching.
+- **Coverage**: only hand-curated vendor entries (Firefox, VS Code, Edge, PowerShell, OneDrive, the Apple/Microsoft placeholders) have a real, deliberately-chosen cross-OS `bin`. The bulk of the ~350-entry catalog only gets a low-confidence Windows/macOS guess when the dataset happened to list a `winget`/`brew` id for it, or nothing at all otherwise.
+- **Verification actually performed**: the Linux path was rebuilt and rerun after this refactor to confirm it still works exactly as before (same apps show, same icons, same launch behavior) — that's the only platform this was actually tested on. `cargo build` succeeding is the only evidence the Windows/macOS branches are even syntactically sound.
 
 ## Frontend — `src/index.html`, `main.js`, `style.css`
 
@@ -107,9 +116,10 @@ Plain HTML/CSS/JS, no framework, no build step. Flow:
 
 A `.desktop` entry points `Exec` at the release binary directly (`src-tauri/target/release/app`, built via `cargo build --release` in `src-tauri/`) and `Icon` at `src-tauri/icons/icon.png` — no `cargo tauri build`/installer packaging involved yet (that's Phase 2). The same file is placed both on `~/Desktop/` (double-clickable shortcut, matching the convention already used by other local projects: `Type=Application`, absolute `Exec` path, `Terminal=false`) and in `~/.local/share/applications/` (so it shows up in the KDE application launcher/search, not just the desktop icon). Re-run `cargo build --release` and the shortcut picks up the new binary automatically — no shortcut file changes needed after a rebuild.
 
-## Explicitly out of scope for v1 (do not build without being asked)
+## Explicitly out of scope (do not build without being asked)
 
-- Any OS other than Linux.
+- Windows/macOS **testing, packaging, or bug-fixing** — the code exists (see "Cross-platform support" above) but this is still developed and verified on Linux only; don't assume a Windows/macOS report is accurate without a real machine to check it on.
+- A Windows/macOS `scan_system_apps.py` equivalent (Start Menu/registry scanning, `mdfind`/Spotlight scanning) — not attempted; those platforms currently rely entirely on the dataset/vendor-entry heuristics.
 - **Runtime** enumeration of installed software — the app itself still only ever does a targeted `is_installed` check against the fixed, pre-built catalog. `scan_system_apps.py` discovering apps is an offline maintenance step (like `build_catalog.py` or `sync_icons.py`), not something the running app does.
 - An in-app settings/editor UI — editing is done by hand in `catalog.json`.
 - Keyboard shortcuts (beyond native text-input behavior in the search box), tray icon, autostart.

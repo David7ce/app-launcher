@@ -64,6 +64,8 @@ FIELD_CODE_RE = re.compile(r"%[a-zA-Z%]")
 
 
 def active_icon_theme() -> str:
+    # KDE. Skipped safely (no crash) on any system without kreadconfig,
+    # e.g. GNOME/XFCE/etc.
     for tool in ("kreadconfig6", "kreadconfig5"):
         try:
             result = subprocess.run(
@@ -74,6 +76,22 @@ def active_icon_theme() -> str:
                 return result.stdout.strip()
         except FileNotFoundError:
             continue
+
+    # GNOME. Value comes back as "'Adwaita'" (with quotes) via gsettings.
+    try:
+        result = subprocess.run(
+            ["gsettings", "get", "org.gnome.desktop.interface", "icon-theme"],
+            capture_output=True, text=True, timeout=3,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip().strip("'\"")
+    except FileNotFoundError:
+        pass
+
+    # Neither desktop's tool is present (XFCE, Cinnamon, i3, ...) — the
+    # by_category/by_bin fallback chain below still tries breeze/Adwaita/
+    # hicolor regardless, so this default is just the first guess, not
+    # the only one.
     return "breeze"
 
 

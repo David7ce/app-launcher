@@ -8,6 +8,7 @@ src/data/catalog.json directly, re-running this will overwrite those edits
 first, or reapply hand edits after).
 """
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -48,12 +49,65 @@ ICON_OVERRIDES = {
 }
 
 
+# Apps worth getting a confidently-correct cross-OS bin for, by hand,
+# rather than trusting the low-confidence heuristics below. Unverified on
+# real Windows/macOS hardware — these are just the names those platforms
+# are known to use.
+BIN_OVERRIDES: dict[str, dict[str, str]] = {
+    "visual-studio-code": {"windows": "Code.exe", "macos": "Visual Studio Code"},
+    "firefox": {"windows": "firefox.exe", "macos": "Firefox"},
+}
+
+
 def guess_bin(pkg_manager: dict) -> str | None:
     for field in BIN_FIELD_PRIORITY:
         value = pkg_manager.get(field)
         if value:
             return value
     return None
+
+
+def guess_windows_bin(pkg_manager: dict, linux_bin: str) -> str | None:
+    # Low-confidence heuristic: plenty of CLI/dev tools ship an identically
+    # named binary on Windows (git, python, node, ...); plenty of GUI apps
+    # don't. No worse than the Linux package-name guess above — wrong
+    # guesses just fail `is_installed` silently. Unverified on real Windows.
+    if pkg_manager.get("windows_winget"):
+        return linux_bin
+    return None
+
+
+def guess_macos_bin(pkg_manager: dict) -> str | None:
+    # Low-confidence heuristic: title-case the Homebrew slug as a guess at
+    # the .app bundle's display name (`open -a` needs, e.g., "Visual Studio
+    # Code", not "visual-studio-code"). Wrong for acronyms ("vlc" -> "Vlc"
+    # instead of "VLC") and anything Homebrew names differently from the
+    # app itself. Unverified on real macOS — hand-fix via BIN_OVERRIDES.
+    brew = pkg_manager.get("macos_brew")
+    if not brew:
+        return None
+    words = re.split(r"[-_]", brew)
+    return " ".join(w.capitalize() for w in words if w)
+
+
+def build_bin(pkg_manager: dict, linux_bin: str, app_id: str) -> dict[str, str]:
+    bin_obj = {"linux": linux_bin}
+    windows = guess_windows_bin(pkg_manager, linux_bin)
+    if windows:
+        bin_obj["windows"] = windows
+    macos = guess_macos_bin(pkg_manager)
+    if macos:
+        bin_obj["macos"] = macos
+    bin_obj.update(BIN_OVERRIDES.get(app_id, {}))
+    return bin_obj
+
+
+def dedupe_key(entry: dict) -> str | None:
+    # Linux first: it's the one platform this app actually runs and gets
+    # tested on. Falling back to windows/macos still catches a collision
+    # between two placeholder entries that share a bin on the same OS.
+    bin_obj = entry["bin"]
+    return bin_obj.get("linux") or bin_obj.get("windows") or bin_obj.get("macos")
 
 
 def is_cli(app_id: str, subcategory: str | None) -> bool:
@@ -108,7 +162,8 @@ def main() -> None:
     skipped_no_linux_bin = []
 
     for app_id, entry in desktop_pkgs.items():
-        bin_name = guess_bin(entry.get("package_manager", {}))
+        pkg_manager = entry.get("package_manager", {})
+        bin_name = guess_bin(pkg_manager)
         if not bin_name:
             skipped_no_linux_bin.append(app_id)
             continue
@@ -118,13 +173,14 @@ def main() -> None:
             "name": entry["name"],
             "vendor": "",
             "category": category,
-            "bin": bin_name,
+            "bin": build_bin(pkg_manager, bin_name, app_id),
             "icon": ICON_OVERRIDES.get(app_id, f"{app_id}.png"),
             "hidden": False,
             "cli": is_cli(app_id, entry.get("subcategory")),
         }
 
     # Hand-curated entries win over dataset-derived ones on id collisions.
+    # vendor_apps.json entries already carry `bin` as a per-OS object.
     for entry in vendor_apps:
         catalog[entry["id"]] = {
             "id": entry["id"],
@@ -143,28 +199,38 @@ def main() -> None:
     by_bin: dict[str, dict] = {}
     dropped_dupes = []
     for entry in sorted(catalog.values(), key=lambda e: e["id"]):
-        existing = by_bin.get(entry["bin"])
+        key = dedupe_key(entry)
+        existing = by_bin.get(key)
         if existing is None:
-            by_bin[entry["bin"]] = entry
+            by_bin[key] = entry
         else:
-            dropped_dupes.append((entry["id"], entry["bin"], existing["id"]))
+            dropped_dupes.append((entry["id"], key, existing["id"]))
 
     # This machine's actual installed .desktop files are ground truth: a
     # real name, a real system-theme icon, and a bin taken straight from
     # Exec= rather than guessed from a package name. They always win over
     # a dataset/vendor entry for the same bin, and add anything new.
+    # scan_system_apps.py only ever scans this Linux machine, so its `bin`
+    # is a flat string — merge it into the Linux slot of whatever per-OS
+    # object already existed for this bin (rather than replacing the whole
+    # object), so a dataset/vendor entry's windows/macos guess isn't lost
+    # just because the Linux side also happens to be locally installed.
     new_from_system = 0
     for entry in system_apps:
         if entry["id"] in EXCLUDED_IDS:
             continue
-        if entry["bin"] not in by_bin:
+        key = entry["bin"]
+        existing = by_bin.get(key)
+        if existing is None:
             new_from_system += 1
-        by_bin[entry["bin"]] = {
+        bin_obj = dict(existing["bin"]) if existing else {}
+        bin_obj["linux"] = entry["bin"]
+        by_bin[key] = {
             "id": entry["id"],
             "name": entry["name"],
             "vendor": "",
             "category": entry["category"],
-            "bin": entry["bin"],
+            "bin": bin_obj,
             "icon": entry["icon"] or f"{entry['id']}.png",
             "hidden": False,
             "cli": False,
