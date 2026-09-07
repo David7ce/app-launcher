@@ -15,6 +15,7 @@ const { invoke } = window.__TAURI__.core;
 
 const categoriesEl = document.getElementById("categories");
 const errorBannerEl = document.getElementById("error-banner");
+const searchEl = document.getElementById("search");
 
 function showError(message) {
   errorBannerEl.textContent = message;
@@ -25,13 +26,19 @@ function categoryIconPath(category) {
   return `assets/icons/category/${category}.svg`;
 }
 
+function iconPath(app) {
+  if (app.cli) return "assets/icons/category/cli-tool.svg";
+  return `assets/icons/${app.icon}`;
+}
+
 function makeTile(app) {
   const button = document.createElement("button");
   button.className = "tile";
   button.type = "button";
+  button.dataset.name = app.name.toLowerCase();
 
   const img = document.createElement("img");
-  img.src = `assets/icons/${app.icon}`;
+  img.src = iconPath(app);
   img.alt = "";
   img.onerror = () => {
     img.onerror = null;
@@ -84,6 +91,33 @@ function renderCategories(grouped) {
     empty.textContent = "No catalog apps found installed on this machine.";
     categoriesEl.appendChild(empty);
   }
+
+  const noResults = document.createElement("p");
+  noResults.id = "no-results";
+  noResults.hidden = true;
+  noResults.textContent = "No apps match your search.";
+  categoriesEl.appendChild(noResults);
+}
+
+function applySearch(query) {
+  const q = query.trim().toLowerCase();
+  const noResultsEl = document.getElementById("no-results");
+  let anyVisible = false;
+
+  for (const section of categoriesEl.querySelectorAll("section.category")) {
+    let sectionHasVisible = false;
+    for (const tile of section.querySelectorAll(".tile")) {
+      const matches = !q || tile.dataset.name.includes(q);
+      tile.hidden = !matches;
+      if (matches) sectionHasVisible = true;
+    }
+    section.hidden = !sectionHasVisible;
+    if (sectionHasVisible) anyVisible = true;
+  }
+
+  if (noResultsEl) {
+    noResultsEl.hidden = anyVisible || !q;
+  }
 }
 
 async function main() {
@@ -113,6 +147,7 @@ async function main() {
   }
 
   renderCategories(grouped);
+  searchEl.addEventListener("input", () => applySearch(searchEl.value));
 }
 
 main();

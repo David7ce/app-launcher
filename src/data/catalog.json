@@ -6,7 +6,8 @@
     "category": "Development",
     "bin": "ansible",
     "icon": "ansible.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "claude-code",
@@ -15,7 +16,8 @@
     "category": "Development",
     "bin": "claude-code",
     "icon": "claude-code.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "claude-desktop",
@@ -24,7 +26,8 @@
     "category": "Development",
     "bin": "claude-desktop",
     "icon": "claude-desktop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "codex",
@@ -33,7 +36,8 @@
     "category": "Development",
     "bin": "codex-bin",
     "icon": "codex.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dbeaver",
@@ -42,7 +46,8 @@
     "category": "Development",
     "bin": "dbeaver-ce",
     "icon": "dbeaver.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "deno",
@@ -51,7 +56,8 @@
     "category": "Development",
     "bin": "deno",
     "icon": "deno.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dotnet-runtime",
@@ -60,7 +66,8 @@
     "category": "Development",
     "bin": "dotnet-runtime-6.0",
     "icon": "dotnet-runtime.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gcc",
@@ -69,7 +76,8 @@
     "category": "Development",
     "bin": "gcc",
     "icon": "gcc.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "geany",
@@ -78,7 +86,8 @@
     "category": "Development",
     "bin": "geany",
     "icon": "geany.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "git",
@@ -87,7 +96,8 @@
     "category": "Development",
     "bin": "git",
     "icon": "git.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "github-desktop",
@@ -96,7 +106,8 @@
     "category": "Development",
     "bin": "github-desktop-bin",
     "icon": "github-desktop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "go",
@@ -105,7 +116,8 @@
     "category": "Development",
     "bin": "golang",
     "icon": "go.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "godot",
@@ -114,7 +126,8 @@
     "category": "Development",
     "bin": "godot",
     "icon": "godot.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gource",
@@ -123,7 +136,8 @@
     "category": "Development",
     "bin": "gource",
     "icon": "gource.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "hugo",
@@ -132,7 +146,8 @@
     "category": "Development",
     "bin": "hugo",
     "icon": "hugo.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "insomnia",
@@ -141,7 +156,8 @@
     "category": "Development",
     "bin": "insomnia",
     "icon": "insomnia.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "intellij-idea",
@@ -150,7 +166,8 @@
     "category": "Development",
     "bin": "intellij-idea-community-edition",
     "icon": "intellij-idea.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "jj",
@@ -159,7 +176,8 @@
     "category": "Development",
     "bin": "jujutsu",
     "icon": "jj.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "k9s",
@@ -168,7 +186,8 @@
     "category": "Development",
     "bin": "k9s",
     "icon": "k9s.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kate",
@@ -176,8 +195,9 @@
     "vendor": "KDE",
     "category": "Development",
     "bin": "kate",
-    "icon": "kate.png",
-    "hidden": false
+    "icon": "kate.svg",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kubectl",
@@ -186,7 +206,8 @@
     "category": "Development",
     "bin": "kubernetes-client",
     "icon": "kubectl.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "lazygit",
@@ -195,7 +216,8 @@
     "category": "Development",
     "bin": "lazygit",
     "icon": "lazygit.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "llama-cpp",
@@ -204,7 +226,8 @@
     "category": "Development",
     "bin": "llama.cpp",
     "icon": "llama-cpp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mariadb",
@@ -213,7 +236,8 @@
     "category": "Development",
     "bin": "mariadb-server",
     "icon": "mariadb.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mediawiki",
@@ -222,7 +246,8 @@
     "category": "Development",
     "bin": "mediawiki",
     "icon": "mediawiki.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mitmproxy",
@@ -231,7 +256,8 @@
     "category": "Development",
     "bin": "mitmproxy",
     "icon": "mitmproxy.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mongodb",
@@ -240,7 +266,8 @@
     "category": "Development",
     "bin": "mongodb-org",
     "icon": "mongodb.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "neovim",
@@ -249,7 +276,8 @@
     "category": "Development",
     "bin": "neovim",
     "icon": "neovim.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "nodejs",
@@ -258,7 +286,8 @@
     "category": "Development",
     "bin": "nodejs",
     "icon": "nodejs.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ollama",
@@ -267,7 +296,8 @@
     "category": "Development",
     "bin": "ollama",
     "icon": "ollama.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "opencode",
@@ -276,7 +306,8 @@
     "category": "Development",
     "bin": "opencode-bin",
     "icon": "opencode.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "openjdk",
@@ -285,7 +316,8 @@
     "category": "Development",
     "bin": "java-latest-openjdk",
     "icon": "openjdk.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "phpmyadmin",
@@ -294,7 +326,8 @@
     "category": "Development",
     "bin": "phpMyAdmin",
     "icon": "phpmyadmin.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "postgresql",
@@ -303,7 +336,8 @@
     "category": "Development",
     "bin": "postgresql-server",
     "icon": "postgresql.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "postman",
@@ -312,7 +346,8 @@
     "category": "Development",
     "bin": "postman",
     "icon": "postman.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "powershell",
@@ -321,7 +356,8 @@
     "category": "Development",
     "bin": "pwsh",
     "icon": "powershell.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "python",
@@ -330,7 +366,8 @@
     "category": "Development",
     "bin": "python3",
     "icon": "python.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "qt",
@@ -339,7 +376,8 @@
     "category": "Development",
     "bin": "qt-creator",
     "icon": "qt.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "responsively",
@@ -348,7 +386,8 @@
     "category": "Development",
     "bin": "responsively-app-bin",
     "icon": "responsively.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "rust",
@@ -357,7 +396,8 @@
     "category": "Development",
     "bin": "rust",
     "icon": "rust.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "scrapy",
@@ -366,7 +406,8 @@
     "category": "Development",
     "bin": "python3-scrapy",
     "icon": "scrapy.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "sqlite",
@@ -375,7 +416,8 @@
     "category": "Development",
     "bin": "sqlite",
     "icon": "sqlite.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "sublime-text-4",
@@ -384,7 +426,8 @@
     "category": "Development",
     "bin": "sublime-text",
     "icon": "sublime-text-4.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "terraform",
@@ -393,7 +436,8 @@
     "category": "Development",
     "bin": "terraform",
     "icon": "terraform.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "unity",
@@ -402,7 +446,8 @@
     "category": "Development",
     "bin": "unityhub",
     "icon": "unity.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "vagrant",
@@ -411,7 +456,8 @@
     "category": "Development",
     "bin": "vagrant",
     "icon": "vagrant.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "visual-studio-code",
@@ -420,7 +466,8 @@
     "category": "Development",
     "bin": "code",
     "icon": "visual-studio-code.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "vscodium",
@@ -429,7 +476,8 @@
     "category": "Development",
     "bin": "codium",
     "icon": "vscodium.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "wordpress",
@@ -438,7 +486,8 @@
     "category": "Development",
     "bin": "wordpress",
     "icon": "wordpress.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "xampp",
@@ -447,7 +496,8 @@
     "category": "Development",
     "bin": "xampp",
     "icon": "xampp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "zed",
@@ -456,7 +506,8 @@
     "category": "Development",
     "bin": "zed",
     "icon": "zed.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gramps",
@@ -465,7 +516,8 @@
     "category": "Education",
     "bin": "gramps",
     "icon": "gramps.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dolphin-emu",
@@ -474,7 +526,8 @@
     "category": "Games",
     "bin": "dolphin-emu",
     "icon": "dolphin-emu.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "duckstation",
@@ -483,7 +536,8 @@
     "category": "Games",
     "bin": "duckstation",
     "icon": "duckstation.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "heroic-games-launcher",
@@ -492,7 +546,8 @@
     "category": "Games",
     "bin": "com.heroicgameslauncher.hgl",
     "icon": "heroic-games-launcher.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "lucaschess",
@@ -501,7 +556,8 @@
     "category": "Games",
     "bin": "lucaschess",
     "icon": "lucaschess.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "lutris",
@@ -510,7 +566,8 @@
     "category": "Games",
     "bin": "lutris",
     "icon": "lutris.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "melonds",
@@ -519,7 +576,8 @@
     "category": "Games",
     "bin": "melonds",
     "icon": "melonds.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "pcsx2",
@@ -528,7 +586,8 @@
     "category": "Games",
     "bin": "pcsx2",
     "icon": "pcsx2.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ppsspp",
@@ -537,7 +596,8 @@
     "category": "Games",
     "bin": "ppsspp",
     "icon": "ppsspp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "retroarch",
@@ -546,7 +606,8 @@
     "category": "Games",
     "bin": "retroarch",
     "icon": "retroarch.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "steam",
@@ -555,7 +616,8 @@
     "category": "Games",
     "bin": "steam",
     "icon": "steam.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "xemu",
@@ -564,7 +626,8 @@
     "category": "Games",
     "bin": "xemu",
     "icon": "xemu.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "blender",
@@ -573,7 +636,8 @@
     "category": "Graphics",
     "bin": "blender",
     "icon": "blender.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "darktable",
@@ -582,7 +646,8 @@
     "category": "Graphics",
     "bin": "darktable",
     "icon": "darktable.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "digikam",
@@ -591,7 +656,8 @@
     "category": "Graphics",
     "bin": "digikam",
     "icon": "digikam.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "freecad",
@@ -600,7 +666,8 @@
     "category": "Graphics",
     "bin": "freecad",
     "icon": "freecad.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gimp",
@@ -609,7 +676,8 @@
     "category": "Graphics",
     "bin": "gimp",
     "icon": "gimp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gwenview",
@@ -618,7 +686,8 @@
     "category": "Graphics",
     "bin": "gwenview",
     "icon": "gwenview.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "loupe",
@@ -627,7 +696,8 @@
     "category": "Graphics",
     "bin": "loupe",
     "icon": "loupe.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "imagemagick",
@@ -636,7 +706,8 @@
     "category": "Graphics",
     "bin": "ImageMagick",
     "icon": "imagemagick.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "inkscape",
@@ -645,7 +716,8 @@
     "category": "Graphics",
     "bin": "inkscape",
     "icon": "inkscape.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "krita",
@@ -654,7 +726,8 @@
     "category": "Graphics",
     "bin": "krita",
     "icon": "krita.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mandelbulber",
@@ -663,7 +736,8 @@
     "category": "Graphics",
     "bin": "mandelbulber2",
     "icon": "mandelbulber.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mypaint",
@@ -672,7 +746,8 @@
     "category": "Graphics",
     "bin": "mypaint",
     "icon": "mypaint.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "rapidraw",
@@ -681,7 +756,8 @@
     "category": "Graphics",
     "bin": "rapidraw",
     "icon": "rapidraw.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "rawtherapee",
@@ -690,7 +766,8 @@
     "category": "Graphics",
     "bin": "rawtherapee",
     "icon": "rawtherapee.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "shotwell",
@@ -699,7 +776,8 @@
     "category": "Graphics",
     "bin": "shotwell",
     "icon": "shotwell.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "stability-matrix",
@@ -708,7 +786,8 @@
     "category": "Graphics",
     "bin": "stabilitymatrix",
     "icon": "stability-matrix.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "upscayl",
@@ -717,7 +796,8 @@
     "category": "Graphics",
     "bin": "upscayl",
     "icon": "upscayl.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "xnview",
@@ -726,7 +806,8 @@
     "category": "Graphics",
     "bin": "xnviewmp",
     "icon": "xnview.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "brave",
@@ -735,7 +816,8 @@
     "category": "Internet",
     "bin": "brave-browser",
     "icon": "brave.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "chromium",
@@ -744,7 +826,8 @@
     "category": "Internet",
     "bin": "chromium",
     "icon": "chromium.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "discord",
@@ -753,7 +836,8 @@
     "category": "Internet",
     "bin": "discord",
     "icon": "discord.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "element",
@@ -762,7 +846,8 @@
     "category": "Internet",
     "bin": "element-desktop",
     "icon": "element.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "evolution",
@@ -771,7 +856,8 @@
     "category": "Internet",
     "bin": "evolution",
     "icon": "evolution.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "firefox",
@@ -780,7 +866,8 @@
     "category": "Internet",
     "bin": "firefox",
     "icon": "firefox.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "google-chrome",
@@ -789,7 +876,8 @@
     "category": "Internet",
     "bin": "google-chrome",
     "icon": "google-chrome.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "jitsi-meet",
@@ -798,7 +886,8 @@
     "category": "Internet",
     "bin": "jitsi-meet-desktop-bin",
     "icon": "jitsi-meet.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "librewolf",
@@ -807,7 +896,8 @@
     "category": "Internet",
     "bin": "librewolf",
     "icon": "librewolf.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "microsoft-edge",
@@ -816,7 +906,8 @@
     "category": "Internet",
     "bin": "microsoft-edge-stable",
     "icon": "microsoft-edge.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mumble",
@@ -825,7 +916,8 @@
     "category": "Internet",
     "bin": "mumble",
     "icon": "mumble.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "opera",
@@ -834,7 +926,8 @@
     "category": "Internet",
     "bin": "opera-stable",
     "icon": "opera.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "signal",
@@ -843,7 +936,8 @@
     "category": "Internet",
     "bin": "signal-desktop",
     "icon": "signal.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "slack",
@@ -852,7 +946,8 @@
     "category": "Internet",
     "bin": "slack",
     "icon": "slack.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "telegram",
@@ -861,7 +956,8 @@
     "category": "Internet",
     "bin": "telegram-desktop",
     "icon": "telegram.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "thunderbird",
@@ -870,7 +966,8 @@
     "category": "Internet",
     "bin": "thunderbird",
     "icon": "thunderbird.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "tor-browser",
@@ -879,7 +976,8 @@
     "category": "Internet",
     "bin": "torbrowser-launcher",
     "icon": "tor-browser.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ungoogled-chromium",
@@ -888,7 +986,8 @@
     "category": "Internet",
     "bin": "ungoogled-chromium",
     "icon": "ungoogled-chromium.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "vivaldi",
@@ -897,7 +996,8 @@
     "category": "Internet",
     "bin": "vivaldi-stable",
     "icon": "vivaldi.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "whatsapp",
@@ -906,7 +1006,8 @@
     "category": "Internet",
     "bin": "whatsapp-for-linux",
     "icon": "whatsapp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "zen-browser",
@@ -915,7 +1016,8 @@
     "category": "Internet",
     "bin": "zen-browser-bin",
     "icon": "zen-browser.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "zoom",
@@ -924,7 +1026,8 @@
     "category": "Internet",
     "bin": "zoom-client",
     "icon": "zoom.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ardour",
@@ -933,7 +1036,8 @@
     "category": "Multimedia",
     "bin": "ardour",
     "icon": "ardour.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "audacious",
@@ -942,7 +1046,8 @@
     "category": "Multimedia",
     "bin": "audacious",
     "icon": "audacious.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "audacity",
@@ -951,7 +1056,8 @@
     "category": "Multimedia",
     "bin": "audacity",
     "icon": "audacity.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "audiorelay",
@@ -960,7 +1066,8 @@
     "category": "Multimedia",
     "bin": "audiorelay",
     "icon": "audiorelay.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "audiveris",
@@ -969,7 +1076,8 @@
     "category": "Multimedia",
     "bin": "audiveris",
     "icon": "audiveris.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "bitwig-studio",
@@ -978,7 +1086,8 @@
     "category": "Multimedia",
     "bin": "bitwig-studio",
     "icon": "bitwig-studio.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "davinci-resolve",
@@ -987,7 +1096,8 @@
     "category": "Multimedia",
     "bin": "davinci-resolve",
     "icon": "davinci-resolve.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "elisa",
@@ -996,7 +1106,8 @@
     "category": "Multimedia",
     "bin": "elisa",
     "icon": "elisa.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ffmpeg",
@@ -1005,7 +1116,8 @@
     "category": "Multimedia",
     "bin": "ffmpeg-free",
     "icon": "ffmpeg.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "handbrake",
@@ -1014,7 +1126,8 @@
     "category": "Multimedia",
     "bin": "handbrake",
     "icon": "handbrake.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "handy",
@@ -1023,7 +1136,8 @@
     "category": "Multimedia",
     "bin": "handy-bin",
     "icon": "handy.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "haruna",
@@ -1032,7 +1146,8 @@
     "category": "Multimedia",
     "bin": "haruna",
     "icon": "haruna.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "iptvnator",
@@ -1041,7 +1156,8 @@
     "category": "Multimedia",
     "bin": "iptvnator",
     "icon": "iptvnator.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "jellyfin-client",
@@ -1050,7 +1166,8 @@
     "category": "Multimedia",
     "bin": "jellyfin",
     "icon": "jellyfin-client.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kdenlive",
@@ -1059,7 +1176,8 @@
     "category": "Multimedia",
     "bin": "kdenlive",
     "icon": "kdenlive.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kodi",
@@ -1068,7 +1186,8 @@
     "category": "Multimedia",
     "bin": "kodi",
     "icon": "kodi.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "lmms",
@@ -1077,7 +1196,8 @@
     "category": "Multimedia",
     "bin": "lmms",
     "icon": "lmms.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mpc-hc",
@@ -1086,7 +1206,8 @@
     "category": "Multimedia",
     "bin": "mpc-hc",
     "icon": "mpc-hc.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mpv",
@@ -1095,7 +1216,8 @@
     "category": "Multimedia",
     "bin": "mpv",
     "icon": "mpv.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "musescore",
@@ -1104,7 +1226,8 @@
     "category": "Multimedia",
     "bin": "musescore",
     "icon": "musescore.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "musicbee",
@@ -1113,7 +1236,8 @@
     "category": "Multimedia",
     "bin": "musicbee",
     "icon": "musicbee.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "obs-studio",
@@ -1122,7 +1246,8 @@
     "category": "Multimedia",
     "bin": "obs-studio",
     "icon": "obs-studio.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ocenaudio",
@@ -1131,7 +1256,8 @@
     "category": "Multimedia",
     "bin": "ocenaudio",
     "icon": "ocenaudio.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "openshot",
@@ -1140,7 +1266,8 @@
     "category": "Multimedia",
     "bin": "openshot",
     "icon": "openshot.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "pear-desktop",
@@ -1149,7 +1276,8 @@
     "category": "Multimedia",
     "bin": "pear-desktop",
     "icon": "pear-desktop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "plex",
@@ -1158,7 +1286,8 @@
     "category": "Multimedia",
     "bin": "plexmediaserver",
     "icon": "plex.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "reaper",
@@ -1167,7 +1296,8 @@
     "category": "Multimedia",
     "bin": "reaper",
     "icon": "reaper.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "shotcut",
@@ -1176,7 +1306,8 @@
     "category": "Multimedia",
     "bin": "shotcut",
     "icon": "shotcut.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "speech-note",
@@ -1185,7 +1316,8 @@
     "category": "Multimedia",
     "bin": "dsnote",
     "icon": "speech-note.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "spotify",
@@ -1194,7 +1326,8 @@
     "category": "Multimedia",
     "bin": "spotify-client",
     "icon": "spotify.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "strawberry",
@@ -1203,7 +1336,8 @@
     "category": "Multimedia",
     "bin": "strawberry",
     "icon": "strawberry.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "stremio",
@@ -1212,7 +1346,8 @@
     "category": "Multimedia",
     "bin": "stremio",
     "icon": "stremio.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "tenacity",
@@ -1221,7 +1356,8 @@
     "category": "Multimedia",
     "bin": "tenacity",
     "icon": "tenacity.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "vlc",
@@ -1230,7 +1366,8 @@
     "category": "Multimedia",
     "bin": "vlc",
     "icon": "vlc.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "whisper-cpp",
@@ -1239,7 +1376,8 @@
     "category": "Multimedia",
     "bin": "whisper-cpp",
     "icon": "whisper-cpp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "yt-dlp",
@@ -1248,7 +1386,8 @@
     "category": "Multimedia",
     "bin": "yt-dlp",
     "icon": "yt-dlp.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ytdownloader",
@@ -1257,7 +1396,8 @@
     "category": "Multimedia",
     "bin": "youtube-dl",
     "icon": "ytdownloader.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ytmdesktop",
@@ -1266,7 +1406,8 @@
     "category": "Multimedia",
     "bin": "ytdownloader",
     "icon": "ytmdesktop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "activitywatch",
@@ -1275,7 +1416,8 @@
     "category": "Office",
     "bin": "activitywatch-bin",
     "icon": "activitywatch.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "anytype",
@@ -1284,7 +1426,8 @@
     "category": "Office",
     "bin": "anytype",
     "icon": "anytype.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-calculator",
@@ -1293,7 +1436,8 @@
     "category": "Office",
     "bin": "gnome-calculator",
     "icon": "gnome-calculator.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "calibre",
@@ -1302,7 +1446,8 @@
     "category": "Office",
     "bin": "calibre",
     "icon": "calibre.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "deepl",
@@ -1311,7 +1456,8 @@
     "category": "Office",
     "bin": "deepl",
     "icon": "deepl.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "drawio",
@@ -1320,7 +1466,8 @@
     "category": "Office",
     "bin": "drawio",
     "icon": "drawio.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "electrum",
@@ -1329,7 +1476,8 @@
     "category": "Office",
     "bin": "electrum",
     "icon": "electrum.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "espanso",
@@ -1338,7 +1486,8 @@
     "category": "Office",
     "bin": "espanso",
     "icon": "espanso.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "foliate",
@@ -1347,7 +1496,8 @@
     "category": "Office",
     "bin": "foliate",
     "icon": "foliate.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "freeplane",
@@ -1356,7 +1506,8 @@
     "category": "Office",
     "bin": "freeplane",
     "icon": "freeplane.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnucash",
@@ -1365,7 +1516,8 @@
     "category": "Office",
     "bin": "gnucash",
     "icon": "gnucash.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "homebank",
@@ -1374,7 +1526,8 @@
     "category": "Office",
     "bin": "homebank",
     "icon": "homebank.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "joplin",
@@ -1383,7 +1536,8 @@
     "category": "Office",
     "bin": "joplin-desktop",
     "icon": "joplin.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kcalc",
@@ -1391,8 +1545,9 @@
     "vendor": "KDE",
     "category": "Office",
     "bin": "kcalc",
-    "icon": "kcalc.png",
-    "hidden": false
+    "icon": "kcalc.svg",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kiwix",
@@ -1401,7 +1556,8 @@
     "category": "Office",
     "bin": "kiwix",
     "icon": "kiwix.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "koodoreader",
@@ -1410,7 +1566,8 @@
     "category": "Office",
     "bin": "koodoreader",
     "icon": "koodoreader.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "koreader",
@@ -1419,7 +1576,8 @@
     "category": "Office",
     "bin": "koreader",
     "icon": "koreader.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ledger-live",
@@ -1428,7 +1586,8 @@
     "category": "Office",
     "bin": "ledger-live-bin",
     "icon": "ledger-live.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "libreoffice",
@@ -1437,7 +1596,8 @@
     "category": "Office",
     "bin": "libreoffice",
     "icon": "libreoffice.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "logseq",
@@ -1446,7 +1606,8 @@
     "category": "Office",
     "bin": "logseq-desktop-bin",
     "icon": "logseq.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "monero-gui",
@@ -1455,7 +1616,8 @@
     "category": "Office",
     "bin": "monero-gui",
     "icon": "monero-gui.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "notion",
@@ -1464,7 +1626,8 @@
     "category": "Office",
     "bin": "notion-desktop",
     "icon": "notion.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "obsidian",
@@ -1473,7 +1636,8 @@
     "category": "Office",
     "bin": "obsidian",
     "icon": "obsidian.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "okular",
@@ -1481,8 +1645,9 @@
     "vendor": "KDE",
     "category": "Office",
     "bin": "okular",
-    "icon": "okular.png",
-    "hidden": false
+    "icon": "okular.svg",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "onlyoffice",
@@ -1491,7 +1656,8 @@
     "category": "Office",
     "bin": "onlyoffice",
     "icon": "onlyoffice.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "pandoc",
@@ -1500,7 +1666,8 @@
     "category": "Office",
     "bin": "pandoc",
     "icon": "pandoc.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "qalculate",
@@ -1509,7 +1676,8 @@
     "category": "Office",
     "bin": "qalculate",
     "icon": "qalculate.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "taskwarrior",
@@ -1518,7 +1686,8 @@
     "category": "Office",
     "bin": "task",
     "icon": "taskwarrior.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-text-editor",
@@ -1527,7 +1696,8 @@
     "category": "Office",
     "bin": "gnome-text-editor",
     "icon": "gnome-text-editor.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "trilium",
@@ -1536,7 +1706,8 @@
     "category": "Office",
     "bin": "trilium-bin",
     "icon": "trilium.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "zotero",
@@ -1545,7 +1716,8 @@
     "category": "Office",
     "bin": "zotero-bin",
     "icon": "zotero.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "geogebra",
@@ -1554,7 +1726,8 @@
     "category": "Science",
     "bin": "geogebra",
     "icon": "geogebra.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "google-earth",
@@ -1563,7 +1736,8 @@
     "category": "Science",
     "bin": "flathub-com.google.EarthPro",
     "icon": "google-earth.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "kstars",
@@ -1572,7 +1746,8 @@
     "category": "Science",
     "bin": "kstars",
     "icon": "kstars.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "qgis",
@@ -1581,7 +1756,8 @@
     "category": "Science",
     "bin": "qgis",
     "icon": "qgis.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "stellarium",
@@ -1590,7 +1766,8 @@
     "category": "Science",
     "bin": "stellarium",
     "icon": "stellarium.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "anydesk",
@@ -1599,7 +1776,8 @@
     "category": "System",
     "bin": "anydesk",
     "icon": "anydesk.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "apache",
@@ -1608,7 +1786,8 @@
     "category": "System",
     "bin": "httpd",
     "icon": "apache.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "bitwarden",
@@ -1617,7 +1796,8 @@
     "category": "System",
     "bin": "bitwarden",
     "icon": "bitwarden.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "bleachbit",
@@ -1626,7 +1806,8 @@
     "category": "System",
     "bin": "bleachbit",
     "icon": "bleachbit.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "bottles",
@@ -1635,7 +1816,8 @@
     "category": "System",
     "bin": "bottles",
     "icon": "bottles.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-boxes",
@@ -1644,7 +1826,8 @@
     "category": "System",
     "bin": "gnome-boxes",
     "icon": "gnome-boxes.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "btop",
@@ -1653,7 +1836,8 @@
     "category": "System",
     "bin": "btop",
     "icon": "btop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "cryptomator",
@@ -1662,7 +1846,8 @@
     "category": "System",
     "bin": "cryptomator",
     "icon": "cryptomator.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-disks",
@@ -1671,7 +1856,8 @@
     "category": "System",
     "bin": "gnome-disks",
     "icon": "gnome-disks.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "distrobox",
@@ -1680,7 +1866,8 @@
     "category": "System",
     "bin": "distrobox",
     "icon": "distrobox.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "docker",
@@ -1689,7 +1876,8 @@
     "category": "System",
     "bin": "docker",
     "icon": "docker.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "fastfetch",
@@ -1698,7 +1886,8 @@
     "category": "System",
     "bin": "fastfetch",
     "icon": "fastfetch.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "filezilla",
@@ -1707,7 +1896,8 @@
     "category": "System",
     "bin": "filezilla",
     "icon": "filezilla.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gparted",
@@ -1716,7 +1906,8 @@
     "category": "System",
     "bin": "gparted",
     "icon": "gparted.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "htop",
@@ -1725,7 +1916,8 @@
     "category": "System",
     "bin": "htop",
     "icon": "htop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "kde-connect",
@@ -1734,7 +1926,8 @@
     "category": "System",
     "bin": "kdeconnect",
     "icon": "kde-connect.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "keepassxc",
@@ -1743,7 +1936,8 @@
     "category": "System",
     "bin": "keepassxc",
     "icon": "keepassxc.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mullvad-vpn",
@@ -1752,7 +1946,8 @@
     "category": "System",
     "bin": "mullvad-vpn",
     "icon": "mullvad-vpn.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "nginx",
@@ -1761,7 +1956,8 @@
     "category": "System",
     "bin": "nginx",
     "icon": "nginx.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "nmap",
@@ -1770,7 +1966,8 @@
     "category": "System",
     "bin": "nmap",
     "icon": "nmap.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "pi-hole",
@@ -1779,7 +1976,8 @@
     "category": "System",
     "bin": "pi-hole-core",
     "icon": "pi-hole.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "playonlinux",
@@ -1788,7 +1986,8 @@
     "category": "System",
     "bin": "playonlinux",
     "icon": "playonlinux.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "podman",
@@ -1797,7 +1996,8 @@
     "category": "System",
     "bin": "podman",
     "icon": "podman.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "proton-vpn",
@@ -1806,7 +2006,8 @@
     "category": "System",
     "bin": "protonvpn",
     "icon": "proton-vpn.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "proton-qt",
@@ -1815,7 +2016,8 @@
     "category": "System",
     "bin": "protonup-qt",
     "icon": "proton-qt.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "qemu",
@@ -1824,7 +2026,8 @@
     "category": "System",
     "bin": "qemu",
     "icon": "qemu.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "rustdesk",
@@ -1833,7 +2036,8 @@
     "category": "System",
     "bin": "rustdesk-bin",
     "icon": "rustdesk.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "scrcpy",
@@ -1842,7 +2046,8 @@
     "category": "System",
     "bin": "scrcpy",
     "icon": "scrcpy.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-software",
@@ -1851,7 +2056,8 @@
     "category": "System",
     "bin": "gnome-software",
     "icon": "gnome-software.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-system-monitor",
@@ -1860,7 +2066,8 @@
     "category": "System",
     "bin": "gnome-system-monitor",
     "icon": "gnome-system-monitor.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "tailscale",
@@ -1869,7 +2076,8 @@
     "category": "System",
     "bin": "tailscale",
     "icon": "tailscale.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "teamviewer",
@@ -1878,7 +2086,8 @@
     "category": "System",
     "bin": "teamviewer",
     "icon": "teamviewer.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "veracrypt",
@@ -1887,7 +2096,8 @@
     "category": "System",
     "bin": "veracrypt",
     "icon": "veracrypt.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "virt-manager",
@@ -1896,7 +2106,8 @@
     "category": "System",
     "bin": "virt-manager",
     "icon": "virt-manager.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "virtualbox",
@@ -1905,7 +2116,8 @@
     "category": "System",
     "bin": "VirtualBox",
     "icon": "virtualbox.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "vmware",
@@ -1914,7 +2126,8 @@
     "category": "System",
     "bin": "vmware-workstation-player",
     "icon": "vmware.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "waydroid",
@@ -1923,7 +2136,8 @@
     "category": "System",
     "bin": "waydroid-git",
     "icon": "waydroid.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "windscribe",
@@ -1932,7 +2146,8 @@
     "category": "System",
     "bin": "windscribe-cli",
     "icon": "windscribe.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "wine",
@@ -1941,7 +2156,8 @@
     "category": "System",
     "bin": "wine",
     "icon": "wine.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "wireguard",
@@ -1950,7 +2166,8 @@
     "category": "System",
     "bin": "wireguard-tools",
     "icon": "wireguard.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "wireshark",
@@ -1959,7 +2176,8 @@
     "category": "System",
     "bin": "wireshark",
     "icon": "wireshark.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "xen",
@@ -1968,7 +2186,8 @@
     "category": "System",
     "bin": "xen",
     "icon": "xen.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "7zip",
@@ -1977,7 +2196,8 @@
     "category": "Utilities",
     "bin": "p7zip",
     "icon": "7zip.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "alacritty",
@@ -1986,7 +2206,8 @@
     "category": "Utilities",
     "bin": "alacritty",
     "icon": "alacritty.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "balena-etcher",
@@ -1995,7 +2216,8 @@
     "category": "Utilities",
     "bin": "etcher",
     "icon": "balena-etcher.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "bat",
@@ -2004,7 +2226,8 @@
     "category": "Utilities",
     "bin": "bat",
     "icon": "bat.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "borg",
@@ -2013,7 +2236,8 @@
     "category": "Utilities",
     "bin": "borgbackup",
     "icon": "borg.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "curl",
@@ -2022,7 +2246,8 @@
     "category": "Utilities",
     "bin": "curl",
     "icon": "curl.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dolphin",
@@ -2031,7 +2256,8 @@
     "category": "Utilities",
     "bin": "dolphin",
     "icon": "dolphin.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dropbox",
@@ -2040,7 +2266,8 @@
     "category": "Utilities",
     "bin": "nautilus-dropbox",
     "icon": "dropbox.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dua-cli",
@@ -2049,7 +2276,8 @@
     "category": "Utilities",
     "bin": "dua-cli",
     "icon": "dua-cli.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "dust",
@@ -2058,7 +2286,8 @@
     "category": "Utilities",
     "bin": "dust",
     "icon": "dust.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "eaglemode",
@@ -2067,7 +2296,8 @@
     "category": "Utilities",
     "bin": "eaglemode",
     "icon": "eaglemode.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "eza",
@@ -2076,7 +2306,8 @@
     "category": "Utilities",
     "bin": "eza",
     "icon": "eza.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "fd",
@@ -2085,7 +2316,8 @@
     "category": "Utilities",
     "bin": "fd-find",
     "icon": "fd.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "nautilus",
@@ -2094,7 +2326,8 @@
     "category": "Utilities",
     "bin": "nautilus",
     "icon": "nautilus.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "flameshot",
@@ -2103,7 +2336,8 @@
     "category": "Utilities",
     "bin": "flameshot",
     "icon": "flameshot.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "freefilesync",
@@ -2112,7 +2346,8 @@
     "category": "Utilities",
     "bin": "freefilesync",
     "icon": "freefilesync.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "fzf",
@@ -2121,7 +2356,8 @@
     "category": "Utilities",
     "bin": "fzf",
     "icon": "fzf.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "ghostty",
@@ -2130,7 +2366,8 @@
     "category": "Utilities",
     "bin": "ghostty",
     "icon": "ghostty.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gpxsee",
@@ -2139,7 +2376,8 @@
     "category": "Utilities",
     "bin": "gpxsee",
     "icon": "gpxsee.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "home-assistant",
@@ -2148,7 +2386,8 @@
     "category": "Utilities",
     "bin": "home-assistant-snap",
     "icon": "home-assistant.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "instaloader",
@@ -2157,7 +2396,8 @@
     "category": "Utilities",
     "bin": "instaloader",
     "icon": "instaloader.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "jq",
@@ -2166,7 +2406,8 @@
     "category": "Utilities",
     "bin": "jq",
     "icon": "jq.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "kitty",
@@ -2175,7 +2416,8 @@
     "category": "Utilities",
     "bin": "kitty",
     "icon": "kitty.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "konsole",
@@ -2183,8 +2425,9 @@
     "vendor": "KDE",
     "category": "Utilities",
     "bin": "konsole",
-    "icon": "konsole.png",
-    "hidden": false
+    "icon": "konsole.svg",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "mega",
@@ -2193,7 +2436,8 @@
     "category": "Utilities",
     "bin": "megasync",
     "icon": "mega.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "meld",
@@ -2202,7 +2446,8 @@
     "category": "Utilities",
     "bin": "meld",
     "icon": "meld.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "musicbrainz-picard",
@@ -2211,7 +2456,8 @@
     "category": "Utilities",
     "bin": "picard",
     "icon": "musicbrainz-picard.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "nextcloud-desktop",
@@ -2220,7 +2466,8 @@
     "category": "Utilities",
     "bin": "nextcloud-client",
     "icon": "nextcloud-desktop.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "onionshare",
@@ -2229,7 +2476,8 @@
     "category": "Utilities",
     "bin": "onionshare",
     "icon": "onionshare.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "openrgb",
@@ -2238,7 +2486,8 @@
     "category": "Utilities",
     "bin": "openrgb",
     "icon": "openrgb.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "putty",
@@ -2247,7 +2496,8 @@
     "category": "Utilities",
     "bin": "putty",
     "icon": "putty.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "qbittorrent",
@@ -2256,7 +2506,8 @@
     "category": "Utilities",
     "bin": "qbittorrent",
     "icon": "qbittorrent.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "rclone",
@@ -2265,7 +2516,8 @@
     "category": "Utilities",
     "bin": "rclone",
     "icon": "rclone.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "redshift",
@@ -2274,7 +2526,8 @@
     "category": "Utilities",
     "bin": "redshift",
     "icon": "redshift.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ripgrep",
@@ -2283,7 +2536,8 @@
     "category": "Utilities",
     "bin": "ripgrep",
     "icon": "ripgrep.png",
-    "hidden": false
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "rsync",
@@ -2292,7 +2546,8 @@
     "category": "Utilities",
     "bin": "rsync",
     "icon": "rsync.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "shutter",
@@ -2301,7 +2556,8 @@
     "category": "Utilities",
     "bin": "shutter",
     "icon": "shutter.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "spectacle",
@@ -2309,8 +2565,9 @@
     "vendor": "KDE",
     "category": "Utilities",
     "bin": "spectacle",
-    "icon": "spectacle.png",
-    "hidden": false
+    "icon": "spectacle.svg",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "starship",
@@ -2319,7 +2576,8 @@
     "category": "Utilities",
     "bin": "starship",
     "icon": "starship.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "stretchly",
@@ -2328,7 +2586,8 @@
     "category": "Utilities",
     "bin": "stretchly",
     "icon": "stretchly.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "superfile",
@@ -2337,7 +2596,8 @@
     "category": "Utilities",
     "bin": "superfile",
     "icon": "superfile.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "syncthing",
@@ -2346,7 +2606,8 @@
     "category": "Utilities",
     "bin": "syncthing",
     "icon": "syncthing.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "gnome-terminal",
@@ -2355,7 +2616,8 @@
     "category": "Utilities",
     "bin": "gnome-terminal",
     "icon": "gnome-terminal.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "timeshift",
@@ -2364,7 +2626,8 @@
     "category": "Utilities",
     "bin": "timeshift",
     "icon": "timeshift.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "tmux",
@@ -2373,7 +2636,8 @@
     "category": "Utilities",
     "bin": "tmux",
     "icon": "tmux.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "transmission",
@@ -2382,7 +2646,8 @@
     "category": "Utilities",
     "bin": "transmission",
     "icon": "transmission.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "tree",
@@ -2391,7 +2656,8 @@
     "category": "Utilities",
     "bin": "tree",
     "icon": "tree.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ventoy",
@@ -2400,7 +2666,8 @@
     "category": "Utilities",
     "bin": "ventoy-bin",
     "icon": "ventoy.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "wezterm",
@@ -2409,6 +2676,7 @@
     "category": "Utilities",
     "bin": "wezterm",
     "icon": "wezterm.png",
-    "hidden": false
+    "hidden": false,
+    "cli": false
   }
 ]

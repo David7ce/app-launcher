@@ -32,6 +32,16 @@ SVG_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
 </svg>
 """
 
+# A dedicated glyph for CLI-only tools (terminal-prompt look), distinct from
+# the 10 category glyphs so a missing icon on a CLI tool doesn't read the
+# same as a missing icon on a GUI app.
+CLI_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#1e1e1e"/>
+  <text x="10" y="40" font-family="monospace" font-size="22" font-weight="700"
+        fill="#4ade80">&gt;_</text>
+</svg>
+"""
+
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
@@ -39,7 +49,8 @@ def main() -> None:
         font_size = 16 if len(label) <= 3 else 13
         svg = SVG_TEMPLATE.format(color=color, label=label, font_size=font_size)
         (OUT / f"{category}.svg").write_text(svg)
-    print(f"wrote {len(GLYPHS)} category glyphs to {OUT.relative_to(ROOT)}")
+    (OUT / "cli-tool.svg").write_text(CLI_SVG)
+    print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph to {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

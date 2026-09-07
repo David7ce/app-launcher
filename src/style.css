@@ -37,12 +37,34 @@ body {
 
 header {
   padding: 20px 28px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 header h1 {
   font-size: 20px;
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
+}
+
+#search {
+  flex: 1 1 240px;
+  max-width: 360px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 13px;
+}
+
+#search:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
 }
 
 #error-banner {
@@ -55,11 +77,13 @@ header h1 {
 }
 
 main {
-  padding: 12px 28px 40px;
+  padding: 12px 32px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 section.category {
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
 section.category h2 {
@@ -68,13 +92,13 @@ section.category h2 {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 8px 4px;
 }
 
 .tile {
@@ -82,13 +106,14 @@ section.category h2 {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 10px 6px;
+  padding: 12px 6px;
   border: 1px solid transparent;
   border-radius: 12px;
   background: transparent;
   cursor: pointer;
   color: inherit;
   font: inherit;
+  transition: transform 0.1s ease, background-color 0.1s ease, box-shadow 0.1s ease;
 }
 
 .tile:hover,
@@ -96,9 +121,17 @@ section.category h2 {
   background: var(--tile-hover);
   border-color: var(--border);
   outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.12);
 }
 
-.tile img {
+.tile:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.tile img,
+.tile svg {
   width: 48px;
   height: 48px;
   border-radius: 10px;
@@ -114,8 +147,37 @@ section.category h2 {
   overflow-wrap: anywhere;
 }
 
+.tile[hidden] {
+  display: none;
+}
+
 #empty-state {
   color: var(--muted);
   padding: 40px 0;
   text-align: center;
+}
+
+@media (max-width: 520px) {
+  header {
+    padding: 16px 16px 4px;
+  }
+
+  main {
+    padding: 10px 16px 32px;
+  }
+
+  #search {
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  }
+
+  .tile img,
+  .tile svg {
+    width: 40px;
+    height: 40px;
+  }
 }

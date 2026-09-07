@@ -27,6 +27,16 @@ BIN_FIELD_PRIORITY = [
     "linux_arch_aur",
 ]
 
+# Dataset subcategories that are unambiguously terminal-only tools.
+CLI_SUBCATEGORIES = {"CLI Utility"}
+
+# A few well-known CLI-only tools whose dataset subcategory is shared with
+# GUI apps (e.g. "System Monitor" also covers GNOME System Monitor), so the
+# subcategory heuristic alone would miss them. Extend by hand as needed —
+# getting this perfect isn't the point, just keeping obvious CLI tools from
+# looking like GUI apps with a broken icon.
+CLI_ID_OVERRIDES = {"btop", "htop", "fastfetch", "neofetch"}
+
 
 def guess_bin(pkg_manager: dict) -> str | None:
     for field in BIN_FIELD_PRIORITY:
@@ -34,6 +44,10 @@ def guess_bin(pkg_manager: dict) -> str | None:
         if value:
             return value
     return None
+
+
+def is_cli(app_id: str, subcategory: str | None) -> bool:
+    return subcategory in CLI_SUBCATEGORIES or app_id in CLI_ID_OVERRIDES
 
 
 def category_for(cat_map: dict, category: str, subcategory: str | None) -> str:
@@ -65,6 +79,7 @@ def main() -> None:
             "bin": bin_name,
             "icon": f"{app_id}.png",
             "hidden": False,
+            "cli": is_cli(app_id, entry.get("subcategory")),
         }
 
     # Hand-curated entries win over dataset-derived ones on id collisions.
@@ -75,8 +90,9 @@ def main() -> None:
             "vendor": entry.get("vendor", ""),
             "category": entry["category"],
             "bin": entry["bin"],
-            "icon": f"{entry['id']}.png",
+            "icon": entry.get("icon", f"{entry['id']}.png"),
             "hidden": False,
+            "cli": False,
         }
 
     # Two catalog entries that launch the identical binary are the same app

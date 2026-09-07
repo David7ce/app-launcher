@@ -2,11 +2,11 @@
   "_comment": "Hand-written entries not covered by desktop-pkgs.json: KDE/GNOME desktop-environment apps, plus Microsoft/Apple apps that actually ship a Linux binary. Apple ships essentially nothing for Linux, so it has no entries here for now (kept as a documented gap, not an oversight).",
   "apps": [
     { "id": "dolphin", "name": "Dolphin", "vendor": "KDE", "category": "Utilities", "bin": "dolphin" },
-    { "id": "konsole", "name": "Konsole", "vendor": "KDE", "category": "Utilities", "bin": "konsole" },
-    { "id": "kate", "name": "Kate", "vendor": "KDE", "category": "Development", "bin": "kate" },
-    { "id": "okular", "name": "Okular", "vendor": "KDE", "category": "Office", "bin": "okular" },
-    { "id": "spectacle", "name": "Spectacle", "vendor": "KDE", "category": "Utilities", "bin": "spectacle" },
-    { "id": "kcalc", "name": "KCalc", "vendor": "KDE", "category": "Office", "bin": "kcalc" },
+    { "id": "konsole", "name": "Konsole", "vendor": "KDE", "category": "Utilities", "bin": "konsole", "icon": "konsole.svg" },
+    { "id": "kate", "name": "Kate", "vendor": "KDE", "category": "Development", "bin": "kate", "icon": "kate.svg" },
+    { "id": "okular", "name": "Okular", "vendor": "KDE", "category": "Office", "bin": "okular", "icon": "okular.svg" },
+    { "id": "spectacle", "name": "Spectacle", "vendor": "KDE", "category": "Utilities", "bin": "spectacle", "icon": "spectacle.svg" },
+    { "id": "kcalc", "name": "KCalc", "vendor": "KDE", "category": "Office", "bin": "kcalc", "icon": "kcalc.svg" },
 
     { "id": "nautilus", "name": "Files", "vendor": "GNOME", "category": "Utilities", "bin": "nautilus" },
     { "id": "gnome-terminal", "name": "Terminal", "vendor": "GNOME", "category": "Utilities", "bin": "gnome-terminal" },

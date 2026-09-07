@@ -12,25 +12,29 @@
 - ✅ Frontend: `src/index.html` + `main.js` + `style.css`, fetch → is_installed filter → group by category → render → click to launch.
 - ✅ Fixed a real bug found during first run: Visual Studio Code appeared twice (dataset entry `visual-studio-code` + a redundant hand-written `vscode` vendor entry, both binding `code`). Removed the redundant vendor entry and added a general bin-collision dedupe pass to `build_catalog.py` so any future duplicate-bin situation (e.g. `jellyfin-client`/`jellyfin-server` both guessed as bin `jellyfin`) is caught automatically instead of shipping two tiles that launch the same thing.
 
-## Phase 1.1 — Polish backlog (requested after first look, not yet implemented)
+## Phase 1.1 — Polish backlog (done)
 
-User feedback after trying v1, captured here to act on next:
+User feedback after trying v1, all items now implemented:
 
-- [ ] **Use screen space better.** Tune the tile grid (flexbox or CSS grid — pick whichever is simplest to get right, no need to use both) so it fills the window width more effectively than the current fixed `minmax(88px, 1fr)` auto-fill grid.
-- [ ] **Cursor feedback on hover.** Tiles are `<button>` elements but don't set `cursor: pointer` — add it, and double check the existing `:hover`/`:focus-visible` background swap actually reads as an affordance.
-- [ ] **KDE icon coverage.** Only `dolphin` (the KDE file manager, correctly resolved) got a real icon from dashboard-icons; `konsole`, `kate`, `okular`, `spectacle`, `kcalc` all fall back to the generic Utilities/Office/Development glyph. Worth a targeted manual pass (alternate dashboard-icons slugs, Iconify, or a couple of UXWing/Magnific AI icons) for just these five.
-- [ ] **Generic icon for CLI tools.** Many dataset entries are terminal/CLI utilities (`bat`, `btop`, `eza`, `dust`, `dua-cli`, etc.) that will never have a branded dashboard-icons entry. Consider a dedicated "CLI tool" glyph (distinct from the plain category fallback) so they're visually distinguishable from GUI apps missing an icon by accident.
-- [ ] **Search/filter bar.** Filter the visible tiles by name as you type.
-- [ ] **Responsive layout.** Verify/adjust at narrow and wide window widths — ties into the flexbox/grid rework above.
-- [ ] Title bar already exists (`<h1>App Launcher</h1>`) — revisit once the search bar is added, since both live in the header area.
+- [x] **Use screen space better.** Tile grid uses `auto-fill, minmax(108px, 1fr)` with a `max-width: 1600px` centered `<main>`, tighter gap — fills window width better than the original `minmax(88px, 1fr)`.
+- [x] **Cursor feedback on hover.** `cursor: pointer` was already present on `.tile`; added a hover lift (`translateY` + `box-shadow`) and an `:active` press state so the affordance actually reads.
+- [x] **KDE icon coverage.** dashboard-icons/Iconify confirmed to have zero coverage for Konsole/Kate/Okular/Spectacle/KCalc (checked directly). Sourced all five from KDE's own `breeze-icons` GitHub repo instead (LGPL, authoritative) via a per-entry `icon` override in `vendor_apps.json`. Watch out: two of the breeze-icons paths (`kcalc.svg`, `spectacle.svg`) are symlink aliases, and `raw.githubusercontent.com` serves a symlink's target path as plain text rather than the real SVG — had to follow the alias by hand (`accessories-calculator.svg`, `ksnapshot.svg`).
+- [x] **Generic icon for CLI tools.** Added a `cli` boolean field to the catalog schema (`is_cli()` in `build_catalog.py`: dataset subcategory `"CLI Utility"` + a manual override list for tools tagged otherwise) and a dedicated terminal-prompt SVG glyph (`assets/icons/category/cli-tool.svg`) shown instead of the plain category fallback.
+- [x] **Search/filter bar.** `#search` input in the header, live substring filter over tile names, hides empty category sections, shows a "no apps match" message.
+- [x] **Responsive layout.** Added a `≤520px` media query (smaller tiles/icons, full-width search, tighter padding).
+
+## Desktop shortcut (done)
+
+`.desktop` entries created on `~/Desktop/AppLauncher.desktop` and `~/.local/share/applications/app-launcher.desktop`, `Exec` pointing at the `cargo build --release` binary (`src-tauri/target/release/app`). Validated with `desktop-file-validate` (no warnings) and smoke-tested by launching directly. See `SPEC.md` "Desktop shortcut" for details. Rebuilding the release binary doesn't require touching the shortcut files.
 
 ## Phase 2 — Later, not started
 
-Ideas parked for after the Phase 1.1 polish pass — do not build until explicitly requested:
+Ideas parked for after this polish pass — do not build until explicitly requested:
 
 - Windows and macOS support (same catalog schema, add `bin`/launch-command per OS, add a presence-check + launch implementation per OS in Rust).
 - Optional in-app minimal editor for hide/rename/recategorize, replacing hand-editing JSON, if that turns out to be annoying in practice.
-- Packaging/installers (`cargo tauri build`) once the app is stable enough to want a distributable binary.
+- Full installer packaging (`cargo tauri build` → `.rpm`/`.deb`/AppImage) — the desktop shortcut currently points straight at the debug/release binary, not a packaged bundle.
+- Broader icon coverage pass (Iconify integration proper, or Magnific AI for specific remaining gaps) if the current dashboard-icons + breeze-icons + CLI-glyph coverage still feels thin in practice.
 
 ## Decisions already made (do not re-litigate without new information)
 
