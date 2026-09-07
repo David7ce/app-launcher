@@ -37,11 +37,10 @@ body {
 
 header {
   padding: 20px 28px 4px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 420px) 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+  column-gap: 20px;
 }
 
 header h1 {
@@ -49,11 +48,12 @@ header h1 {
   font-weight: 600;
   margin: 0;
   white-space: nowrap;
+  justify-self: start;
 }
 
 #search {
-  flex: 1 1 240px;
-  max-width: 360px;
+  justify-self: stretch;
+  width: 100%;
   padding: 8px 14px;
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -82,8 +82,42 @@ main {
   margin: 0 auto;
 }
 
+#categories {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+@media (min-width: 700px) {
+  #categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1050px) {
+  #categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1350px) {
+  #categories {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1650px) {
+  #categories {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 section.category {
-  margin-top: 26px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px 20px;
+  background: var(--tile-bg);
 }
 
 section.category h2 {
@@ -136,7 +170,7 @@ section.category h2 {
   height: 48px;
   border-radius: 10px;
   object-fit: contain;
-  background: var(--tile-bg);
+  background: var(--bg);
 }
 
 .tile span {
@@ -151,7 +185,9 @@ section.category h2 {
   display: none;
 }
 
-#empty-state {
+#empty-state,
+#no-results {
+  grid-column: 1 / -1;
   color: var(--muted);
   padding: 40px 0;
   text-align: center;
@@ -159,16 +195,17 @@ section.category h2 {
 
 @media (max-width: 520px) {
   header {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
     padding: 16px 16px 4px;
+  }
+
+  header h1 {
+    justify-self: center;
   }
 
   main {
     padding: 10px 16px 32px;
-  }
-
-  #search {
-    max-width: none;
-    flex-basis: 100%;
   }
 
   .grid {

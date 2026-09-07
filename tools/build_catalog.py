@@ -35,7 +35,17 @@ CLI_SUBCATEGORIES = {"CLI Utility"}
 # subcategory heuristic alone would miss them. Extend by hand as needed —
 # getting this perfect isn't the point, just keeping obvious CLI tools from
 # looking like GUI apps with a broken icon.
-CLI_ID_OVERRIDES = {"btop", "htop", "fastfetch", "neofetch"}
+CLI_ID_OVERRIDES = {"btop", "htop", "fastfetch", "neofetch", "rsync", "tmux", "tree", "curl"}
+
+# Dataset-derived entries whose default `<id>.png` icon guess is wrong —
+# e.g. a real icon sourced from KDE's breeze-icons repo instead (SVG, no
+# branded PNG exists anywhere). Same idea as vendor_apps.json's per-entry
+# `icon` override, but for entries that come from the dataset, not
+# hand-written ones.
+ICON_OVERRIDES = {
+    "gwenview": "gwenview.svg",
+    "elisa": "elisa.svg",
+}
 
 
 def guess_bin(pkg_manager: dict) -> str | None:
@@ -57,10 +67,17 @@ def category_for(cat_map: dict, category: str, subcategory: str | None) -> str:
     return cat_map["by_category"][category]
 
 
+# This machine's own app-launcher shortcut shows up in the system scan
+# (it drops a .desktop file too) — self-referential, always excluded.
+SYSTEM_SCAN_EXCLUDE_IDS = {"app-launcher"}
+
+
 def main() -> None:
     desktop_pkgs = json.loads((SOURCES / "desktop-pkgs.json").read_text())["packages"]
     vendor_apps = json.loads((SOURCES / "vendor_apps.json").read_text())["apps"]
     cat_map = json.loads((SOURCES / "category_map.json").read_text())
+    system_apps_path = SOURCES / "system_apps.json"
+    system_apps = json.loads(system_apps_path.read_text()) if system_apps_path.exists() else []
 
     catalog: dict[str, dict] = {}
     skipped_no_linux_bin = []
@@ -77,7 +94,7 @@ def main() -> None:
             "vendor": "",
             "category": category,
             "bin": bin_name,
-            "icon": f"{app_id}.png",
+            "icon": ICON_OVERRIDES.get(app_id, f"{app_id}.png"),
             "hidden": False,
             "cli": is_cli(app_id, entry.get("subcategory")),
         }
@@ -107,6 +124,27 @@ def main() -> None:
         else:
             dropped_dupes.append((entry["id"], entry["bin"], existing["id"]))
 
+    # This machine's actual installed .desktop files are ground truth: a
+    # real name, a real system-theme icon, and a bin taken straight from
+    # Exec= rather than guessed from a package name. They always win over
+    # a dataset/vendor entry for the same bin, and add anything new.
+    new_from_system = 0
+    for entry in system_apps:
+        if entry["id"] in SYSTEM_SCAN_EXCLUDE_IDS:
+            continue
+        if entry["bin"] not in by_bin:
+            new_from_system += 1
+        by_bin[entry["bin"]] = {
+            "id": entry["id"],
+            "name": entry["name"],
+            "vendor": "",
+            "category": entry["category"],
+            "bin": entry["bin"],
+            "icon": entry["icon"] or f"{entry['id']}.png",
+            "hidden": False,
+            "cli": False,
+        }
+
     result = sorted(by_bin.values(), key=lambda e: (e["category"], e["name"].lower()))
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")
@@ -118,6 +156,9 @@ def main() -> None:
         print(f"dropped {len(dropped_dupes)} duplicate-bin entries (kept the other id):")
         for dropped_id, bin_name, kept_id in dropped_dupes:
             print(f"  {dropped_id!r} -> bin {bin_name!r} also used by {kept_id!r}")
+    if system_apps:
+        print(f"merged {len(system_apps)} locally-scanned apps ({new_from_system} new, "
+              f"the rest replaced a dataset/vendor guess with the real local name+icon)")
 
 
 if __name__ == "__main__":

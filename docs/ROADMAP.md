@@ -27,6 +27,18 @@ User feedback after trying v1, all items now implemented:
 
 `.desktop` entries created on `~/Desktop/AppLauncher.desktop` and `~/.local/share/applications/app-launcher.desktop`, `Exec` pointing at the `cargo build --release` binary (`src-tauri/target/release/app`). Validated with `desktop-file-validate` (no warnings) and smoke-tested by launching directly. See `SPEC.md` "Desktop shortcut" for details. Rebuilding the release binary doesn't require touching the shortcut files.
 
+## Phase 1.2 — System scan, layout, and icon completeness (done)
+
+User feedback: too many locally-installed apps were missing (the curated dataset only knows ~250 apps), and asked for icons for a few specific CLI tools/KDE apps plus a better multi-column layout.
+
+- [x] **System app scan.** New `tools/scan_system_apps.py` reads this machine's actual `.desktop` files (XDG application dirs) instead of only the curated dataset — real `Name=`/`Categories=`/`Exec=`/`Icon=`, zero guessing, zero network. Icons resolved via the active icon theme (`breeze-dark` here) are copied into the shared `src/assets/icons/` folder so lookups happen once, not on every rebuild. `build_catalog.py` now merges this in with system entries winning bin collisions. Result on this machine: 268 → 322 catalog entries (54 new, ~18 upgraded from a guessed/downloaded icon to the real local one — Dolphin, Konsole, Kate, Okular, Spectacle, KCalc, Gwenview, Elisa all now show their actual system icon).
+- [x] **Base/generic icon for `rsync`, `tmux`, `tree`, `curl`.** Added to `CLI_ID_OVERRIDES` in `build_catalog.py` — these have no GUI and will never have a branded icon, so they show the CLI glyph rather than a generic category fallback or a broken one.
+- [x] **Icons for Gwenview and Elisa.** Sourced from breeze-icons as the portability fallback (`ICON_OVERRIDES` in `build_catalog.py`); now superseded by the real system-scanned icon on this machine anyway.
+- [x] **Multi-column category layout.** `#categories` is a CSS grid whose column count scales with window width (1/2/3/4/5 at 0/700/1050/1350/1650px), each category rendered as a bordered, rounded card (`section.category`) instead of a full-width stacked block.
+- [x] **Centered search bar.** `header` is now a 3-column grid (`1fr minmax(220px,420px) 1fr`) so `#search` sits centered regardless of the title's width.
+
+Known gap surfaced by the scan, not yet fixed: a `.desktop` file with `Terminal=true` (TUI tools that still ship a menu entry, e.g. `btop`) gets a real icon and shows up normally, but `launch_app` spawns the bin directly with nothing to attach a terminal to — clicking it won't visibly do anything useful. Needs `launch_app` (or a new catalog field) to know when to wrap `Exec` in a terminal emulator. Not fixed yet — flagging for next time.
+
 ## Phase 2 — Later, not started
 
 Ideas parked for after this polish pass — do not build until explicitly requested:
@@ -38,4 +50,4 @@ Ideas parked for after this polish pass — do not build until explicitly reques
 
 ## Decisions already made (do not re-litigate without new information)
 
-See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, no scanner (targeted PATH lookups against a known catalog instead), 10 freedesktop-style categories, icons vendored offline from dashboard-icons/Iconify with manual fallbacks, single hand-edited `catalog.json` as source of truth.
+See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, 10 freedesktop-style categories, single hand-edited `catalog.json` as source of truth, no runtime scanning (the app only ever does a targeted `is_installed` PATH check against the pre-built catalog). The catalog itself is now built from three merged sources: the curated dataset, hand-written vendor entries, and — as of Phase 1.2 — an offline scan of this machine's own `.desktop` files, which also wins as the primary icon source (system theme → dashboard-icons/Iconify → manual fallbacks, all still resolved offline ahead of time, never at runtime).
