@@ -1,0 +1,2414 @@
+[
+  {
+    "id": "ansible",
+    "name": "Ansible",
+    "vendor": "",
+    "category": "Development",
+    "bin": "ansible",
+    "icon": "ansible.png",
+    "hidden": false
+  },
+  {
+    "id": "claude-code",
+    "name": "Claude Code",
+    "vendor": "",
+    "category": "Development",
+    "bin": "claude-code",
+    "icon": "claude-code.png",
+    "hidden": false
+  },
+  {
+    "id": "claude-desktop",
+    "name": "Claude Desktop",
+    "vendor": "",
+    "category": "Development",
+    "bin": "claude-desktop",
+    "icon": "claude-desktop.png",
+    "hidden": false
+  },
+  {
+    "id": "codex",
+    "name": "Codex",
+    "vendor": "",
+    "category": "Development",
+    "bin": "codex-bin",
+    "icon": "codex.png",
+    "hidden": false
+  },
+  {
+    "id": "dbeaver",
+    "name": "DBeaver",
+    "vendor": "",
+    "category": "Development",
+    "bin": "dbeaver-ce",
+    "icon": "dbeaver.png",
+    "hidden": false
+  },
+  {
+    "id": "deno",
+    "name": "Deno",
+    "vendor": "",
+    "category": "Development",
+    "bin": "deno",
+    "icon": "deno.png",
+    "hidden": false
+  },
+  {
+    "id": "dotnet-runtime",
+    "name": "Dotnet Runtime",
+    "vendor": "",
+    "category": "Development",
+    "bin": "dotnet-runtime-6.0",
+    "icon": "dotnet-runtime.png",
+    "hidden": false
+  },
+  {
+    "id": "gcc",
+    "name": "GCC",
+    "vendor": "",
+    "category": "Development",
+    "bin": "gcc",
+    "icon": "gcc.png",
+    "hidden": false
+  },
+  {
+    "id": "geany",
+    "name": "Geany",
+    "vendor": "",
+    "category": "Development",
+    "bin": "geany",
+    "icon": "geany.png",
+    "hidden": false
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "vendor": "",
+    "category": "Development",
+    "bin": "git",
+    "icon": "git.png",
+    "hidden": false
+  },
+  {
+    "id": "github-desktop",
+    "name": "GitHub Desktop",
+    "vendor": "",
+    "category": "Development",
+    "bin": "github-desktop-bin",
+    "icon": "github-desktop.png",
+    "hidden": false
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "vendor": "",
+    "category": "Development",
+    "bin": "golang",
+    "icon": "go.png",
+    "hidden": false
+  },
+  {
+    "id": "godot",
+    "name": "Godot",
+    "vendor": "",
+    "category": "Development",
+    "bin": "godot",
+    "icon": "godot.png",
+    "hidden": false
+  },
+  {
+    "id": "gource",
+    "name": "Gource",
+    "vendor": "",
+    "category": "Development",
+    "bin": "gource",
+    "icon": "gource.png",
+    "hidden": false
+  },
+  {
+    "id": "hugo",
+    "name": "Hugo",
+    "vendor": "",
+    "category": "Development",
+    "bin": "hugo",
+    "icon": "hugo.png",
+    "hidden": false
+  },
+  {
+    "id": "insomnia",
+    "name": "Insomnia",
+    "vendor": "",
+    "category": "Development",
+    "bin": "insomnia",
+    "icon": "insomnia.png",
+    "hidden": false
+  },
+  {
+    "id": "intellij-idea",
+    "name": "IntelliJ IDEA",
+    "vendor": "",
+    "category": "Development",
+    "bin": "intellij-idea-community-edition",
+    "icon": "intellij-idea.png",
+    "hidden": false
+  },
+  {
+    "id": "jj",
+    "name": "Jujutsu",
+    "vendor": "",
+    "category": "Development",
+    "bin": "jujutsu",
+    "icon": "jj.png",
+    "hidden": false
+  },
+  {
+    "id": "k9s",
+    "name": "k9s",
+    "vendor": "",
+    "category": "Development",
+    "bin": "k9s",
+    "icon": "k9s.png",
+    "hidden": false
+  },
+  {
+    "id": "kate",
+    "name": "Kate",
+    "vendor": "KDE",
+    "category": "Development",
+    "bin": "kate",
+    "icon": "kate.png",
+    "hidden": false
+  },
+  {
+    "id": "kubectl",
+    "name": "Kubernetes",
+    "vendor": "",
+    "category": "Development",
+    "bin": "kubernetes-client",
+    "icon": "kubectl.png",
+    "hidden": false
+  },
+  {
+    "id": "lazygit",
+    "name": "Lazygit",
+    "vendor": "",
+    "category": "Development",
+    "bin": "lazygit",
+    "icon": "lazygit.png",
+    "hidden": false
+  },
+  {
+    "id": "llama-cpp",
+    "name": "llama.cpp",
+    "vendor": "",
+    "category": "Development",
+    "bin": "llama.cpp",
+    "icon": "llama-cpp.png",
+    "hidden": false
+  },
+  {
+    "id": "mariadb",
+    "name": "MariaDB",
+    "vendor": "",
+    "category": "Development",
+    "bin": "mariadb-server",
+    "icon": "mariadb.png",
+    "hidden": false
+  },
+  {
+    "id": "mediawiki",
+    "name": "MediaWiki",
+    "vendor": "",
+    "category": "Development",
+    "bin": "mediawiki",
+    "icon": "mediawiki.png",
+    "hidden": false
+  },
+  {
+    "id": "mitmproxy",
+    "name": "mitmproxy",
+    "vendor": "",
+    "category": "Development",
+    "bin": "mitmproxy",
+    "icon": "mitmproxy.png",
+    "hidden": false
+  },
+  {
+    "id": "mongodb",
+    "name": "MongoDB",
+    "vendor": "",
+    "category": "Development",
+    "bin": "mongodb-org",
+    "icon": "mongodb.png",
+    "hidden": false
+  },
+  {
+    "id": "neovim",
+    "name": "Neovim",
+    "vendor": "",
+    "category": "Development",
+    "bin": "neovim",
+    "icon": "neovim.png",
+    "hidden": false
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "vendor": "",
+    "category": "Development",
+    "bin": "nodejs",
+    "icon": "nodejs.png",
+    "hidden": false
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "vendor": "",
+    "category": "Development",
+    "bin": "ollama",
+    "icon": "ollama.png",
+    "hidden": false
+  },
+  {
+    "id": "opencode",
+    "name": "opencode",
+    "vendor": "",
+    "category": "Development",
+    "bin": "opencode-bin",
+    "icon": "opencode.png",
+    "hidden": false
+  },
+  {
+    "id": "openjdk",
+    "name": "OpenJDK",
+    "vendor": "",
+    "category": "Development",
+    "bin": "java-latest-openjdk",
+    "icon": "openjdk.png",
+    "hidden": false
+  },
+  {
+    "id": "phpmyadmin",
+    "name": "phpMyAdmin",
+    "vendor": "",
+    "category": "Development",
+    "bin": "phpMyAdmin",
+    "icon": "phpmyadmin.png",
+    "hidden": false
+  },
+  {
+    "id": "postgresql",
+    "name": "PostgreSQL",
+    "vendor": "",
+    "category": "Development",
+    "bin": "postgresql-server",
+    "icon": "postgresql.png",
+    "hidden": false
+  },
+  {
+    "id": "postman",
+    "name": "Postman",
+    "vendor": "",
+    "category": "Development",
+    "bin": "postman",
+    "icon": "postman.png",
+    "hidden": false
+  },
+  {
+    "id": "powershell",
+    "name": "PowerShell",
+    "vendor": "Microsoft",
+    "category": "Development",
+    "bin": "pwsh",
+    "icon": "powershell.png",
+    "hidden": false
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "vendor": "",
+    "category": "Development",
+    "bin": "python3",
+    "icon": "python.png",
+    "hidden": false
+  },
+  {
+    "id": "qt",
+    "name": "Qt Creator",
+    "vendor": "",
+    "category": "Development",
+    "bin": "qt-creator",
+    "icon": "qt.png",
+    "hidden": false
+  },
+  {
+    "id": "responsively",
+    "name": "Responsively App",
+    "vendor": "",
+    "category": "Development",
+    "bin": "responsively-app-bin",
+    "icon": "responsively.png",
+    "hidden": false
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "vendor": "",
+    "category": "Development",
+    "bin": "rust",
+    "icon": "rust.png",
+    "hidden": false
+  },
+  {
+    "id": "scrapy",
+    "name": "Scrapy",
+    "vendor": "",
+    "category": "Development",
+    "bin": "python3-scrapy",
+    "icon": "scrapy.png",
+    "hidden": false
+  },
+  {
+    "id": "sqlite",
+    "name": "SQLite",
+    "vendor": "",
+    "category": "Development",
+    "bin": "sqlite",
+    "icon": "sqlite.png",
+    "hidden": false
+  },
+  {
+    "id": "sublime-text-4",
+    "name": "Sublime Text",
+    "vendor": "",
+    "category": "Development",
+    "bin": "sublime-text",
+    "icon": "sublime-text-4.png",
+    "hidden": false
+  },
+  {
+    "id": "terraform",
+    "name": "Terraform",
+    "vendor": "",
+    "category": "Development",
+    "bin": "terraform",
+    "icon": "terraform.png",
+    "hidden": false
+  },
+  {
+    "id": "unity",
+    "name": "Unity",
+    "vendor": "",
+    "category": "Development",
+    "bin": "unityhub",
+    "icon": "unity.png",
+    "hidden": false
+  },
+  {
+    "id": "vagrant",
+    "name": "Vagrant",
+    "vendor": "",
+    "category": "Development",
+    "bin": "vagrant",
+    "icon": "vagrant.png",
+    "hidden": false
+  },
+  {
+    "id": "visual-studio-code",
+    "name": "Visual Studio Code",
+    "vendor": "",
+    "category": "Development",
+    "bin": "code",
+    "icon": "visual-studio-code.png",
+    "hidden": false
+  },
+  {
+    "id": "vscodium",
+    "name": "VSCodium",
+    "vendor": "",
+    "category": "Development",
+    "bin": "codium",
+    "icon": "vscodium.png",
+    "hidden": false
+  },
+  {
+    "id": "wordpress",
+    "name": "Wordpress",
+    "vendor": "",
+    "category": "Development",
+    "bin": "wordpress",
+    "icon": "wordpress.png",
+    "hidden": false
+  },
+  {
+    "id": "xampp",
+    "name": "XAMPP",
+    "vendor": "",
+    "category": "Development",
+    "bin": "xampp",
+    "icon": "xampp.png",
+    "hidden": false
+  },
+  {
+    "id": "zed",
+    "name": "Zed",
+    "vendor": "",
+    "category": "Development",
+    "bin": "zed",
+    "icon": "zed.png",
+    "hidden": false
+  },
+  {
+    "id": "gramps",
+    "name": "Gramps",
+    "vendor": "",
+    "category": "Education",
+    "bin": "gramps",
+    "icon": "gramps.png",
+    "hidden": false
+  },
+  {
+    "id": "dolphin-emu",
+    "name": "Dolphin Emulator",
+    "vendor": "",
+    "category": "Games",
+    "bin": "dolphin-emu",
+    "icon": "dolphin-emu.png",
+    "hidden": false
+  },
+  {
+    "id": "duckstation",
+    "name": "DuckStation",
+    "vendor": "",
+    "category": "Games",
+    "bin": "duckstation",
+    "icon": "duckstation.png",
+    "hidden": false
+  },
+  {
+    "id": "heroic-games-launcher",
+    "name": "Heroic",
+    "vendor": "",
+    "category": "Games",
+    "bin": "com.heroicgameslauncher.hgl",
+    "icon": "heroic-games-launcher.png",
+    "hidden": false
+  },
+  {
+    "id": "lucaschess",
+    "name": "Lucas Chess",
+    "vendor": "",
+    "category": "Games",
+    "bin": "lucaschess",
+    "icon": "lucaschess.png",
+    "hidden": false
+  },
+  {
+    "id": "lutris",
+    "name": "Lutris",
+    "vendor": "",
+    "category": "Games",
+    "bin": "lutris",
+    "icon": "lutris.png",
+    "hidden": false
+  },
+  {
+    "id": "melonds",
+    "name": "melonDS",
+    "vendor": "",
+    "category": "Games",
+    "bin": "melonds",
+    "icon": "melonds.png",
+    "hidden": false
+  },
+  {
+    "id": "pcsx2",
+    "name": "PCSX2",
+    "vendor": "",
+    "category": "Games",
+    "bin": "pcsx2",
+    "icon": "pcsx2.png",
+    "hidden": false
+  },
+  {
+    "id": "ppsspp",
+    "name": "PPSSPP",
+    "vendor": "",
+    "category": "Games",
+    "bin": "ppsspp",
+    "icon": "ppsspp.png",
+    "hidden": false
+  },
+  {
+    "id": "retroarch",
+    "name": "RetroArch",
+    "vendor": "",
+    "category": "Games",
+    "bin": "retroarch",
+    "icon": "retroarch.png",
+    "hidden": false
+  },
+  {
+    "id": "steam",
+    "name": "Steam",
+    "vendor": "",
+    "category": "Games",
+    "bin": "steam",
+    "icon": "steam.png",
+    "hidden": false
+  },
+  {
+    "id": "xemu",
+    "name": "Xemu",
+    "vendor": "",
+    "category": "Games",
+    "bin": "xemu",
+    "icon": "xemu.png",
+    "hidden": false
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "blender",
+    "icon": "blender.png",
+    "hidden": false
+  },
+  {
+    "id": "darktable",
+    "name": "Darktable",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "darktable",
+    "icon": "darktable.png",
+    "hidden": false
+  },
+  {
+    "id": "digikam",
+    "name": "digiKam",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "digikam",
+    "icon": "digikam.png",
+    "hidden": false
+  },
+  {
+    "id": "freecad",
+    "name": "FreeCAD",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "freecad",
+    "icon": "freecad.png",
+    "hidden": false
+  },
+  {
+    "id": "gimp",
+    "name": "GIMP",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "gimp",
+    "icon": "gimp.png",
+    "hidden": false
+  },
+  {
+    "id": "gwenview",
+    "name": "Gwenview",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "gwenview",
+    "icon": "gwenview.png",
+    "hidden": false
+  },
+  {
+    "id": "loupe",
+    "name": "Image Viewer",
+    "vendor": "GNOME",
+    "category": "Graphics",
+    "bin": "loupe",
+    "icon": "loupe.png",
+    "hidden": false
+  },
+  {
+    "id": "imagemagick",
+    "name": "ImageMagick",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "ImageMagick",
+    "icon": "imagemagick.png",
+    "hidden": false
+  },
+  {
+    "id": "inkscape",
+    "name": "Inkscape",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "inkscape",
+    "icon": "inkscape.png",
+    "hidden": false
+  },
+  {
+    "id": "krita",
+    "name": "Krita",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "krita",
+    "icon": "krita.png",
+    "hidden": false
+  },
+  {
+    "id": "mandelbulber",
+    "name": "Mandelbulber2",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "mandelbulber2",
+    "icon": "mandelbulber.png",
+    "hidden": false
+  },
+  {
+    "id": "mypaint",
+    "name": "MyPaint",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "mypaint",
+    "icon": "mypaint.png",
+    "hidden": false
+  },
+  {
+    "id": "rapidraw",
+    "name": "RapidRaw",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "rapidraw",
+    "icon": "rapidraw.png",
+    "hidden": false
+  },
+  {
+    "id": "rawtherapee",
+    "name": "RawTherapee",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "rawtherapee",
+    "icon": "rawtherapee.png",
+    "hidden": false
+  },
+  {
+    "id": "shotwell",
+    "name": "Shotwell",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "shotwell",
+    "icon": "shotwell.png",
+    "hidden": false
+  },
+  {
+    "id": "stability-matrix",
+    "name": "StabilityMatrix",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "stabilitymatrix",
+    "icon": "stability-matrix.png",
+    "hidden": false
+  },
+  {
+    "id": "upscayl",
+    "name": "Upscayl",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "upscayl",
+    "icon": "upscayl.png",
+    "hidden": false
+  },
+  {
+    "id": "xnview",
+    "name": "XnView MP",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": "xnviewmp",
+    "icon": "xnview.png",
+    "hidden": false
+  },
+  {
+    "id": "brave",
+    "name": "Brave",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "brave-browser",
+    "icon": "brave.png",
+    "hidden": false
+  },
+  {
+    "id": "chromium",
+    "name": "Chromium",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "chromium",
+    "icon": "chromium.png",
+    "hidden": false
+  },
+  {
+    "id": "discord",
+    "name": "Discord",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "discord",
+    "icon": "discord.png",
+    "hidden": false
+  },
+  {
+    "id": "element",
+    "name": "Element",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "element-desktop",
+    "icon": "element.png",
+    "hidden": false
+  },
+  {
+    "id": "evolution",
+    "name": "Evolution",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "evolution",
+    "icon": "evolution.png",
+    "hidden": false
+  },
+  {
+    "id": "firefox",
+    "name": "Firefox",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "firefox",
+    "icon": "firefox.png",
+    "hidden": false
+  },
+  {
+    "id": "google-chrome",
+    "name": "Google Chrome",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "google-chrome",
+    "icon": "google-chrome.png",
+    "hidden": false
+  },
+  {
+    "id": "jitsi-meet",
+    "name": "Jitsi Meet",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "jitsi-meet-desktop-bin",
+    "icon": "jitsi-meet.png",
+    "hidden": false
+  },
+  {
+    "id": "librewolf",
+    "name": "LibreWolf",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "librewolf",
+    "icon": "librewolf.png",
+    "hidden": false
+  },
+  {
+    "id": "microsoft-edge",
+    "name": "Microsoft Edge",
+    "vendor": "Microsoft",
+    "category": "Internet",
+    "bin": "microsoft-edge-stable",
+    "icon": "microsoft-edge.png",
+    "hidden": false
+  },
+  {
+    "id": "mumble",
+    "name": "Mumble",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "mumble",
+    "icon": "mumble.png",
+    "hidden": false
+  },
+  {
+    "id": "opera",
+    "name": "Opera",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "opera-stable",
+    "icon": "opera.png",
+    "hidden": false
+  },
+  {
+    "id": "signal",
+    "name": "Signal",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "signal-desktop",
+    "icon": "signal.png",
+    "hidden": false
+  },
+  {
+    "id": "slack",
+    "name": "Slack",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "slack",
+    "icon": "slack.png",
+    "hidden": false
+  },
+  {
+    "id": "telegram",
+    "name": "Telegram",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "telegram-desktop",
+    "icon": "telegram.png",
+    "hidden": false
+  },
+  {
+    "id": "thunderbird",
+    "name": "Thunderbird",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "thunderbird",
+    "icon": "thunderbird.png",
+    "hidden": false
+  },
+  {
+    "id": "tor-browser",
+    "name": "Tor Browser",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "torbrowser-launcher",
+    "icon": "tor-browser.png",
+    "hidden": false
+  },
+  {
+    "id": "ungoogled-chromium",
+    "name": "Ungoogled Chromium",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "ungoogled-chromium",
+    "icon": "ungoogled-chromium.png",
+    "hidden": false
+  },
+  {
+    "id": "vivaldi",
+    "name": "Vivaldi",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "vivaldi-stable",
+    "icon": "vivaldi.png",
+    "hidden": false
+  },
+  {
+    "id": "whatsapp",
+    "name": "WhatsApp",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "whatsapp-for-linux",
+    "icon": "whatsapp.png",
+    "hidden": false
+  },
+  {
+    "id": "zen-browser",
+    "name": "Zen Browser",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "zen-browser-bin",
+    "icon": "zen-browser.png",
+    "hidden": false
+  },
+  {
+    "id": "zoom",
+    "name": "Zoom",
+    "vendor": "",
+    "category": "Internet",
+    "bin": "zoom-client",
+    "icon": "zoom.png",
+    "hidden": false
+  },
+  {
+    "id": "ardour",
+    "name": "Ardour",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "ardour",
+    "icon": "ardour.png",
+    "hidden": false
+  },
+  {
+    "id": "audacious",
+    "name": "Audacious",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "audacious",
+    "icon": "audacious.png",
+    "hidden": false
+  },
+  {
+    "id": "audacity",
+    "name": "Audacity",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "audacity",
+    "icon": "audacity.png",
+    "hidden": false
+  },
+  {
+    "id": "audiorelay",
+    "name": "AudioRelay",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "audiorelay",
+    "icon": "audiorelay.png",
+    "hidden": false
+  },
+  {
+    "id": "audiveris",
+    "name": "Audiveris",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "audiveris",
+    "icon": "audiveris.png",
+    "hidden": false
+  },
+  {
+    "id": "bitwig-studio",
+    "name": "Bitwig Studio",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "bitwig-studio",
+    "icon": "bitwig-studio.png",
+    "hidden": false
+  },
+  {
+    "id": "davinci-resolve",
+    "name": "DaVinci Resolve",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "davinci-resolve",
+    "icon": "davinci-resolve.png",
+    "hidden": false
+  },
+  {
+    "id": "elisa",
+    "name": "Elisa",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "elisa",
+    "icon": "elisa.png",
+    "hidden": false
+  },
+  {
+    "id": "ffmpeg",
+    "name": "FFmpeg",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "ffmpeg-free",
+    "icon": "ffmpeg.png",
+    "hidden": false
+  },
+  {
+    "id": "handbrake",
+    "name": "HandBrake",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "handbrake",
+    "icon": "handbrake.png",
+    "hidden": false
+  },
+  {
+    "id": "handy",
+    "name": "Handy",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "handy-bin",
+    "icon": "handy.png",
+    "hidden": false
+  },
+  {
+    "id": "haruna",
+    "name": "Haruna",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "haruna",
+    "icon": "haruna.png",
+    "hidden": false
+  },
+  {
+    "id": "iptvnator",
+    "name": "IPTVnator",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "iptvnator",
+    "icon": "iptvnator.png",
+    "hidden": false
+  },
+  {
+    "id": "jellyfin-client",
+    "name": "Jellyfin Media Player",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "jellyfin",
+    "icon": "jellyfin-client.png",
+    "hidden": false
+  },
+  {
+    "id": "kdenlive",
+    "name": "Kdenlive",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "kdenlive",
+    "icon": "kdenlive.png",
+    "hidden": false
+  },
+  {
+    "id": "kodi",
+    "name": "Kodi",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "kodi",
+    "icon": "kodi.png",
+    "hidden": false
+  },
+  {
+    "id": "lmms",
+    "name": "LMMS",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "lmms",
+    "icon": "lmms.png",
+    "hidden": false
+  },
+  {
+    "id": "mpc-hc",
+    "name": "MPC-HC",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "mpc-hc",
+    "icon": "mpc-hc.png",
+    "hidden": false
+  },
+  {
+    "id": "mpv",
+    "name": "MPV",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "mpv",
+    "icon": "mpv.png",
+    "hidden": false
+  },
+  {
+    "id": "musescore",
+    "name": "MuseScore",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "musescore",
+    "icon": "musescore.png",
+    "hidden": false
+  },
+  {
+    "id": "musicbee",
+    "name": "MusicBee",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "musicbee",
+    "icon": "musicbee.png",
+    "hidden": false
+  },
+  {
+    "id": "obs-studio",
+    "name": "OBS Studio",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "obs-studio",
+    "icon": "obs-studio.png",
+    "hidden": false
+  },
+  {
+    "id": "ocenaudio",
+    "name": "Ocenaudio",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "ocenaudio",
+    "icon": "ocenaudio.png",
+    "hidden": false
+  },
+  {
+    "id": "openshot",
+    "name": "OpenShot",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "openshot",
+    "icon": "openshot.png",
+    "hidden": false
+  },
+  {
+    "id": "pear-desktop",
+    "name": "Pear Desktop (YT-Music)",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "pear-desktop",
+    "icon": "pear-desktop.png",
+    "hidden": false
+  },
+  {
+    "id": "plex",
+    "name": "Plex",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "plexmediaserver",
+    "icon": "plex.png",
+    "hidden": false
+  },
+  {
+    "id": "reaper",
+    "name": "REAPER",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "reaper",
+    "icon": "reaper.png",
+    "hidden": false
+  },
+  {
+    "id": "shotcut",
+    "name": "Shotcut",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "shotcut",
+    "icon": "shotcut.png",
+    "hidden": false
+  },
+  {
+    "id": "speech-note",
+    "name": "Speech Note",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "dsnote",
+    "icon": "speech-note.png",
+    "hidden": false
+  },
+  {
+    "id": "spotify",
+    "name": "Spotify",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "spotify-client",
+    "icon": "spotify.png",
+    "hidden": false
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "strawberry",
+    "icon": "strawberry.png",
+    "hidden": false
+  },
+  {
+    "id": "stremio",
+    "name": "Stremio",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "stremio",
+    "icon": "stremio.png",
+    "hidden": false
+  },
+  {
+    "id": "tenacity",
+    "name": "Tenacity",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "tenacity",
+    "icon": "tenacity.png",
+    "hidden": false
+  },
+  {
+    "id": "vlc",
+    "name": "VLC",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "vlc",
+    "icon": "vlc.png",
+    "hidden": false
+  },
+  {
+    "id": "whisper-cpp",
+    "name": "Whisper.cpp",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "whisper-cpp",
+    "icon": "whisper-cpp.png",
+    "hidden": false
+  },
+  {
+    "id": "yt-dlp",
+    "name": "yt-dlp",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "yt-dlp",
+    "icon": "yt-dlp.png",
+    "hidden": false
+  },
+  {
+    "id": "ytdownloader",
+    "name": "ytDownloader",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "youtube-dl",
+    "icon": "ytdownloader.png",
+    "hidden": false
+  },
+  {
+    "id": "ytmdesktop",
+    "name": "YTMDesktop",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": "ytdownloader",
+    "icon": "ytmdesktop.png",
+    "hidden": false
+  },
+  {
+    "id": "activitywatch",
+    "name": "ActivityWatch",
+    "vendor": "",
+    "category": "Office",
+    "bin": "activitywatch-bin",
+    "icon": "activitywatch.png",
+    "hidden": false
+  },
+  {
+    "id": "anytype",
+    "name": "Anytype",
+    "vendor": "",
+    "category": "Office",
+    "bin": "anytype",
+    "icon": "anytype.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-calculator",
+    "name": "Calculator",
+    "vendor": "GNOME",
+    "category": "Office",
+    "bin": "gnome-calculator",
+    "icon": "gnome-calculator.png",
+    "hidden": false
+  },
+  {
+    "id": "calibre",
+    "name": "Calibre",
+    "vendor": "",
+    "category": "Office",
+    "bin": "calibre",
+    "icon": "calibre.png",
+    "hidden": false
+  },
+  {
+    "id": "deepl",
+    "name": "DeepL",
+    "vendor": "",
+    "category": "Office",
+    "bin": "deepl",
+    "icon": "deepl.png",
+    "hidden": false
+  },
+  {
+    "id": "drawio",
+    "name": "draw.io",
+    "vendor": "",
+    "category": "Office",
+    "bin": "drawio",
+    "icon": "drawio.png",
+    "hidden": false
+  },
+  {
+    "id": "electrum",
+    "name": "Electrum",
+    "vendor": "",
+    "category": "Office",
+    "bin": "electrum",
+    "icon": "electrum.png",
+    "hidden": false
+  },
+  {
+    "id": "espanso",
+    "name": "Espanso",
+    "vendor": "",
+    "category": "Office",
+    "bin": "espanso",
+    "icon": "espanso.png",
+    "hidden": false
+  },
+  {
+    "id": "foliate",
+    "name": "Foliate",
+    "vendor": "",
+    "category": "Office",
+    "bin": "foliate",
+    "icon": "foliate.png",
+    "hidden": false
+  },
+  {
+    "id": "freeplane",
+    "name": "Freeplane",
+    "vendor": "",
+    "category": "Office",
+    "bin": "freeplane",
+    "icon": "freeplane.png",
+    "hidden": false
+  },
+  {
+    "id": "gnucash",
+    "name": "GnuCash",
+    "vendor": "",
+    "category": "Office",
+    "bin": "gnucash",
+    "icon": "gnucash.png",
+    "hidden": false
+  },
+  {
+    "id": "homebank",
+    "name": "HomeBank",
+    "vendor": "",
+    "category": "Office",
+    "bin": "homebank",
+    "icon": "homebank.png",
+    "hidden": false
+  },
+  {
+    "id": "joplin",
+    "name": "Joplin",
+    "vendor": "",
+    "category": "Office",
+    "bin": "joplin-desktop",
+    "icon": "joplin.png",
+    "hidden": false
+  },
+  {
+    "id": "kcalc",
+    "name": "KCalc",
+    "vendor": "KDE",
+    "category": "Office",
+    "bin": "kcalc",
+    "icon": "kcalc.png",
+    "hidden": false
+  },
+  {
+    "id": "kiwix",
+    "name": "Kiwix",
+    "vendor": "",
+    "category": "Office",
+    "bin": "kiwix",
+    "icon": "kiwix.png",
+    "hidden": false
+  },
+  {
+    "id": "koodoreader",
+    "name": "Koodo Reader",
+    "vendor": "",
+    "category": "Office",
+    "bin": "koodoreader",
+    "icon": "koodoreader.png",
+    "hidden": false
+  },
+  {
+    "id": "koreader",
+    "name": "KOReader",
+    "vendor": "",
+    "category": "Office",
+    "bin": "koreader",
+    "icon": "koreader.png",
+    "hidden": false
+  },
+  {
+    "id": "ledger-live",
+    "name": "Ledger Live",
+    "vendor": "",
+    "category": "Office",
+    "bin": "ledger-live-bin",
+    "icon": "ledger-live.png",
+    "hidden": false
+  },
+  {
+    "id": "libreoffice",
+    "name": "LibreOffice",
+    "vendor": "",
+    "category": "Office",
+    "bin": "libreoffice",
+    "icon": "libreoffice.png",
+    "hidden": false
+  },
+  {
+    "id": "logseq",
+    "name": "Logseq",
+    "vendor": "",
+    "category": "Office",
+    "bin": "logseq-desktop-bin",
+    "icon": "logseq.png",
+    "hidden": false
+  },
+  {
+    "id": "monero-gui",
+    "name": "Monero GUI Wallet",
+    "vendor": "",
+    "category": "Office",
+    "bin": "monero-gui",
+    "icon": "monero-gui.png",
+    "hidden": false
+  },
+  {
+    "id": "notion",
+    "name": "Notion",
+    "vendor": "",
+    "category": "Office",
+    "bin": "notion-desktop",
+    "icon": "notion.png",
+    "hidden": false
+  },
+  {
+    "id": "obsidian",
+    "name": "Obsidian",
+    "vendor": "",
+    "category": "Office",
+    "bin": "obsidian",
+    "icon": "obsidian.png",
+    "hidden": false
+  },
+  {
+    "id": "okular",
+    "name": "Okular",
+    "vendor": "KDE",
+    "category": "Office",
+    "bin": "okular",
+    "icon": "okular.png",
+    "hidden": false
+  },
+  {
+    "id": "onlyoffice",
+    "name": "OnlyOffice",
+    "vendor": "",
+    "category": "Office",
+    "bin": "onlyoffice",
+    "icon": "onlyoffice.png",
+    "hidden": false
+  },
+  {
+    "id": "pandoc",
+    "name": "Pandoc",
+    "vendor": "",
+    "category": "Office",
+    "bin": "pandoc",
+    "icon": "pandoc.png",
+    "hidden": false
+  },
+  {
+    "id": "qalculate",
+    "name": "Qalculate!",
+    "vendor": "",
+    "category": "Office",
+    "bin": "qalculate",
+    "icon": "qalculate.png",
+    "hidden": false
+  },
+  {
+    "id": "taskwarrior",
+    "name": "Taskwarrior",
+    "vendor": "",
+    "category": "Office",
+    "bin": "task",
+    "icon": "taskwarrior.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-text-editor",
+    "name": "Text Editor",
+    "vendor": "GNOME",
+    "category": "Office",
+    "bin": "gnome-text-editor",
+    "icon": "gnome-text-editor.png",
+    "hidden": false
+  },
+  {
+    "id": "trilium",
+    "name": "Trilium Notes",
+    "vendor": "",
+    "category": "Office",
+    "bin": "trilium-bin",
+    "icon": "trilium.png",
+    "hidden": false
+  },
+  {
+    "id": "zotero",
+    "name": "Zotero",
+    "vendor": "",
+    "category": "Office",
+    "bin": "zotero-bin",
+    "icon": "zotero.png",
+    "hidden": false
+  },
+  {
+    "id": "geogebra",
+    "name": "GeoGebra",
+    "vendor": "",
+    "category": "Science",
+    "bin": "geogebra",
+    "icon": "geogebra.png",
+    "hidden": false
+  },
+  {
+    "id": "google-earth",
+    "name": "Google Earth",
+    "vendor": "",
+    "category": "Science",
+    "bin": "flathub-com.google.EarthPro",
+    "icon": "google-earth.png",
+    "hidden": false
+  },
+  {
+    "id": "kstars",
+    "name": "Kstars",
+    "vendor": "",
+    "category": "Science",
+    "bin": "kstars",
+    "icon": "kstars.png",
+    "hidden": false
+  },
+  {
+    "id": "qgis",
+    "name": "QGIS",
+    "vendor": "",
+    "category": "Science",
+    "bin": "qgis",
+    "icon": "qgis.png",
+    "hidden": false
+  },
+  {
+    "id": "stellarium",
+    "name": "Stellarium",
+    "vendor": "",
+    "category": "Science",
+    "bin": "stellarium",
+    "icon": "stellarium.png",
+    "hidden": false
+  },
+  {
+    "id": "anydesk",
+    "name": "AnyDesk",
+    "vendor": "",
+    "category": "System",
+    "bin": "anydesk",
+    "icon": "anydesk.png",
+    "hidden": false
+  },
+  {
+    "id": "apache",
+    "name": "Apache",
+    "vendor": "",
+    "category": "System",
+    "bin": "httpd",
+    "icon": "apache.png",
+    "hidden": false
+  },
+  {
+    "id": "bitwarden",
+    "name": "Bitwarden",
+    "vendor": "",
+    "category": "System",
+    "bin": "bitwarden",
+    "icon": "bitwarden.png",
+    "hidden": false
+  },
+  {
+    "id": "bleachbit",
+    "name": "BleachBit",
+    "vendor": "",
+    "category": "System",
+    "bin": "bleachbit",
+    "icon": "bleachbit.png",
+    "hidden": false
+  },
+  {
+    "id": "bottles",
+    "name": "Bottles",
+    "vendor": "",
+    "category": "System",
+    "bin": "bottles",
+    "icon": "bottles.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-boxes",
+    "name": "Boxes",
+    "vendor": "",
+    "category": "System",
+    "bin": "gnome-boxes",
+    "icon": "gnome-boxes.png",
+    "hidden": false
+  },
+  {
+    "id": "btop",
+    "name": "btop",
+    "vendor": "",
+    "category": "System",
+    "bin": "btop",
+    "icon": "btop.png",
+    "hidden": false
+  },
+  {
+    "id": "cryptomator",
+    "name": "Cryptomator",
+    "vendor": "",
+    "category": "System",
+    "bin": "cryptomator",
+    "icon": "cryptomator.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-disks",
+    "name": "Disks",
+    "vendor": "GNOME",
+    "category": "System",
+    "bin": "gnome-disks",
+    "icon": "gnome-disks.png",
+    "hidden": false
+  },
+  {
+    "id": "distrobox",
+    "name": "Distrobox",
+    "vendor": "",
+    "category": "System",
+    "bin": "distrobox",
+    "icon": "distrobox.png",
+    "hidden": false
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "vendor": "",
+    "category": "System",
+    "bin": "docker",
+    "icon": "docker.png",
+    "hidden": false
+  },
+  {
+    "id": "fastfetch",
+    "name": "fastfetch",
+    "vendor": "",
+    "category": "System",
+    "bin": "fastfetch",
+    "icon": "fastfetch.png",
+    "hidden": false
+  },
+  {
+    "id": "filezilla",
+    "name": "FileZilla",
+    "vendor": "",
+    "category": "System",
+    "bin": "filezilla",
+    "icon": "filezilla.png",
+    "hidden": false
+  },
+  {
+    "id": "gparted",
+    "name": "gparted",
+    "vendor": "",
+    "category": "System",
+    "bin": "gparted",
+    "icon": "gparted.png",
+    "hidden": false
+  },
+  {
+    "id": "htop",
+    "name": "htop",
+    "vendor": "",
+    "category": "System",
+    "bin": "htop",
+    "icon": "htop.png",
+    "hidden": false
+  },
+  {
+    "id": "kde-connect",
+    "name": "KDE Connect",
+    "vendor": "",
+    "category": "System",
+    "bin": "kdeconnect",
+    "icon": "kde-connect.png",
+    "hidden": false
+  },
+  {
+    "id": "keepassxc",
+    "name": "KeePassXC",
+    "vendor": "",
+    "category": "System",
+    "bin": "keepassxc",
+    "icon": "keepassxc.png",
+    "hidden": false
+  },
+  {
+    "id": "mullvad-vpn",
+    "name": "Mullvad VPN",
+    "vendor": "",
+    "category": "System",
+    "bin": "mullvad-vpn",
+    "icon": "mullvad-vpn.png",
+    "hidden": false
+  },
+  {
+    "id": "nginx",
+    "name": "Nginx",
+    "vendor": "",
+    "category": "System",
+    "bin": "nginx",
+    "icon": "nginx.png",
+    "hidden": false
+  },
+  {
+    "id": "nmap",
+    "name": "Nmap",
+    "vendor": "",
+    "category": "System",
+    "bin": "nmap",
+    "icon": "nmap.png",
+    "hidden": false
+  },
+  {
+    "id": "pi-hole",
+    "name": "Pi-hole",
+    "vendor": "",
+    "category": "System",
+    "bin": "pi-hole-core",
+    "icon": "pi-hole.png",
+    "hidden": false
+  },
+  {
+    "id": "playonlinux",
+    "name": "PlayOnLinux",
+    "vendor": "",
+    "category": "System",
+    "bin": "playonlinux",
+    "icon": "playonlinux.png",
+    "hidden": false
+  },
+  {
+    "id": "podman",
+    "name": "Podman",
+    "vendor": "",
+    "category": "System",
+    "bin": "podman",
+    "icon": "podman.png",
+    "hidden": false
+  },
+  {
+    "id": "proton-vpn",
+    "name": "Proton VPN",
+    "vendor": "",
+    "category": "System",
+    "bin": "protonvpn",
+    "icon": "proton-vpn.png",
+    "hidden": false
+  },
+  {
+    "id": "proton-qt",
+    "name": "ProtonUp-Qt",
+    "vendor": "",
+    "category": "System",
+    "bin": "protonup-qt",
+    "icon": "proton-qt.png",
+    "hidden": false
+  },
+  {
+    "id": "qemu",
+    "name": "QEMU",
+    "vendor": "",
+    "category": "System",
+    "bin": "qemu",
+    "icon": "qemu.png",
+    "hidden": false
+  },
+  {
+    "id": "rustdesk",
+    "name": "RustDesk",
+    "vendor": "",
+    "category": "System",
+    "bin": "rustdesk-bin",
+    "icon": "rustdesk.png",
+    "hidden": false
+  },
+  {
+    "id": "scrcpy",
+    "name": "Scrcpy",
+    "vendor": "",
+    "category": "System",
+    "bin": "scrcpy",
+    "icon": "scrcpy.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-software",
+    "name": "Software",
+    "vendor": "GNOME",
+    "category": "System",
+    "bin": "gnome-software",
+    "icon": "gnome-software.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-system-monitor",
+    "name": "System Monitor",
+    "vendor": "GNOME",
+    "category": "System",
+    "bin": "gnome-system-monitor",
+    "icon": "gnome-system-monitor.png",
+    "hidden": false
+  },
+  {
+    "id": "tailscale",
+    "name": "Tailscale",
+    "vendor": "",
+    "category": "System",
+    "bin": "tailscale",
+    "icon": "tailscale.png",
+    "hidden": false
+  },
+  {
+    "id": "teamviewer",
+    "name": "TeamViewer",
+    "vendor": "",
+    "category": "System",
+    "bin": "teamviewer",
+    "icon": "teamviewer.png",
+    "hidden": false
+  },
+  {
+    "id": "veracrypt",
+    "name": "VeraCrypt",
+    "vendor": "",
+    "category": "System",
+    "bin": "veracrypt",
+    "icon": "veracrypt.png",
+    "hidden": false
+  },
+  {
+    "id": "virt-manager",
+    "name": "Virt Manager",
+    "vendor": "",
+    "category": "System",
+    "bin": "virt-manager",
+    "icon": "virt-manager.png",
+    "hidden": false
+  },
+  {
+    "id": "virtualbox",
+    "name": "VirtualBox",
+    "vendor": "",
+    "category": "System",
+    "bin": "VirtualBox",
+    "icon": "virtualbox.png",
+    "hidden": false
+  },
+  {
+    "id": "vmware",
+    "name": "VMware Workstation",
+    "vendor": "",
+    "category": "System",
+    "bin": "vmware-workstation-player",
+    "icon": "vmware.png",
+    "hidden": false
+  },
+  {
+    "id": "waydroid",
+    "name": "WayDroid",
+    "vendor": "",
+    "category": "System",
+    "bin": "waydroid-git",
+    "icon": "waydroid.png",
+    "hidden": false
+  },
+  {
+    "id": "windscribe",
+    "name": "Windscribe",
+    "vendor": "",
+    "category": "System",
+    "bin": "windscribe-cli",
+    "icon": "windscribe.png",
+    "hidden": false
+  },
+  {
+    "id": "wine",
+    "name": "Wine",
+    "vendor": "",
+    "category": "System",
+    "bin": "wine",
+    "icon": "wine.png",
+    "hidden": false
+  },
+  {
+    "id": "wireguard",
+    "name": "WireGuard",
+    "vendor": "",
+    "category": "System",
+    "bin": "wireguard-tools",
+    "icon": "wireguard.png",
+    "hidden": false
+  },
+  {
+    "id": "wireshark",
+    "name": "Wireshark",
+    "vendor": "",
+    "category": "System",
+    "bin": "wireshark",
+    "icon": "wireshark.png",
+    "hidden": false
+  },
+  {
+    "id": "xen",
+    "name": "Xen",
+    "vendor": "",
+    "category": "System",
+    "bin": "xen",
+    "icon": "xen.png",
+    "hidden": false
+  },
+  {
+    "id": "7zip",
+    "name": "7-Zip",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "p7zip",
+    "icon": "7zip.png",
+    "hidden": false
+  },
+  {
+    "id": "alacritty",
+    "name": "Alacritty",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "alacritty",
+    "icon": "alacritty.png",
+    "hidden": false
+  },
+  {
+    "id": "balena-etcher",
+    "name": "Balena Etcher",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "etcher",
+    "icon": "balena-etcher.png",
+    "hidden": false
+  },
+  {
+    "id": "bat",
+    "name": "bat",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "bat",
+    "icon": "bat.png",
+    "hidden": false
+  },
+  {
+    "id": "borg",
+    "name": "Borg",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "borgbackup",
+    "icon": "borg.png",
+    "hidden": false
+  },
+  {
+    "id": "curl",
+    "name": "cURL",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "curl",
+    "icon": "curl.png",
+    "hidden": false
+  },
+  {
+    "id": "dolphin",
+    "name": "Dolphin",
+    "vendor": "KDE",
+    "category": "Utilities",
+    "bin": "dolphin",
+    "icon": "dolphin.png",
+    "hidden": false
+  },
+  {
+    "id": "dropbox",
+    "name": "Dropbox",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "nautilus-dropbox",
+    "icon": "dropbox.png",
+    "hidden": false
+  },
+  {
+    "id": "dua-cli",
+    "name": "Dua",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "dua-cli",
+    "icon": "dua-cli.png",
+    "hidden": false
+  },
+  {
+    "id": "dust",
+    "name": "Dust",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "dust",
+    "icon": "dust.png",
+    "hidden": false
+  },
+  {
+    "id": "eaglemode",
+    "name": "Eagle-Mode",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "eaglemode",
+    "icon": "eaglemode.png",
+    "hidden": false
+  },
+  {
+    "id": "eza",
+    "name": "eza",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "eza",
+    "icon": "eza.png",
+    "hidden": false
+  },
+  {
+    "id": "fd",
+    "name": "fd",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "fd-find",
+    "icon": "fd.png",
+    "hidden": false
+  },
+  {
+    "id": "nautilus",
+    "name": "Files",
+    "vendor": "GNOME",
+    "category": "Utilities",
+    "bin": "nautilus",
+    "icon": "nautilus.png",
+    "hidden": false
+  },
+  {
+    "id": "flameshot",
+    "name": "Flameshot",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "flameshot",
+    "icon": "flameshot.png",
+    "hidden": false
+  },
+  {
+    "id": "freefilesync",
+    "name": "FreeFileSync",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "freefilesync",
+    "icon": "freefilesync.png",
+    "hidden": false
+  },
+  {
+    "id": "fzf",
+    "name": "fzf",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "fzf",
+    "icon": "fzf.png",
+    "hidden": false
+  },
+  {
+    "id": "ghostty",
+    "name": "Ghostty",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "ghostty",
+    "icon": "ghostty.png",
+    "hidden": false
+  },
+  {
+    "id": "gpxsee",
+    "name": "GPXSee",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "gpxsee",
+    "icon": "gpxsee.png",
+    "hidden": false
+  },
+  {
+    "id": "home-assistant",
+    "name": "Home Assistant",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "home-assistant-snap",
+    "icon": "home-assistant.png",
+    "hidden": false
+  },
+  {
+    "id": "instaloader",
+    "name": "Instaloader",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "instaloader",
+    "icon": "instaloader.png",
+    "hidden": false
+  },
+  {
+    "id": "jq",
+    "name": "jq",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "jq",
+    "icon": "jq.png",
+    "hidden": false
+  },
+  {
+    "id": "kitty",
+    "name": "Kitty",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "kitty",
+    "icon": "kitty.png",
+    "hidden": false
+  },
+  {
+    "id": "konsole",
+    "name": "Konsole",
+    "vendor": "KDE",
+    "category": "Utilities",
+    "bin": "konsole",
+    "icon": "konsole.png",
+    "hidden": false
+  },
+  {
+    "id": "mega",
+    "name": "MEGAsync",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "megasync",
+    "icon": "mega.png",
+    "hidden": false
+  },
+  {
+    "id": "meld",
+    "name": "meld",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "meld",
+    "icon": "meld.png",
+    "hidden": false
+  },
+  {
+    "id": "musicbrainz-picard",
+    "name": "MusicBrainz Picard",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "picard",
+    "icon": "musicbrainz-picard.png",
+    "hidden": false
+  },
+  {
+    "id": "nextcloud-desktop",
+    "name": "Nextcloud Desktop",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "nextcloud-client",
+    "icon": "nextcloud-desktop.png",
+    "hidden": false
+  },
+  {
+    "id": "onionshare",
+    "name": "OnionShare",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "onionshare",
+    "icon": "onionshare.png",
+    "hidden": false
+  },
+  {
+    "id": "openrgb",
+    "name": "OpenRGB",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "openrgb",
+    "icon": "openrgb.png",
+    "hidden": false
+  },
+  {
+    "id": "putty",
+    "name": "PuTTY",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "putty",
+    "icon": "putty.png",
+    "hidden": false
+  },
+  {
+    "id": "qbittorrent",
+    "name": "qBittorrent",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "qbittorrent",
+    "icon": "qbittorrent.png",
+    "hidden": false
+  },
+  {
+    "id": "rclone",
+    "name": "Rclone",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "rclone",
+    "icon": "rclone.png",
+    "hidden": false
+  },
+  {
+    "id": "redshift",
+    "name": "Redshift",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "redshift",
+    "icon": "redshift.png",
+    "hidden": false
+  },
+  {
+    "id": "ripgrep",
+    "name": "ripgrep",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "ripgrep",
+    "icon": "ripgrep.png",
+    "hidden": false
+  },
+  {
+    "id": "rsync",
+    "name": "Rsync",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "rsync",
+    "icon": "rsync.png",
+    "hidden": false
+  },
+  {
+    "id": "shutter",
+    "name": "Shutter",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "shutter",
+    "icon": "shutter.png",
+    "hidden": false
+  },
+  {
+    "id": "spectacle",
+    "name": "Spectacle",
+    "vendor": "KDE",
+    "category": "Utilities",
+    "bin": "spectacle",
+    "icon": "spectacle.png",
+    "hidden": false
+  },
+  {
+    "id": "starship",
+    "name": "Starship",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "starship",
+    "icon": "starship.png",
+    "hidden": false
+  },
+  {
+    "id": "stretchly",
+    "name": "Stretchly",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "stretchly",
+    "icon": "stretchly.png",
+    "hidden": false
+  },
+  {
+    "id": "superfile",
+    "name": "Superfile",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "superfile",
+    "icon": "superfile.png",
+    "hidden": false
+  },
+  {
+    "id": "syncthing",
+    "name": "Syncthing",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "syncthing",
+    "icon": "syncthing.png",
+    "hidden": false
+  },
+  {
+    "id": "gnome-terminal",
+    "name": "Terminal",
+    "vendor": "GNOME",
+    "category": "Utilities",
+    "bin": "gnome-terminal",
+    "icon": "gnome-terminal.png",
+    "hidden": false
+  },
+  {
+    "id": "timeshift",
+    "name": "Timeshift",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "timeshift",
+    "icon": "timeshift.png",
+    "hidden": false
+  },
+  {
+    "id": "tmux",
+    "name": "tmux",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "tmux",
+    "icon": "tmux.png",
+    "hidden": false
+  },
+  {
+    "id": "transmission",
+    "name": "Transmission",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "transmission",
+    "icon": "transmission.png",
+    "hidden": false
+  },
+  {
+    "id": "tree",
+    "name": "Tree",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "tree",
+    "icon": "tree.png",
+    "hidden": false
+  },
+  {
+    "id": "ventoy",
+    "name": "Ventoy",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "ventoy-bin",
+    "icon": "ventoy.png",
+    "hidden": false
+  },
+  {
+    "id": "wezterm",
+    "name": "WezTerm",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": "wezterm",
+    "icon": "wezterm.png",
+    "hidden": false
+  }
+]

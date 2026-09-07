@@ -1,0 +1,23 @@
+{
+  "_comment": "Hand-written entries not covered by desktop-pkgs.json: KDE/GNOME desktop-environment apps, plus Microsoft/Apple apps that actually ship a Linux binary. Apple ships essentially nothing for Linux, so it has no entries here for now (kept as a documented gap, not an oversight).",
+  "apps": [
+    { "id": "dolphin", "name": "Dolphin", "vendor": "KDE", "category": "Utilities", "bin": "dolphin" },
+    { "id": "konsole", "name": "Konsole", "vendor": "KDE", "category": "Utilities", "bin": "konsole" },
+    { "id": "kate", "name": "Kate", "vendor": "KDE", "category": "Development", "bin": "kate" },
+    { "id": "okular", "name": "Okular", "vendor": "KDE", "category": "Office", "bin": "okular" },
+    { "id": "spectacle", "name": "Spectacle", "vendor": "KDE", "category": "Utilities", "bin": "spectacle" },
+    { "id": "kcalc", "name": "KCalc", "vendor": "KDE", "category": "Office", "bin": "kcalc" },
+
+    { "id": "nautilus", "name": "Files", "vendor": "GNOME", "category": "Utilities", "bin": "nautilus" },
+    { "id": "gnome-terminal", "name": "Terminal", "vendor": "GNOME", "category": "Utilities", "bin": "gnome-terminal" },
+    { "id": "gnome-text-editor", "name": "Text Editor", "vendor": "GNOME", "category": "Office", "bin": "gnome-text-editor" },
+    { "id": "gnome-calculator", "name": "Calculator", "vendor": "GNOME", "category": "Office", "bin": "gnome-calculator" },
+    { "id": "loupe", "name": "Image Viewer", "vendor": "GNOME", "category": "Graphics", "bin": "loupe" },
+    { "id": "gnome-software", "name": "Software", "vendor": "GNOME", "category": "System", "bin": "gnome-software" },
+    { "id": "gnome-disks", "name": "Disks", "vendor": "GNOME", "category": "System", "bin": "gnome-disks" },
+    { "id": "gnome-system-monitor", "name": "System Monitor", "vendor": "GNOME", "category": "System", "bin": "gnome-system-monitor" },
+
+    { "id": "microsoft-edge", "name": "Microsoft Edge", "vendor": "Microsoft", "category": "Internet", "bin": "microsoft-edge-stable" },
+    { "id": "powershell", "name": "PowerShell", "vendor": "Microsoft", "category": "Development", "bin": "pwsh" }
+  ]
+}

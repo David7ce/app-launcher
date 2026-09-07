@@ -1,0 +1,34 @@
+{
+  "_comment": "Maps desktop-pkgs.json's own category/subcategory strings to our 10 fixed categories. by_category is the default per dataset category; by_subcategory overrides win when the app's subcategory matches, letting a couple of mixed dataset buckets split across two of our categories.",
+  "by_category": {
+    "audio-and-music": "Multimedia",
+    "development": "Development",
+    "education-and-reference": "Education",
+    "file-management": "Utilities",
+    "gaming": "Games",
+    "health-and-fitness": "Utilities",
+    "home-and-family": "Utilities",
+    "money-and-finance": "Office",
+    "news-and-books": "Office",
+    "office-and-productivity": "Office",
+    "os-and-utilities": "Utilities",
+    "photos-and-graphics": "Graphics",
+    "security-and-privacy": "System",
+    "social-and-communications": "Internet",
+    "system-administration": "System",
+    "travel-and-location": "Utilities",
+    "video-and-movies": "Multimedia",
+    "web-browsers": "Internet"
+  },
+  "by_subcategory": {
+    "Astronomy": "Science",
+    "GIS": "Science",
+    "Geography": "Science",
+    "Mathematics": "Science",
+    "System Monitor": "System",
+    "System Partition": "System",
+    "Startup Manager": "System",
+    "Info System": "System",
+    "System Cleaner": "System"
+  }
+}
