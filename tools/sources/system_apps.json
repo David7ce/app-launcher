@@ -4,13 +4,15 @@
     "name": "btop++",
     "bin": "btop",
     "category": "System",
-    "icon": "btop.svg"
+    "cli": true,
+    "icon": "btop.png"
   },
   {
     "id": "chromium-browser",
     "name": "Chromium Web Browser",
     "bin": "chromium-browser",
     "category": "Internet",
+    "cli": false,
     "icon": "chromium-browser.png"
   },
   {
@@ -18,6 +20,7 @@
     "name": "Visual Studio Code",
     "bin": "code",
     "category": "Development",
+    "cli": false,
     "icon": "code.png"
   },
   {
@@ -25,13 +28,15 @@
     "name": "Firewall",
     "bin": "firewall-config",
     "category": "System",
-    "icon": "firewall-config.svg"
+    "cli": false,
+    "icon": "firewall-config.png"
   },
   {
     "id": "im-chooser",
     "name": "Input Method Selector",
     "bin": "im-chooser",
     "category": "System",
+    "cli": false,
     "icon": "im-chooser.png"
   },
   {
@@ -39,48 +44,55 @@
     "name": "KDE System Settings",
     "bin": "systemsettings",
     "category": "System",
-    "icon": "kdesystemsettings.svg"
+    "cli": false,
+    "icon": "kdesystemsettings.png"
   },
   {
     "id": "libreoffice-calc",
     "name": "LibreOffice Calc",
     "bin": "libreoffice",
     "category": "Office",
-    "icon": "libreoffice-calc.svg"
+    "cli": false,
+    "icon": "libreoffice-calc.png"
   },
   {
     "id": "libreoffice-draw",
     "name": "LibreOffice Draw",
     "bin": "libreoffice",
     "category": "Office",
-    "icon": "libreoffice-draw.svg"
+    "cli": false,
+    "icon": "libreoffice-draw.png"
   },
   {
     "id": "libreoffice-impress",
     "name": "LibreOffice Impress",
     "bin": "libreoffice",
     "category": "Office",
-    "icon": "libreoffice-impress.svg"
+    "cli": false,
+    "icon": "libreoffice-impress.png"
   },
   {
     "id": "libreoffice-math",
     "name": "LibreOffice Math",
     "bin": "libreoffice",
     "category": "Office",
-    "icon": "libreoffice-math.svg"
+    "cli": false,
+    "icon": "libreoffice-math.png"
   },
   {
     "id": "libreoffice-writer",
     "name": "LibreOffice Writer",
     "bin": "libreoffice",
     "category": "Office",
-    "icon": "libreoffice-writer.svg"
+    "cli": false,
+    "icon": "libreoffice-writer.png"
   },
   {
     "id": "org.fedoraproject.MediaWriter",
     "name": "Fedora Media Writer",
     "bin": "mediawriter",
     "category": "System",
+    "cli": false,
     "icon": "org.fedoraproject.MediaWriter.png"
   },
   {
@@ -88,230 +100,263 @@
     "name": "Problem Reporting",
     "bin": "gnome-abrt",
     "category": "System",
-    "icon": "org.freedesktop.GnomeAbrt.svg"
+    "cli": false,
+    "icon": "org.freedesktop.GnomeAbrt.png"
   },
   {
     "id": "org.kde.akonadiimportwizard",
     "name": "KMail Import Wizard",
     "bin": "akonadiimportwizard",
     "category": "Utilities",
-    "icon": "org.kde.akonadiimportwizard.svg"
+    "cli": false,
+    "icon": "org.kde.akonadiimportwizard.png"
   },
   {
     "id": "org.kde.akregator",
     "name": "Akregator",
     "bin": "akregator",
     "category": "Internet",
-    "icon": "org.kde.akregator.svg"
+    "cli": false,
+    "icon": "org.kde.akregator.png"
   },
   {
     "id": "org.kde.ark",
     "name": "Ark",
     "bin": "ark",
     "category": "Utilities",
-    "icon": "org.kde.ark.svg"
+    "cli": false,
+    "icon": "org.kde.ark.png"
   },
   {
     "id": "org.kde.contactprintthemeeditor",
     "name": "Contact Print Theme Editor",
     "bin": "contactprintthemeeditor",
     "category": "Office",
-    "icon": "org.kde.contactprintthemeeditor.svg"
+    "cli": false,
+    "icon": "org.kde.contactprintthemeeditor.png"
   },
   {
     "id": "org.kde.contactthemeeditor",
     "name": "Contact Theme Editor",
     "bin": "contactthemeeditor",
     "category": "Office",
-    "icon": "org.kde.contactthemeeditor.svg"
+    "cli": false,
+    "icon": "org.kde.contactthemeeditor.png"
   },
   {
     "id": "org.kde.discover",
     "name": "Discover",
     "bin": "plasma-discover",
     "category": "System",
-    "icon": "org.kde.discover.svg"
+    "cli": false,
+    "icon": "org.kde.discover.png"
   },
   {
     "id": "org.kde.dolphin",
     "name": "Dolphin",
     "bin": "dolphin",
     "category": "System",
-    "icon": "org.kde.dolphin.svg"
+    "cli": false,
+    "icon": "org.kde.dolphin.png"
   },
   {
     "id": "org.kde.dragonplayer",
     "name": "Dragon Player",
     "bin": "dragon",
     "category": "Multimedia",
-    "icon": "org.kde.dragonplayer.svg"
+    "cli": false,
+    "icon": "org.kde.dragonplayer.png"
   },
   {
     "id": "org.kde.drkonqi.coredump.gui",
     "name": "Crashed Processes Viewer",
     "bin": "drkonqi-coredump-gui",
     "category": "System",
-    "icon": "org.kde.drkonqi.coredump.gui.svg"
+    "cli": false,
+    "icon": "org.kde.drkonqi.coredump.gui.png"
   },
   {
     "id": "org.kde.elisa",
     "name": "Elisa",
     "bin": "elisa",
     "category": "Multimedia",
-    "icon": "org.kde.elisa.svg"
+    "cli": false,
+    "icon": "org.kde.elisa.png"
   },
   {
     "id": "org.kde.filelight",
     "name": "Filelight",
     "bin": "filelight",
     "category": "Utilities",
-    "icon": "org.kde.filelight.svg"
+    "cli": false,
+    "icon": "org.kde.filelight.png"
   },
   {
     "id": "org.kde.gwenview",
     "name": "Gwenview",
     "bin": "gwenview",
     "category": "Graphics",
-    "icon": "org.kde.gwenview.svg"
+    "cli": false,
+    "icon": "org.kde.gwenview.png"
   },
   {
     "id": "org.kde.headerthemeeditor",
     "name": "KMail Header Theme Editor",
     "bin": "headerthemeeditor",
     "category": "Office",
-    "icon": "org.kde.headerthemeeditor.svg"
+    "cli": false,
+    "icon": "org.kde.headerthemeeditor.png"
   },
   {
     "id": "org.kde.kaddressbook",
     "name": "KAddressBook",
     "bin": "kaddressbook",
     "category": "Office",
-    "icon": "org.kde.kaddressbook.svg"
+    "cli": false,
+    "icon": "org.kde.kaddressbook.png"
   },
   {
     "id": "org.kde.kamoso",
     "name": "Kamoso",
     "bin": "kamoso",
     "category": "Multimedia",
-    "icon": "org.kde.kamoso.svg"
+    "cli": false,
+    "icon": "org.kde.kamoso.png"
   },
   {
     "id": "org.kde.kate",
     "name": "Kate",
     "bin": "kate",
     "category": "Development",
-    "icon": "org.kde.kate.svg"
+    "cli": false,
+    "icon": "org.kde.kate.png"
   },
   {
     "id": "org.kde.kcalc",
     "name": "KCalc",
     "bin": "kcalc",
     "category": "Utilities",
-    "icon": "org.kde.kcalc.svg"
+    "cli": false,
+    "icon": "org.kde.kcalc.png"
   },
   {
     "id": "org.kde.kcharselect",
     "name": "KCharSelect",
     "bin": "kcharselect",
     "category": "Utilities",
-    "icon": "org.kde.kcharselect.svg"
+    "cli": false,
+    "icon": "org.kde.kcharselect.png"
   },
   {
     "id": "org.kde.kdebugsettings",
     "name": "KDebugSettings",
     "bin": "kdebugsettings",
     "category": "Development",
-    "icon": "org.kde.kdebugsettings.svg"
+    "cli": false,
+    "icon": "org.kde.kdebugsettings.png"
   },
   {
     "id": "org.kde.kdeconnect.app",
     "name": "KDE Connect",
     "bin": "kdeconnect-app",
     "category": "Internet",
-    "icon": "org.kde.kdeconnect.app.svg"
+    "cli": false,
+    "icon": "org.kde.kdeconnect.app.png"
   },
   {
     "id": "org.kde.kdeconnect.nonplasma",
     "name": "KDE Connect Indicator",
     "bin": "kdeconnect-indicator",
     "category": "Internet",
-    "icon": "org.kde.kdeconnect.nonplasma.svg"
+    "cli": false,
+    "icon": "org.kde.kdeconnect.nonplasma.png"
   },
   {
     "id": "org.kde.kdeconnect.sms",
     "name": "KDE Connect SMS",
     "bin": "kdeconnect-sms",
     "category": "Internet",
-    "icon": "org.kde.kdeconnect.sms.svg"
+    "cli": false,
+    "icon": "org.kde.kdeconnect.sms.png"
   },
   {
     "id": "org.kde.kfind",
     "name": "KFind",
     "bin": "kfind",
     "category": "Utilities",
-    "icon": "org.kde.kfind.svg"
+    "cli": false,
+    "icon": "org.kde.kfind.png"
   },
   {
     "id": "org.kde.kgpg",
     "name": "KGpg",
     "bin": "kgpg",
     "category": "Utilities",
-    "icon": "org.kde.kgpg.svg"
+    "cli": false,
+    "icon": "org.kde.kgpg.png"
   },
   {
     "id": "org.kde.khelpcenter",
     "name": "Help Center",
     "bin": "khelpcenter",
     "category": "Utilities",
-    "icon": "org.kde.khelpcenter.svg"
+    "cli": false,
+    "icon": "org.kde.khelpcenter.png"
   },
   {
     "id": "org.kde.kinfocenter",
     "name": "Info Center",
     "bin": "kinfocenter",
     "category": "System",
-    "icon": "org.kde.kinfocenter.svg"
+    "cli": false,
+    "icon": "org.kde.kinfocenter.png"
   },
   {
     "id": "org.kde.kjournaldbrowser",
     "name": "Journald Browser",
     "bin": "kjournaldbrowser",
     "category": "System",
-    "icon": "org.kde.kjournaldbrowser.svg"
+    "cli": false,
+    "icon": "org.kde.kjournaldbrowser.png"
   },
   {
     "id": "org.kde.kleopatra",
     "name": "Kleopatra",
     "bin": "kleopatra",
     "category": "Utilities",
-    "icon": "org.kde.kleopatra.svg"
+    "cli": false,
+    "icon": "org.kde.kleopatra.png"
   },
   {
     "id": "org.kde.kmahjongg",
     "name": "KMahjongg",
     "bin": "kmahjongg",
     "category": "Games",
-    "icon": "org.kde.kmahjongg.svg"
+    "cli": false,
+    "icon": "org.kde.kmahjongg.png"
   },
   {
     "id": "org.kde.kmail2",
     "name": "KMail",
     "bin": "kmail",
     "category": "Office",
-    "icon": "org.kde.kmail2.svg"
+    "cli": false,
+    "icon": "org.kde.kmail2.png"
   },
   {
     "id": "org.kde.kmenuedit",
     "name": "Menu Editor",
     "bin": "kmenuedit",
     "category": "System",
-    "icon": "org.kde.kmenuedit.svg"
+    "cli": false,
+    "icon": "org.kde.kmenuedit.png"
   },
   {
     "id": "org.kde.kmines",
     "name": "KMines",
     "bin": "kmines",
     "category": "Games",
+    "cli": false,
     "icon": "org.kde.kmines.png"
   },
   {
@@ -319,167 +364,191 @@
     "name": "KMouth",
     "bin": "kmouth",
     "category": "Utilities",
-    "icon": "org.kde.kmouth.svg"
+    "cli": false,
+    "icon": "org.kde.kmouth.png"
   },
   {
     "id": "org.kde.kolourpaint",
     "name": "KolourPaint",
     "bin": "kolourpaint",
     "category": "Graphics",
-    "icon": "org.kde.kolourpaint.svg"
+    "cli": false,
+    "icon": "org.kde.kolourpaint.png"
   },
   {
     "id": "org.kde.konsole",
     "name": "Konsole",
     "bin": "konsole",
     "category": "System",
-    "icon": "org.kde.konsole.svg"
+    "cli": false,
+    "icon": "org.kde.konsole.png"
   },
   {
     "id": "org.kde.kontact",
     "name": "Kontact",
     "bin": "kontact",
     "category": "Office",
-    "icon": "org.kde.kontact.svg"
+    "cli": false,
+    "icon": "org.kde.kontact.png"
   },
   {
     "id": "org.kde.korganizer",
     "name": "KOrganizer",
     "bin": "korganizer",
     "category": "Office",
-    "icon": "org.kde.korganizer.svg"
+    "cli": false,
+    "icon": "org.kde.korganizer.png"
   },
   {
     "id": "org.kde.kpat",
     "name": "KPatience",
     "bin": "kpat",
     "category": "Games",
-    "icon": "org.kde.kpat.svg"
+    "cli": false,
+    "icon": "org.kde.kpat.png"
   },
   {
     "id": "org.kde.krdc",
     "name": "KRDC",
     "bin": "krdc",
     "category": "Internet",
-    "icon": "org.kde.krdc.svg"
+    "cli": false,
+    "icon": "org.kde.krdc.png"
   },
   {
     "id": "org.kde.krfb",
     "name": "Krfb",
     "bin": "krfb",
     "category": "Internet",
-    "icon": "org.kde.krfb.svg"
+    "cli": false,
+    "icon": "org.kde.krfb.png"
   },
   {
     "id": "org.kde.ktnef",
     "name": "KTnef",
     "bin": "ktnef",
     "category": "Office",
-    "icon": "org.kde.ktnef.svg"
+    "cli": false,
+    "icon": "org.kde.ktnef.png"
   },
   {
     "id": "org.kde.kwalletmanager",
     "name": "KWalletManager",
     "bin": "kwalletmanager5",
     "category": "System",
-    "icon": "org.kde.kwalletmanager.svg"
+    "cli": false,
+    "icon": "org.kde.kwalletmanager.png"
   },
   {
     "id": "org.kde.kwatchgnupg",
     "name": "GnuPG Log Viewer",
     "bin": "kwatchgnupg",
     "category": "System",
-    "icon": "org.kde.kwatchgnupg.svg"
+    "cli": false,
+    "icon": "org.kde.kwatchgnupg.png"
   },
   {
     "id": "org.kde.kwrite",
     "name": "KWrite",
     "bin": "kwrite",
     "category": "Utilities",
-    "icon": "org.kde.kwrite.svg"
+    "cli": false,
+    "icon": "org.kde.kwrite.png"
   },
   {
     "id": "org.kde.neochat",
     "name": "NeoChat",
     "bin": "neochat",
     "category": "Internet",
-    "icon": "org.kde.neochat.svg"
+    "cli": false,
+    "icon": "org.kde.neochat.png"
   },
   {
     "id": "org.kde.okular",
     "name": "Okular",
     "bin": "okular",
     "category": "Graphics",
-    "icon": "org.kde.okular.svg"
+    "cli": false,
+    "icon": "org.kde.okular.png"
   },
   {
     "id": "org.kde.partitionmanager",
     "name": "KDE Partition Manager",
     "bin": "partitionmanager",
     "category": "System",
-    "icon": "org.kde.partitionmanager.svg"
+    "cli": false,
+    "icon": "org.kde.partitionmanager.png"
   },
   {
     "id": "org.kde.pimdataexporter",
     "name": "PIM Data Exporter",
     "bin": "pimdataexporter",
     "category": "Internet",
-    "icon": "org.kde.pimdataexporter.svg"
+    "cli": false,
+    "icon": "org.kde.pimdataexporter.png"
   },
   {
     "id": "org.kde.plasma-systemmonitor",
     "name": "System Monitor",
     "bin": "plasma-systemmonitor",
     "category": "System",
-    "icon": "org.kde.plasma-systemmonitor.svg"
+    "cli": false,
+    "icon": "org.kde.plasma-systemmonitor.png"
   },
   {
     "id": "org.kde.plasma-welcome",
     "name": "Welcome Center",
     "bin": "plasma-welcome",
     "category": "Utilities",
-    "icon": "org.kde.plasma-welcome.svg"
+    "cli": false,
+    "icon": "org.kde.plasma-welcome.png"
   },
   {
     "id": "org.kde.plasma.emojier",
     "name": "Emoji Selector",
     "bin": "plasma-emojier",
     "category": "Utilities",
-    "icon": "org.kde.plasma.emojier.svg"
+    "cli": false,
+    "icon": "org.kde.plasma.emojier.png"
   },
   {
     "id": "org.kde.qrca",
     "name": "Qrca",
     "bin": "qrca",
     "category": "Utilities",
-    "icon": "org.kde.qrca.svg"
+    "cli": false,
+    "icon": "org.kde.qrca.png"
   },
   {
     "id": "org.kde.sieveeditor",
     "name": "Sieve Editor",
     "bin": "sieveeditor",
     "category": "Office",
-    "icon": "org.kde.sieveeditor.svg"
+    "cli": false,
+    "icon": "org.kde.sieveeditor.png"
   },
   {
     "id": "org.kde.skanpage",
     "name": "Skanpage",
     "bin": "skanpage",
     "category": "Graphics",
-    "icon": "org.kde.skanpage.svg"
+    "cli": false,
+    "icon": "org.kde.skanpage.png"
   },
   {
     "id": "org.kde.spectacle",
     "name": "Spectacle",
     "bin": "spectacle",
     "category": "Utilities",
-    "icon": "org.kde.spectacle.svg"
+    "cli": false,
+    "icon": "org.kde.spectacle.png"
   },
   {
     "id": "org.mozilla.firefox",
     "name": "Firefox",
     "bin": "firefox",
     "category": "Internet",
+    "cli": false,
     "icon": "org.mozilla.firefox.png"
   },
   {
@@ -487,20 +556,23 @@
     "name": "SELinux Troubleshooter",
     "bin": "sealert",
     "category": "System",
-    "icon": "setroubleshoot.svg"
+    "cli": false,
+    "icon": "setroubleshoot.png"
   },
   {
     "id": "systemsettings",
     "name": "System Settings",
     "bin": "systemsettings",
     "category": "System",
-    "icon": "systemsettings.svg"
+    "cli": false,
+    "icon": "systemsettings.png"
   },
   {
     "id": "app-launcher",
     "name": "App Launcher",
     "bin": "app-launcher",
     "category": "Utilities",
+    "cli": false,
     "icon": "app-launcher.png"
   },
   {
@@ -508,6 +580,7 @@
     "name": "PlayTorrioMov",
     "bin": "PlayTorrioMov",
     "category": "Multimedia",
+    "cli": false,
     "icon": "playtorriomov.png"
   }
 ]

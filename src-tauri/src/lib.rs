@@ -52,15 +52,59 @@ fn is_installed(bin: PlatformBin) -> bool {
     }
 }
 
+/// A CLI tool spawned bare has no terminal attached, so it either exits
+/// instantly or produces output nobody sees — "clicking it does nothing"
+/// from the user's side. Open one of the common terminal emulators instead,
+/// running the tool inside it and dropping to a shell afterwards (via
+/// `bash -c "<bin>; ...; read"`) so the window doesn't vanish the instant a
+/// quick command like `tree` finishes. Tried in a fixed order; the first
+/// one actually installed wins.
+fn linux_terminal_spawn(bin: &str) -> std::io::Result<std::process::Child> {
+    const TERMINALS: &[(&str, &str)] = &[
+        ("konsole", "-e"),
+        ("gnome-terminal", "--"),
+        ("xfce4-terminal", "-e"),
+        ("alacritty", "-e"),
+        ("kitty", "-e"),
+    ];
+    let hold_cmd = format!("{bin}; echo; read -n1 -s -r -p 'Press any key to close...'");
+    for (terminal, flag) in TERMINALS {
+        if which::which(terminal).is_ok() {
+            return Command::new(terminal)
+                .arg(flag)
+                .args(["bash", "-c", &hold_cmd])
+                .spawn();
+        }
+    }
+    // xterm's `-hold` keeps the window open after the command exits, no
+    // need for the bash/read wrapper — kept as the last resort since it's
+    // the least likely to already be installed on a modern desktop.
+    if which::which("xterm").is_ok() {
+        return Command::new("xterm").args(["-hold", "-e", bin]).spawn();
+    }
+    Err(std::io::Error::new(
+        std::io::ErrorKind::NotFound,
+        "no terminal emulator found (tried konsole, gnome-terminal, xfce4-terminal, alacritty, kitty, xterm)",
+    ))
+}
+
 #[tauri::command]
-fn launch_app(bin: PlatformBin) -> Result<(), String> {
+fn launch_app(bin: PlatformBin, cli: bool) -> Result<(), String> {
     let Some(name) = bin.for_current_os() else {
         return Err("no launch command configured for this OS".to_string());
     };
     let result = match std::env::consts::OS {
         // The standard way to launch a macOS app by name regardless of its
-        // exact path. Unverified: never run on real macOS.
+        // exact path. Unverified: never run on real macOS. CLI tools aren't
+        // given the terminal-wrapping treatment here — is_installed's
+        // .app-bundle check means a bare CLI tool essentially never shows
+        // as installed on macOS anyway, so this path is rarely reached.
         "macos" => Command::new("open").args(["-a", name]).spawn(),
+        "linux" if cli => linux_terminal_spawn(name),
+        // cmd /k runs the command and stays open at an interactive prompt
+        // afterwards, same idea as the Linux bash/read wrapper. Unverified
+        // on real Windows.
+        "windows" if cli => Command::new("cmd").args(["/k", name]).spawn(),
         _ => Command::new(name).spawn(),
     };
     result

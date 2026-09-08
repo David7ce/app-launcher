@@ -22,7 +22,7 @@
       "windows": "claude-code",
       "macos": "Claude Code"
     },
-    "icon": "claude-code.svg",
+    "icon": "claude-code.png",
     "hidden": false,
     "cli": false
   },
@@ -64,7 +64,7 @@
       "windows": "dbeaver-ce",
       "macos": "Dbeaver Community"
     },
-    "icon": "dbeaver.svg",
+    "icon": "dbeaver.png",
     "hidden": false,
     "cli": false
   },
@@ -217,7 +217,7 @@
       "windows": "insomnia",
       "macos": "Insomnia"
     },
-    "icon": "insomnia.svg",
+    "icon": "insomnia.png",
     "hidden": false,
     "cli": false
   },
@@ -231,7 +231,7 @@
       "windows": "intellij-idea-community-edition",
       "macos": "Intellij Idea"
     },
-    "icon": "intellij-idea.svg",
+    "icon": "intellij-idea.png",
     "hidden": false,
     "cli": false
   },
@@ -271,7 +271,7 @@
     "bin": {
       "linux": "kate"
     },
-    "icon": "org.kde.kate.svg",
+    "icon": "org.kde.kate.png",
     "hidden": false,
     "cli": false
   },
@@ -520,7 +520,7 @@
       "windows": "qt-creator",
       "macos": "Qt Creator"
     },
-    "icon": "qt.svg",
+    "icon": "qt.png",
     "hidden": false,
     "cli": false
   },
@@ -631,7 +631,7 @@
       "windows": "vagrant",
       "macos": "Vagrant"
     },
-    "icon": "vagrant.svg",
+    "icon": "vagrant.png",
     "hidden": false,
     "cli": false
   },
@@ -671,7 +671,7 @@
       "windows": "codium",
       "macos": "Vscodium"
     },
-    "icon": "vscodium.svg",
+    "icon": "vscodium.png",
     "hidden": false,
     "cli": false
   },
@@ -698,7 +698,7 @@
       "linux": "xampp",
       "windows": "xampp"
     },
-    "icon": "xampp.svg",
+    "icon": "xampp.png",
     "hidden": false,
     "cli": false
   },
@@ -780,7 +780,7 @@
       "windows": "com.heroicgameslauncher.hgl",
       "macos": "Heroic"
     },
-    "icon": "heroic-games-launcher.svg",
+    "icon": "heroic-games-launcher.png",
     "hidden": false,
     "cli": false
   },
@@ -792,7 +792,7 @@
     "bin": {
       "linux": "kmahjongg"
     },
-    "icon": "org.kde.kmahjongg.svg",
+    "icon": "org.kde.kmahjongg.png",
     "hidden": false,
     "cli": false
   },
@@ -816,7 +816,7 @@
     "bin": {
       "linux": "kpat"
     },
-    "icon": "org.kde.kpat.svg",
+    "icon": "org.kde.kpat.png",
     "hidden": false,
     "cli": false
   },
@@ -1017,7 +1017,7 @@
     "bin": {
       "linux": "gwenview"
     },
-    "icon": "org.kde.gwenview.svg",
+    "icon": "org.kde.gwenview.png",
     "hidden": false,
     "cli": false
   },
@@ -1057,7 +1057,7 @@
       "windows": "inkscape",
       "macos": "Inkscape"
     },
-    "icon": "inkscape.svg",
+    "icon": "inkscape.png",
     "hidden": false,
     "cli": false
   },
@@ -1069,7 +1069,7 @@
     "bin": {
       "linux": "kolourpaint"
     },
-    "icon": "org.kde.kolourpaint.svg",
+    "icon": "org.kde.kolourpaint.png",
     "hidden": false,
     "cli": false
   },
@@ -1083,7 +1083,7 @@
       "windows": "krita",
       "macos": "Krita"
     },
-    "icon": "krita.svg",
+    "icon": "krita.png",
     "hidden": false,
     "cli": false
   },
@@ -1122,7 +1122,7 @@
     "bin": {
       "linux": "okular"
     },
-    "icon": "org.kde.okular.svg",
+    "icon": "org.kde.okular.png",
     "hidden": false,
     "cli": false
   },
@@ -1209,7 +1209,7 @@
     "bin": {
       "linux": "skanpage"
     },
-    "icon": "org.kde.skanpage.svg",
+    "icon": "org.kde.skanpage.png",
     "hidden": false,
     "cli": false
   },
@@ -1261,7 +1261,7 @@
     "bin": {
       "linux": "akregator"
     },
-    "icon": "org.kde.akregator.svg",
+    "icon": "org.kde.akregator.png",
     "hidden": false,
     "cli": false
   },
@@ -1406,7 +1406,7 @@
     "bin": {
       "linux": "kdeconnect-app"
     },
-    "icon": "org.kde.kdeconnect.app.svg",
+    "icon": "org.kde.kdeconnect.app.png",
     "hidden": false,
     "cli": false
   },
@@ -1418,7 +1418,7 @@
     "bin": {
       "linux": "krdc"
     },
-    "icon": "org.kde.krdc.svg",
+    "icon": "org.kde.krdc.png",
     "hidden": false,
     "cli": false
   },
@@ -1430,7 +1430,7 @@
     "bin": {
       "linux": "krfb"
     },
-    "icon": "org.kde.krfb.svg",
+    "icon": "org.kde.krfb.png",
     "hidden": false,
     "cli": false
   },
@@ -1532,7 +1532,7 @@
     "bin": {
       "linux": "neochat"
     },
-    "icon": "org.kde.neochat.svg",
+    "icon": "org.kde.neochat.png",
     "hidden": false,
     "cli": false
   },
@@ -1572,7 +1572,7 @@
     "bin": {
       "linux": "pimdataexporter"
     },
-    "icon": "org.kde.pimdataexporter.svg",
+    "icon": "org.kde.pimdataexporter.png",
     "hidden": false,
     "cli": false
   },
@@ -1666,7 +1666,7 @@
       "windows": "torbrowser-launcher",
       "macos": "Tor Browser"
     },
-    "icon": "tor-browser.svg",
+    "icon": "tor-browser.png",
     "hidden": false,
     "cli": false
   },
@@ -1749,7 +1749,7 @@
       "linux": "ardour",
       "macos": "Ardour"
     },
-    "icon": "ardour.svg",
+    "icon": "ardour.png",
     "hidden": false,
     "cli": false
   },
@@ -1828,7 +1828,7 @@
     "bin": {
       "linux": "davinci-resolve"
     },
-    "icon": "davinci-resolve.svg",
+    "icon": "davinci-resolve.png",
     "hidden": false,
     "cli": false
   },
@@ -1840,7 +1840,7 @@
     "bin": {
       "linux": "dragon"
     },
-    "icon": "org.kde.dragonplayer.svg",
+    "icon": "org.kde.dragonplayer.png",
     "hidden": false,
     "cli": false
   },
@@ -1853,7 +1853,7 @@
       "linux": "elisa",
       "windows": "elisa"
     },
-    "icon": "org.kde.elisa.svg",
+    "icon": "org.kde.elisa.png",
     "hidden": false,
     "cli": false
   },
@@ -1867,7 +1867,7 @@
       "windows": "ffmpeg-free",
       "macos": "Ffmpeg"
     },
-    "icon": "ffmpeg.svg",
+    "icon": "ffmpeg.png",
     "hidden": false,
     "cli": false
   },
@@ -1970,7 +1970,7 @@
     "bin": {
       "linux": "kamoso"
     },
-    "icon": "org.kde.kamoso.svg",
+    "icon": "org.kde.kamoso.png",
     "hidden": false,
     "cli": false
   },
@@ -1984,7 +1984,7 @@
       "windows": "kdenlive",
       "macos": "Kdenlive"
     },
-    "icon": "kdenlive.svg",
+    "icon": "kdenlive.png",
     "hidden": false,
     "cli": false
   },
@@ -2104,7 +2104,7 @@
       "windows": "obs-studio",
       "macos": "Obs"
     },
-    "icon": "obs-studio.svg",
+    "icon": "obs-studio.png",
     "hidden": false,
     "cli": false
   },
@@ -2594,7 +2594,7 @@
     "bin": {
       "linux": "kaddressbook"
     },
-    "icon": "org.kde.kaddressbook.svg",
+    "icon": "org.kde.kaddressbook.png",
     "hidden": false,
     "cli": false
   },
@@ -2632,7 +2632,7 @@
     "bin": {
       "linux": "kmail"
     },
-    "icon": "org.kde.kmail2.svg",
+    "icon": "org.kde.kmail2.png",
     "hidden": false,
     "cli": false
   },
@@ -2644,7 +2644,7 @@
     "bin": {
       "linux": "kontact"
     },
-    "icon": "org.kde.kontact.svg",
+    "icon": "org.kde.kontact.png",
     "hidden": false,
     "cli": false
   },
@@ -2682,7 +2682,7 @@
     "bin": {
       "linux": "korganizer"
     },
-    "icon": "org.kde.korganizer.svg",
+    "icon": "org.kde.korganizer.png",
     "hidden": false,
     "cli": false
   },
@@ -2694,7 +2694,7 @@
     "bin": {
       "linux": "ktnef"
     },
-    "icon": "org.kde.ktnef.svg",
+    "icon": "org.kde.ktnef.png",
     "hidden": false,
     "cli": false
   },
@@ -2722,7 +2722,7 @@
       "windows": "libreoffice",
       "macos": "Libreoffice"
     },
-    "icon": "libreoffice-writer.svg",
+    "icon": "libreoffice-writer.png",
     "hidden": false,
     "cli": false
   },
@@ -3178,9 +3178,9 @@
       "windows": "btop",
       "macos": "Btop"
     },
-    "icon": "btop.svg",
+    "icon": "btop.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "cryptomator",
@@ -3204,7 +3204,7 @@
     "bin": {
       "linux": "plasma-discover"
     },
-    "icon": "org.kde.discover.svg",
+    "icon": "org.kde.discover.png",
     "hidden": false,
     "cli": false
   },
@@ -3241,7 +3241,7 @@
       "linux": "distrobox",
       "macos": "Distrobox"
     },
-    "icon": "distrobox.svg",
+    "icon": "distrobox.png",
     "hidden": false,
     "cli": false
   },
@@ -3267,7 +3267,7 @@
     "bin": {
       "linux": "dolphin"
     },
-    "icon": "org.kde.dolphin.svg",
+    "icon": "org.kde.dolphin.png",
     "hidden": false,
     "cli": false
   },
@@ -3319,7 +3319,7 @@
     "bin": {
       "linux": "firewall-config"
     },
-    "icon": "firewall-config.svg",
+    "icon": "firewall-config.png",
     "hidden": false,
     "cli": false
   },
@@ -3331,7 +3331,7 @@
     "bin": {
       "linux": "kwatchgnupg"
     },
-    "icon": "org.kde.kwatchgnupg.svg",
+    "icon": "org.kde.kwatchgnupg.png",
     "hidden": false,
     "cli": false
   },
@@ -3368,7 +3368,7 @@
     "bin": {
       "linux": "kinfocenter"
     },
-    "icon": "org.kde.kinfocenter.svg",
+    "icon": "org.kde.kinfocenter.png",
     "hidden": false,
     "cli": false
   },
@@ -3380,7 +3380,7 @@
     "bin": {
       "linux": "partitionmanager"
     },
-    "icon": "org.kde.partitionmanager.svg",
+    "icon": "org.kde.partitionmanager.png",
     "hidden": false,
     "cli": false
   },
@@ -3406,7 +3406,7 @@
     "bin": {
       "linux": "konsole"
     },
-    "icon": "org.kde.konsole.svg",
+    "icon": "org.kde.konsole.png",
     "hidden": false,
     "cli": false
   },
@@ -3418,7 +3418,7 @@
     "bin": {
       "linux": "kwalletmanager5"
     },
-    "icon": "org.kde.kwalletmanager.svg",
+    "icon": "org.kde.kwalletmanager.png",
     "hidden": false,
     "cli": false
   },
@@ -3628,7 +3628,7 @@
     "bin": {
       "linux": "plasma-systemmonitor"
     },
-    "icon": "org.kde.plasma-systemmonitor.svg",
+    "icon": "org.kde.plasma-systemmonitor.png",
     "hidden": false,
     "cli": false
   },
@@ -3652,7 +3652,7 @@
     "bin": {
       "linux": "systemsettings"
     },
-    "icon": "systemsettings.svg",
+    "icon": "systemsettings.png",
     "hidden": false,
     "cli": false
   },
@@ -3692,7 +3692,7 @@
       "windows": "teamviewer",
       "macos": "Teamviewer"
     },
-    "icon": "teamviewer.svg",
+    "icon": "teamviewer.png",
     "hidden": false,
     "cli": false
   },
@@ -3783,7 +3783,7 @@
       "linux": "wine",
       "macos": "Wine"
     },
-    "icon": "wine.svg",
+    "icon": "wine.png",
     "hidden": false,
     "cli": false
   },
@@ -3852,7 +3852,7 @@
       "windows": "alacritty",
       "macos": "Alacritty"
     },
-    "icon": "alacritty.svg",
+    "icon": "alacritty.png",
     "hidden": false,
     "cli": false
   },
@@ -3864,7 +3864,7 @@
     "bin": {
       "linux": "ark"
     },
-    "icon": "org.kde.ark.svg",
+    "icon": "org.kde.ark.png",
     "hidden": false,
     "cli": false
   },
@@ -3997,7 +3997,7 @@
     "bin": {
       "linux": "plasma-emojier"
     },
-    "icon": "org.kde.plasma.emojier.svg",
+    "icon": "org.kde.plasma.emojier.png",
     "hidden": false,
     "cli": false
   },
@@ -4049,7 +4049,7 @@
     "bin": {
       "linux": "filelight"
     },
-    "icon": "org.kde.filelight.svg",
+    "icon": "org.kde.filelight.png",
     "hidden": false,
     "cli": false
   },
@@ -4153,7 +4153,7 @@
     "bin": {
       "linux": "khelpcenter"
     },
-    "icon": "org.kde.khelpcenter.svg",
+    "icon": "org.kde.khelpcenter.png",
     "hidden": false,
     "cli": false
   },
@@ -4206,7 +4206,7 @@
     "bin": {
       "linux": "kcalc"
     },
-    "icon": "org.kde.kcalc.svg",
+    "icon": "org.kde.kcalc.png",
     "hidden": false,
     "cli": false
   },
@@ -4218,7 +4218,7 @@
     "bin": {
       "linux": "kcharselect"
     },
-    "icon": "org.kde.kcharselect.svg",
+    "icon": "org.kde.kcharselect.png",
     "hidden": false,
     "cli": false
   },
@@ -4230,7 +4230,7 @@
     "bin": {
       "linux": "kfind"
     },
-    "icon": "org.kde.kfind.svg",
+    "icon": "org.kde.kfind.png",
     "hidden": false,
     "cli": false
   },
@@ -4242,7 +4242,7 @@
     "bin": {
       "linux": "kgpg"
     },
-    "icon": "org.kde.kgpg.svg",
+    "icon": "org.kde.kgpg.png",
     "hidden": false,
     "cli": false
   },
@@ -4267,7 +4267,7 @@
     "bin": {
       "linux": "kleopatra"
     },
-    "icon": "org.kde.kleopatra.svg",
+    "icon": "org.kde.kleopatra.png",
     "hidden": false,
     "cli": false
   },
@@ -4279,7 +4279,7 @@
     "bin": {
       "linux": "kmouth"
     },
-    "icon": "org.kde.kmouth.svg",
+    "icon": "org.kde.kmouth.png",
     "hidden": false,
     "cli": false
   },
@@ -4401,7 +4401,7 @@
     "bin": {
       "linux": "qrca"
     },
-    "icon": "org.kde.qrca.svg",
+    "icon": "org.kde.qrca.png",
     "hidden": false,
     "cli": false
   },
@@ -4479,7 +4479,7 @@
     "bin": {
       "linux": "spectacle"
     },
-    "icon": "org.kde.spectacle.svg",
+    "icon": "org.kde.spectacle.png",
     "hidden": false,
     "cli": false
   },
@@ -4493,7 +4493,7 @@
       "windows": "starship",
       "macos": "Starship"
     },
-    "icon": "starship.svg",
+    "icon": "starship.png",
     "hidden": false,
     "cli": false
   },
@@ -4547,7 +4547,7 @@
     "bin": {
       "linux": "gnome-terminal"
     },
-    "icon": "gnome-terminal.svg",
+    "icon": "gnome-terminal.png",
     "hidden": false,
     "cli": false
   },
@@ -4639,7 +4639,7 @@
       "windows": "wezterm",
       "macos": "Wezterm"
     },
-    "icon": "wezterm.svg",
+    "icon": "wezterm.png",
     "hidden": false,
     "cli": false
   },

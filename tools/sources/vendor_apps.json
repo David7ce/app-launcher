@@ -18,7 +18,7 @@
       "bin": {
         "linux": "konsole"
       },
-      "icon": "konsole.svg"
+      "icon": "konsole.png"
     },
     {
       "id": "kate",
@@ -28,7 +28,7 @@
       "bin": {
         "linux": "kate"
       },
-      "icon": "kate.svg"
+      "icon": "kate.png"
     },
     {
       "id": "okular",
@@ -38,7 +38,7 @@
       "bin": {
         "linux": "okular"
       },
-      "icon": "okular.svg"
+      "icon": "okular.png"
     },
     {
       "id": "spectacle",
@@ -48,7 +48,7 @@
       "bin": {
         "linux": "spectacle"
       },
-      "icon": "spectacle.svg"
+      "icon": "spectacle.png"
     },
     {
       "id": "kcalc",
@@ -58,7 +58,7 @@
       "bin": {
         "linux": "kcalc"
       },
-      "icon": "kcalc.svg"
+      "icon": "kcalc.png"
     },
     {
       "id": "nautilus",

@@ -18,12 +18,10 @@ ICONS_DIR = ROOT / "src" / "assets" / "icons"
 
 
 def default_icon(app_id: str) -> str:
-    # sync_icons.py may have vendored either a dashboard-icons PNG or an
-    # Iconify SVG (or neither yet) — point at whichever actually exists so
-    # the frontend's onerror fallback isn't the only thing standing between
-    # a real icon and the generic category glyph.
-    if (ICONS_DIR / f"{app_id}.svg").exists():
-        return f"{app_id}.svg"
+    # Every icon source (dashboard-icons, Iconify, the system-theme scan,
+    # the generated category/CLI glyphs) is normalized to PNG at vendoring
+    # time — see "Icon format" in SPEC.md — so this is just the naming
+    # convention, not a check against what's actually on disk.
     return f"{app_id}.png"
 
 # Preference order for guessing a Linux executable name from the dataset's
@@ -55,8 +53,8 @@ CLI_ID_OVERRIDES = {"btop", "htop", "fastfetch", "neofetch", "rsync", "tmux", "t
 # `icon` override, but for entries that come from the dataset, not
 # hand-written ones.
 ICON_OVERRIDES = {
-    "gwenview": "gwenview.svg",
-    "elisa": "elisa.svg",
+    "gwenview": "gwenview.png",
+    "elisa": "elisa.png",
 }
 
 
@@ -134,6 +132,14 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
             new_count += 1
         bin_obj = dict(existing["bin"]) if existing else {}
         bin_obj[os_key] = entry["bin"]
+        # A positive cli classification from *either* source wins — don't
+        # let a system scan with no Terminal=/cli signal of its own (the
+        # Windows/macOS scans don't set one at all) silently clobber a
+        # dataset/vendor entry's correct cli:true (this was a real bug:
+        # btop is explicitly CLI_ID_OVERRIDES'd but also has a local
+        # .desktop file, so the scan was unconditionally resetting it to
+        # cli:false, defeating the terminal-launch wrapping entirely).
+        cli = entry.get("cli", False) or (existing["cli"] if existing else False)
         by_bin[key] = {
             "id": entry["id"],
             "name": entry["name"],
@@ -142,7 +148,7 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
             "bin": bin_obj,
             "icon": entry["icon"] or f"{entry['id']}.png",
             "hidden": False,
-            "cli": False,
+            "cli": cli,
         }
     return new_count
 

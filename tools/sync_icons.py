@@ -7,10 +7,14 @@ Two tiers, tried in order per entry:
 2. Iconify's simple-icons set (CC0, brand marks), SVG via the public
    api.iconify.design render endpoint — tried under a couple of slug
    variants since simple-icons names rarely match our ids exactly
-   (e.g. "intellij-idea" -> "intellijidea"). These render as a flat
-   black glyph when loaded via <img> (currentColor doesn't inherit
-   across an external image document), which is still a real,
-   recognizable icon rather than a generic category fallback.
+   (e.g. "intellij-idea" -> "intellijidea"). Rasterized to PNG via
+   ImageMagick (`magick`) for the app — the original SVG resolves
+   `fill="currentColor"` to black when rasterized with no surrounding
+   CSS context, same as it would loaded via <img> anyway, so this is a
+   flat black glyph rather than a colored one, but still a real,
+   recognizable icon rather than a generic category fallback. The SVG
+   itself is archived to tools/icon_sources/ — not shipped with the
+   app, kept only because it's the losslessly-editable original.
 
 CLI-flagged entries and placeholder entries with no `linux` bin (they
 can never show up on this OS) are skipped — no point spending a lookup
@@ -23,6 +27,7 @@ per-category fallback glyph.
 """
 import concurrent.futures
 import json
+import subprocess
 import time
 from pathlib import Path
 
@@ -31,6 +36,7 @@ import requests
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "src" / "data" / "catalog.json"
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
+SVG_ARCHIVE = ROOT / "tools" / "icon_sources"
 MISSING_FILE = ROOT / "tools" / "missing_icons.txt"
 
 DASHBOARD_ICONS_URL = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/{slug}.png"
@@ -69,8 +75,8 @@ def iconify_slug_candidates(entry_id: str) -> list[str]:
 
 
 def fetch_iconify(entry_id: str) -> bool:
-    dest = ICONS_DIR / f"{entry_id}.svg"
-    if dest.exists() or (ICONS_DIR / f"{entry_id}.png").exists():
+    dest = ICONS_DIR / f"{entry_id}.png"
+    if dest.exists():
         return True
     for slug in iconify_slug_candidates(entry_id):
         try:
@@ -78,7 +84,15 @@ def fetch_iconify(entry_id: str) -> bool:
         except requests.RequestException:
             continue
         if resp.status_code == 200 and resp.content.startswith(b"<svg"):
-            dest.write_bytes(resp.content)
+            # Archived as SVG (it's a vector, no quality lost by keeping the
+            # original around) but shipped to the app as PNG, same as every
+            # other icon source — see "Icon format" in SPEC.md.
+            svg_path = SVG_ARCHIVE / f"{entry_id}.svg"
+            svg_path.write_bytes(resp.content)
+            subprocess.run(
+                ["magick", str(svg_path), "-background", "none", "-resize", "128x128", str(dest)],
+                check=True,
+            )
             return True
     return False
 
@@ -89,6 +103,7 @@ def fetch_one(entry_id: str) -> bool:
 
 def main() -> None:
     ICONS_DIR.mkdir(parents=True, exist_ok=True)
+    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
     catalog = json.loads(CATALOG.read_text())
     ids = sorted({
         entry["id"] for entry in catalog

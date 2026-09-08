@@ -39,17 +39,34 @@ let installedApps = [];
 let overrides = {};
 let editMode = false;
 
+function cliToolsVisible() {
+  try {
+    return localStorage.getItem("cliToolsVisible") !== "false";
+  } catch {
+    return true;
+  }
+}
+
+function setCliToolsVisible(visible) {
+  try {
+    localStorage.setItem("cliToolsVisible", visible ? "true" : "false");
+  } catch {
+    // localStorage unavailable (e.g. private-browsing-style restrictions) —
+    // the toggle just won't persist across restarts, no big deal.
+  }
+}
+
 function showError(message) {
   errorBannerEl.textContent = message;
   errorBannerEl.hidden = false;
 }
 
 function categoryIconPath(category) {
-  return `assets/icons/category/${category}.svg`;
+  return `assets/icons/category/${category}.png`;
 }
 
 function iconPath(app) {
-  if (app.cli) return "assets/icons/category/cli-tool.svg";
+  if (app.cli) return "assets/icons/category/cli-tool.png";
   return `assets/icons/${app.icon}`;
 }
 
@@ -169,7 +186,7 @@ function makeTile(app) {
   button.addEventListener("click", async () => {
     if (editMode) return;
     try {
-      await invoke("launch_app", { bin: app.bin });
+      await invoke("launch_app", { bin: app.bin, cli: !!app.cli });
     } catch (err) {
       showError(`Couldn't launch ${app.name}: ${err}`);
     }
@@ -247,7 +264,47 @@ function makeHiddenPanel(hiddenApps) {
   return section;
 }
 
-function renderCategories(grouped, hiddenApps) {
+function makeCliSection(cliApps) {
+  const section = document.createElement("section");
+  section.className = "category cli-section";
+
+  const heading = document.createElement("h2");
+  const icon = document.createElement("span");
+  icon.className = "category-icon";
+  icon.textContent = "⌨️"; // ⌨️
+  icon.setAttribute("aria-hidden", "true");
+  const label = document.createElement("span");
+  label.textContent = `CLI Tools (${cliApps.length})`;
+  const toggleBtn = document.createElement("button");
+  toggleBtn.type = "button";
+  toggleBtn.className = "cli-toggle";
+  const visible = cliToolsVisible();
+  toggleBtn.textContent = visible ? "Hide" : "Show";
+  toggleBtn.addEventListener("click", () => {
+    setCliToolsVisible(!cliToolsVisible());
+    render();
+  });
+  heading.append(icon, label, toggleBtn);
+  section.appendChild(heading);
+
+  if (visible) {
+    const note = document.createElement("p");
+    note.className = "cli-note";
+    note.textContent = "Terminal-only tools — opens in a terminal instead of a normal window.";
+    section.appendChild(note);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    for (const app of cliApps) {
+      grid.appendChild(makeTile(app));
+    }
+    section.appendChild(grid);
+  }
+
+  return section;
+}
+
+function renderCategories(grouped, hiddenApps, cliApps) {
   categoriesEl.replaceChildren();
   let renderedAny = false;
 
@@ -276,6 +333,11 @@ function renderCategories(grouped, hiddenApps) {
 
     section.append(heading, grid);
     categoriesEl.appendChild(section);
+  }
+
+  if (cliApps.length > 0) {
+    renderedAny = true;
+    categoriesEl.appendChild(makeCliSection(cliApps));
   }
 
   if (!renderedAny) {
@@ -322,8 +384,14 @@ function render() {
   const visible = merged.filter((app) => !app.hidden);
   const hiddenApps = merged.filter((app) => app.hidden);
 
+  // CLI tools get their own section instead of being scattered across the
+  // 10 regular categories — grouped together since they're a different
+  // kind of tile (opens a terminal, not a normal app window).
+  const cliApps = visible.filter((app) => app.cli).sort((a, b) => a.name.localeCompare(b.name));
+  const guiApps = visible.filter((app) => !app.cli);
+
   const grouped = new Map();
-  for (const app of visible) {
+  for (const app of guiApps) {
     if (!grouped.has(app.category)) grouped.set(app.category, []);
     grouped.get(app.category).push(app);
   }
@@ -331,7 +399,7 @@ function render() {
     apps.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  renderCategories(grouped, hiddenApps);
+  renderCategories(grouped, hiddenApps, cliApps);
   if (searchEl.value) applySearch(searchEl.value);
 }
 

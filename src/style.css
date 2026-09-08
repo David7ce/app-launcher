@@ -353,6 +353,38 @@ section.category h2 .category-icon {
   margin: 0;
 }
 
+.cli-section {
+  background: var(--bg);
+  border-style: dashed;
+}
+
+.cli-section h2 {
+  margin-bottom: 8px;
+}
+
+.cli-toggle {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.cli-toggle:hover {
+  background: var(--tile-hover);
+}
+
+.cli-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 0 12px;
+}
+
 #empty-state,
 #no-results {
   color: var(--muted);

@@ -27,6 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
+SVG_ARCHIVE = ROOT / "tools" / "icon_sources"
 OUT = ROOT / "tools" / "sources" / "system_apps.json"
 
 APPLICATION_DIRS = [
@@ -180,11 +181,16 @@ def parse_desktop_file(path: Path) -> dict | None:
         "bin": bin_name,
         "category": map_category(entry.get("Categories", "")),
         "icon_name": entry.get("Icon", ""),
+        # Terminal=true means this app expects to run inside a terminal
+        # emulator (TUI tools that still ship a menu entry, e.g. btop) —
+        # launch_app needs to know to wrap it instead of spawning it bare.
+        "cli": entry.get("Terminal", "false").lower() == "true",
     }
 
 
 def main() -> None:
     ICONS_DIR.mkdir(parents=True, exist_ok=True)
+    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
     theme_priority = [active_icon_theme(), "breeze", "Adwaita", "hicolor"]
 
     seen_paths: set[Path] = set()
@@ -207,9 +213,23 @@ def main() -> None:
             icon_path = find_icon_file(parsed.pop("icon_name"), theme_priority)
             icon_field = None
             if icon_path is not None:
-                dest = ICONS_DIR / f"{parsed['id']}{icon_path.suffix}"
+                dest = ICONS_DIR / f"{parsed['id']}.png"
                 if not dest.exists():
-                    shutil.copy(icon_path, dest)
+                    if icon_path.suffix == ".svg":
+                        # Every icon the app ships is PNG (see "Icon format"
+                        # in SPEC.md) — rasterize theme SVGs at copy time.
+                        # The system theme itself is the permanent source
+                        # for these (re-derivable any time by re-running
+                        # this scan), but archive a copy anyway for a
+                        # complete, uniform icon_sources/ collection.
+                        shutil.copy(icon_path, SVG_ARCHIVE / f"{parsed['id']}.svg")
+                        subprocess.run(
+                            ["magick", str(icon_path), "-background", "none",
+                             "-resize", "128x128", str(dest)],
+                            check=True,
+                        )
+                    else:
+                        shutil.copy(icon_path, dest)
                 icon_field = dest.name
                 icons_copied += 1
             else:

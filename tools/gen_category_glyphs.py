@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
-"""Generate the 10 generic per-category fallback glyphs as plain SVG.
+"""Generate the 10 generic per-category fallback glyphs (plus the CLI-tool
+glyph) as PNG — the uniform format every icon in the app ships as (see
+"Icon format" in SPEC.md).
 
-These are used only when a catalog entry's own icon is missing (see
-sync_icons.py). Hand-authored here instead of sourced from UXWing/SvgRepo:
-zero licensing questions, zero network dependency, trivially reproducible.
-One-off script, not run by the app.
+Authored as SVG first, since a rounded-rect-plus-label vector is much
+easier to hand-tweak than raw pixels, then rasterized to PNG via
+ImageMagick (`magick`). The SVG source is archived to
+tools/icon_sources/category/ — not shipped with the app, just kept
+around because it's the losslessly-editable original if these ever need
+retouching, unlike the rasterized PNG.
+
+Hand-authored instead of sourced from UXWing/SvgRepo: zero licensing
+questions, zero network dependency, trivially reproducible. One-off
+script, not run by the app.
 """
+import subprocess
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "src" / "assets" / "icons" / "category"
+SVG_ARCHIVE = ROOT / "tools" / "icon_sources" / "category"
 
 # category -> (background color, short label)
 GLYPHS = {
@@ -44,17 +54,28 @@ CLI_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" view
 """
 
 
+def write_glyph(name: str, svg: str) -> None:
+    svg_path = SVG_ARCHIVE / f"{name}.svg"
+    svg_path.write_text(svg)
+    subprocess.run(
+        ["magick", str(svg_path), "-background", "none", "-resize", "128x128", str(OUT / f"{name}.png")],
+        check=True,
+    )
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
     for category, (color, label) in GLYPHS.items():
         font_size = 16 if len(label) <= 3 else 13
         # Text content in SVG is XML — a raw "<" (as in the "</>" label)
         # would otherwise start what looks like a tag, making the file
         # invalid XML that silently fails to render.
         svg = SVG_TEMPLATE.format(color=color, label=escape(label), font_size=font_size)
-        (OUT / f"{category}.svg").write_text(svg)
-    (OUT / "cli-tool.svg").write_text(CLI_SVG)
-    print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph to {OUT.relative_to(ROOT)}")
+        write_glyph(category, svg)
+    write_glyph("cli-tool", CLI_SVG)
+    print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph "
+          f"to {OUT.relative_to(ROOT)} (SVG sources archived in {SVG_ARCHIVE.relative_to(ROOT)})")
 
 
 if __name__ == "__main__":
