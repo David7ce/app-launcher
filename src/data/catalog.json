@@ -22,7 +22,7 @@
       "windows": "claude-code",
       "macos": "Claude Code"
     },
-    "icon": "claude-code.png",
+    "icon": "claude-code.svg",
     "hidden": false,
     "cli": false
   },
@@ -64,7 +64,7 @@
       "windows": "dbeaver-ce",
       "macos": "Dbeaver Community"
     },
-    "icon": "dbeaver.png",
+    "icon": "dbeaver.svg",
     "hidden": false,
     "cli": false
   },
@@ -217,7 +217,7 @@
       "windows": "insomnia",
       "macos": "Insomnia"
     },
-    "icon": "insomnia.png",
+    "icon": "insomnia.svg",
     "hidden": false,
     "cli": false
   },
@@ -231,7 +231,7 @@
       "windows": "intellij-idea-community-edition",
       "macos": "Intellij Idea"
     },
-    "icon": "intellij-idea.png",
+    "icon": "intellij-idea.svg",
     "hidden": false,
     "cli": false
   },
@@ -520,7 +520,7 @@
       "windows": "qt-creator",
       "macos": "Qt Creator"
     },
-    "icon": "qt.png",
+    "icon": "qt.svg",
     "hidden": false,
     "cli": false
   },
@@ -631,7 +631,7 @@
       "windows": "vagrant",
       "macos": "Vagrant"
     },
-    "icon": "vagrant.png",
+    "icon": "vagrant.svg",
     "hidden": false,
     "cli": false
   },
@@ -671,7 +671,7 @@
       "windows": "codium",
       "macos": "Vscodium"
     },
-    "icon": "vscodium.png",
+    "icon": "vscodium.svg",
     "hidden": false,
     "cli": false
   },
@@ -698,7 +698,7 @@
       "linux": "xampp",
       "windows": "xampp"
     },
-    "icon": "xampp.png",
+    "icon": "xampp.svg",
     "hidden": false,
     "cli": false
   },
@@ -780,7 +780,7 @@
       "windows": "com.heroicgameslauncher.hgl",
       "macos": "Heroic"
     },
-    "icon": "heroic-games-launcher.png",
+    "icon": "heroic-games-launcher.svg",
     "hidden": false,
     "cli": false
   },
@@ -1057,7 +1057,7 @@
       "windows": "inkscape",
       "macos": "Inkscape"
     },
-    "icon": "inkscape.png",
+    "icon": "inkscape.svg",
     "hidden": false,
     "cli": false
   },
@@ -1083,7 +1083,7 @@
       "windows": "krita",
       "macos": "Krita"
     },
-    "icon": "krita.png",
+    "icon": "krita.svg",
     "hidden": false,
     "cli": false
   },
@@ -1654,7 +1654,7 @@
       "windows": "torbrowser-launcher",
       "macos": "Tor Browser"
     },
-    "icon": "tor-browser.png",
+    "icon": "tor-browser.svg",
     "hidden": false,
     "cli": false
   },
@@ -1737,7 +1737,7 @@
       "linux": "ardour",
       "macos": "Ardour"
     },
-    "icon": "ardour.png",
+    "icon": "ardour.svg",
     "hidden": false,
     "cli": false
   },
@@ -1816,7 +1816,7 @@
     "bin": {
       "linux": "davinci-resolve"
     },
-    "icon": "davinci-resolve.png",
+    "icon": "davinci-resolve.svg",
     "hidden": false,
     "cli": false
   },
@@ -1855,7 +1855,7 @@
       "windows": "ffmpeg-free",
       "macos": "Ffmpeg"
     },
-    "icon": "ffmpeg.png",
+    "icon": "ffmpeg.svg",
     "hidden": false,
     "cli": false
   },
@@ -1972,7 +1972,7 @@
       "windows": "kdenlive",
       "macos": "Kdenlive"
     },
-    "icon": "kdenlive.png",
+    "icon": "kdenlive.svg",
     "hidden": false,
     "cli": false
   },
@@ -2092,7 +2092,7 @@
       "windows": "obs-studio",
       "macos": "Obs"
     },
-    "icon": "obs-studio.png",
+    "icon": "obs-studio.svg",
     "hidden": false,
     "cli": false
   },
@@ -3229,7 +3229,7 @@
       "linux": "distrobox",
       "macos": "Distrobox"
     },
-    "icon": "distrobox.png",
+    "icon": "distrobox.svg",
     "hidden": false,
     "cli": false
   },
@@ -3680,7 +3680,7 @@
       "windows": "teamviewer",
       "macos": "Teamviewer"
     },
-    "icon": "teamviewer.png",
+    "icon": "teamviewer.svg",
     "hidden": false,
     "cli": false
   },
@@ -3771,7 +3771,7 @@
       "linux": "wine",
       "macos": "Wine"
     },
-    "icon": "wine.png",
+    "icon": "wine.svg",
     "hidden": false,
     "cli": false
   },
@@ -3840,7 +3840,7 @@
       "windows": "alacritty",
       "macos": "Alacritty"
     },
-    "icon": "alacritty.png",
+    "icon": "alacritty.svg",
     "hidden": false,
     "cli": false
   },
@@ -4481,7 +4481,7 @@
       "windows": "starship",
       "macos": "Starship"
     },
-    "icon": "starship.png",
+    "icon": "starship.svg",
     "hidden": false,
     "cli": false
   },
@@ -4535,7 +4535,7 @@
     "bin": {
       "linux": "gnome-terminal"
     },
-    "icon": "gnome-terminal.png",
+    "icon": "gnome-terminal.svg",
     "hidden": false,
     "cli": false
   },
@@ -4627,7 +4627,7 @@
       "windows": "wezterm",
       "macos": "Wezterm"
     },
-    "icon": "wezterm.png",
+    "icon": "wezterm.svg",
     "hidden": false,
     "cli": false
   },

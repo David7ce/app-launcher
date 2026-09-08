@@ -14,6 +14,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SOURCES = ROOT / "tools" / "sources"
 OUT = ROOT / "src" / "data" / "catalog.json"
+ICONS_DIR = ROOT / "src" / "assets" / "icons"
+
+
+def default_icon(app_id: str) -> str:
+    # sync_icons.py may have vendored either a dashboard-icons PNG or an
+    # Iconify SVG (or neither yet) — point at whichever actually exists so
+    # the frontend's onerror fallback isn't the only thing standing between
+    # a real icon and the generic category glyph.
+    if (ICONS_DIR / f"{app_id}.svg").exists():
+        return f"{app_id}.svg"
+    return f"{app_id}.png"
 
 # Preference order for guessing a Linux executable name from the dataset's
 # package identifiers. Package name often equals the binary name but not
@@ -174,7 +185,7 @@ def main() -> None:
             "vendor": "",
             "category": category,
             "bin": build_bin(pkg_manager, bin_name, app_id),
-            "icon": ICON_OVERRIDES.get(app_id, f"{app_id}.png"),
+            "icon": ICON_OVERRIDES.get(app_id, default_icon(app_id)),
             "hidden": False,
             "cli": is_cli(app_id, entry.get("subcategory")),
         }
@@ -188,7 +199,7 @@ def main() -> None:
             "vendor": entry.get("vendor", ""),
             "category": entry["category"],
             "bin": entry["bin"],
-            "icon": entry.get("icon", f"{entry['id']}.png"),
+            "icon": entry.get("icon", default_icon(entry["id"])),
             "hidden": False,
             "cli": entry.get("cli", False),
         }

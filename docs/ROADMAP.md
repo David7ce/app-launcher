@@ -73,15 +73,50 @@ Next item in the Phase 2 backlog, and the only remaining one fully testable on t
 - [x] Updated both `.desktop` shortcuts (`~/Desktop/AppLauncher.desktop`, `~/.local/share/applications/app-launcher.desktop`) to point at the renamed `target/release/app-launcher` binary.
 - **Not done**: actually installing the RPM system-wide (`sudo rpm -i ...`) — needs `sudo`, not run this session. First real install-and-launch-from-menu is still an open verification step for whenever that's wanted.
 
+## Phase 2.3 — In-app editor for hide/rename/recategorize (done)
+
+`catalog.json` is bundled/read-only once installed, so edits go into a small per-user `overrides.json` (OS-standard app config dir) instead, applied on top at render time — see `SPEC.md` "In-app editor" for the full design.
+
+- [x] Rust: `load_overrides`/`save_overrides` commands, reading/writing `overrides.json` in `app.path().app_config_dir()`.
+- [x] Frontend: `#edit-toggle` header button; per-tile hover toolbar (hide ✕, edit ✎ → inline rename/recategorize form with save ✓/cancel ✕/reset ↺); a "Hidden apps" panel with Unhide buttons so hiding isn't a one-way trap.
+- [x] UX follow-up requested immediately after: edit-form buttons switched from text labels to icons-only (✓/✕/↺) to save space; Escape now cancels an open form, or exits edit mode entirely if none is open.
+- **Not verified**: click-through interaction testing — no input-automation tool (`xdotool`/`ydotool`) is available in this environment, so the click handlers, form swap, and persistence round-trip are verified by code review and by confirming the app config directory gets created on startup (proving the Rust path-resolution half works), not by actually clicking through the UI.
+
+## Phase 2.4 — Broader icon coverage (done)
+
+- [x] Added a second automated tier to `sync_icons.py`: Iconify's `simple-icons` set (CC0 brand marks) via the public render endpoint, tried under a couple of slug variants, for anything dashboard-icons misses. Skips `cli: true` entries and Apple/Microsoft placeholders (no `linux` bin) since they can never display an icon here anyway.
+- [x] **Real bug found and fixed**: jsDelivr was rate-limiting concurrent requests with a `403` indistinguishable from a genuine 404 miss — an early pass wrongly marked `vlc`, `obs-studio`, `wine`, `teamviewer`, `kdenlive` and others as absent from dashboard-icons. Fixed with retry+backoff on non-404 failures and lower concurrency (16 → 6 workers).
+- [x] **Second real bug found and fixed**: `build_catalog.py` always wrote `<id>.png` into `catalog.json`'s `icon` field regardless of what `sync_icons.py` actually vendored, so entries that got an Iconify `.svg` (e.g. `gnome-terminal`) silently fell back to the category glyph even though a real icon existed on disk. Fixed with a `default_icon()` helper that checks which extension actually exists before writing the field.
+- **Result**: 176/291 Linux-relevant, non-CLI catalog entries now have a real vendored icon (up from 108/270 at the end of Phase 1.1), plus everything the Phase 1.2 system scan resolves directly from the local icon theme on top of that.
+
+## Phase 2.2 — Installer packaging (done, Linux-verified)
+
+Next item in the Phase 2 backlog, and the only remaining one fully testable on this machine.
+
+- [x] **`cargo tauri build`** configured with `bundle.targets: ["appimage", "rpm"]` (not `"all"` — `.deb` needs Debian's `dpkg-deb`, not native to Fedora), `bundle.category: "Utility"`, `bundle.shortDescription` set.
+- [x] **Renamed the Cargo package** `app` → `app-launcher` so the installed binary is `/usr/bin/app-launcher`, not the dangerously generic `/usr/bin/app` the default scaffold would have shipped in a real system package.
+- [x] **Real bug hit and fixed**: `cargo tauri build` failed on the AppImage target (`failed to run linuxdeploy`) — root cause only visible with `--verbose`: linuxdeploy's bundled `strip` is too old to parse the `.relr.dyn` section this machine's very-new Fedora toolchain emits, so it failed to strip *any* library and gave up. Fixed with `NO_STRIP=1 cargo tauri build` (skips the strip step entirely).
+- [x] **Filled in real package metadata** in `Cargo.toml` (description, author, MIT license, repository URL) — was still the scaffold's placeholder `"A Tauri App"`/`authors = ["you"]`/empty license.
+- [x] **Verified**: both `app-launcher_0.1.0_amd64.AppImage` (~111MB) and `app-launcher-0.1.0-1.x86_64.rpm` (~6.7MB) build successfully; ran the AppImage directly and screenshotted the working UI; inspected the RPM's metadata and file list (`rpm -qip`/`rpm -qlp`).
+- [x] Updated both `.desktop` shortcuts (`~/Desktop/AppLauncher.desktop`, `~/.local/share/applications/app-launcher.desktop`) to point at the renamed `target/release/app-launcher` binary.
+- **Not done locally**: actually installing the RPM system-wide (`sudo rpm -i ...`) — needs `sudo`, not run this session.
+
+## Phase 2.6 — CI: build and publish installers for every platform (done)
+
+User asked to publish real binary installers for Windows, macOS, and Linux (`.deb`/`.rpm`/pacman) via a GitHub Actions workflow, then added AppImage (already covered) and Flatpak. Full design in `SPEC.md` "CI: build and publish installers".
+
+- [x] `.github/workflows/release.yml`: 5 independent jobs — `tauri-bundles` (matrix ubuntu/windows/macos via `tauri-action`), `arch-package` (PKGBUILD via `makepkg` in an Arch container), `flatpak-bundle` (`flatpak-builder` action). Triggers on version tags or manual `workflow_dispatch` (draft prerelease, so it's testable without cutting a real release).
+- [x] `packaging/arch/PKGBUILD` (git-sourced from `master`, `pkgver()` derived from git history) and `packaging/flatpak/dev.d7.app-launcher.json` (org.gnome.Platform//47 + rust-stable SDK extension, built with network access allowed — not Flathub-compliant, deliberately, see SPEC.md).
+- [x] **Two real runs, watched live via `gh run view`**: first run — 4/5 jobs succeeded (Linux, Windows, macOS, Arch); Flatpak failed (`gnome-46`'s bundled Cargo too old for a dependency needing edition2024 — GNOME 46 is also EOL). Fixed by bumping to `gnome-47` (checked the tag actually exists via Docker Hub's API first). Second run — **all 5 jobs succeeded**.
+- **Significant side effect**: this is the first time the Windows/macOS Rust code from Phase 2.1 has actually been compiled on real Windows/macOS runners — both succeeded, which is real (if partial — build-only, not runtime) verification that code was previously only "reviewed, never tested."
+- **Not done**: installing/running any of the built packages on a real system; submitting the Flatpak to Flathub (would need a compliant offline/sandboxed rebuild, a separate undertaking).
+
 ## Phase 2 — Remaining, not started
 
-Ideas parked, in the order the user will likely pick them up next — do not build until explicitly requested:
-
-- Optional in-app minimal editor for hide/rename/recategorize, replacing hand-editing JSON, if that turns out to be annoying in practice.
-- Broader icon coverage pass (Iconify integration proper, or Magnific AI for specific remaining gaps) if the current dashboard-icons + breeze-icons + CLI-glyph coverage still feels thin in practice.
 - A Windows/macOS equivalent of `scan_system_apps.py` (Start Menu/registry scan, Spotlight/`mdfind`) if the current dataset-heuristic-only coverage on those OSes proves too thin once actually tested on real hardware.
-- Actually installing/testing the `.rpm` package system-wide, and building/testing a `.deb` if ever done from a Debian-family machine.
+- Actually installing/testing the `.rpm`/`.deb`/Arch package/Flatpak on a real system, and cutting a real version-tagged release (current testing has only used manual `workflow_dispatch` dev builds).
+- A Flathub-compliant Flatpak rebuild (offline/sandboxed via `cargo-sources.json`) if actually submitting to Flathub is ever wanted.
 
 ## Decisions already made (do not re-litigate without new information)
 
-See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, 10 freedesktop-style categories, single hand-edited `catalog.json` as source of truth, no runtime scanning (the app only ever does a targeted `is_installed` PATH/bundle check against the pre-built catalog). The catalog itself is now built from three merged sources: the curated dataset, hand-written vendor entries, and — as of Phase 1.2 — an offline scan of this machine's own `.desktop` files, which also wins as the primary icon source (system theme → dashboard-icons/Iconify → manual fallbacks, all still resolved offline ahead of time, never at runtime). A final `EXCLUDED_IDS` filter (Phase 1.3) drops known low-value/duplicate entries regardless of source. `#categories` uses CSS multi-column (not grid) specifically so category cards balance across columns instead of row-locking to the tallest one. As of Phase 2.1, `bin` is a per-OS object and the Rust backend dispatches per-OS launch logic — Linux is the only platform this has actually been run on. As of Phase 2.2, the Cargo package is named `app-launcher` (not `app`) and `cargo tauri build` needs `NO_STRIP=1` on this machine.
+See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, 10 freedesktop-style categories, single hand-edited `catalog.json` as source of truth, no runtime scanning (the app only ever does a targeted `is_installed` PATH/bundle check against the pre-built catalog). The catalog itself is now built from three merged sources: the curated dataset, hand-written vendor entries, and — as of Phase 1.2 — an offline scan of this machine's own `.desktop` files, which also wins as the primary icon source (system theme → dashboard-icons/Iconify → manual fallbacks, all still resolved offline ahead of time, never at runtime). A final `EXCLUDED_IDS` filter (Phase 1.3) drops known low-value/duplicate entries regardless of source. `#categories` uses CSS multi-column (not grid) specifically so category cards balance across columns instead of row-locking to the tallest one. As of Phase 2.1, `bin` is a per-OS object and the Rust backend dispatches per-OS launch logic — Linux is the only platform this has been *run* on, though CI (Phase 2.6) has *compiled and bundled* it on real Windows/macOS runners. As of Phase 2.2, the Cargo package is named `app-launcher` (not `app`) and `cargo tauri build` needs `NO_STRIP=1` on this machine. As of Phase 2.3, user edits (hide/rename/recategorize) live in a separate per-user `overrides.json`, not in `catalog.json` itself — the shipped file stays read-only-safe for a packaged install. As of Phase 2.6, `.github/workflows/release.yml` builds and publishes installers for every platform (Windows/macOS/Linux/Arch/Flatpak) on a tag push or manual dispatch.
