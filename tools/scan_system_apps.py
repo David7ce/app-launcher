@@ -129,6 +129,15 @@ def find_icon_file(icon_value: str, theme_priority: list[str]) -> Path | None:
                 hits += list(theme_dir.glob(f"**/apps/{icon_value}.{ext}"))
                 # breeze-style: apps/<size>/<name>.<ext>
                 hits += list(theme_dir.glob(f"apps/**/{icon_value}.{ext}"))
+            if not hits:
+                # Not every app icon lives under "apps" — e.g. KDE's Emoji
+                # Selector uses Icon=preferences-desktop-emoticons, which
+                # only exists under .../preferences/<size>/. Fall back to
+                # matching the exact name anywhere in the theme rather than
+                # missing a real icon just because of which subdirectory
+                # convention its own app happened to file it under.
+                for ext in ("svg", "png"):
+                    hits += list(theme_dir.glob(f"**/{icon_value}.{ext}"))
             if hits:
                 svgs = [h for h in hits if h.suffix == ".svg"]
                 return svgs[0] if svgs else hits[0]

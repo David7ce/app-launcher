@@ -7,6 +7,13 @@
     "icon": "btop.svg"
   },
   {
+    "id": "chromium-browser",
+    "name": "Chromium Web Browser",
+    "bin": "chromium-browser",
+    "category": "Internet",
+    "icon": "chromium-browser.png"
+  },
+  {
     "id": "code",
     "name": "Visual Studio Code",
     "bin": "code",
@@ -88,7 +95,7 @@
     "name": "KMail Import Wizard",
     "bin": "akonadiimportwizard",
     "category": "Utilities",
-    "icon": "org.kde.akonadiimportwizard.png"
+    "icon": "org.kde.akonadiimportwizard.svg"
   },
   {
     "id": "org.kde.akregator",
@@ -144,7 +151,7 @@
     "name": "Crashed Processes Viewer",
     "bin": "drkonqi-coredump-gui",
     "category": "System",
-    "icon": null
+    "icon": "org.kde.drkonqi.coredump.gui.svg"
   },
   {
     "id": "org.kde.elisa",
@@ -214,7 +221,7 @@
     "name": "KDebugSettings",
     "bin": "kdebugsettings",
     "category": "Development",
-    "icon": null
+    "icon": "org.kde.kdebugsettings.svg"
   },
   {
     "id": "org.kde.kdeconnect.app",
@@ -431,14 +438,14 @@
     "name": "Welcome Center",
     "bin": "plasma-welcome",
     "category": "Utilities",
-    "icon": null
+    "icon": "org.kde.plasma-welcome.svg"
   },
   {
     "id": "org.kde.plasma.emojier",
     "name": "Emoji Selector",
     "bin": "plasma-emojier",
     "category": "Utilities",
-    "icon": null
+    "icon": "org.kde.plasma.emojier.svg"
   },
   {
     "id": "org.kde.qrca",
@@ -492,7 +499,7 @@
   {
     "id": "app-launcher",
     "name": "App Launcher",
-    "bin": "app",
+    "bin": "app-launcher",
     "category": "Utilities",
     "icon": "app-launcher.png"
   },

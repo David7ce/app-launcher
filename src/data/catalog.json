@@ -1294,6 +1294,18 @@
     "cli": false
   },
   {
+    "id": "chromium-browser",
+    "name": "Chromium Web Browser",
+    "vendor": "",
+    "category": "Internet",
+    "bin": {
+      "linux": "chromium-browser"
+    },
+    "icon": "chromium-browser.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "discord",
     "name": "Discord",
     "vendor": "",
@@ -3985,7 +3997,7 @@
     "bin": {
       "linux": "plasma-emojier"
     },
-    "icon": "org.kde.plasma.emojier.png",
+    "icon": "org.kde.plasma.emojier.svg",
     "hidden": false,
     "cli": false
   },
