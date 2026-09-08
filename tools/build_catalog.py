@@ -113,6 +113,40 @@ def build_bin(pkg_manager: dict, linux_bin: str, app_id: str) -> dict[str, str]:
     return bin_obj
 
 
+def load_json_list(path: Path) -> list[dict]:
+    return json.loads(path.read_text()) if path.exists() else []
+
+
+def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str) -> int:
+    # Shared by all three system scans (Linux/Windows/macOS): a locally-
+    # scanned entry is ground truth for its OS, so it wins the name/icon/
+    # category for that bin — but it only overwrites its *own* slot in the
+    # per-OS `bin` object, preserving whatever the dataset/vendor guess had
+    # for the other two OSes (see the Firefox/VS Code bug this fixed for
+    # the Linux scan — same fix applies here by construction, not by luck).
+    new_count = 0
+    for entry in entries:
+        if entry["id"] in EXCLUDED_IDS:
+            continue
+        key = entry["bin"]
+        existing = by_bin.get(key)
+        if existing is None:
+            new_count += 1
+        bin_obj = dict(existing["bin"]) if existing else {}
+        bin_obj[os_key] = entry["bin"]
+        by_bin[key] = {
+            "id": entry["id"],
+            "name": entry["name"],
+            "vendor": "",
+            "category": entry["category"],
+            "bin": bin_obj,
+            "icon": entry["icon"] or f"{entry['id']}.png",
+            "hidden": False,
+            "cli": False,
+        }
+    return new_count
+
+
 def dedupe_key(entry: dict) -> str | None:
     # Linux first: it's the one platform this app actually runs and gets
     # tested on. Falling back to windows/macos still catches a collision
@@ -166,8 +200,9 @@ def main() -> None:
     desktop_pkgs = json.loads((SOURCES / "desktop-pkgs.json").read_text())["packages"]
     vendor_apps = json.loads((SOURCES / "vendor_apps.json").read_text())["apps"]
     cat_map = json.loads((SOURCES / "category_map.json").read_text())
-    system_apps_path = SOURCES / "system_apps.json"
-    system_apps = json.loads(system_apps_path.read_text()) if system_apps_path.exists() else []
+    system_apps = load_json_list(SOURCES / "system_apps.json")
+    system_apps_windows = load_json_list(SOURCES / "system_apps_windows.json")
+    system_apps_macos = load_json_list(SOURCES / "system_apps_macos.json")
 
     catalog: dict[str, dict] = {}
     skipped_no_linux_bin = []
@@ -217,35 +252,16 @@ def main() -> None:
         else:
             dropped_dupes.append((entry["id"], key, existing["id"]))
 
-    # This machine's actual installed .desktop files are ground truth: a
-    # real name, a real system-theme icon, and a bin taken straight from
-    # Exec= rather than guessed from a package name. They always win over
-    # a dataset/vendor entry for the same bin, and add anything new.
-    # scan_system_apps.py only ever scans this Linux machine, so its `bin`
-    # is a flat string — merge it into the Linux slot of whatever per-OS
-    # object already existed for this bin (rather than replacing the whole
-    # object), so a dataset/vendor entry's windows/macos guess isn't lost
-    # just because the Linux side also happens to be locally installed.
-    new_from_system = 0
-    for entry in system_apps:
-        if entry["id"] in EXCLUDED_IDS:
-            continue
-        key = entry["bin"]
-        existing = by_bin.get(key)
-        if existing is None:
-            new_from_system += 1
-        bin_obj = dict(existing["bin"]) if existing else {}
-        bin_obj["linux"] = entry["bin"]
-        by_bin[key] = {
-            "id": entry["id"],
-            "name": entry["name"],
-            "vendor": "",
-            "category": entry["category"],
-            "bin": bin_obj,
-            "icon": entry["icon"] or f"{entry['id']}.png",
-            "hidden": False,
-            "cli": False,
-        }
+    # Each machine's actual installed apps are ground truth: a real name,
+    # a real system-theme icon, and a bin taken straight from the OS's own
+    # records rather than guessed from a package name. They always win over
+    # a dataset/vendor entry for the same bin, and add anything new. Only
+    # the scan matching the machine that generated these files will ever
+    # be non-empty for a given run (e.g. system_apps.json is always empty
+    # on a Windows machine, system_apps_windows.json always empty here).
+    new_from_system = merge_system_scan(by_bin, system_apps, "linux")
+    new_from_system += merge_system_scan(by_bin, system_apps_windows, "windows")
+    new_from_system += merge_system_scan(by_bin, system_apps_macos, "macos")
 
     result = sorted(
         (e for e in by_bin.values() if e["id"] not in EXCLUDED_IDS),
@@ -261,8 +277,9 @@ def main() -> None:
         print(f"dropped {len(dropped_dupes)} duplicate-bin entries (kept the other id):")
         for dropped_id, bin_name, kept_id in dropped_dupes:
             print(f"  {dropped_id!r} -> bin {bin_name!r} also used by {kept_id!r}")
-    if system_apps:
-        print(f"merged {len(system_apps)} locally-scanned apps ({new_from_system} new, "
+    total_system_apps = len(system_apps) + len(system_apps_windows) + len(system_apps_macos)
+    if total_system_apps:
+        print(f"merged {total_system_apps} locally-scanned apps ({new_from_system} new, "
               f"the rest replaced a dataset/vendor guess with the real local name+icon)")
 
 

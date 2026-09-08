@@ -111,11 +111,22 @@ User asked to publish real binary installers for Windows, macOS, and Linux (`.de
 - **Significant side effect**: this is the first time the Windows/macOS Rust code from Phase 2.1 has actually been compiled on real Windows/macOS runners — both succeeded, which is real (if partial — build-only, not runtime) verification that code was previously only "reviewed, never tested."
 - **Not done**: installing/running any of the built packages on a real system; submitting the Flatpak to Flathub (would need a compliant offline/sandboxed rebuild, a separate undertaking).
 
-## Phase 2 — Remaining, not started
+## Phase 2.5 — Windows/macOS system-scan equivalents (code done, unverified)
 
-- A Windows/macOS equivalent of `scan_system_apps.py` (Start Menu/registry scan, Spotlight/`mdfind`) if the current dataset-heuristic-only coverage on those OSes proves too thin once actually tested on real hardware.
+Last item in the original Phase 2 backlog. Analogous to `scan_system_apps.py`, one per OS — see `SPEC.md` "Windows/macOS system scans" for the full design and caveats.
+
+- [x] **`tools/scan_system_apps_macos.py`**: reads `Contents/Info.plist` from each `.app` bundle via `plistlib` (pure Python stdlib) for name/bin/category (`LSApplicationCategoryType` mapped to our 10 categories, same idea as freedesktop `Categories=`). **Partially verified**: `--self-test` builds a synthetic bundle in a temp dir and asserts the parsing logic reads it correctly — passed. That's real evidence the plist-reading code is correct, not evidence about real-world `/Applications` contents. Icon extraction not implemented (`.icns` → web-displayable needs macOS-only tools this machine doesn't have) — falls back to the category glyph.
+- [x] **`tools/scan_system_apps_windows.py`**: enumerates the registry's `Uninstall` keys via `winreg` for name/bin (best-effort extraction from `DisplayIcon`, since Uninstall entries aren't meant for launching). **Cannot be verified at all** — `winreg` doesn't exist on Linux, so unlike the macOS script there's no fixture-based self-test possible; reviewed carefully, `winreg` imported lazily so the file at least loads without crashing here, but genuinely untested code. No category concept exists in the registry, so everything defaults to Utilities.
+- [x] **`build_catalog.py` generalized**: extracted the Linux-specific merge logic into a shared `merge_system_scan(by_bin, entries, os_key)` used for all three scans. Confirmed via `git diff --stat` that re-running `build_catalog.py` after this refactor produces a byte-identical `catalog.json` — the generalization didn't change Linux behavior.
+
+## Phase 2 backlog: fully worked through
+
+Everything originally listed in Phase 2 (Windows/macOS support, installer packaging, in-app editor, broader icon coverage, CI publishing, Windows/macOS system scans) is now implemented, in every case as honestly as the available hardware allows — Linux fully verified by running the app; Windows/macOS verified only as far as "compiles and bundles in CI," with runtime behavior, real registry/plist quirks, and actual package installation all still open. Remaining ideas, not currently planned unless asked:
+
 - Actually installing/testing the `.rpm`/`.deb`/Arch package/Flatpak on a real system, and cutting a real version-tagged release (current testing has only used manual `workflow_dispatch` dev builds).
+- Running `scan_system_apps_windows.py`/`scan_system_apps_macos.py` on real hardware and merging the results in — right now neither has ever produced real output.
 - A Flathub-compliant Flatpak rebuild (offline/sandboxed via `cargo-sources.json`) if actually submitting to Flathub is ever wanted.
+- Windows icon extraction from an `.exe`'s embedded resources, and macOS `.icns` → web-displayable conversion — both skipped as out of reach without the respective OS's own tools.
 
 ## Decisions already made (do not re-litigate without new information)
 
