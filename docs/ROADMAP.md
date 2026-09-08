@@ -61,15 +61,27 @@ User asked to start Phase 2, prioritizing cross-platform support first (over the
 - **Verified**: rebuilt and re-ran on this Fedora/KDE machine after the refactor — same apps show, same icons, same launch behavior as before. That's the only platform actually tested.
 - **Not verified, flagged plainly**: any Windows or macOS behavior at all (no hardware to test on); GNOME/other-DE icon theme detection; flatpak/snap app scanning (in the scan list, zero installed here to exercise it).
 
+## Phase 2.2 — Installer packaging (done, Linux-verified)
+
+Next item in the Phase 2 backlog, and the only remaining one fully testable on this machine.
+
+- [x] **`cargo tauri build`** configured with `bundle.targets: ["appimage", "rpm"]` (not `"all"` — `.deb` needs Debian's `dpkg-deb`, not native to Fedora), `bundle.category: "Utility"`, `bundle.shortDescription` set.
+- [x] **Renamed the Cargo package** `app` → `app-launcher` so the installed binary is `/usr/bin/app-launcher`, not the dangerously generic `/usr/bin/app` the default scaffold would have shipped in a real system package.
+- [x] **Real bug hit and fixed**: `cargo tauri build` failed on the AppImage target (`failed to run linuxdeploy`) — root cause only visible with `--verbose`: linuxdeploy's bundled `strip` is too old to parse the `.relr.dyn` section this machine's very-new Fedora toolchain emits, so it failed to strip *any* library and gave up. Fixed with `NO_STRIP=1 cargo tauri build` (skips the strip step entirely).
+- [x] **Filled in real package metadata** in `Cargo.toml` (description, author, MIT license, repository URL) — was still the scaffold's placeholder `"A Tauri App"`/`authors = ["you"]`/empty license.
+- [x] **Verified**: both `app-launcher_0.1.0_amd64.AppImage` (~111MB) and `app-launcher-0.1.0-1.x86_64.rpm` (~6.7MB) build successfully; ran the AppImage directly and screenshotted the working UI; inspected the RPM's metadata and file list (`rpm -qip`/`rpm -qlp`).
+- [x] Updated both `.desktop` shortcuts (`~/Desktop/AppLauncher.desktop`, `~/.local/share/applications/app-launcher.desktop`) to point at the renamed `target/release/app-launcher` binary.
+- **Not done**: actually installing the RPM system-wide (`sudo rpm -i ...`) — needs `sudo`, not run this session. First real install-and-launch-from-menu is still an open verification step for whenever that's wanted.
+
 ## Phase 2 — Remaining, not started
 
 Ideas parked, in the order the user will likely pick them up next — do not build until explicitly requested:
 
-- Full installer packaging (`cargo tauri build` → `.rpm`/`.deb`/AppImage) — the desktop shortcut currently points straight at the debug/release binary, not a packaged bundle.
 - Optional in-app minimal editor for hide/rename/recategorize, replacing hand-editing JSON, if that turns out to be annoying in practice.
 - Broader icon coverage pass (Iconify integration proper, or Magnific AI for specific remaining gaps) if the current dashboard-icons + breeze-icons + CLI-glyph coverage still feels thin in practice.
 - A Windows/macOS equivalent of `scan_system_apps.py` (Start Menu/registry scan, Spotlight/`mdfind`) if the current dataset-heuristic-only coverage on those OSes proves too thin once actually tested on real hardware.
+- Actually installing/testing the `.rpm` package system-wide, and building/testing a `.deb` if ever done from a Debian-family machine.
 
 ## Decisions already made (do not re-litigate without new information)
 
-See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, 10 freedesktop-style categories, single hand-edited `catalog.json` as source of truth, no runtime scanning (the app only ever does a targeted `is_installed` PATH/bundle check against the pre-built catalog). The catalog itself is now built from three merged sources: the curated dataset, hand-written vendor entries, and — as of Phase 1.2 — an offline scan of this machine's own `.desktop` files, which also wins as the primary icon source (system theme → dashboard-icons/Iconify → manual fallbacks, all still resolved offline ahead of time, never at runtime). A final `EXCLUDED_IDS` filter (Phase 1.3) drops known low-value/duplicate entries regardless of source. `#categories` uses CSS multi-column (not grid) specifically so category cards balance across columns instead of row-locking to the tallest one. As of Phase 2.1, `bin` is a per-OS object and the Rust backend dispatches per-OS launch logic — Linux is the only platform this has actually been run on.
+See [`SPEC.md`](SPEC.md) for full rationale. Short version: Tauri + plain HTML/CSS/JS, 10 freedesktop-style categories, single hand-edited `catalog.json` as source of truth, no runtime scanning (the app only ever does a targeted `is_installed` PATH/bundle check against the pre-built catalog). The catalog itself is now built from three merged sources: the curated dataset, hand-written vendor entries, and — as of Phase 1.2 — an offline scan of this machine's own `.desktop` files, which also wins as the primary icon source (system theme → dashboard-icons/Iconify → manual fallbacks, all still resolved offline ahead of time, never at runtime). A final `EXCLUDED_IDS` filter (Phase 1.3) drops known low-value/duplicate entries regardless of source. `#categories` uses CSS multi-column (not grid) specifically so category cards balance across columns instead of row-locking to the tallest one. As of Phase 2.1, `bin` is a per-OS object and the Rust backend dispatches per-OS launch logic — Linux is the only platform this has actually been run on. As of Phase 2.2, the Cargo package is named `app-launcher` (not `app`) and `cargo tauri build` needs `NO_STRIP=1` on this machine.
