@@ -208,7 +208,7 @@ section.category h2 .category-icon {
   height: 34px;
   border-radius: 8px;
   object-fit: contain;
-  background: var(--bg);
+  background: transparent;
 }
 
 .tile span {
@@ -280,7 +280,7 @@ section.category h2 .category-icon {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: var(--bg);
+  background: transparent;
 }
 
 .tile-edit-form .edit-name,
