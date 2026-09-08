@@ -1,0 +1,135 @@
+name: Build and publish installers
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  tauri-bundles:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: ubuntu-latest
+            args: "--bundles deb,rpm,appimage"
+          - platform: windows-latest
+            args: "--bundles nsis,msi"
+          - platform: macos-latest
+            args: "--bundles dmg,app"
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Compute release tag
+        id: tag
+        shell: bash
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # linuxdeploy bundles an old `strip` that can't parse the
+          # .relr.dyn section newer toolchains emit -- skip stripping
+          # rather than have the whole AppImage bundle fail (see SPEC.md
+          # "Installer packaging").
+          NO_STRIP: 1
+        with:
+          tagName: ${{ steps.tag.outputs.tag }}
+          releaseName: "App Launcher ${{ steps.tag.outputs.tag }}"
+          releaseBody: "Automated build. See assets below for installers."
+          releaseDraft: true
+          prerelease: ${{ steps.tag.outputs.prerelease }}
+          args: ${{ matrix.args }}
+
+  arch-package:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install build dependencies
+        run: pacman -Syu --noconfirm --needed base-devel git rust webkit2gtk-4.1 sudo
+
+      - uses: actions/checkout@v4
+
+      - name: Build package as non-root user
+        run: |
+          useradd -m builder
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          su builder -c "cd '$GITHUB_WORKSPACE/packaging/arch' && makepkg -f --noconfirm"
+
+      - name: Compute release tag
+        id: tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "App Launcher ${{ steps.tag.outputs.tag }}"
+          draft: true
+          prerelease: ${{ steps.tag.outputs.prerelease }}
+          files: packaging/arch/*.pkg.tar.zst
+
+  flatpak-bundle:
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: app-launcher.flatpak
+          manifest-path: packaging/flatpak/dev.d7.app-launcher.json
+          cache: false
+
+      - name: Compute release tag
+        id: tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "App Launcher ${{ steps.tag.outputs.tag }}"
+          draft: true
+          prerelease: ${{ steps.tag.outputs.prerelease }}
+          files: app-launcher.flatpak

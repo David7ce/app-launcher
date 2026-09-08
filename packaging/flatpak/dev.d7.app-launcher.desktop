@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=App Launcher
+Comment=Categorized home dashboard for launching installed desktop apps
+Exec=app-launcher
+Icon=dev.d7.app-launcher
+Terminal=false
+Categories=Utility;

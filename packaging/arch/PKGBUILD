@@ -1,0 +1,35 @@
+# Maintainer: David7ce
+# Builds from the master branch (not a fixed release tarball), so pkgver is
+# derived from the git history rather than pinned to a version tag -- this
+# is deliberate for now (no PKGBUILD-vs-Cargo.toml version to keep in sync)
+# and is the standard pattern for a git-sourced PKGBUILD.
+pkgname=app-launcher
+pkgver=r1
+pkgrel=1
+pkgdesc="Categorized home dashboard for launching installed desktop apps"
+arch=('x86_64')
+url="https://github.com/David7ce/app-launcher"
+license=('MIT')
+depends=('webkit2gtk-4.1' 'gtk3')
+makedepends=('rust' 'git')
+provides=('app-launcher')
+conflicts=('app-launcher')
+source=("app-launcher::git+https://github.com/David7ce/app-launcher.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd app-launcher
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd app-launcher/src-tauri
+  cargo build --release --locked
+}
+
+package() {
+  cd app-launcher
+  install -Dm755 "src-tauri/target/release/app-launcher" "$pkgdir/usr/bin/app-launcher"
+  install -Dm644 "src-tauri/icons/icon.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/app-launcher.png"
+  install -Dm644 "packaging/linux/app-launcher.desktop" "$pkgdir/usr/share/applications/app-launcher.desktop"
+}

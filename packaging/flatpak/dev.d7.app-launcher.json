@@ -1,0 +1,36 @@
+{
+  "app-id": "dev.d7.app-launcher",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "46",
+  "sdk": "org.gnome.Sdk",
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
+  "command": "app-launcher",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--device=dri"
+  ],
+  "build-options": {
+    "append-path": "/usr/lib/sdk/rust-stable/bin",
+    "build-args": ["--share=network"]
+  },
+  "modules": [
+    {
+      "name": "app-launcher",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cargo build --release --manifest-path=src-tauri/Cargo.toml",
+        "install -Dm755 src-tauri/target/release/app-launcher /app/bin/app-launcher",
+        "install -Dm644 src-tauri/icons/icon.png /app/share/icons/hicolor/512x512/apps/dev.d7.app-launcher.png",
+        "install -Dm644 packaging/flatpak/dev.d7.app-launcher.desktop /app/share/applications/dev.d7.app-launcher.desktop"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "../.."
+        }
+      ]
+    }
+  ]
+}
