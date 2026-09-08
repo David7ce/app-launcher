@@ -67,6 +67,28 @@ header h1 {
   outline-offset: -1px;
 }
 
+#edit-toggle {
+  justify-self: end;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#edit-toggle:hover {
+  background: var(--tile-hover);
+}
+
+#edit-toggle.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
 #error-banner {
   margin: 12px 28px 0;
   padding: 10px 14px;
@@ -197,8 +219,138 @@ section.category h2 .category-icon {
   overflow-wrap: anywhere;
 }
 
-.tile[hidden] {
+.tile-wrapper {
+  position: relative;
+}
+
+.tile-wrapper[hidden] {
   display: none;
+}
+
+.tile-toolbar {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.tile-wrapper:hover .tile-toolbar {
+  opacity: 1;
+}
+
+.tile-action {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tile-action:hover {
+  background: var(--tile-hover);
+}
+
+.tile-hide:hover {
+  background: var(--error-bg);
+  color: var(--error-fg);
+  border-color: var(--error-fg);
+}
+
+.tile-edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  background: var(--tile-hover);
+}
+
+.tile-edit-form img {
+  align-self: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.tile-edit-form .edit-name,
+.tile-edit-form .edit-category {
+  width: 100%;
+  padding: 5px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 12px;
+}
+
+.edit-form-buttons {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.edit-form-buttons button {
+  flex: 1;
+  padding: 4px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.edit-save {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+.hidden-panel {
+  background: transparent;
+  border-style: dashed;
+}
+
+.hidden-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hidden-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.hidden-row button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hidden-empty {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
 }
 
 #empty-state,
