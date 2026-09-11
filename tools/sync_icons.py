@@ -89,8 +89,15 @@ def fetch_iconify(entry_id: str) -> bool:
             # other icon source — see "Icon format" in SPEC.md.
             svg_path = SVG_ARCHIVE / f"{entry_id}.svg"
             svg_path.write_bytes(resp.content)
+            # -density matters: without it, ImageMagick's built-in MSVG
+            # delegate (no rsvg-convert on this box) rasterizes at the
+            # SVG's native ~24x24 size and then -resize upscales that tiny
+            # bitmap, producing a blurry blob instead of a crisp glyph.
+            # Rendering at 384 DPI (72 * 128/24, simple-icons' viewBox is
+            # always 24x24) makes MSVG rasterize straight to full size.
             subprocess.run(
-                ["magick", str(svg_path), "-background", "none", "-resize", "128x128", str(dest)],
+                ["magick", "-density", "384", str(svg_path), "-background", "none",
+                 "-resize", "128x128", str(dest)],
                 check=True,
             )
             return True
