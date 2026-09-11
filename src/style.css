@@ -43,15 +43,8 @@ header {
   column-gap: 20px;
 }
 
-header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-  white-space: nowrap;
-  justify-self: start;
-}
-
 #search {
+  grid-column: 2;
   justify-self: stretch;
   width: 100%;
   padding: 8px 14px;
@@ -68,6 +61,7 @@ header h1 {
 }
 
 #edit-toggle {
+  grid-column: 3;
   justify-self: end;
   padding: 8px 14px;
   border-radius: 8px;
@@ -399,8 +393,9 @@ section.category h2 .category-icon {
     padding: 16px 16px 4px;
   }
 
-  header h1 {
-    justify-self: center;
+  #search,
+  #edit-toggle {
+    grid-column: 1;
   }
 
   main {
