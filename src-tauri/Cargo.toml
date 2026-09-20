@@ -24,6 +24,8 @@ log = "0.4"
 tauri = { version = "2.11.3", features = [] }
 tauri-plugin-log = "2"
 which = "6"
+# Encodes a fallback icon as a data: URL for the frontend (all OSes).
+base64 = "0.22"
 
 # Windows-only: resolve apps the registry knows about but $PATH doesn't.
 # `which` covers PATH + PATHEXT; the registry's App Paths key is how most
@@ -31,5 +33,3 @@ which = "6"
 # dialog / `start` lookup, and is invisible to a PATH search.
 [target.'cfg(windows)'.dependencies]
 winreg = "0.55"
-# Encodes the extracted icon PNG as a data: URL for the frontend.
-base64 = "0.22"
