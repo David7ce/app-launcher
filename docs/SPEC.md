@@ -106,6 +106,10 @@ Priority order, each tried in sequence per catalog entry, all resolved **once at
 
 Explicitly **not used for bulk/automated fetching**: SVGRepo — its icons are aggregated from many sources with mixed, icon-by-icon licensing and no site-wide grant, which is incompatible with an unattended sync script. Fine to use manually if a specific icon's license is checked first, but `sync_icons.py` should not scrape it.
 
+### Which entries are CLI tools
+
+`cli: true` decides whether a tile lives under CLI Tools and opens in a terminal. The rule is *does clicking it show anything*: a program that prints usage and exits (`git`, `bun`, `pandoc`, `nmap`, `starship`) or has no window needs the terminal wrapper. It is a hand-kept list (`CLI_ID_OVERRIDES` in `build_catalog.py`, applied to every entry including scan-created ones), not a PE-header check: darktable, scrcpy and UltraStar are *console-subsystem exes that are really GUI apps*, and would be misfiled. Interactive shells that already open fine (PowerShell, mitmproxy) are left as normal tiles.
+
 ### Shipped vs. generated on the machine
 
 Icons are **shipped, not generated per machine**: everything in
@@ -120,8 +124,8 @@ works offline, and looks the same everywhere. Two consequences worth knowing:
   when an `<img>` fails, `main.js` calls the `get_icon` command, which resolves
   the exe and runs `src-tauri/src/extract_icon.ps1` (the same script the scan
   uses) with `CREATE_NO_WINDOW`, caches the PNG under `app_cache_dir()/icons/`,
-  and returns a `data:` URL (already allowed by the CSP). A failed extraction
-  leaves a `<id>.none` marker so it isn't retried every launch. Linux and macOS
+  and returns a `data:` URL (already allowed by the CSP). Packaged (MSIX/UWP/Store) apps such as MusicBee and Microsoft Store have no exe: their AppID is `<family>!<app>`, and `extract_appx_icon.ps1` reads the package manifest's `Square44x44Logo` and picks the largest plain variant (`targetsize-256`, unplated preferred). An exe under `WindowsApps` is an app-execution alias (a 0-byte reparse point with no icon), so it takes that route too. A failed extraction
+  leaves a `<id>.none` marker so it isn't retried every launch — for a week, then it is retried. Linux and macOS
   return nothing and keep the category glyph — see `ROADMAP.md`.
 
 ### Icon format: PNG only, vector sources archived
@@ -166,7 +170,7 @@ Two Tauri commands, intentionally minimal, both taking a `PlatformBin { linux: O
 
 A `cli: true` entry has no window of its own — spawned directly, its output goes nowhere anyone can see and the process exits (or hangs) invisibly. `linux_terminal_spawn(bin)` instead tries a fixed list of terminal emulators in order (`konsole`, `gnome-terminal`, `xfce4-terminal`, `alacritty`, `kitty`, checked via `which::which`; `xterm` last since it's least likely to already be installed on a modern desktop) and runs the tool inside whichever is found first, wrapped as `bash -c "<bin>; echo; read -n1 -s -r -p 'Press any key to close...'"` so the window doesn't vanish the instant a quick command like `tree` finishes (xterm gets `-hold` instead, which does the same job natively). If no terminal is found at all, returns an error rather than silently failing. **Verified working**: manually confirmed via `konsole -e bash -c "tree /tmp; ..."` — real output, window stayed open with the close prompt, screenshotted.
 
-Windows gets the analogous `cmd /k <bin>` (stays open at an interactive prompt afterwards) — written by analogy with the Linux path and still **unverified** on real hardware. macOS is left as a bare `open -a` — `is_installed`'s `.app`-bundle check means a CLI tool essentially never shows as "installed" on macOS in the first place (CLI tools aren't `.app` bundles), so this path is rarely if ever reached there; not worth the extra complexity for a case that shouldn't come up.
+Windows gets the analogous `cmd /k <exe>` (stays open at a prompt afterwards), launched through `cmd /c start "" cmd /k <exe>` (`windows_cli_spawn`). **Verified on real hardware** by clicking the tiles in the running app (`tools/drive_app.js`). The `start` indirection matters: a direct `cmd /k` child inherits the app's null standard handles, reads EOF and closes the instant the program exits, so `pandoc`/`git` would flash and vanish. The exe is resolved to a full path first (`cmd` ignores App Paths, and Node.js is only reachable through the Start Menu). macOS is left as a bare `open -a` — `is_installed`'s `.app`-bundle check means a CLI tool essentially never shows as "installed" on macOS in the first place (CLI tools aren't `.app` bundles), so this path is rarely if ever reached there; not worth the extra complexity for a case that shouldn't come up.
 
 Two more, for the in-app editor (see "In-app editor" below): `load_overrides(app: AppHandle) -> Result<Value, String>` and `save_overrides(app: AppHandle, overrides: Value) -> Result<(), String>`, reading/writing a small JSON file in `app.path().app_config_dir()` — created on first access via `fs::create_dir_all`. Both take the overrides object as opaque `serde_json::Value` rather than a typed struct since the frontend owns the shape (`{ [catalogId]: { hidden?, name?, category? } }`) and the backend only needs to persist it, not interpret it.
 

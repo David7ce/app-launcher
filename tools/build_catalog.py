@@ -78,7 +78,22 @@ CLI_SUBCATEGORIES = {"CLI Utility", "Compiler"}
 # subcategory heuristic alone would miss them. Extend by hand as needed —
 # getting this perfect isn't the point, just keeping obvious CLI tools from
 # looking like GUI apps with a broken icon.
-CLI_ID_OVERRIDES = {"btop", "htop", "fastfetch", "neofetch", "rsync", "tmux", "tree", "curl"}
+#
+# The test is "does clicking it show anything": a tool that prints usage and
+# exits (git, bun, pandoc, nmap) or has no window at all needs the terminal
+# wrapper, while GUI apps that merely happen to be console-subsystem exes
+# (darktable, scrcpy, UltraStar) must NOT be listed — a PE-header check would
+# misfile those, so this stays a hand-kept list. Interactive shells that already
+# open fine on their own (PowerShell, mitmproxy) are left out.
+CLI_ID_OVERRIDES = {
+    "btop", "htop", "fastfetch", "neofetch", "rsync", "tmux", "tree", "curl",
+    "ansible", "borg", "claude-code", "codex", "deno", "distrobox", "docker",
+    "ffmpeg", "git", "go", "hugo", "imagemagick", "instaloader", "jj", "k9s",
+    "kubectl", "lazygit", "llama-cpp", "nmap", "nodejs", "opencode", "pandoc",
+    "podman", "python", "rclone", "sqlite", "starship", "terraform", "vagrant",
+    "yt-dlp",
+    "win-bun", "win-tesseract-ocr",  # scan-created ids (no dataset entry)
+}
 
 # Dataset-derived entries whose default `<id>.png` icon guess is wrong —
 # e.g. a real icon sourced from KDE's breeze-icons repo instead (SVG, no
@@ -98,6 +113,10 @@ ICON_OVERRIDES = {
 BIN_OVERRIDES: dict[str, dict[str, str]] = {
     "visual-studio-code": {"windows": "Code.exe", "macos": "Visual Studio Code"},
     "firefox": {"windows": "firefox.exe", "macos": "Firefox"},
+    # Linux says python3, but on Windows `python3.exe` is usually the Microsoft
+    # Store *stub* in WindowsApps (present even when Python isn't installed);
+    # the real interpreter is python.exe.
+    "python": {"windows": "python.exe"},
 }
 
 
@@ -429,6 +448,11 @@ def main() -> None:
         (e for e in by_bin.values() if e["id"] not in EXCLUDED_IDS),
         key=lambda e: (e["category"], e["name"].lower()),
     )
+    # Scan-created entries never pass through is_cli(), so apply the curated
+    # list to the final result rather than only to dataset entries.
+    for entry in result:
+        if entry["id"] in CLI_ID_OVERRIDES:
+            entry["cli"] = True
     icons_placed, icons_pruned = place_scan_icons(result)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")

@@ -220,6 +220,17 @@ class CatalogIntegrity(unittest.TestCase):
                  "Multimedia", "Office", "Science", "System", "Utilities"}
         self.assertFalse([e["id"] for e in self.catalog if e["category"] not in valid])
 
+    def test_terminal_only_tools_are_listed_as_cli_and_gui_apps_are_not(self):
+        by_id = {e["id"]: e for e in self.catalog}
+        # These print usage and exit (or have no window), so they need the terminal.
+        for tool in ("git", "win-bun", "pandoc", "nmap", "starship", "deno", "nodejs"):
+            if tool in by_id:
+                self.assertTrue(by_id[tool]["cli"], tool)
+        # Console-subsystem exes that are really GUI apps must stay ordinary tiles.
+        for gui in ("darktable", "scrcpy", "win-ultrastar-deluxe"):
+            if gui in by_id:
+                self.assertFalse(by_id[gui]["cli"], gui)
+
     def test_no_orphan_icons_and_none_named_wrongly(self):
         referenced = {e["icon"] for e in self.catalog}
         on_disk = {p.name for p in bc.ICONS_DIR.iterdir() if p.is_file()}

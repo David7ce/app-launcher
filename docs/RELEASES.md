@@ -115,7 +115,18 @@ shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
   dangling dashes are cleaned, OpenAL is filtered as a runtime, and
   ResponsivelyApp/Inno Setup get Development. `ResponsivelyApp` no longer
   duplicates `Responsively App`.
-- **Tests:** 25 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
+- **CLI tools open properly on Windows.** `bun`, `pandoc`, `git`, `nmap`,
+  `starship`, `deno`, `hugo`, `tesseract`, `node`, `python` and ~20 more were
+  ordinary tiles that flashed a console and vanished. They are now listed
+  under CLI Tools, and clicking one opens a console that stays open. Getting
+  that to work needed `cmd /c start "" cmd /k <exe>`: a direct `cmd /k` child
+  inherits the app's null stdin, reads EOF and exits at once. Verified by
+  clicking the tiles in the real app. `python3.exe` (the Store stub) is now
+  `python.exe`.
+- **Icons for packaged apps.** MusicBee, Microsoft Store, Settings and Windows
+  Terminal (no exe to extract from) get their logo from the package manifest.
+  Failed extractions are retried after a week instead of forever.
+- **Tests:** 26 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
 - **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
   build` on Windows/macOS now works (`bundle.targets` is `all`, with the
   Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch

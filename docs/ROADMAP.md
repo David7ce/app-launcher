@@ -40,11 +40,6 @@ Windows runs, launches apps, and resolves beyond `$PATH` (v0.2.x).
       (Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox, ...). What
       is still missed is anything *not in the curated dataset* — e.g. AdGuard —
       because the scan doesn't add Start Menu entries as new catalog entries.
-- [ ] **UWP/Store tiles have no icon.** Their AppID has no exe to extract from,
-      so Microsoft Store, Settings and similar keep the category glyph; the
-      package's logo asset would have to be read from its manifest.
-- [ ] **Verify the `cmd /k` CLI-tool path** on real hardware. Written by
-      analogy with the Linux terminal wrapping, never exercised.
 - [ ] **Convert `.ico`-only icons properly.** Icons come from the `.exe`'s
       embedded resources, but a DisplayIcon pointing at a standalone `.ico`
       is still only copied, not converted.
@@ -67,7 +62,7 @@ CI proves every installer *builds*. None has been installed and launched.
 
 ## Tests — thin
 
-`tools/test_tools.py` (25 cases: catalog merge, icon placement, scan helpers,
+`tools/test_tools.py` (26 cases: catalog merge, icon placement, scan helpers,
 catalog invariants) and 10 Rust unit tests (name matching, env expansion,
 `.desktop`/theme icon lookup) exist. Still untested:
 

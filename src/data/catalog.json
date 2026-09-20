@@ -22,7 +22,7 @@
     },
     "icon": "ansible.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "win-bun",
@@ -34,7 +34,7 @@
     },
     "icon": "win-bun.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "claude-code",
@@ -48,7 +48,7 @@
     },
     "icon": "claude-code.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "claude-desktop",
@@ -76,7 +76,7 @@
     },
     "icon": "codex.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "dbeaver",
@@ -104,7 +104,7 @@
     },
     "icon": "deno.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "dotnet-runtime",
@@ -160,7 +160,7 @@
     },
     "icon": "git.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "github-desktop",
@@ -188,7 +188,7 @@
     },
     "icon": "go.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "godot",
@@ -229,7 +229,7 @@
     },
     "icon": "hugo.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "win-inno-setup",
@@ -283,7 +283,7 @@
     },
     "icon": "jj.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "k9s",
@@ -297,7 +297,7 @@
     },
     "icon": "k9s.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "kate",
@@ -323,7 +323,7 @@
     },
     "icon": "kubectl.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "win-laragon",
@@ -349,7 +349,7 @@
     },
     "icon": "lazygit.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "llama-cpp",
@@ -363,7 +363,7 @@
     },
     "icon": "llama-cpp.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "mariadb",
@@ -445,7 +445,7 @@
     },
     "icon": "nodejs.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "ollama",
@@ -473,7 +473,7 @@
     },
     "icon": "opencode.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "openjdk",
@@ -551,12 +551,12 @@
     "category": "Development",
     "bin": {
       "linux": "python3",
-      "windows": "python3.exe",
+      "windows": "python.exe",
       "macos": "Python"
     },
     "icon": "python.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "qt",
@@ -625,7 +625,7 @@
     },
     "icon": "sqlite.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "sublime-text-4",
@@ -653,7 +653,7 @@
     },
     "icon": "terraform.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "win-tesseract-ocr",
@@ -665,7 +665,7 @@
     },
     "icon": "win-tesseract-ocr.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "unity",
@@ -693,7 +693,7 @@
     },
     "icon": "vagrant.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "win-visual-studio",
@@ -1155,7 +1155,7 @@
     },
     "icon": "imagemagick.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "inkscape",
@@ -1991,7 +1991,7 @@
     },
     "icon": "ffmpeg.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "mac-garageband",
@@ -2491,7 +2491,7 @@
     },
     "icon": "yt-dlp.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "ytdownloader",
@@ -3097,7 +3097,7 @@
     },
     "icon": "pandoc.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "qalculate",
@@ -3450,7 +3450,7 @@
     },
     "icon": "distrobox.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "docker",
@@ -3464,7 +3464,7 @@
     },
     "icon": "docker.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "fastfetch",
@@ -3669,7 +3669,7 @@
     },
     "icon": "nmap.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "pi-hole",
@@ -3708,7 +3708,7 @@
     },
     "icon": "podman.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "proton-vpn",
@@ -4126,7 +4126,7 @@
     },
     "icon": "borg.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "curl",
@@ -4414,7 +4414,7 @@
     },
     "icon": "instaloader.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "jq",
@@ -4697,7 +4697,7 @@
     },
     "icon": "rclone.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "redshift",
@@ -4775,7 +4775,7 @@
     },
     "icon": "starship.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "stretchly",

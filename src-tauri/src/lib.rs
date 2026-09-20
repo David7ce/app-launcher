@@ -174,6 +174,7 @@ pub(crate) fn windows_resolve(name: &str) -> Option<PathBuf> {
 fn norm_app_name(name: &str) -> String {
     const NOISE: &[&str] = &[
         "x64", "x86", "64bit", "32bit", "64-bit", "32-bit", "microsoft", "oracle", "the", "desktop",
+        "windows",
     ];
     let mut flat = String::new();
     let mut depth = 0u32;
@@ -338,6 +339,42 @@ fn linux_terminal_spawn(bin: &str) -> std::io::Result<std::process::Child> {
     ))
 }
 
+/// Windows counterpart of `linux_terminal_spawn`: run a console program in its
+/// own window and leave it open at a prompt afterwards (`cmd /k`), so
+/// `git`/`bun`/`pandoc` — which print usage and exit — stay readable.
+///
+/// The program is resolved to a full path first, since `cmd` doesn't consult
+/// App Paths and Node.js is only reachable through the Start Menu.
+///
+/// It goes through `start`, not a direct `cmd /k` child: a direct child inherits
+/// this process's standard handles, which for a GUI app (or one started with
+/// redirected output) are null, so `cmd /k` reads EOF from stdin and closes the
+/// instant the program exits — the window never stays open. `start` opens the
+/// new console with real console handles. The outer `cmd` is hidden and exits.
+#[cfg(windows)]
+fn windows_cli_spawn(target: &str, name: Option<&str>) -> std::io::Result<std::process::Child> {
+    use std::os::windows::process::CommandExt;
+
+    let exe = windows_resolve(target)
+        .or_else(|| name.and_then(windows_start_app).and_then(start_app_exe))
+        .unwrap_or_else(|| PathBuf::from(expand_env(target)));
+    if exe.as_os_str().is_empty() {
+        return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "program not found"));
+    }
+    // `start`'s first quoted argument is a window title, hence the empty "".
+    Command::new("cmd")
+        .args(["/c", "start", "", "cmd", "/k"])
+        .arg(exe)
+        .creation_flags(CREATE_NO_WINDOW)
+        .spawn()
+}
+
+// Only reached when `consts::OS` is "windows"; exists so other OSes compile.
+#[cfg(not(windows))]
+fn windows_cli_spawn(_target: &str, _name: Option<&str>) -> std::io::Result<std::process::Child> {
+    Err(std::io::Error::new(std::io::ErrorKind::Unsupported, "not Windows"))
+}
+
 #[tauri::command(async)]
 fn launch_app(bin: PlatformBin, cli: bool, name: Option<String>) -> Result<(), String> {
     let Some(target) = bin.for_current_os() else {
@@ -354,12 +391,7 @@ fn launch_app(bin: PlatformBin, cli: bool, name: Option<String>) -> Result<(), S
         // as installed on macOS anyway, so this path is rarely reached.
         "macos" => Command::new("open").args(["-a", target]).spawn(),
         "linux" if cli => linux_terminal_spawn(target),
-        // cmd /k runs the command and stays open at an interactive prompt
-        // afterwards, same idea as the Linux bash/read wrapper. Unverified
-        // on real Windows.
-        "windows" if cli && !target.is_empty() => {
-            Command::new("cmd").args(["/k", &expand_env(target)]).spawn()
-        }
+        "windows" if cli => windows_cli_spawn(target, name.as_deref()),
         "windows" => {
             // Resolve to a full path first: an app registered only in the
             // registry's App Paths key (Office, VLC, Inkscape) is invisible
@@ -505,6 +537,7 @@ mod tests {
             ("MPC-HC", "MPC-HC x64"),
             ("Lucas Chess", "Lucas Chess (R)"),
             ("Visual Studio", "Visual Studio 2022"),
+            ("Windows Terminal", "Terminal"),
         ] {
             assert_eq!(norm_app_name(catalog), norm_app_name(start), "{catalog} / {start}");
         }

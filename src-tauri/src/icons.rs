@@ -23,6 +23,8 @@ use tauri::Manager;
 /// Bigger than any sensible app icon; refuse rather than ship a huge data URL.
 const MAX_ICON_BYTES: u64 = 1_500_000;
 
+const RETRY_FAILED_AFTER: std::time::Duration = std::time::Duration::from_secs(7 * 24 * 60 * 60);
+
 fn data_url(mime: &str, bytes: &[u8]) -> String {
     let b64 = base64::engine::general_purpose::STANDARD.encode(bytes);
     format!("data:{mime};base64,{b64}")
@@ -56,7 +58,14 @@ fn cached_png(
         .collect();
     let png = dir.join(format!("{safe}.png"));
     let none = dir.join(format!("{safe}.none"));
-    if none.exists() {
+    // A failure is remembered so it isn't retried on every launch, but only
+    // for a week: it may have been transient, or something a newer version
+    // of the app can now handle.
+    let recently_failed = none
+        .metadata()
+        .and_then(|m| m.modified())
+        .is_ok_and(|t| t.elapsed().is_ok_and(|age| age < RETRY_FAILED_AFTER));
+    if recently_failed {
         return None;
     }
     if !png.is_file() && !(generate(&dir, &png) && png.is_file()) {
@@ -86,39 +95,74 @@ pub fn fallback(
 // ---------------------------------------------------------------- Windows
 
 fn windows(app: &tauri::AppHandle, id: &str, bin: &PlatformBin, name: Option<&str>) -> Option<String> {
+    // Found by exe path, or only through the Start Menu.
+    // A `WindowsApps` exe is an app-execution alias for a packaged app (wt.exe,
+    // python.exe): a 0-byte reparse point with no icon resource of its own, so
+    // it goes through the package route below instead.
     let exe = bin
         .windows
         .as_deref()
         .and_then(windows_resolve)
-        // Found only through the Start Menu: a classic entry's AppID still
-        // encodes the exe path; a UWP one doesn't, and keeps the glyph.
-        .or_else(|| name.and_then(windows_start_app).and_then(start_app_exe))?;
-    let bytes = cached_png(app, id, |dir, png| extract_exe_icon(&exe, dir, png))?;
+        .filter(|p| !p.to_string_lossy().contains("\\WindowsApps\\"));
+    let start_id = || name.and_then(windows_start_app);
+    let bytes = match exe.or_else(|| start_id().and_then(start_app_exe)) {
+        Some(exe) => cached_png(app, id, |dir, png| extract_exe_icon(&exe, dir, png))?,
+        // No exe behind it: a packaged (MSIX/UWP/Store) app, whose AppID is
+        // `<family>!<app>`. Its logo comes from the package manifest.
+        None => {
+            let app_id = start_id().filter(|id| id.contains('!'))?;
+            cached_png(app, id, |dir, png| extract_appx_icon(app_id, dir, png))?
+        }
+    };
     Some(data_url("image/png", &bytes))
 }
 
 #[cfg(windows)]
 fn extract_exe_icon(exe: &Path, dir: &Path, png: &Path) -> bool {
-    use std::os::windows::process::CommandExt;
     use std::sync::OnceLock;
+    static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
+    run_script(&SCRIPT, dir, "extract_icon.ps1", include_str!("extract_icon.ps1"), &[
+        "-Exe".as_ref(),
+        exe.as_os_str(),
+        "-Out".as_ref(),
+        png.as_os_str(),
+    ])
+}
 
-    const SCRIPT: &str = include_str!("extract_icon.ps1");
-    // Written once per run: parallel first-time extractions would otherwise
-    // rewrite the file while another PowerShell is reading it.
-    static SCRIPT_PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
-    let Some(script) = SCRIPT_PATH.get_or_init(|| {
-        let path = dir.join("extract_icon.ps1");
-        fs::write(&path, SCRIPT).ok().map(|_| path)
+#[cfg(windows)]
+fn extract_appx_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
+    use std::sync::OnceLock;
+    static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
+    run_script(&SCRIPT, dir, "extract_appx_icon.ps1", include_str!("extract_appx_icon.ps1"), &[
+        "-AppId".as_ref(),
+        app_id.as_ref(),
+        "-Out".as_ref(),
+        png.as_os_str(),
+    ])
+}
+
+/// Run one of the bundled PowerShell scripts with a hidden window. The script
+/// is written into the cache dir once per run (`cell`): parallel first-time
+/// extractions would otherwise rewrite it while another PowerShell reads it.
+#[cfg(windows)]
+fn run_script(
+    cell: &'static std::sync::OnceLock<Option<PathBuf>>,
+    dir: &Path,
+    file: &str,
+    body: &str,
+    args: &[&std::ffi::OsStr],
+) -> bool {
+    use std::os::windows::process::CommandExt;
+    let Some(script) = cell.get_or_init(|| {
+        let path = dir.join(file);
+        fs::write(&path, body).ok().map(|_| path)
     }) else {
         return false;
     };
     Command::new("powershell")
         .args(["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File"])
         .arg(script)
-        .arg("-Exe")
-        .arg(exe)
-        .arg("-Out")
-        .arg(png)
+        .args(args)
         .creation_flags(crate::CREATE_NO_WINDOW)
         .status()
         .is_ok_and(|s| s.success())
@@ -126,6 +170,11 @@ fn extract_exe_icon(exe: &Path, dir: &Path, png: &Path) -> bool {
 
 #[cfg(not(windows))]
 fn extract_exe_icon(_exe: &Path, _dir: &Path, _png: &Path) -> bool {
+    false
+}
+
+#[cfg(not(windows))]
+fn extract_appx_icon(_app_id: &str, _dir: &Path, _png: &Path) -> bool {
     false
 }
 
