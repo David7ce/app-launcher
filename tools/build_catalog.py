@@ -24,6 +24,29 @@ def default_icon(app_id: str) -> str:
     # convention, not a check against what's actually on disk.
     return f"{app_id}.png"
 
+
+# Normalizes a display name to a comparison key: lowercase, alphanumerics
+# only. Used to join a Windows-scanned app ("Microsoft Visual Studio Code
+# (User)") to its curated entry ("Visual Studio Code"). Strips the same
+# vendor/edition noise the scan's clean_name() removes, so the two sides
+# actually meet: without dropping "microsoft", "visualstudiocodeuser" never
+# matches "visualstudiocode".
+_NAME_NOISE_RE = re.compile(
+    r"\b(microsoft|mozilla|the|inc|llc|ltd|corporation|corp|user|"
+    r"community|preview|desktop|client|app|application|x64|x86|64bit|32bit)\b"
+    r"|\b[a-z]{2}[-_][a-z]{2,4}\b"  # locale tags: "en-US", "pt_BR"
+)
+# A trailing 4-digit year, e.g. "Visual Studio Community 2022" -> "Visual
+# Studio". Anchored to the end and requiring a preceding space, so a name
+# that *is* a number ("2048") is left intact.
+_TRAILING_YEAR_RE = re.compile(r"\s+(?:19|20)\d{2}\s*$")
+
+
+def normalize_name(name: str) -> str:
+    lowered = _TRAILING_YEAR_RE.sub("", name.lower())
+    stripped = _NAME_NOISE_RE.sub(" ", lowered)
+    return re.sub(r"[^a-z0-9]", "", stripped)
+
 # Preference order for guessing a Linux executable name from the dataset's
 # package identifiers. Package name often equals the binary name but not
 # always (e.g. Fedora's p7zip package ships a `7z`/`7za` binary) — wrong
@@ -79,10 +102,21 @@ def guess_bin(pkg_manager: dict) -> str | None:
 def guess_windows_bin(pkg_manager: dict, linux_bin: str) -> str | None:
     # Low-confidence heuristic: plenty of CLI/dev tools ship an identically
     # named binary on Windows (git, python, node, ...); plenty of GUI apps
-    # don't. No worse than the Linux package-name guess above — wrong
-    # guesses just fail `is_installed` silently. Unverified on real Windows.
-    if pkg_manager.get("windows_winget"):
-        return linux_bin
+    # don't. Unverified on real Windows.
+    #
+    # Guard against the worst failure mode: the Linux bin is often a *package
+    # id*, not a binary name (`dbeaver-ce`, `github-desktop-bin`,
+    # `intellij-idea-community-edition`, `dotnet-runtime-6.0`). Emitting those
+    # as Windows bins produces entries that can never resolve, so the tile
+    # silently never appears. Only guess when the name is a plausible bare
+    # executable: no hyphens, no version-ish dots, no path separators. A
+    # missing guess is strictly better than a wrong one — the app just stays
+    # hidden on Windows until the real path is known (the Windows system scan
+    # supplies exact paths for anything actually installed).
+    if not pkg_manager.get("windows_winget"):
+        return None
+    if re.fullmatch(r"[A-Za-z0-9_]+", linux_bin):
+        return f"{linux_bin}.exe"
     return None
 
 
@@ -122,12 +156,45 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
     # per-OS `bin` object, preserving whatever the dataset/vendor guess had
     # for the other two OSes (see the Firefox/VS Code bug this fixed for
     # the Linux scan — same fix applies here by construction, not by luck).
+    #
+    # Windows needs a different match key: the Linux/macOS scans emit a bare
+    # command name (which is what `by_bin` is keyed on), but the Windows scan
+    # emits a full path (`C:\Program Files\7-Zip\7zFM.exe`) because that's
+    # what the registry stores. Keying on the raw path would never match an
+    # existing entry, so every scanned app would land as a brand-new
+    # GUID-named duplicate instead of upgrading the real entry. Match on the
+    # exe's basename against existing `bin.windows` values instead.
+    if os_key == "windows":
+        by_windows_bin = {
+            e["bin"]["windows"].lower(): e
+            for e in by_bin.values()
+            if e["bin"].get("windows")
+        }
+        # Matching on the exe basename alone misses most apps: a curated
+        # entry only has a `bin.windows` when the dataset happened to list a
+        # winget id *and* the name looked like a bare executable, so the
+        # common case is no Windows bin at all. Without a second key, every
+        # scanned app became a brand-new entry carrying the scan's hardcoded
+        # "Utilities" category — which put GIMP, Steam, Spotify, OBS and
+        # Android Studio all in Utilities. The app's display name is the
+        # reliable join: 64 of 68 scanned apps matched a curated entry by
+        # normalized name, versus 0 by basename.
+        by_windows_name = {
+            normalize_name(e["name"]): e for e in by_bin.values()
+        }
     new_count = 0
     for entry in entries:
         if entry["id"] in EXCLUDED_IDS:
             continue
-        key = entry["bin"]
-        existing = by_bin.get(key)
+        if os_key == "windows":
+            basename = entry["bin"].replace("/", "\\").rsplit("\\", 1)[-1].lower()
+            existing = by_windows_bin.get(basename) or by_windows_name.get(
+                normalize_name(entry["name"])
+            )
+            key = existing["id"] if existing else entry["bin"]
+        else:
+            key = entry["bin"]
+            existing = by_bin.get(key)
         if existing is None:
             new_count += 1
         bin_obj = dict(existing["bin"]) if existing else {}
@@ -140,6 +207,23 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
         # .desktop file, so the scan was unconditionally resetting it to
         # cli:false, defeating the terminal-launch wrapping entirely).
         cli = entry.get("cli", False) or (existing["cli"] if existing else False)
+        if existing is not None:
+            # Matched an existing curated entry: the scan's only real
+            # contribution is the authoritative launch path. Its name
+            # ("7-Zip 26.03 (x64)") and category (always "Utilities", since
+            # the registry has no category concept) are both worse than the
+            # curated ones, so keep the existing entry and just take the bin.
+            existing["bin"] = bin_obj
+            existing["cli"] = cli
+            # The curated `icon` field is a naming convention, not a check —
+            # plenty of dataset entries reference a `<id>.png` that was never
+            # actually vendored, which renders as a placeholder. The scan
+            # extracted a real icon from the exe's own resources, so prefer
+            # it whenever the curated file isn't actually on disk.
+            scan_icon = entry.get("icon")
+            if scan_icon and not (ICONS_DIR / (existing.get("icon") or "")).exists():
+                existing["icon"] = scan_icon
+            continue
         by_bin[key] = {
             "id": entry["id"],
             "name": entry["name"],

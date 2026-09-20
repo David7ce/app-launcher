@@ -1,5 +1,50 @@
 # Roadmap
 
+## Status as of 2026-09-20
+
+**Windows is now verified on real hardware.** A Windows machine became
+available, which turned the long-standing "reviewed but never run" caveat
+into actual testing — and immediately surfaced four real bugs that were
+invisible from Linux (see Phase 3 below). Windows goes from *unverified* to
+*verified*: the app runs, detects 68 installed programs with 65 real icons
+extracted from the `.exe`s, and click-to-launch works.
+
+## Phase 3 — Windows verification and fixes (done, verified on hardware)
+
+First time any Windows code path was exercised. Four real bugs found:
+
+- [x] **Windows bins were package ids, not executables.** `guess_windows_bin`
+      copied the Linux bin verbatim, but that's usually a *package* id
+      (`dbeaver-ce`, `github-desktop-bin`, `intellij-idea-community-edition`,
+      `golang`, `dotnet-runtime-6.0`) — 208 of 224 entries. None can resolve
+      via `$PATH`, so most Windows tiles silently never appeared. Now only
+      guesses for a plausible bare name (`[A-Za-z0-9_]+`) and appends `.exe`;
+      a missing guess is better than a wrong one.
+- [x] **The Windows scan produced duplicates instead of upgrades.** It emits
+      full paths (`C:\Program Files\7-Zip\7zFM.exe`) because that's what the
+      registry stores, but the merge was keyed on the Linux bin — so all 84
+      scanned apps became brand-new GUID-named entries (`win-20b93302-...`)
+      instead of upgrading the real ones.
+- [x] **Category join was wrong, dumping 52 of 68 apps into "Utilities".**
+      Matching on exe basename found **0** matches (curated entries mostly
+      have no `bin.windows` at all), so GIMP, Steam, Spotify, OBS, Telegram
+      and Android Studio all landed in Utilities. Joining on the normalized
+      display name instead matches **63 of 68**, and the curated category
+      wins. Utilities went 116 → 75.
+- [x] **No icons at all on Windows** — every tile was a generic placeholder.
+      Added `.exe` resource extraction via `PrivateExtractIcons` at 256×256
+      (deliberately *not* `ExtractAssociatedIcon`, which only ever returns a
+      blurry 32×32). **65 of 68 extracted**, verified visually.
+
+Also added: registry-noise filtering (runtimes, redistributables, drivers,
+update packages), display-name cleaning (`"7-Zip 26.03 (x64)"` → `7-Zip`),
+readable slug ids instead of GUIDs, and a keyword heuristic so a scan-added
+app gets a sensible category rather than always "Utilities".
+
+**Windows gaps that remain**: resolution is still `$PATH`-only, so Start Menu
+shortcuts, the registry `App Paths` key, and UWP/Store packages are all
+missed — the main outstanding Windows item.
+
 ## Status as of 2026-09-07
 
 **v1 MVP is built and running.** `cargo tauri dev` opens the dashboard, showing installed apps grouped into the 10 categories, click-to-launch works. User confirmed on their own machine: "not bad for first release."

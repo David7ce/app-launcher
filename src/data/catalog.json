@@ -1,5 +1,17 @@
 [
   {
+    "id": "win-android-studio",
+    "name": "Android Studio",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "C:\\Program Files\\Android\\Android Studio\\bin\\studio.exe"
+    },
+    "icon": "win-android-studio.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "ansible",
     "name": "Ansible",
     "vendor": "",
@@ -13,13 +25,24 @@
     "cli": false
   },
   {
+    "id": "win-bun",
+    "name": "Bun",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "C:\\Users\\d7\\.bun\\bin\\bun.exe"
+    },
+    "icon": "win-bun.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "claude-code",
     "name": "Claude Code",
     "vendor": "",
     "category": "Development",
     "bin": {
       "linux": "claude-code",
-      "windows": "claude-code",
       "macos": "Claude Code"
     },
     "icon": "claude-code.png",
@@ -33,7 +56,6 @@
     "category": "Development",
     "bin": {
       "linux": "claude-desktop",
-      "windows": "claude-desktop",
       "macos": "Claude"
     },
     "icon": "claude-desktop.png",
@@ -47,7 +69,6 @@
     "category": "Development",
     "bin": {
       "linux": "codex-bin",
-      "windows": "codex-bin",
       "macos": "Codex"
     },
     "icon": "codex.png",
@@ -61,7 +82,6 @@
     "category": "Development",
     "bin": {
       "linux": "dbeaver-ce",
-      "windows": "dbeaver-ce",
       "macos": "Dbeaver Community"
     },
     "icon": "dbeaver.png",
@@ -75,7 +95,7 @@
     "category": "Development",
     "bin": {
       "linux": "deno",
-      "windows": "deno",
+      "windows": "deno.exe",
       "macos": "Deno"
     },
     "icon": "deno.png",
@@ -89,7 +109,6 @@
     "category": "Development",
     "bin": {
       "linux": "dotnet-runtime-6.0",
-      "windows": "dotnet-runtime-6.0",
       "macos": "Dotnet"
     },
     "icon": "dotnet-runtime.png",
@@ -103,7 +122,7 @@
     "category": "Development",
     "bin": {
       "linux": "gcc",
-      "windows": "gcc",
+      "windows": "gcc.exe",
       "macos": "Gcc"
     },
     "icon": "gcc.png",
@@ -117,7 +136,7 @@
     "category": "Development",
     "bin": {
       "linux": "geany",
-      "windows": "geany",
+      "windows": "geany.exe",
       "macos": "Geany"
     },
     "icon": "geany.png",
@@ -131,7 +150,7 @@
     "category": "Development",
     "bin": {
       "linux": "git",
-      "windows": "git",
+      "windows": "git.exe",
       "macos": "Git"
     },
     "icon": "git.png",
@@ -145,7 +164,6 @@
     "category": "Development",
     "bin": {
       "linux": "github-desktop-bin",
-      "windows": "github-desktop-bin",
       "macos": "Github"
     },
     "icon": "github-desktop.png",
@@ -159,7 +177,7 @@
     "category": "Development",
     "bin": {
       "linux": "golang",
-      "windows": "golang",
+      "windows": "golang.exe",
       "macos": "Go"
     },
     "icon": "go.png",
@@ -173,7 +191,7 @@
     "category": "Development",
     "bin": {
       "linux": "godot",
-      "windows": "godot",
+      "windows": "godot.exe",
       "macos": "Godot"
     },
     "icon": "godot.png",
@@ -200,7 +218,7 @@
     "category": "Development",
     "bin": {
       "linux": "hugo",
-      "windows": "hugo",
+      "windows": "hugo.exe",
       "macos": "Hugo"
     },
     "icon": "hugo.png",
@@ -214,7 +232,7 @@
     "category": "Development",
     "bin": {
       "linux": "insomnia",
-      "windows": "insomnia",
+      "windows": "insomnia.exe",
       "macos": "Insomnia"
     },
     "icon": "insomnia.png",
@@ -228,7 +246,6 @@
     "category": "Development",
     "bin": {
       "linux": "intellij-idea-community-edition",
-      "windows": "intellij-idea-community-edition",
       "macos": "Intellij Idea"
     },
     "icon": "intellij-idea.png",
@@ -242,7 +259,7 @@
     "category": "Development",
     "bin": {
       "linux": "jujutsu",
-      "windows": "jujutsu",
+      "windows": "jujutsu.exe",
       "macos": "Jj"
     },
     "icon": "jj.png",
@@ -256,7 +273,7 @@
     "category": "Development",
     "bin": {
       "linux": "k9s",
-      "windows": "k9s",
+      "windows": "k9s.exe",
       "macos": "K9s"
     },
     "icon": "k9s.png",
@@ -264,14 +281,14 @@
     "cli": false
   },
   {
-    "id": "org.kde.kate",
+    "id": "kate",
     "name": "Kate",
-    "vendor": "",
+    "vendor": "KDE",
     "category": "Development",
     "bin": {
       "linux": "kate"
     },
-    "icon": "org.kde.kate.png",
+    "icon": "kate.png",
     "hidden": false,
     "cli": false
   },
@@ -282,10 +299,21 @@
     "category": "Development",
     "bin": {
       "linux": "kubernetes-client",
-      "windows": "kubernetes-client",
       "macos": "Kubectl"
     },
     "icon": "kubectl.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-laragon",
+    "name": "Laragon",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "C:\\laragon\\Laragon.exe"
+    },
+    "icon": "win-laragon.png",
     "hidden": false,
     "cli": false
   },
@@ -296,7 +324,7 @@
     "category": "Development",
     "bin": {
       "linux": "lazygit",
-      "windows": "lazygit",
+      "windows": "lazygit.exe",
       "macos": "Lazygit"
     },
     "icon": "lazygit.png",
@@ -310,7 +338,6 @@
     "category": "Development",
     "bin": {
       "linux": "llama.cpp",
-      "windows": "llama.cpp",
       "macos": "Llama.cpp"
     },
     "icon": "llama-cpp.png",
@@ -324,7 +351,6 @@
     "category": "Development",
     "bin": {
       "linux": "mariadb-server",
-      "windows": "mariadb-server",
       "macos": "Mariadb"
     },
     "icon": "mariadb.png",
@@ -350,7 +376,7 @@
     "category": "Development",
     "bin": {
       "linux": "mitmproxy",
-      "windows": "mitmproxy",
+      "windows": "mitmproxy.exe",
       "macos": "Mitmproxy"
     },
     "icon": "mitmproxy.png",
@@ -364,7 +390,6 @@
     "category": "Development",
     "bin": {
       "linux": "mongodb-org",
-      "windows": "mongodb-org",
       "macos": "Mongodb Community"
     },
     "icon": "mongodb.png",
@@ -378,7 +403,7 @@
     "category": "Development",
     "bin": {
       "linux": "neovim",
-      "windows": "neovim",
+      "windows": "neovim.exe",
       "macos": "Neovim"
     },
     "icon": "neovim.png",
@@ -392,7 +417,7 @@
     "category": "Development",
     "bin": {
       "linux": "nodejs",
-      "windows": "nodejs",
+      "windows": "nodejs.exe",
       "macos": "Node"
     },
     "icon": "nodejs.png",
@@ -406,7 +431,7 @@
     "category": "Development",
     "bin": {
       "linux": "ollama",
-      "windows": "ollama",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Ollama\\unins000.exe",
       "macos": "Ollama"
     },
     "icon": "ollama.png",
@@ -420,7 +445,6 @@
     "category": "Development",
     "bin": {
       "linux": "opencode-bin",
-      "windows": "opencode-bin",
       "macos": "Sst/tap/opencode"
     },
     "icon": "opencode.png",
@@ -434,7 +458,6 @@
     "category": "Development",
     "bin": {
       "linux": "java-latest-openjdk",
-      "windows": "java-latest-openjdk",
       "macos": "Openjdk"
     },
     "icon": "openjdk.png",
@@ -461,7 +484,6 @@
     "category": "Development",
     "bin": {
       "linux": "postgresql-server",
-      "windows": "postgresql-server",
       "macos": "Postgresql"
     },
     "icon": "postgresql.png",
@@ -475,7 +497,7 @@
     "category": "Development",
     "bin": {
       "linux": "postman",
-      "windows": "postman",
+      "windows": "postman.exe",
       "macos": "Postman"
     },
     "icon": "postman.png",
@@ -503,7 +525,7 @@
     "category": "Development",
     "bin": {
       "linux": "python3",
-      "windows": "python3",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Package Cache\\{bdda61aa-57d0-45c8-ae92-fa67d560e32f}\\python-3.13.15-amd64.exe",
       "macos": "Python"
     },
     "icon": "python.png",
@@ -517,7 +539,6 @@
     "category": "Development",
     "bin": {
       "linux": "qt-creator",
-      "windows": "qt-creator",
       "macos": "Qt Creator"
     },
     "icon": "qt.png",
@@ -531,7 +552,6 @@
     "category": "Development",
     "bin": {
       "linux": "responsively-app-bin",
-      "windows": "responsively-app-bin",
       "macos": "Responsively"
     },
     "icon": "responsively.png",
@@ -545,7 +565,7 @@
     "category": "Development",
     "bin": {
       "linux": "rust",
-      "windows": "rust",
+      "windows": "rust.exe",
       "macos": "Rust"
     },
     "icon": "rust.png",
@@ -572,7 +592,7 @@
     "category": "Development",
     "bin": {
       "linux": "sqlite",
-      "windows": "sqlite",
+      "windows": "sqlite.exe",
       "macos": "Sqlite"
     },
     "icon": "sqlite.png",
@@ -586,7 +606,6 @@
     "category": "Development",
     "bin": {
       "linux": "sublime-text",
-      "windows": "sublime-text",
       "macos": "Sublime Text"
     },
     "icon": "sublime-text-4.png",
@@ -600,10 +619,22 @@
     "category": "Development",
     "bin": {
       "linux": "terraform",
-      "windows": "terraform",
+      "windows": "terraform.exe",
       "macos": "Terraform"
     },
     "icon": "terraform.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-tesseract-ocr-open-source-ocr-engine",
+    "name": "Tesseract-OCR - open source OCR engine",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "C:\\Program Files\\Tesseract-OCR\\tesseract-uninstall.exe"
+    },
+    "icon": "win-tesseract-ocr-open-source-ocr-engine.png",
     "hidden": false,
     "cli": false
   },
@@ -614,7 +645,7 @@
     "category": "Development",
     "bin": {
       "linux": "unityhub",
-      "windows": "unityhub",
+      "windows": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.11f1\\Editor\\Unity.exe",
       "macos": "Unity Hub"
     },
     "icon": "unity.png",
@@ -628,7 +659,7 @@
     "category": "Development",
     "bin": {
       "linux": "vagrant",
-      "windows": "vagrant",
+      "windows": "vagrant.exe",
       "macos": "Vagrant"
     },
     "icon": "vagrant.png",
@@ -641,23 +672,23 @@
     "vendor": "Microsoft",
     "category": "Development",
     "bin": {
-      "windows": "devenv.exe"
+      "windows": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe"
     },
-    "icon": "win-visual-studio.png",
+    "icon": "win-visual-studio-community-2022.png",
     "hidden": false,
     "cli": false
   },
   {
-    "id": "code",
+    "id": "visual-studio-code",
     "name": "Visual Studio Code",
     "vendor": "",
     "category": "Development",
     "bin": {
       "linux": "code",
-      "windows": "Code.exe",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
       "macos": "Visual Studio Code"
     },
-    "icon": "code.png",
+    "icon": "visual-studio-code.png",
     "hidden": false,
     "cli": false
   },
@@ -668,7 +699,7 @@
     "category": "Development",
     "bin": {
       "linux": "codium",
-      "windows": "codium",
+      "windows": "codium.exe",
       "macos": "Vscodium"
     },
     "icon": "vscodium.png",
@@ -682,7 +713,7 @@
     "category": "Development",
     "bin": {
       "linux": "wordpress",
-      "windows": "wordpress",
+      "windows": "wordpress.exe",
       "macos": "Wordpresscom"
     },
     "icon": "wordpress.png",
@@ -696,7 +727,7 @@
     "category": "Development",
     "bin": {
       "linux": "xampp",
-      "windows": "xampp"
+      "windows": "xampp.exe"
     },
     "icon": "xampp.png",
     "hidden": false,
@@ -721,10 +752,10 @@
     "category": "Development",
     "bin": {
       "linux": "zed",
-      "windows": "zed",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Zed\\Zed.exe",
       "macos": "Zed"
     },
-    "icon": "zed.png",
+    "icon": "win-zed.png",
     "hidden": false,
     "cli": false
   },
@@ -735,7 +766,7 @@
     "category": "Education",
     "bin": {
       "linux": "gramps",
-      "windows": "gramps",
+      "windows": "gramps.exe",
       "macos": "Gramps"
     },
     "icon": "gramps.png",
@@ -749,7 +780,6 @@
     "category": "Games",
     "bin": {
       "linux": "dolphin-emu",
-      "windows": "dolphin-emu",
       "macos": "Dolphin"
     },
     "icon": "dolphin-emu.png",
@@ -763,7 +793,7 @@
     "category": "Games",
     "bin": {
       "linux": "duckstation",
-      "windows": "duckstation",
+      "windows": "duckstation.exe",
       "macos": "Duckstation"
     },
     "icon": "duckstation.png",
@@ -777,8 +807,8 @@
     "category": "Games",
     "bin": {
       "linux": "com.heroicgameslauncher.hgl",
-      "windows": "com.heroicgameslauncher.hgl",
-      "macos": "Heroic"
+      "macos": "Heroic",
+      "windows": "C:\\Program Files\\Heroic\\Heroic.exe"
     },
     "icon": "heroic-games-launcher.png",
     "hidden": false,
@@ -826,9 +856,10 @@
     "vendor": "",
     "category": "Games",
     "bin": {
-      "linux": "lucaschess"
+      "linux": "lucaschess",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\LucasChessR\\bin\\LucasR.exe"
     },
-    "icon": "lucaschess.png",
+    "icon": "win-lucas-chess.png",
     "hidden": false,
     "cli": false
   },
@@ -852,7 +883,7 @@
     "category": "Games",
     "bin": {
       "linux": "melonds",
-      "windows": "melonds",
+      "windows": "melonds.exe",
       "macos": "Melonds"
     },
     "icon": "melonds.png",
@@ -866,9 +897,10 @@
     "category": "Games",
     "bin": {
       "linux": "pcsx2",
-      "macos": "Pcsx2"
+      "macos": "Pcsx2",
+      "windows": "C:\\Program Files\\PCSX2\\pcsx2-qt.exe"
     },
-    "icon": "pcsx2.png",
+    "icon": "win-pcsx2.png",
     "hidden": false,
     "cli": false
   },
@@ -879,7 +911,7 @@
     "category": "Games",
     "bin": {
       "linux": "ppsspp",
-      "windows": "ppsspp",
+      "windows": "ppsspp.exe",
       "macos": "Ppsspp"
     },
     "icon": "ppsspp.png",
@@ -893,7 +925,7 @@
     "category": "Games",
     "bin": {
       "linux": "retroarch",
-      "windows": "retroarch",
+      "windows": "retroarch.exe",
       "macos": "Retroarch"
     },
     "icon": "retroarch.png",
@@ -907,10 +939,46 @@
     "category": "Games",
     "bin": {
       "linux": "steam",
-      "windows": "steam",
+      "windows": "C:\\Program Files (x86)\\Steam\\uninstall.exe",
       "macos": "Steam"
     },
     "icon": "steam.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-ultrastar-deluxe",
+    "name": "UltraStar Deluxe",
+    "vendor": "",
+    "category": "Games",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\UltraStar Deluxe\\ultrastardx.exe"
+    },
+    "icon": "win-ultrastar-deluxe.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-ultrastar-creator",
+    "name": "UltraStar-Creator",
+    "vendor": "",
+    "category": "Games",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\UltraStar-Creator\\UltraStar-Creator.exe"
+    },
+    "icon": "win-ultrastar-creator.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-ultrastar-manager",
+    "name": "UltraStar-Manager",
+    "vendor": "",
+    "category": "Games",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\UltraStar-Manager\\UltraStar-Manager.exe"
+    },
+    "icon": "win-ultrastar-manager.png",
     "hidden": false,
     "cli": false
   },
@@ -933,7 +1001,7 @@
     "category": "Games",
     "bin": {
       "linux": "xemu",
-      "windows": "xemu"
+      "windows": "xemu.exe"
     },
     "icon": "xemu.png",
     "hidden": false,
@@ -946,7 +1014,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "blender",
-      "windows": "blender",
+      "windows": "blender.exe",
       "macos": "Blender"
     },
     "icon": "blender.png",
@@ -960,10 +1028,10 @@
     "category": "Graphics",
     "bin": {
       "linux": "darktable",
-      "windows": "darktable",
+      "windows": "C:\\Program Files\\darktable\\bin\\darktable.exe",
       "macos": "Darktable"
     },
-    "icon": "darktable.png",
+    "icon": "win-darktable.png",
     "hidden": false,
     "cli": false
   },
@@ -974,10 +1042,22 @@
     "category": "Graphics",
     "bin": {
       "linux": "digikam",
-      "windows": "digikam",
+      "windows": "C:\\Program Files\\digiKam\\digikam.exe",
       "macos": "Digikam"
     },
-    "icon": "digikam.png",
+    "icon": "win-digikam.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-eagle",
+    "name": "Eagle",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": "C:\\Program Files\\Eagle\\Eagle.exe"
+    },
+    "icon": "win-eagle.png",
     "hidden": false,
     "cli": false
   },
@@ -988,7 +1068,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "freecad",
-      "windows": "freecad",
+      "windows": "freecad.exe",
       "macos": "Freecad"
     },
     "icon": "freecad.png",
@@ -1002,7 +1082,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "gimp",
-      "windows": "gimp",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\GIMP 3\\bin\\gimp-3.exe",
       "macos": "Gimp"
     },
     "icon": "gimp.png",
@@ -1010,14 +1090,14 @@
     "cli": false
   },
   {
-    "id": "org.kde.gwenview",
+    "id": "gwenview",
     "name": "Gwenview",
     "vendor": "",
     "category": "Graphics",
     "bin": {
       "linux": "gwenview"
     },
-    "icon": "org.kde.gwenview.png",
+    "icon": "gwenview.png",
     "hidden": false,
     "cli": false
   },
@@ -1040,7 +1120,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "ImageMagick",
-      "windows": "ImageMagick",
+      "windows": "ImageMagick.exe",
       "macos": "Imagemagick"
     },
     "icon": "imagemagick.png",
@@ -1054,7 +1134,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "inkscape",
-      "windows": "inkscape",
+      "windows": "inkscape.exe",
       "macos": "Inkscape"
     },
     "icon": "inkscape.png",
@@ -1080,7 +1160,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "krita",
-      "windows": "krita",
+      "windows": "krita.exe",
       "macos": "Krita"
     },
     "icon": "krita.png",
@@ -1094,7 +1174,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "mandelbulber2",
-      "windows": "mandelbulber2"
+      "windows": "mandelbulber2.exe"
     },
     "icon": "mandelbulber.png",
     "hidden": false,
@@ -1107,22 +1187,10 @@
     "category": "Graphics",
     "bin": {
       "linux": "mypaint",
-      "windows": "mypaint",
+      "windows": "mypaint.exe",
       "macos": "Mypaint"
     },
     "icon": "mypaint.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.okular",
-    "name": "Okular",
-    "vendor": "",
-    "category": "Graphics",
-    "bin": {
-      "linux": "okular"
-    },
-    "icon": "org.kde.okular.png",
     "hidden": false,
     "cli": false
   },
@@ -1169,9 +1237,9 @@
     "category": "Graphics",
     "bin": {
       "linux": "rapidraw",
-      "windows": "rapidraw"
+      "windows": "C:\\Users\\d7\\AppData\\Local\\RapidRAW\\RapidRAW.exe"
     },
-    "icon": "rapidraw.png",
+    "icon": "win-rapidraw.png",
     "hidden": false,
     "cli": false
   },
@@ -1182,10 +1250,22 @@
     "category": "Graphics",
     "bin": {
       "linux": "rawtherapee",
-      "windows": "rawtherapee",
+      "windows": "rawtherapee.exe",
       "macos": "Rawtherapee"
     },
     "icon": "rawtherapee.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-sharex",
+    "name": "ShareX",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": "C:\\Program Files\\ShareX\\ShareX.exe"
+    },
+    "icon": "win-sharex.png",
     "hidden": false,
     "cli": false
   },
@@ -1232,10 +1312,10 @@
     "category": "Graphics",
     "bin": {
       "linux": "upscayl",
-      "windows": "upscayl",
+      "windows": "C:\\Program Files\\Upscayl\\Upscayl.exe",
       "macos": "Upscayl"
     },
-    "icon": "upscayl.png",
+    "icon": "win-upscayl.png",
     "hidden": false,
     "cli": false
   },
@@ -1246,7 +1326,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "xnviewmp",
-      "windows": "xnviewmp",
+      "windows": "xnviewmp.exe",
       "macos": "Xnviewmp"
     },
     "icon": "xnview.png",
@@ -1272,7 +1352,6 @@
     "category": "Internet",
     "bin": {
       "linux": "brave-browser",
-      "windows": "brave-browser",
       "macos": "Brave Browser"
     },
     "icon": "brave.png",
@@ -1286,7 +1365,7 @@
     "category": "Internet",
     "bin": {
       "linux": "chromium",
-      "windows": "chromium",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Chromium\\Application\\chrome.exe",
       "macos": "Chromium"
     },
     "icon": "chromium.png",
@@ -1312,7 +1391,7 @@
     "category": "Internet",
     "bin": {
       "linux": "discord",
-      "windows": "discord",
+      "windows": "discord.exe",
       "macos": "Discord"
     },
     "icon": "discord.png",
@@ -1326,7 +1405,6 @@
     "category": "Internet",
     "bin": {
       "linux": "element-desktop",
-      "windows": "element-desktop",
       "macos": "Element"
     },
     "icon": "element.png",
@@ -1358,16 +1436,16 @@
     "cli": false
   },
   {
-    "id": "org.mozilla.firefox",
+    "id": "firefox",
     "name": "Firefox",
     "vendor": "",
     "category": "Internet",
     "bin": {
       "linux": "firefox",
-      "windows": "firefox.exe",
+      "windows": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
       "macos": "Firefox"
     },
-    "icon": "org.mozilla.firefox.png",
+    "icon": "firefox.png",
     "hidden": false,
     "cli": false
   },
@@ -1378,7 +1456,6 @@
     "category": "Internet",
     "bin": {
       "linux": "google-chrome",
-      "windows": "google-chrome",
       "macos": "Google Chrome"
     },
     "icon": "google-chrome.png",
@@ -1441,7 +1518,7 @@
     "category": "Internet",
     "bin": {
       "linux": "librewolf",
-      "windows": "librewolf",
+      "windows": "librewolf.exe",
       "macos": "Librewolf"
     },
     "icon": "librewolf.png",
@@ -1517,7 +1594,7 @@
     "category": "Internet",
     "bin": {
       "linux": "mumble",
-      "windows": "mumble",
+      "windows": "mumble.exe",
       "macos": "Mumble"
     },
     "icon": "mumble.png",
@@ -1557,7 +1634,6 @@
     "category": "Internet",
     "bin": {
       "linux": "opera-stable",
-      "windows": "opera-stable",
       "macos": "Opera"
     },
     "icon": "opera.png",
@@ -1595,7 +1671,6 @@
     "category": "Internet",
     "bin": {
       "linux": "signal-desktop",
-      "windows": "signal-desktop",
       "macos": "Signal"
     },
     "icon": "signal.png",
@@ -1621,7 +1696,7 @@
     "category": "Internet",
     "bin": {
       "linux": "slack",
-      "windows": "slack",
+      "windows": "slack.exe",
       "macos": "Slack"
     },
     "icon": "slack.png",
@@ -1635,8 +1710,8 @@
     "category": "Internet",
     "bin": {
       "linux": "telegram-desktop",
-      "windows": "telegram-desktop",
-      "macos": "Telegram Desktop"
+      "macos": "Telegram Desktop",
+      "windows": "C:\\Users\\d7\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe"
     },
     "icon": "telegram.png",
     "hidden": false,
@@ -1649,7 +1724,7 @@
     "category": "Internet",
     "bin": {
       "linux": "thunderbird",
-      "windows": "thunderbird",
+      "windows": "C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe",
       "macos": "Thunderbird"
     },
     "icon": "thunderbird.png",
@@ -1663,7 +1738,6 @@
     "category": "Internet",
     "bin": {
       "linux": "torbrowser-launcher",
-      "windows": "torbrowser-launcher",
       "macos": "Tor Browser"
     },
     "icon": "tor-browser.png",
@@ -1677,7 +1751,6 @@
     "category": "Internet",
     "bin": {
       "linux": "ungoogled-chromium",
-      "windows": "ungoogled-chromium",
       "macos": "Ungoogled Chromium"
     },
     "icon": "ungoogled-chromium.png",
@@ -1691,7 +1764,6 @@
     "category": "Internet",
     "bin": {
       "linux": "vivaldi-stable",
-      "windows": "vivaldi-stable",
       "macos": "Vivaldi"
     },
     "icon": "vivaldi.png",
@@ -1705,7 +1777,6 @@
     "category": "Internet",
     "bin": {
       "linux": "whatsapp-for-linux",
-      "windows": "whatsapp-for-linux",
       "macos": "Whatsapp"
     },
     "icon": "whatsapp.png",
@@ -1719,7 +1790,6 @@
     "category": "Internet",
     "bin": {
       "linux": "zen-browser-bin",
-      "windows": "zen-browser-bin",
       "macos": "Zen"
     },
     "icon": "zen-browser.png",
@@ -1733,7 +1803,6 @@
     "category": "Internet",
     "bin": {
       "linux": "zoom-client",
-      "windows": "zoom-client",
       "macos": "Zoom"
     },
     "icon": "zoom.png",
@@ -1760,7 +1829,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "audacious",
-      "windows": "audacious",
+      "windows": "audacious.exe",
       "macos": "Audacious"
     },
     "icon": "audacious.png",
@@ -1774,7 +1843,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "audacity",
-      "windows": "audacity",
+      "windows": "audacity.exe",
       "macos": "Audacity"
     },
     "icon": "audacity.png",
@@ -1788,7 +1857,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "audiorelay",
-      "windows": "audiorelay"
+      "windows": "audiorelay.exe"
     },
     "icon": "audiorelay.png",
     "hidden": false,
@@ -1807,16 +1876,39 @@
     "cli": false
   },
   {
+    "id": "win-balabolka",
+    "name": "Balabolka",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\Balabolka\\balabolka.exe"
+    },
+    "icon": "win-balabolka.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "bitwig-studio",
     "name": "Bitwig Studio",
     "vendor": "",
     "category": "Multimedia",
     "bin": {
       "linux": "bitwig-studio",
-      "windows": "bitwig-studio",
       "macos": "Bitwig Studio"
     },
     "icon": "bitwig-studio.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-capcut",
+    "name": "CapCut",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\CapCut\\Apps\\uninst.exe"
+    },
+    "icon": "win-capcut.png",
     "hidden": false,
     "cli": false
   },
@@ -1845,15 +1937,15 @@
     "cli": false
   },
   {
-    "id": "org.kde.elisa",
+    "id": "elisa",
     "name": "Elisa",
     "vendor": "",
     "category": "Multimedia",
     "bin": {
       "linux": "elisa",
-      "windows": "elisa"
+      "windows": "elisa.exe"
     },
-    "icon": "org.kde.elisa.png",
+    "icon": "elisa.png",
     "hidden": false,
     "cli": false
   },
@@ -1864,7 +1956,6 @@
     "category": "Multimedia",
     "bin": {
       "linux": "ffmpeg-free",
-      "windows": "ffmpeg-free",
       "macos": "Ffmpeg"
     },
     "icon": "ffmpeg.png",
@@ -1890,7 +1981,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "handbrake",
-      "windows": "handbrake",
+      "windows": "C:\\Program Files\\HandBrake\\HandBrake.exe",
       "macos": "Handbrake"
     },
     "icon": "handbrake.png",
@@ -1904,10 +1995,10 @@
     "category": "Multimedia",
     "bin": {
       "linux": "handy-bin",
-      "windows": "handy-bin",
-      "macos": "Handy"
+      "macos": "Handy",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Handy\\handy.exe"
     },
-    "icon": "handy.png",
+    "icon": "win-handy.png",
     "hidden": false,
     "cli": false
   },
@@ -1918,7 +2009,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "haruna",
-      "windows": "haruna"
+      "windows": "haruna.exe"
     },
     "icon": "haruna.png",
     "hidden": false,
@@ -1943,9 +2034,9 @@
     "category": "Multimedia",
     "bin": {
       "linux": "iptvnator",
-      "windows": "iptvnator"
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\iptvnator\\IPTVnator.exe"
     },
-    "icon": "iptvnator.png",
+    "icon": "win-iptvnator.png",
     "hidden": false,
     "cli": false
   },
@@ -1956,7 +2047,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "jellyfin",
-      "windows": "jellyfin"
+      "windows": "jellyfin.exe"
     },
     "icon": "jellyfin-client.png",
     "hidden": false,
@@ -1981,7 +2072,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "kdenlive",
-      "windows": "kdenlive",
+      "windows": "kdenlive.exe",
       "macos": "Kdenlive"
     },
     "icon": "kdenlive.png",
@@ -1995,7 +2086,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "kodi",
-      "windows": "kodi",
+      "windows": "C:\\Program Files\\Kodi\\Kodi.exe",
       "macos": "Kodi"
     },
     "icon": "kodi.png",
@@ -2009,7 +2100,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "lmms",
-      "windows": "lmms",
+      "windows": "lmms.exe",
       "macos": "Lmms"
     },
     "icon": "lmms.png",
@@ -2035,9 +2126,9 @@
     "category": "Multimedia",
     "bin": {
       "linux": "mpc-hc",
-      "windows": "mpc-hc"
+      "windows": "C:\\Program Files\\MPC-HC\\mpc-hc64.exe"
     },
-    "icon": "mpc-hc.png",
+    "icon": "win-mpc-hc.png",
     "hidden": false,
     "cli": false
   },
@@ -2048,7 +2139,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "mpv",
-      "windows": "mpv",
+      "windows": "mpv.exe",
       "macos": "Mpv"
     },
     "icon": "mpv.png",
@@ -2062,7 +2153,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "musescore",
-      "windows": "musescore",
+      "windows": "musescore.exe",
       "macos": "Musescore"
     },
     "icon": "musescore.png",
@@ -2088,7 +2179,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "musicbee",
-      "windows": "musicbee"
+      "windows": "musicbee.exe"
     },
     "icon": "musicbee.png",
     "hidden": false,
@@ -2101,8 +2192,8 @@
     "category": "Multimedia",
     "bin": {
       "linux": "obs-studio",
-      "windows": "obs-studio",
-      "macos": "Obs"
+      "macos": "Obs",
+      "windows": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe"
     },
     "icon": "obs-studio.png",
     "hidden": false,
@@ -2115,7 +2206,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "ocenaudio",
-      "windows": "ocenaudio",
+      "windows": "ocenaudio.exe",
       "macos": "Ocenaudio"
     },
     "icon": "ocenaudio.png",
@@ -2129,7 +2220,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "openshot",
-      "windows": "openshot",
+      "windows": "openshot.exe",
       "macos": "Openshot"
     },
     "icon": "openshot.png",
@@ -2154,7 +2245,8 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "linux": "/home/d7/.local/share/flatpak/exports/bin/io.github.MediaHubOrg.PlayTorrioMov"
+      "linux": "PlayTorrioMov",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\PlayTorrioMov\\PlayTorrioMov.exe"
     },
     "icon": "playtorriomov.png",
     "hidden": false,
@@ -2167,7 +2259,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "plexmediaserver",
-      "windows": "plexmediaserver",
+      "windows": "plexmediaserver.exe",
       "macos": "Plex"
     },
     "icon": "plex.png",
@@ -2205,7 +2297,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "reaper",
-      "windows": "reaper",
+      "windows": "reaper.exe",
       "macos": "Reaper"
     },
     "icon": "reaper.png",
@@ -2219,7 +2311,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "shotcut",
-      "windows": "shotcut",
+      "windows": "shotcut.exe",
       "macos": "Shotcut"
     },
     "icon": "shotcut.png",
@@ -2245,8 +2337,8 @@
     "category": "Multimedia",
     "bin": {
       "linux": "spotify-client",
-      "windows": "spotify-client",
-      "macos": "Spotify"
+      "macos": "Spotify",
+      "windows": "C:\\Users\\d7\\AppData\\Roaming\\Spotify\\Spotify.exe"
     },
     "icon": "spotify.png",
     "hidden": false,
@@ -2272,7 +2364,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "stremio",
-      "windows": "stremio",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Stremio\\stremio-shell-ng.exe",
       "macos": "Stremio"
     },
     "icon": "stremio.png",
@@ -2286,7 +2378,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "tenacity",
-      "windows": "tenacity",
+      "windows": "tenacity.exe",
       "macos": "Tenacity"
     },
     "icon": "tenacity.png",
@@ -2306,16 +2398,40 @@
     "cli": false
   },
   {
+    "id": "win-visionaid-spanish-ivona-voice-pack",
+    "name": "VisionAid Spanish Ivona Voice Pack",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": "C:\\ProgramData\\Package Cache\\{7b1a7c29-30d6-47da-8ea4-61ab08bd1d06}\\VisionAid Spanish Ivona Voice Pack Setup 2.6.2.exe"
+    },
+    "icon": "win-visionaid-spanish-ivona-voice-pack.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "vlc",
     "name": "VLC",
     "vendor": "",
     "category": "Multimedia",
     "bin": {
       "linux": "vlc",
-      "windows": "vlc",
+      "windows": "vlc.exe",
       "macos": "Vlc"
     },
     "icon": "vlc.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-wave",
+    "name": "WAVE",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\WAVE\\wave.exe"
+    },
+    "icon": "win-wave.png",
     "hidden": false,
     "cli": false
   },
@@ -2333,13 +2449,24 @@
     "cli": false
   },
   {
+    "id": "win-youtube-music",
+    "name": "YouTube Music",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\youtube-music\\YouTube Music.exe"
+    },
+    "icon": "win-youtube-music.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "yt-dlp",
     "name": "yt-dlp",
     "vendor": "",
     "category": "Multimedia",
     "bin": {
       "linux": "yt-dlp",
-      "windows": "yt-dlp",
       "macos": "Yt Dlp"
     },
     "icon": "yt-dlp.png",
@@ -2353,7 +2480,6 @@
     "category": "Multimedia",
     "bin": {
       "linux": "youtube-dl",
-      "windows": "youtube-dl",
       "macos": "Youtube Dl"
     },
     "icon": "ytdownloader.png",
@@ -2367,7 +2493,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "ytdownloader",
-      "windows": "ytdownloader",
+      "windows": "ytdownloader.exe",
       "macos": "Ytmdesktop Youtube Music"
     },
     "icon": "ytmdesktop.png",
@@ -2381,10 +2507,21 @@
     "category": "Office",
     "bin": {
       "linux": "activitywatch-bin",
-      "windows": "activitywatch-bin",
       "macos": "Activitywatch"
     },
     "icon": "activitywatch.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-amazon-kindle",
+    "name": "Amazon Kindle",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\Amazon\\Kindle\\Kindle.exe"
+    },
+    "icon": "win-amazon-kindle.png",
     "hidden": false,
     "cli": false
   },
@@ -2395,7 +2532,7 @@
     "category": "Office",
     "bin": {
       "linux": "anytype",
-      "windows": "anytype",
+      "windows": "anytype.exe",
       "macos": "Anytype"
     },
     "icon": "anytype.png",
@@ -2445,7 +2582,7 @@
     "category": "Office",
     "bin": {
       "linux": "calibre",
-      "windows": "calibre",
+      "windows": "calibre.exe",
       "macos": "Calibre"
     },
     "icon": "calibre.png",
@@ -2471,7 +2608,7 @@
     "category": "Office",
     "bin": {
       "linux": "deepl",
-      "windows": "deepl"
+      "windows": "deepl.exe"
     },
     "icon": "deepl.png",
     "hidden": false,
@@ -2484,7 +2621,7 @@
     "category": "Office",
     "bin": {
       "linux": "drawio",
-      "windows": "drawio",
+      "windows": "drawio.exe",
       "macos": "Drawio"
     },
     "icon": "drawio.png",
@@ -2498,7 +2635,7 @@
     "category": "Office",
     "bin": {
       "linux": "electrum",
-      "windows": "electrum",
+      "windows": "electrum.exe",
       "macos": "Electrum"
     },
     "icon": "electrum.png",
@@ -2512,7 +2649,7 @@
     "category": "Office",
     "bin": {
       "linux": "espanso",
-      "windows": "espanso",
+      "windows": "espanso.exe",
       "macos": "Espanso"
     },
     "icon": "espanso.png",
@@ -2539,7 +2676,7 @@
     "category": "Office",
     "bin": {
       "linux": "freeplane",
-      "windows": "freeplane"
+      "windows": "freeplane.exe"
     },
     "icon": "freeplane.png",
     "hidden": false,
@@ -2552,7 +2689,7 @@
     "category": "Office",
     "bin": {
       "linux": "gnucash",
-      "windows": "gnucash",
+      "windows": "gnucash.exe",
       "macos": "Gnucash"
     },
     "icon": "gnucash.png",
@@ -2566,7 +2703,7 @@
     "category": "Office",
     "bin": {
       "linux": "homebank",
-      "windows": "homebank"
+      "windows": "homebank.exe"
     },
     "icon": "homebank.png",
     "hidden": false,
@@ -2579,7 +2716,6 @@
     "category": "Office",
     "bin": {
       "linux": "joplin-desktop",
-      "windows": "joplin-desktop",
       "macos": "Joplin"
     },
     "icon": "joplin.png",
@@ -2595,6 +2731,18 @@
       "linux": "kaddressbook"
     },
     "icon": "org.kde.kaddressbook.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "kcalc",
+    "name": "KCalc",
+    "vendor": "KDE",
+    "category": "Office",
+    "bin": {
+      "linux": "kcalc"
+    },
+    "icon": "kcalc.png",
     "hidden": false,
     "cli": false
   },
@@ -2617,7 +2765,7 @@
     "category": "Office",
     "bin": {
       "linux": "kiwix",
-      "windows": "kiwix",
+      "windows": "kiwix.exe",
       "macos": "Kiwix"
     },
     "icon": "kiwix.png",
@@ -2655,9 +2803,9 @@
     "category": "Office",
     "bin": {
       "linux": "koodoreader",
-      "windows": "koodoreader"
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\koodo-reader\\Koodo Reader.exe"
     },
-    "icon": "koodoreader.png",
+    "icon": "win-koodo-reader.png",
     "hidden": false,
     "cli": false
   },
@@ -2705,7 +2853,6 @@
     "category": "Office",
     "bin": {
       "linux": "ledger-live-bin",
-      "windows": "ledger-live-bin",
       "macos": "Ledger Live"
     },
     "icon": "ledger-live.png",
@@ -2713,16 +2860,16 @@
     "cli": false
   },
   {
-    "id": "libreoffice-writer",
-    "name": "LibreOffice Writer",
+    "id": "libreoffice",
+    "name": "LibreOffice",
     "vendor": "",
     "category": "Office",
     "bin": {
       "linux": "libreoffice",
-      "windows": "libreoffice",
+      "windows": "libreoffice.exe",
       "macos": "Libreoffice"
     },
-    "icon": "libreoffice-writer.png",
+    "icon": "libreoffice.png",
     "hidden": false,
     "cli": false
   },
@@ -2733,7 +2880,6 @@
     "category": "Office",
     "bin": {
       "linux": "logseq-desktop-bin",
-      "windows": "logseq-desktop-bin",
       "macos": "Logseq"
     },
     "icon": "logseq.png",
@@ -2749,6 +2895,18 @@
       "windows": "EXCEL.EXE"
     },
     "icon": "win-excel.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-microsoft-office-home-2024",
+    "name": "Microsoft Office Home 2024",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe"
+    },
+    "icon": "win-microsoft-office-home-2024.png",
     "hidden": false,
     "cli": false
   },
@@ -2794,7 +2952,7 @@
     "vendor": "Microsoft",
     "category": "Office",
     "bin": {
-      "windows": "notepad.exe"
+      "windows": "C:\\Program Files\\Notepad++\\notepad++.exe"
     },
     "icon": "win-notepad.png",
     "hidden": false,
@@ -2819,7 +2977,6 @@
     "category": "Office",
     "bin": {
       "linux": "notion-desktop",
-      "windows": "notion-desktop",
       "macos": "Notion"
     },
     "icon": "notion.png",
@@ -2845,10 +3002,22 @@
     "category": "Office",
     "bin": {
       "linux": "obsidian",
-      "windows": "obsidian",
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
       "macos": "Obsidian"
     },
     "icon": "obsidian.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "okular",
+    "name": "Okular",
+    "vendor": "KDE",
+    "category": "Office",
+    "bin": {
+      "linux": "okular"
+    },
+    "icon": "okular.png",
     "hidden": false,
     "cli": false
   },
@@ -2871,7 +3040,7 @@
     "category": "Office",
     "bin": {
       "linux": "onlyoffice",
-      "windows": "onlyoffice",
+      "windows": "onlyoffice.exe",
       "macos": "Onlyoffice"
     },
     "icon": "onlyoffice.png",
@@ -2897,7 +3066,7 @@
     "category": "Office",
     "bin": {
       "linux": "pandoc",
-      "windows": "pandoc",
+      "windows": "pandoc.exe",
       "macos": "Pandoc"
     },
     "icon": "pandoc.png",
@@ -2911,7 +3080,7 @@
     "category": "Office",
     "bin": {
       "linux": "qalculate",
-      "windows": "qalculate",
+      "windows": "qalculate.exe",
       "macos": "Qalculate Gtk"
     },
     "icon": "qalculate.png",
@@ -2927,6 +3096,18 @@
       "macos": "Reminders"
     },
     "icon": "mac-reminders.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-sumatrapdf",
+    "name": "SumatraPDF",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe"
+    },
+    "icon": "win-sumatrapdf.png",
     "hidden": false,
     "cli": false
   },
@@ -2986,7 +3167,6 @@
     "category": "Office",
     "bin": {
       "linux": "zotero-bin",
-      "windows": "zotero-bin",
       "macos": "Zotero"
     },
     "icon": "zotero.png",
@@ -3000,7 +3180,7 @@
     "category": "Science",
     "bin": {
       "linux": "geogebra",
-      "windows": "geogebra",
+      "windows": "geogebra.exe",
       "macos": "Geogebra"
     },
     "icon": "geogebra.png",
@@ -3014,7 +3194,6 @@
     "category": "Science",
     "bin": {
       "linux": "flathub-com.google.EarthPro",
-      "windows": "flathub-com.google.EarthPro",
       "macos": "Google Earth Pro"
     },
     "icon": "google-earth.png",
@@ -3028,7 +3207,7 @@
     "category": "Science",
     "bin": {
       "linux": "kstars",
-      "windows": "kstars",
+      "windows": "kstars.exe",
       "macos": "Kstars"
     },
     "icon": "kstars.png",
@@ -3042,7 +3221,7 @@
     "category": "Science",
     "bin": {
       "linux": "qgis",
-      "windows": "qgis",
+      "windows": "qgis.exe",
       "macos": "Qgis"
     },
     "icon": "qgis.png",
@@ -3056,7 +3235,7 @@
     "category": "Science",
     "bin": {
       "linux": "stellarium",
-      "windows": "stellarium",
+      "windows": "stellarium.exe",
       "macos": "Stellarium"
     },
     "icon": "stellarium.png",
@@ -3076,13 +3255,25 @@
     "cli": false
   },
   {
+    "id": "win-adguard",
+    "name": "AdGuard",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": "C:\\ProgramData\\Package Cache\\{c7054d61-d3ae-4d6e-8a12-e89045cf1887}\\adGuardSetup.exe"
+    },
+    "icon": "win-adguard.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "anydesk",
     "name": "AnyDesk",
     "vendor": "",
     "category": "System",
     "bin": {
       "linux": "anydesk",
-      "windows": "anydesk",
+      "windows": "anydesk.exe",
       "macos": "Anydesk"
     },
     "icon": "anydesk.png",
@@ -3096,7 +3287,7 @@
     "category": "System",
     "bin": {
       "linux": "httpd",
-      "windows": "httpd",
+      "windows": "httpd.exe",
       "macos": "Httpd"
     },
     "icon": "apache.png",
@@ -3122,7 +3313,7 @@
     "category": "System",
     "bin": {
       "linux": "bitwarden",
-      "windows": "bitwarden",
+      "windows": "bitwarden.exe",
       "macos": "Bitwarden"
     },
     "icon": "bitwarden.png",
@@ -3136,7 +3327,7 @@
     "category": "System",
     "bin": {
       "linux": "bleachbit",
-      "windows": "bleachbit",
+      "windows": "bleachbit.exe",
       "macos": "Bleachbit"
     },
     "icon": "bleachbit.png",
@@ -3170,12 +3361,12 @@
   },
   {
     "id": "btop",
-    "name": "btop++",
+    "name": "btop",
     "vendor": "",
     "category": "System",
     "bin": {
       "linux": "btop",
-      "windows": "btop",
+      "windows": "btop.exe",
       "macos": "Btop"
     },
     "icon": "btop.png",
@@ -3189,7 +3380,7 @@
     "category": "System",
     "bin": {
       "linux": "cryptomator",
-      "windows": "cryptomator",
+      "windows": "cryptomator.exe",
       "macos": "Cryptomator"
     },
     "icon": "cryptomator.png",
@@ -3252,22 +3443,10 @@
     "category": "System",
     "bin": {
       "linux": "docker",
-      "windows": "docker",
+      "windows": "docker.exe",
       "macos": "Docker"
     },
     "icon": "docker.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.dolphin",
-    "name": "Dolphin",
-    "vendor": "",
-    "category": "System",
-    "bin": {
-      "linux": "dolphin"
-    },
-    "icon": "org.kde.dolphin.png",
     "hidden": false,
     "cli": false
   },
@@ -3278,7 +3457,7 @@
     "category": "System",
     "bin": {
       "linux": "fastfetch",
-      "windows": "fastfetch",
+      "windows": "fastfetch.exe",
       "macos": "Fastfetch"
     },
     "icon": "fastfetch.png",
@@ -3304,7 +3483,7 @@
     "category": "System",
     "bin": {
       "linux": "filezilla",
-      "windows": "filezilla",
+      "windows": "filezilla.exe",
       "macos": "Filezilla"
     },
     "icon": "filezilla.png",
@@ -3385,28 +3564,28 @@
     "cli": false
   },
   {
+    "id": "kdesystemsettings",
+    "name": "KDE System Settings",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "linux": "systemsettings"
+    },
+    "icon": "kdesystemsettings.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "keepassxc",
     "name": "KeePassXC",
     "vendor": "",
     "category": "System",
     "bin": {
       "linux": "keepassxc",
-      "windows": "keepassxc",
+      "windows": "keepassxc.exe",
       "macos": "Keepassxc"
     },
     "icon": "keepassxc.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.konsole",
-    "name": "Konsole",
-    "vendor": "",
-    "category": "System",
-    "bin": {
-      "linux": "konsole"
-    },
-    "icon": "org.kde.konsole.png",
     "hidden": false,
     "cli": false
   },
@@ -3441,8 +3620,8 @@
     "category": "System",
     "bin": {
       "linux": "mullvad-vpn",
-      "windows": "mullvad-vpn",
-      "macos": "Mullvadvpn"
+      "macos": "Mullvadvpn",
+      "windows": "C:\\Program Files\\Mullvad VPN\\Mullvad VPN.exe"
     },
     "icon": "mullvad-vpn.png",
     "hidden": false,
@@ -3455,7 +3634,7 @@
     "category": "System",
     "bin": {
       "linux": "nginx",
-      "windows": "nginx",
+      "windows": "nginx.exe",
       "macos": "Nginx"
     },
     "icon": "nginx.png",
@@ -3469,10 +3648,22 @@
     "category": "System",
     "bin": {
       "linux": "nmap",
-      "windows": "nmap",
+      "windows": "nmap.exe",
       "macos": "Nmap"
     },
     "icon": "nmap.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-npcap",
+    "name": "Npcap",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": "C:\\Program Files\\Npcap\\uninstall.exe"
+    },
+    "icon": "win-npcap.png",
     "hidden": false,
     "cli": false
   },
@@ -3508,7 +3699,7 @@
     "category": "System",
     "bin": {
       "linux": "podman",
-      "windows": "podman",
+      "windows": "podman.exe",
       "macos": "Podman"
     },
     "icon": "podman.png",
@@ -3522,7 +3713,7 @@
     "category": "System",
     "bin": {
       "linux": "protonvpn",
-      "windows": "protonvpn",
+      "windows": "protonvpn.exe",
       "macos": "Protonvpn"
     },
     "icon": "proton-vpn.png",
@@ -3535,8 +3726,7 @@
     "vendor": "",
     "category": "System",
     "bin": {
-      "linux": "protonup-qt",
-      "windows": "protonup-qt"
+      "linux": "protonup-qt"
     },
     "icon": "proton-qt.png",
     "hidden": false,
@@ -3549,7 +3739,7 @@
     "category": "System",
     "bin": {
       "linux": "qemu",
-      "windows": "qemu",
+      "windows": "qemu.exe",
       "macos": "Qemu"
     },
     "icon": "qemu.png",
@@ -3563,7 +3753,6 @@
     "category": "System",
     "bin": {
       "linux": "rustdesk-bin",
-      "windows": "rustdesk-bin",
       "macos": "Rustdesk"
     },
     "icon": "rustdesk.png",
@@ -3577,7 +3766,7 @@
     "category": "System",
     "bin": {
       "linux": "scrcpy",
-      "windows": "scrcpy",
+      "windows": "scrcpy.exe",
       "macos": "Scrcpy"
     },
     "icon": "scrcpy.png",
@@ -3645,25 +3834,13 @@
     "cli": false
   },
   {
-    "id": "systemsettings",
-    "name": "System Settings",
-    "vendor": "",
-    "category": "System",
-    "bin": {
-      "linux": "systemsettings"
-    },
-    "icon": "systemsettings.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "tailscale",
     "name": "Tailscale",
     "vendor": "",
     "category": "System",
     "bin": {
       "linux": "tailscale",
-      "windows": "tailscale",
+      "windows": "tailscale.exe",
       "macos": "Tailscale"
     },
     "icon": "tailscale.png",
@@ -3689,7 +3866,7 @@
     "category": "System",
     "bin": {
       "linux": "teamviewer",
-      "windows": "teamviewer",
+      "windows": "teamviewer.exe",
       "macos": "Teamviewer"
     },
     "icon": "teamviewer.png",
@@ -3703,7 +3880,7 @@
     "category": "System",
     "bin": {
       "linux": "veracrypt",
-      "windows": "veracrypt",
+      "windows": "veracrypt.exe",
       "macos": "Veracrypt"
     },
     "icon": "veracrypt.png",
@@ -3729,7 +3906,7 @@
     "category": "System",
     "bin": {
       "linux": "VirtualBox",
-      "windows": "VirtualBox",
+      "windows": "VirtualBox.exe",
       "macos": "Virtualbox"
     },
     "icon": "virtualbox.png",
@@ -3767,7 +3944,6 @@
     "category": "System",
     "bin": {
       "linux": "windscribe-cli",
-      "windows": "windscribe-cli",
       "macos": "Windscribe"
     },
     "icon": "windscribe.png",
@@ -3788,13 +3964,24 @@
     "cli": false
   },
   {
+    "id": "win-winmerge-x64-current-user-64-bit",
+    "name": "WinMerge x64 (Current user, 64-bit)",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\WinMerge\\WinMergeU.exe"
+    },
+    "icon": "win-winmerge-x64-current-user-64-bit.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "wireguard",
     "name": "WireGuard",
     "vendor": "",
     "category": "System",
     "bin": {
       "linux": "wireguard-tools",
-      "windows": "wireguard-tools",
       "macos": "Wireguard Tools"
     },
     "icon": "wireguard.png",
@@ -3808,7 +3995,7 @@
     "category": "System",
     "bin": {
       "linux": "wireshark",
-      "windows": "wireshark",
+      "windows": "C:\\Program Files\\Wireshark\\Wireshark.exe",
       "macos": "Wireshark"
     },
     "icon": "wireshark.png",
@@ -3822,7 +4009,7 @@
     "category": "System",
     "bin": {
       "linux": "xen",
-      "windows": "xen"
+      "windows": "xen.exe"
     },
     "icon": "xen.png",
     "hidden": false,
@@ -3835,7 +4022,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "p7zip",
-      "windows": "p7zip",
+      "windows": "C:\\Program Files\\7-Zip\\7zFM.exe",
       "macos": "P7zip"
     },
     "icon": "7zip.png",
@@ -3849,7 +4036,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "alacritty",
-      "windows": "alacritty",
+      "windows": "alacritty.exe",
       "macos": "Alacritty"
     },
     "icon": "alacritty.png",
@@ -3865,6 +4052,18 @@
       "linux": "ark"
     },
     "icon": "org.kde.ark.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-autofirma",
+    "name": "Autofirma",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\Autofirma\\Autofirma\\Autofirma.exe"
+    },
+    "icon": "win-autofirma.png",
     "hidden": false,
     "cli": false
   },
@@ -3887,7 +4086,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "etcher",
-      "windows": "etcher",
+      "windows": "etcher.exe",
       "macos": "Balenaetcher"
     },
     "icon": "balena-etcher.png",
@@ -3901,7 +4100,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "bat",
-      "windows": "bat",
+      "windows": "bat.exe",
       "macos": "Bat"
     },
     "icon": "bat.png",
@@ -3928,12 +4127,24 @@
     "category": "Utilities",
     "bin": {
       "linux": "curl",
-      "windows": "curl",
+      "windows": "curl.exe",
       "macos": "Curl"
     },
     "icon": "curl.png",
     "hidden": false,
     "cli": true
+  },
+  {
+    "id": "dolphin",
+    "name": "Dolphin",
+    "vendor": "KDE",
+    "category": "Utilities",
+    "bin": {
+      "linux": "dolphin"
+    },
+    "icon": "dolphin.png",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "dropbox",
@@ -3942,7 +4153,6 @@
     "category": "Utilities",
     "bin": {
       "linux": "nautilus-dropbox",
-      "windows": "nautilus-dropbox",
       "macos": "Dropbox"
     },
     "icon": "dropbox.png",
@@ -3956,7 +4166,6 @@
     "category": "Utilities",
     "bin": {
       "linux": "dua-cli",
-      "windows": "dua-cli",
       "macos": "Dua Cli"
     },
     "icon": "dua-cli.png",
@@ -3970,7 +4179,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "dust",
-      "windows": "dust",
+      "windows": "dust.exe",
       "macos": "Dust"
     },
     "icon": "dust.png",
@@ -4008,7 +4217,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "eza",
-      "windows": "eza",
+      "windows": "eza.exe",
       "macos": "Eza"
     },
     "icon": "eza.png",
@@ -4022,7 +4231,6 @@
     "category": "Utilities",
     "bin": {
       "linux": "fd-find",
-      "windows": "fd-find",
       "macos": "Fd"
     },
     "icon": "fd.png",
@@ -4084,7 +4292,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "flameshot",
-      "windows": "flameshot",
+      "windows": "flameshot.exe",
       "macos": "Flameshot"
     },
     "icon": "flameshot.png",
@@ -4098,9 +4306,10 @@
     "category": "Utilities",
     "bin": {
       "linux": "freefilesync",
-      "macos": "Freefilesync"
+      "macos": "Freefilesync",
+      "windows": "C:\\Program Files\\FreeFileSync\\FreeFileSync.exe"
     },
-    "icon": "freefilesync.png",
+    "icon": "win-freefilesync.png",
     "hidden": false,
     "cli": false
   },
@@ -4111,7 +4320,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "fzf",
-      "windows": "fzf",
+      "windows": "fzf.exe",
       "macos": "Fzf"
     },
     "icon": "fzf.png",
@@ -4132,16 +4341,28 @@
     "cli": false
   },
   {
+    "id": "win-golden-cheetah",
+    "name": "Golden Cheetah",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\Golden Cheetah\\GoldenCheetah.exe"
+    },
+    "icon": "win-golden-cheetah.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "gpxsee",
     "name": "GPXSee",
     "vendor": "",
     "category": "Utilities",
     "bin": {
       "linux": "gpxsee",
-      "windows": "gpxsee",
+      "windows": "C:\\Program Files\\GPXSee\\gpxsee.exe",
       "macos": "Gpxsee"
     },
-    "icon": "gpxsee.png",
+    "icon": "win-gpxsee.png",
     "hidden": false,
     "cli": false
   },
@@ -4171,13 +4392,25 @@
     "cli": false
   },
   {
+    "id": "win-inno-setup",
+    "name": "Inno Setup",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Inno Setup 7\\ISIDE.exe"
+    },
+    "icon": "win-inno-setup.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "instaloader",
     "name": "Instaloader",
     "vendor": "",
     "category": "Utilities",
     "bin": {
       "linux": "instaloader",
-      "windows": "instaloader",
+      "windows": "instaloader.exe",
       "macos": "Instaloader"
     },
     "icon": "instaloader.png",
@@ -4191,24 +4424,12 @@
     "category": "Utilities",
     "bin": {
       "linux": "jq",
-      "windows": "jq",
+      "windows": "jq.exe",
       "macos": "Jq"
     },
     "icon": "jq.png",
     "hidden": false,
     "cli": true
-  },
-  {
-    "id": "org.kde.kcalc",
-    "name": "KCalc",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "linux": "kcalc"
-    },
-    "icon": "org.kde.kcalc.png",
-    "hidden": false,
-    "cli": false
   },
   {
     "id": "org.kde.kcharselect",
@@ -4284,15 +4505,39 @@
     "cli": false
   },
   {
+    "id": "konsole",
+    "name": "Konsole",
+    "vendor": "KDE",
+    "category": "Utilities",
+    "bin": {
+      "linux": "konsole"
+    },
+    "icon": "konsole.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-kudu",
+    "name": "Kudu",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\Kudu\\Kudu.exe"
+    },
+    "icon": "win-kudu.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "mega",
     "name": "MEGAsync",
     "vendor": "",
     "category": "Utilities",
     "bin": {
       "linux": "megasync",
-      "windows": "megasync"
+      "windows": "C:\\Users\\d7\\AppData\\Local\\MEGAsync\\MEGAsync.exe"
     },
-    "icon": "mega.png",
+    "icon": "win-megasync.png",
     "hidden": false,
     "cli": false
   },
@@ -4303,7 +4548,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "meld",
-      "windows": "meld",
+      "windows": "meld.exe",
       "macos": "Meld"
     },
     "icon": "meld.png",
@@ -4317,10 +4562,22 @@
     "category": "Utilities",
     "bin": {
       "linux": "picard",
-      "windows": "picard",
+      "windows": "picard.exe",
       "macos": "Picard"
     },
     "icon": "musicbrainz-picard.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-mytourbook",
+    "name": "MyTourbook",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\MyTourbook\\mytourbook.exe"
+    },
+    "icon": "win-mytourbook.png",
     "hidden": false,
     "cli": false
   },
@@ -4331,7 +4588,6 @@
     "category": "Utilities",
     "bin": {
       "linux": "nextcloud-client",
-      "windows": "nextcloud-client",
       "macos": "Nextcloud"
     },
     "icon": "nextcloud-desktop.png",
@@ -4345,10 +4601,22 @@
     "category": "Utilities",
     "bin": {
       "linux": "onionshare",
-      "windows": "onionshare",
+      "windows": "onionshare.exe",
       "macos": "Onionshare"
     },
     "icon": "onionshare.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-openal",
+    "name": "OpenAL",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files (x86)\\OpenAL\\oalinst.exe"
+    },
+    "icon": "win-openal.png",
     "hidden": false,
     "cli": false
   },
@@ -4359,9 +4627,33 @@
     "category": "Utilities",
     "bin": {
       "linux": "openrgb",
-      "windows": "openrgb"
+      "windows": "openrgb.exe"
     },
     "icon": "openrgb.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-openscreen",
+    "name": "Openscreen",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Openscreen\\Openscreen.exe"
+    },
+    "icon": "win-openscreen.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-powertoys-preview",
+    "name": "PowerToys (Preview)",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Package Cache\\{28CDFE7F-68F0-403E-B53D-7A6E1E9AAA17}\\PowerToysUserSetup-0.101.2362.0-x64.exe"
+    },
+    "icon": "win-powertoys-preview.png",
     "hidden": false,
     "cli": false
   },
@@ -4372,7 +4664,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "putty",
-      "windows": "putty",
+      "windows": "putty.exe",
       "macos": "Putty"
     },
     "icon": "putty.png",
@@ -4386,7 +4678,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "qbittorrent",
-      "windows": "qbittorrent",
+      "windows": "qbittorrent.exe",
       "macos": "Qbittorrent"
     },
     "icon": "qbittorrent.png",
@@ -4412,7 +4704,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "rclone",
-      "windows": "rclone",
+      "windows": "rclone.exe",
       "macos": "Rclone"
     },
     "icon": "rclone.png",
@@ -4433,13 +4725,25 @@
     "cli": false
   },
   {
+    "id": "win-responsivelyapp",
+    "name": "ResponsivelyApp",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe"
+    },
+    "icon": "win-responsivelyapp.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "ripgrep",
     "name": "ripgrep",
     "vendor": "",
     "category": "Utilities",
     "bin": {
       "linux": "ripgrep",
-      "windows": "ripgrep",
+      "windows": "ripgrep.exe",
       "macos": "Ripgrep"
     },
     "icon": "ripgrep.png",
@@ -4472,14 +4776,14 @@
     "cli": false
   },
   {
-    "id": "org.kde.spectacle",
+    "id": "spectacle",
     "name": "Spectacle",
-    "vendor": "",
+    "vendor": "KDE",
     "category": "Utilities",
     "bin": {
       "linux": "spectacle"
     },
-    "icon": "org.kde.spectacle.png",
+    "icon": "spectacle.png",
     "hidden": false,
     "cli": false
   },
@@ -4490,7 +4794,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "starship",
-      "windows": "starship",
+      "windows": "starship.exe",
       "macos": "Starship"
     },
     "icon": "starship.png",
@@ -4504,7 +4808,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "stretchly",
-      "windows": "stretchly",
+      "windows": "stretchly.exe",
       "macos": "Stretchly"
     },
     "icon": "stretchly.png",
@@ -4518,7 +4822,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "superfile",
-      "windows": "superfile",
+      "windows": "superfile.exe",
       "macos": "Superfile"
     },
     "icon": "superfile.png",
@@ -4532,7 +4836,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "syncthing",
-      "windows": "syncthing",
+      "windows": "syncthing.exe",
       "macos": "Syncthing"
     },
     "icon": "syncthing.png",
@@ -4560,6 +4864,18 @@
       "macos": "Terminal"
     },
     "icon": "mac-terminal.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-thermaltake-tool",
+    "name": "Thermaltake Tool",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\Tt\\Tool\\LibHWInfo.exe"
+    },
+    "icon": "win-thermaltake-tool.png",
     "hidden": false,
     "cli": false
   },
@@ -4595,7 +4911,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "transmission",
-      "windows": "transmission",
+      "windows": "transmission.exe",
       "macos": "Transmission"
     },
     "icon": "transmission.png",
@@ -4609,7 +4925,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "tree",
-      "windows": "tree",
+      "windows": "tree.exe",
       "macos": "Tree"
     },
     "icon": "tree.png",
@@ -4622,8 +4938,7 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "linux": "ventoy-bin",
-      "windows": "ventoy-bin"
+      "linux": "ventoy-bin"
     },
     "icon": "ventoy.png",
     "hidden": false,
@@ -4636,10 +4951,22 @@
     "category": "Utilities",
     "bin": {
       "linux": "wezterm",
-      "windows": "wezterm",
+      "windows": "wezterm.exe",
       "macos": "Wezterm"
     },
     "icon": "wezterm.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-windows-software-development-kit-windows",
+    "name": "Windows Software Development Kit - Windows",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\ProgramData\\Package Cache\\{b72d4013-dd88-405a-9f9d-e88c278dcefe}\\winsdksetup.exe"
+    },
+    "icon": "win-windows-software-development-kit-windows.png",
     "hidden": false,
     "cli": false
   },
