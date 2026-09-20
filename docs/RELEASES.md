@@ -60,6 +60,11 @@ be finished from a Windows machine.
   generated `missing_icons.txt`, the unused Windows-Store logos, the Android config, `tauri.linux.conf.json`,
   the mobile entry point, `tauri-plugin-log`, and the Arch packaging.
 
+**Verified before release:** the Windows installer was installed per-user on a real machine, the installed
+production build was launched (174 tiles in 6 columns, shipped icons loading) and it was uninstalled again,
+which removed the install folder, the registry entry and the Start Menu shortcut and left the user's saved
+settings untouched. The offline Flatpak build was run end to end on CI.
+
 **Known limits:** macOS has never run on real hardware, and the Linux tarball and Flatpak have not been
 installed on a real system. See [`ROADMAP.md`](ROADMAP.md).
 
