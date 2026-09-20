@@ -75,6 +75,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-log",
  "which",
+ "winreg",
 ]
 
 [[package]]

@@ -38,6 +38,75 @@ fn macos_app_installed(name: &str) -> bool {
     dirs.iter().any(|dir| Path::new(dir).join(format!("{name}.app")).exists())
 }
 
+/// Windows: resolve a bare executable name the way the `Run` dialog and
+/// `start` do — via the registry's App Paths key. Most GUI installers
+/// (Office, VLC, Inkscape) register themselves here and *not* on $PATH, so a
+/// PATH-only search reports them as not installed and they never appear.
+/// Both the 64-bit and 32-bit (WOW6432Node) views are checked, for the
+/// current user and the whole machine. Returns the full executable path.
+#[cfg(windows)]
+fn windows_registry_lookup(name: &str) -> Option<PathBuf> {
+    use winreg::enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, KEY_READ};
+    use winreg::RegKey;
+
+    const APP_PATHS: &str =
+        r"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
+    const APP_PATHS_WOW: &str =
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\App Paths";
+
+    // The key is named after the executable, so a bare "vlc" has to be tried
+    // as "vlc.exe" — but a name that already carries the extension must not
+    // become "vlc.exe.exe".
+    let exe = if name.to_ascii_lowercase().ends_with(".exe") {
+        name.to_string()
+    } else {
+        format!("{name}.exe")
+    };
+
+    for (hive, sub) in [
+        (HKEY_CURRENT_USER, APP_PATHS),
+        (HKEY_LOCAL_MACHINE, APP_PATHS),
+        (HKEY_LOCAL_MACHINE, APP_PATHS_WOW),
+    ] {
+        let Ok(root) = RegKey::predef(hive).open_subkey_with_flags(sub, KEY_READ) else {
+            continue;
+        };
+        let Ok(key) = root.open_subkey_with_flags(&exe, KEY_READ) else {
+            continue;
+        };
+        // The default value is the full path. It is usually unquoted but
+        // often contains spaces ("C:\Program Files\VideoLAN\VLC\vlc.exe"),
+        // and occasionally carries a trailing argument. So: try the whole
+        // string first, and only fall back to taking the leading token.
+        // Splitting on whitespace up front would truncate every unquoted
+        // path at the first space — "C:\Program" — and silently report an
+        // installed app as missing.
+        let Ok(raw) = key.get_value::<String, _>("") else {
+            continue;
+        };
+        let raw = raw.trim();
+        let unquoted = raw
+            .strip_prefix('"')
+            .and_then(|rest| rest.split('"').next())
+            .unwrap_or(raw);
+
+        let mut candidates = vec![unquoted];
+        if let Some(first) = raw.split_whitespace().next() {
+            if first != unquoted {
+                candidates.push(first);
+            }
+        }
+        if let Some(path) = candidates
+            .into_iter()
+            .map(PathBuf::from)
+            .find(|p| p.is_file())
+        {
+            return Some(path);
+        }
+    }
+    None
+}
+
 #[tauri::command]
 fn is_installed(bin: PlatformBin) -> bool {
     let Some(name) = bin.for_current_os() else {
@@ -45,9 +114,17 @@ fn is_installed(bin: PlatformBin) -> bool {
     };
     match std::env::consts::OS {
         "macos" => macos_app_installed(name),
-        // Linux and Windows both resolve via $PATH; the `which` crate is
-        // cross-platform and Windows-aware (checks PATHEXT, so a bare
-        // "git" correctly resolves "git.exe").
+        "windows" => {
+            // An absolute path (what the system scan produces) just has to
+            // exist; a bare name is searched on $PATH and then in the
+            // registry's App Paths key. `which` is Windows-aware (checks
+            // PATHEXT, so a bare "git" resolves "git.exe").
+            if name.contains('\\') || name.contains('/') {
+                return Path::new(name).is_file();
+            }
+            which::which(name).is_ok() || windows_registry_lookup(name).is_some()
+        }
+        // Linux: $PATH only, which is how desktop apps are launched there.
         _ => which::which(name).is_ok(),
     }
 }
@@ -105,6 +182,14 @@ fn launch_app(bin: PlatformBin, cli: bool) -> Result<(), String> {
         // afterwards, same idea as the Linux bash/read wrapper. Unverified
         // on real Windows.
         "windows" if cli => Command::new("cmd").args(["/k", name]).spawn(),
+        "windows" => {
+            // Resolve to a full path first: an app registered only in the
+            // registry's App Paths key (Office, VLC, Inkscape) is invisible
+            // to a bare `Command::new("vlc.exe")`, which would fail with
+            // "not found" even though `is_installed` just said it exists.
+            let target = windows_registry_lookup(name).unwrap_or_else(|| PathBuf::from(name));
+            Command::new(target).spawn()
+        }
         _ => Command::new(name).spawn(),
     };
     result
