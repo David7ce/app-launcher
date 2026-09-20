@@ -178,6 +178,22 @@ class StartMenuLookup(unittest.TestCase):
                          "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App")
 
 
+class ShrinkIcons(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("magick"), "needs ImageMagick")
+    def test_oversized_icons_are_capped_and_small_ones_left_alone(self):
+        import struct
+        with tempfile.TemporaryDirectory() as tmp:
+            big, small = Path(tmp, "big.png"), Path(tmp, "small.png")
+            subprocess.run(["magick", "-size", "512x256", "xc:red", str(big)], check=True)
+            subprocess.run(["magick", "-size", "64x64", "xc:blue", str(small)], check=True)
+            before = small.read_bytes()
+            with mock.patch.object(bc, "ICONS_DIR", Path(tmp)):
+                self.assertEqual(bc.shrink_icons(), 1)
+            w, h = struct.unpack(">II", big.read_bytes()[16:24])
+            self.assertEqual((w, h), (128, 64))  # aspect ratio kept, longest side capped
+            self.assertEqual(small.read_bytes(), before)
+
+
 class PlaceScanIcons(unittest.TestCase):
     def test_places_staged_icons_and_prunes_orphans(self):
         with tempfile.TemporaryDirectory() as tmp:

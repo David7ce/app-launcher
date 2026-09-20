@@ -36,7 +36,9 @@ be finished from a Windows machine.
   SAGA GIS, CMake, Character Map, Magnifier, Narrator and the on-screen keyboard.
 - **75 more icons ship with the app.** The build now extracts them from the Start Menu (the app's exe, the
   package's manifest, or the shell's own tile), so a fresh install shows them without extracting anything:
-  246 of 321 Windows entries ship an icon, and only 136 of 440 entries lack one (was 181 of 408).
+  246 of 321 Windows entries ship an icon, and only 136 of 440 entries lack one (was 181 of 408). The
+  build caps every shipped icon at 128px (tiles show them at 30px), which halves the icon folder
+  (8.9 → 3.8 MB) and keeps the installers small despite the extra icons.
 
 ### Fixes
 

@@ -385,6 +385,31 @@ def place_scan_icons(entries: list[dict]) -> tuple[int, int]:
     return placed, pruned
 
 
+MAX_ICON_PX = 128
+
+
+def shrink_icons() -> int:
+    """Cap every shipped icon at MAX_ICON_PX. Tiles show them at 30px, and the icons
+    extracted from executables and packages arrive at 256px or 512px: on their own
+    they added several MB to every installer. Only ever shrinks (`>`), and needs
+    ImageMagick like the other icon tools; without it nothing is changed."""
+    import shutil
+    import struct
+    import subprocess
+
+    if not shutil.which("magick"):
+        return 0
+    big = []
+    for path in ICONS_DIR.glob("*.png"):
+        header = path.read_bytes()[:24]
+        if len(header) == 24 and max(struct.unpack(">II", header[16:24])) > MAX_ICON_PX:
+            big.append(str(path))
+    for path in big:
+        subprocess.run(["magick", path, "-background", "none", "-resize", f"{MAX_ICON_PX}x{MAX_ICON_PX}>", path],
+                       check=True, capture_output=True)
+    return len(big)
+
+
 def dedupe_key(entry: dict) -> str | None:
     # Linux first: it's the one platform this app actually runs and gets
     # tested on. Falling back to windows/macos still catches a collision
@@ -547,11 +572,13 @@ def main() -> None:
         elif entry["id"] in EXISTS_ON_WINDOWS and windows is None:
             entry["bin"]["windows"] = ""
     icons_placed, icons_pruned = place_scan_icons(result)
+    icons_shrunk = shrink_icons()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")
 
     print(f"wrote {len(result)} entries to {OUT.relative_to(ROOT)}")
-    print(f"icons: {icons_placed} placed as <id>.png, {icons_pruned} orphaned file(s) pruned")
+    print(f"icons: {icons_placed} placed as <id>.png, {icons_pruned} orphaned file(s) pruned, "
+          f"{icons_shrunk} shrunk to {MAX_ICON_PX}px")
     print(f"skipped {len(skipped_no_linux_bin)} dataset entries with no plausible Linux bin "
           f"(flatpak/macOS/Windows-only in the source data)")
     if dropped_dupes:

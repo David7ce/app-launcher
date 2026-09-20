@@ -135,7 +135,7 @@ Every icon the app ships — dashboard-icons, Iconify, the system-theme scan, th
 
 The only SVGs kept are the hand-authored **fallback glyphs**, in `tools/icons/glyphs/` (one per category, plus `CLI-tool.svg`). They are not shipped and nothing reads them at runtime; they are the editable originals, and `tools/icons/make_glyphs.py` rasterizes them (`magick <svg> -background none -resize 128x128 <png>`) into `src/assets/icons/category/`. Any other SVG met along the way — an Iconify brand mark, a system-theme icon — is only an intermediate: `tools/icons/sync.py` and `tools/scan/linux.py` rasterize it and discard it, since it can be fetched or re-read again. `dashboard-icons` never enters the SVG path at all; only its `png/` variant is fetched.
 
-`ImageMagick` (`magick`) is a hard dependency of these maintenance scripts (not of the running app). All 128×128, `-background none` to preserve transparency where the source has any.
+`ImageMagick` (`magick`) is a hard dependency of these maintenance scripts (not of the running app). All at most 128×128, `-background none` to preserve transparency where the source has any. `build_catalog.py` enforces the cap (`shrink_icons`) on every build, since icons extracted from executables and packages arrive at 256–512px and, unshrunk, added several MB to every installer while tiles show them at 30px.
 
 ### Icon naming: one invariant, enforced by `build_catalog.py`
 
