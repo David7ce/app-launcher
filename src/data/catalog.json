@@ -30,7 +30,7 @@
     "vendor": "",
     "category": "Development",
     "bin": {
-      "windows": "C:\\Users\\d7\\.bun\\bin\\bun.exe"
+      "windows": "%USERPROFILE%\\.bun\\bin\\bun.exe"
     },
     "icon": "win-bun.png",
     "hidden": false,
@@ -431,7 +431,7 @@
     "category": "Development",
     "bin": {
       "linux": "ollama",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Ollama\\unins000.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama app.exe",
       "macos": "Ollama"
     },
     "icon": "ollama.png",
@@ -525,7 +525,7 @@
     "category": "Development",
     "bin": {
       "linux": "python3",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Package Cache\\{bdda61aa-57d0-45c8-ae92-fa67d560e32f}\\python-3.13.15-amd64.exe",
+      "windows": "python3.exe",
       "macos": "Python"
     },
     "icon": "python.png",
@@ -632,7 +632,7 @@
     "vendor": "",
     "category": "Development",
     "bin": {
-      "windows": "C:\\Program Files\\Tesseract-OCR\\tesseract-uninstall.exe"
+      "windows": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
     },
     "icon": "win-tesseract-ocr-open-source-ocr-engine.png",
     "hidden": false,
@@ -685,7 +685,7 @@
     "category": "Development",
     "bin": {
       "linux": "code",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe",
       "macos": "Visual Studio Code"
     },
     "icon": "visual-studio-code.png",
@@ -752,7 +752,7 @@
     "category": "Development",
     "bin": {
       "linux": "zed",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Zed\\Zed.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Zed\\Zed.exe",
       "macos": "Zed"
     },
     "icon": "zed.png",
@@ -857,7 +857,7 @@
     "category": "Games",
     "bin": {
       "linux": "lucaschess",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\LucasChessR\\bin\\LucasR.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\LucasChessR\\bin\\LucasR.exe"
     },
     "icon": "lucaschess.png",
     "hidden": false,
@@ -939,7 +939,7 @@
     "category": "Games",
     "bin": {
       "linux": "steam",
-      "windows": "C:\\Program Files (x86)\\Steam\\uninstall.exe",
+      "windows": "C:\\Program Files (x86)\\Steam\\steam.exe",
       "macos": "Steam"
     },
     "icon": "steam.png",
@@ -1082,7 +1082,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "gimp",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\GIMP 3\\bin\\gimp-3.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\GIMP 3\\bin\\gimp-3.exe",
       "macos": "Gimp"
     },
     "icon": "gimp.png",
@@ -1237,7 +1237,7 @@
     "category": "Graphics",
     "bin": {
       "linux": "rapidraw",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\RapidRAW\\RapidRAW.exe"
+      "windows": "%LOCALAPPDATA%\\RapidRAW\\RapidRAW.exe"
     },
     "icon": "rapidraw.png",
     "hidden": false,
@@ -1365,7 +1365,7 @@
     "category": "Internet",
     "bin": {
       "linux": "chromium",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Chromium\\Application\\chrome.exe",
+      "windows": "%LOCALAPPDATA%\\Chromium\\Application\\chrome.exe",
       "macos": "Chromium"
     },
     "icon": "chromium.png",
@@ -1699,7 +1699,7 @@
     "bin": {
       "linux": "telegram-desktop",
       "macos": "Telegram Desktop",
-      "windows": "C:\\Users\\d7\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe"
+      "windows": "%APPDATA%\\Telegram Desktop\\Telegram.exe"
     },
     "icon": "telegram.png",
     "hidden": false,
@@ -1894,7 +1894,7 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\CapCut\\Apps\\uninst.exe"
+      "windows": "%LOCALAPPDATA%\\CapCut\\Apps\\CapCut.exe"
     },
     "icon": "win-capcut.png",
     "hidden": false,
@@ -1984,7 +1984,7 @@
     "bin": {
       "linux": "handy-bin",
       "macos": "Handy",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Handy\\handy.exe"
+      "windows": "%LOCALAPPDATA%\\Handy\\handy.exe"
     },
     "icon": "handy.png",
     "hidden": false,
@@ -2022,7 +2022,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "iptvnator",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\iptvnator\\IPTVnator.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\iptvnator\\IPTVnator.exe"
     },
     "icon": "iptvnator.png",
     "hidden": false,
@@ -2234,7 +2234,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "PlayTorrioMov",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\PlayTorrioMov\\PlayTorrioMov.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\PlayTorrioMov\\PlayTorrioMov.exe"
     },
     "icon": "playtorriomov.png",
     "hidden": false,
@@ -2326,7 +2326,7 @@
     "bin": {
       "linux": "spotify-client",
       "macos": "Spotify",
-      "windows": "C:\\Users\\d7\\AppData\\Roaming\\Spotify\\Spotify.exe"
+      "windows": "%APPDATA%\\Spotify\\Spotify.exe"
     },
     "icon": "spotify.png",
     "hidden": false,
@@ -2352,7 +2352,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "stremio",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Stremio\\stremio-shell-ng.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Stremio\\stremio-shell-ng.exe",
       "macos": "Stremio"
     },
     "icon": "stremio.png",
@@ -2386,18 +2386,6 @@
     "cli": false
   },
   {
-    "id": "win-visionaid-spanish-ivona-voice-pack",
-    "name": "VisionAid Spanish Ivona Voice Pack",
-    "vendor": "",
-    "category": "Multimedia",
-    "bin": {
-      "windows": "C:\\ProgramData\\Package Cache\\{7b1a7c29-30d6-47da-8ea4-61ab08bd1d06}\\VisionAid Spanish Ivona Voice Pack Setup 2.6.2.exe"
-    },
-    "icon": "win-visionaid-spanish-ivona-voice-pack.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "vlc",
     "name": "VLC",
     "vendor": "",
@@ -2417,7 +2405,7 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\WAVE\\wave.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\WAVE\\wave.exe"
     },
     "icon": "win-wave.png",
     "hidden": false,
@@ -2442,7 +2430,7 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\youtube-music\\YouTube Music.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\youtube-music\\YouTube Music.exe"
     },
     "icon": "win-youtube-music.png",
     "hidden": false,
@@ -2791,7 +2779,7 @@
     "category": "Office",
     "bin": {
       "linux": "koodoreader",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\koodo-reader\\Koodo Reader.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\koodo-reader\\Koodo Reader.exe"
     },
     "icon": "koodoreader.png",
     "hidden": false,
@@ -2990,7 +2978,7 @@
     "category": "Office",
     "bin": {
       "linux": "obsidian",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Obsidian\\Obsidian.exe",
       "macos": "Obsidian"
     },
     "icon": "obsidian.png",
@@ -3093,7 +3081,7 @@
     "vendor": "",
     "category": "Office",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe"
+      "windows": "%LOCALAPPDATA%\\SumatraPDF\\SumatraPDF.exe"
     },
     "icon": "win-sumatrapdf.png",
     "hidden": false,
@@ -3239,18 +3227,6 @@
       "macos": "Activity Monitor"
     },
     "icon": "mac-activity-monitor.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-adguard",
-    "name": "AdGuard",
-    "vendor": "",
-    "category": "System",
-    "bin": {
-      "windows": "C:\\ProgramData\\Package Cache\\{c7054d61-d3ae-4d6e-8a12-e89045cf1887}\\adGuardSetup.exe"
-    },
-    "icon": "win-adguard.png",
     "hidden": false,
     "cli": false
   },
@@ -3644,18 +3620,6 @@
     "cli": false
   },
   {
-    "id": "win-npcap",
-    "name": "Npcap",
-    "vendor": "",
-    "category": "System",
-    "bin": {
-      "windows": "C:\\Program Files\\Npcap\\uninstall.exe"
-    },
-    "icon": "win-npcap.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "pi-hole",
     "name": "Pi-hole",
     "vendor": "",
@@ -3957,7 +3921,7 @@
     "vendor": "",
     "category": "System",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\WinMerge\\WinMergeU.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe"
     },
     "icon": "win-winmerge-x64-current-user-64-bit.png",
     "hidden": false,
@@ -4385,7 +4349,7 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Inno Setup 7\\ISIDE.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\Inno Setup 7\\ISIDE.exe"
     },
     "icon": "win-inno-setup.png",
     "hidden": false,
@@ -4523,7 +4487,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "megasync",
-      "windows": "C:\\Users\\d7\\AppData\\Local\\MEGAsync\\MEGAsync.exe"
+      "windows": "%LOCALAPPDATA%\\MEGAsync\\MEGAsync.exe"
     },
     "icon": "mega.png",
     "hidden": false,
@@ -4627,7 +4591,7 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Openscreen\\Openscreen.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\Openscreen\\Openscreen.exe"
     },
     "icon": "win-openscreen.png",
     "hidden": false,
@@ -4639,7 +4603,7 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Package Cache\\{28CDFE7F-68F0-403E-B53D-7A6E1E9AAA17}\\PowerToysUserSetup-0.101.2362.0-x64.exe"
+      "windows": "%LOCALAPPDATA%\\PowerToys\\PowerToys.exe"
     },
     "icon": "win-powertoys-preview.png",
     "hidden": false,
@@ -4666,7 +4630,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "qbittorrent",
-      "windows": "qbittorrent.exe",
+      "windows": "C:\\Program Files\\qBittorrent\\qbittorrent.exe",
       "macos": "Qbittorrent"
     },
     "icon": "qbittorrent.png",
@@ -4718,7 +4682,7 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe"
+      "windows": "%LOCALAPPDATA%\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe"
     },
     "icon": "win-responsivelyapp.png",
     "hidden": false,
@@ -4943,18 +4907,6 @@
       "macos": "Wezterm"
     },
     "icon": "wezterm.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-windows-software-development-kit-windows",
-    "name": "Windows Software Development Kit - Windows",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "C:\\ProgramData\\Package Cache\\{b72d4013-dd88-405a-9f9d-e88c278dcefe}\\winsdksetup.exe"
-    },
-    "icon": "win-windows-software-development-kit-windows.png",
     "hidden": false,
     "cli": false
   },

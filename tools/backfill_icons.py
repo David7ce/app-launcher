@@ -17,6 +17,7 @@ macOS `.icns` extraction). Run from the repo root; icons are staged into
 tools/icon_cache/ and placed by `build_catalog.py`.
 """
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -61,6 +62,7 @@ def registry_lookup(winreg, name: str) -> Path | None:
 
 
 def resolve(winreg, target: str) -> Path | None:
+    target = os.path.expandvars(target)  # catalog bins may be %LOCALAPPDATA%-relative
     if "\\" in target or "/" in target:
         path = Path(target)
         return path if path.is_file() else None

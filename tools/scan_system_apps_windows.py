@@ -4,17 +4,13 @@ programs via the registry's Uninstall keys and write
 tools/sources/system_apps_windows.json for build_catalog.py to merge in
 (into the `windows` slot of each entry's per-OS `bin` object).
 
-UNVERIFIED — CANNOT BE RUN ON THIS MACHINE AT ALL. This is Fedora/KDE;
-`winreg` is a Windows-only stdlib module that doesn't exist on Linux,
-so unlike scan_system_apps_macos.py (which could at least be smoke-
-tested against a synthetic fixture with pure-Python `plistlib`), there
-is no way to exercise this script's logic at all without a real
-Windows machine. It has been reviewed carefully but treat it as
-unverified Python, not just unverified behavior.
+Verified on real Windows (68 installed programs found). Windows-only:
+`winreg` doesn't exist elsewhere.
 
-Windows has no equivalent of a `.desktop` file's Categories=, so every
-entry defaults to "Utilities" — there's nothing to map from, unlike
-Linux (freedesktop Categories=) or macOS (LSApplicationCategoryType).
+Windows has no equivalent of a `.desktop` file's Categories=, so the
+category is inferred from the name by `guess_category()` (falling back to
+"Utilities") — unlike Linux (freedesktop Categories=) or macOS
+(LSApplicationCategoryType).
 
 Registry entries are meant for uninstalling, not launching, so the
 executable path is a best-effort extraction from DisplayIcon (usually
@@ -24,6 +20,7 @@ no plausible .exe path can be extracted are skipped rather than
 guessed at further.
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -163,58 +160,28 @@ def guess_category(name: str) -> str:
     return "Utilities"
 
 
-# PowerShell script that pulls an executable's own icon out of its embedded
-# resources. Pure-Python is not an option here: the icon lives in the PE
-# resource section, and the only practical reader is the Win32 API. Shelling
-# out to PowerShell keeps this dependency-free (no pywin32/Pillow install)
-# and, unlike the common `ExtractAssociatedIcon` route, `PrivateExtractIcons`
-# asked for 256x256 returns the *largest* size the exe actually embeds —
-# `ExtractAssociatedIcon` always yields a blurry 32x32. Verified on real
-# Windows: a 7-Zip install produced a clean 256x256 PNG.
-ICON_EXTRACT_PS = r"""
-param([string]$Exe, [string]$Out)
-Add-Type -AssemblyName System.Drawing
-$sig = @'
-[DllImport("user32.dll", CharSet=CharSet.Unicode)]
-public static extern int PrivateExtractIcons(string lpszFile, int nIconIndex, int cxIcon, int cyIcon,
-    IntPtr[] phicon, int[] piconid, int nIcons, int flags);
-[DllImport("user32.dll")] public static extern bool DestroyIcon(IntPtr h);
-'@
-Add-Type -MemberDefinition $sig -Name Ico -Namespace Ex | Out-Null
-$h = New-Object IntPtr[] 1
-$id = New-Object int[] 1
-$n = [Ex.Ico]::PrivateExtractIcons($Exe, 0, 256, 256, $h, $id, 1, 0)
-if ($n -le 0 -or $h[0] -eq [IntPtr]::Zero) { exit 1 }
-try {
-    $bmp = [System.Drawing.Bitmap]::FromHicon($h[0])
-    $bmp.Save($Out, [System.Drawing.Imaging.ImageFormat]::Png)
-    $bmp.Dispose()
-} finally {
-    [Ex.Ico]::DestroyIcon($h[0]) | Out-Null
-}
-"""
+# The extractor lives in src-tauri/src/extract_icon.ps1 so the running app
+# (which uses it for tiles with no shipped icon) and this scan share one copy.
+# Pure-Python can't read a PE resource section, and shelling out avoids a
+# pywin32/Pillow dependency. Verified on real Windows: a 7-Zip install produced
+# a clean 256x256 PNG.
+ICON_EXTRACT_PS = ROOT / "src-tauri" / "src" / "extract_icon.ps1"
 
 
 def extract_exe_icon(exe_path: str, dest_png: Path) -> bool:
     import subprocess
-    import tempfile
 
     if not Path(exe_path).is_file():
         return False
-    with tempfile.NamedTemporaryFile("w", suffix=".ps1", delete=False, encoding="utf-8") as fh:
-        fh.write(ICON_EXTRACT_PS)
-        script = fh.name
     try:
         result = subprocess.run(
             ["powershell", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass",
-             "-File", script, "-Exe", exe_path, "-Out", str(dest_png)],
+             "-File", str(ICON_EXTRACT_PS), "-Exe", exe_path, "-Out", str(dest_png)],
             capture_output=True,
             timeout=30,
         )
     except (OSError, subprocess.TimeoutExpired):
         return False
-    finally:
-        Path(script).unlink(missing_ok=True)
     return result.returncode == 0 and dest_png.is_file() and dest_png.stat().st_size > 0
 
 
@@ -227,15 +194,35 @@ UNINSTALL_KEYS = [
 ]
 
 
+# Longest first: %LOCALAPPDATA% and %APPDATA% both live under %USERPROFILE%.
+USER_ENV_VARS = ("LOCALAPPDATA", "APPDATA", "USERPROFILE")
+
+
+def collapse_env(path: str) -> str:
+    r"""Rewrite a per-user prefix as its %VAR% (`C:\Users\me\AppData\Local\x`
+    -> `%LOCALAPPDATA%\x`) so the committed catalog neither leaks a username
+    nor only resolves on the machine that produced it. lib.rs expands the
+    variables again at runtime. Program Files paths are left literal: they are
+    the same on every machine."""
+    for var in USER_ENV_VARS:
+        base = os.environ.get(var)
+        if base and path.lower().startswith(base.lower() + "\\"):
+            return f"%{var}%{path[len(base):]}"
+    return path
+
+
 def extract_exe_path(display_icon: str) -> str | None:
     # DisplayIcon is often "C:\path\app.exe,0" (a resource-index suffix) or
     # occasionally just "C:\path\app.exe". Strip a trailing ",<digits>" and
     # keep only paths that plausibly point at the app's own executable.
-    path = display_icon.strip().strip('"')
+    # Strip the index *before* the quotes: the usual form is `"C:\a b\app.exe",0`,
+    # with the comma outside the closing quote.
+    path = display_icon.strip()
     if "," in path:
         head, _, tail = path.rpartition(",")
-        if tail.lstrip("-").isdigit():
+        if tail.strip().lstrip("-").isdigit():
             path = head
+    path = path.strip().strip('"')
     if not path.lower().endswith(".exe"):
         return None
     return path
@@ -262,6 +249,41 @@ def read_uninstall_entries():
                     continue
 
 
+# DisplayIcon frequently points at the *uninstaller* (Inno Setup's unins000.exe,
+# NSIS's uninst.exe, Steam's uninstall.exe) or at a cached installer, because
+# that is the executable the Add/Remove Programs row is really about. Used as a
+# launch target it would run the uninstaller — verified on a real scan, where
+# Steam, Ollama, CapCut, Npcap and Tesseract all resolved to one.
+INSTALLER_EXE_RE = re.compile(r"unins|uninst|setup|install|update|patch", re.IGNORECASE)
+
+
+def is_installer_exe(path: str) -> bool:
+    p = path.replace("/", "\\").lower()
+    return "\\package cache\\" in p or bool(INSTALLER_EXE_RE.search(Path(p).stem))
+
+
+def _alnum(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def find_real_exe(dirs: list[str], name: str) -> str | None:
+    """Look for the app's own executable beside the installer/uninstaller (or in
+    InstallLocation): a non-installer .exe whose stem matches the app name.
+    Deliberately strict — no match means the app is skipped, because a missing
+    tile is better than a tile that launches the wrong thing."""
+    key = _alnum(name)
+    for d in dict.fromkeys(dirs):
+        if not d or not Path(d).is_dir():
+            continue
+        for exe in sorted(Path(d).glob("*.exe")):
+            stem = _alnum(exe.stem)
+            if is_installer_exe(str(exe)) or len(stem) < 4:
+                continue
+            if stem == key or key.startswith(stem) or stem.startswith(key):
+                return str(exe)
+    return None
+
+
 def read_entry(winreg, entry_key, subkey_name: str) -> dict | None:
     def get(name, default=None):
         try:
@@ -280,6 +302,15 @@ def read_entry(winreg, entry_key, subkey_name: str) -> dict | None:
     bin_path = extract_exe_path(display_icon)
     if not bin_path:
         return None
+    if is_installer_exe(bin_path):
+        bin_path = find_real_exe(
+            [str(Path(bin_path).parent), str(get("InstallLocation", "")).strip('"')],
+            clean_name(name),
+        )
+        if not bin_path:
+            return None
+    # Kept expanded until the icon is extracted (main() needs a real path);
+    # collapsed for the output there.
 
     icon_path = None
     icon_candidate = display_icon.strip().strip('"')
@@ -338,6 +369,7 @@ def main() -> None:
         else:
             entry["icon_source"] = None
             icons_missing += 1
+        entry["bin"] = collapse_env(entry["bin"])
         results.append(entry)
 
     OUT.write_text(json.dumps(results, indent=2) + "\n")
