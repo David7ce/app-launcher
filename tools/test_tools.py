@@ -161,6 +161,12 @@ class ScanHelpers(unittest.TestCase):
         # dangling dash must not survive them.
         self.assertEqual(sw.clean_name("Foo Runtime - 1.2.3"), "Foo Runtime")
 
+    def test_clean_name_drops_release_channel_tags(self):
+        self.assertEqual(sw.clean_name("PowerToys (Preview) x64"), "PowerToys")
+        self.assertEqual(sw.clean_name("Foo (Beta)"), "Foo")
+        # A parenthesised part that is not a channel tag stays.
+        self.assertEqual(sw.clean_name("Lucas Chess (R)"), "Lucas Chess (R)")
+
     def test_guess_category_covers_dev_tools_named_without_word_breaks(self):
         self.assertEqual(sw.guess_category("ResponsivelyApp"), "Development")
         self.assertEqual(sw.guess_category("Inno Setup"), "Development")
@@ -203,6 +209,10 @@ class ScanHelpers(unittest.TestCase):
             found = sw.find_real_exe([tmp], "Steam")
             self.assertEqual(Path(found).name, "Steam.exe")
             self.assertIsNone(sw.find_real_exe([tmp], "Unrelated App"))
+            # An exact name beats an alphabetically earlier prefix match.
+            for name in ("PowerToys.ActionRunner.exe", "PowerToys.exe"):
+                Path(tmp, name).write_bytes(b"")
+            self.assertEqual(Path(sw.find_real_exe([tmp], "PowerToys")).name, "PowerToys.exe")
             self.assertIsNone(sw.find_real_exe(["", str(Path(tmp, "missing"))], "Steam"))
 
 

@@ -16,9 +16,11 @@ Two tiers, tried in order per entry:
    itself is archived to tools/icon_sources/ — not shipped with the
    app, kept only because it's the losslessly-editable original.
 
-CLI-flagged entries and placeholder entries with no `linux` bin (they
-can never show up on this OS) are skipped — no point spending a lookup
-on something that can't be displayed here.
+Placeholder entries with no `linux` bin (they can never show up on this OS)
+are skipped — no point spending a lookup on something that can't be
+displayed here. CLI tools are *not* skipped: a tile in the CLI Tools panel
+shows the tool's own logo when one exists (git, docker, python, ...), and only
+falls back to the generic CLI glyph when it doesn't.
 
 Anything still missing after both tiers is left for manual sourcing
 (UXWing pick, or a Magnific AI-generated icon) and listed in
@@ -111,10 +113,10 @@ def fetch_one(entry_id: str) -> bool:
 def main() -> None:
     ICONS_DIR.mkdir(parents=True, exist_ok=True)
     SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
-    catalog = json.loads(CATALOG.read_text())
+    catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     ids = sorted({
         entry["id"] for entry in catalog
-        if not entry.get("cli") and "linux" in entry.get("bin", {})
+        if "linux" in entry.get("bin", {})
     })
 
     hits, misses = [], []

@@ -372,6 +372,12 @@ EXCLUDED_IDS = {
     "org.kde.kdebugsettings",  # dev-only debug-logging config, not a user app
     "org.kde.kjournaldbrowser",  # systemd journal log viewer, sysadmin meta tool
     "org.kde.kmenuedit",  # editor for the start menu this launcher replaces
+    "win-thermaltake-tool",  # vendor RGB utility, uninstalled from the dev machine
+    # UltraStar is one program: the game (UltraStar Deluxe) plus two companion
+    # editors it installs as separate entries. One tile is enough, same call as
+    # the Kontact/KMail sub-tools above.
+    "win-ultrastar-creator",
+    "win-ultrastar-manager",
     "im-chooser",  # input-method setup wizard, onboarding-ish system config
     "setroubleshoot",  # SELinux diagnostic tool, same spirit as the crash reporters above
 }

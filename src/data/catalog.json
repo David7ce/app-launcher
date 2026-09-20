@@ -218,6 +218,19 @@
     "cli": false
   },
   {
+    "id": "hermes-agent",
+    "name": "Hermes Agent",
+    "vendor": "Nous Research",
+    "category": "Development",
+    "bin": {
+      "linux": "hermes",
+      "windows": "hermes.exe"
+    },
+    "icon": "hermes-agent.png",
+    "hidden": false,
+    "cli": true
+  },
+  {
     "id": "hugo",
     "name": "Hugo",
     "vendor": "",
@@ -454,7 +467,7 @@
     "category": "Development",
     "bin": {
       "linux": "ollama",
-      "windows": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama app.exe",
+      "windows": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe",
       "macos": "Ollama"
     },
     "icon": "ollama.png",
@@ -985,30 +998,6 @@
       "windows": "C:\\Program Files (x86)\\UltraStar Deluxe\\ultrastardx.exe"
     },
     "icon": "win-ultrastar-deluxe.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-ultrastar-creator",
-    "name": "UltraStar-Creator",
-    "vendor": "",
-    "category": "Games",
-    "bin": {
-      "windows": "C:\\Program Files (x86)\\UltraStar-Creator\\UltraStar-Creator.exe"
-    },
-    "icon": "win-ultrastar-creator.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-ultrastar-manager",
-    "name": "UltraStar-Manager",
-    "vendor": "",
-    "category": "Games",
-    "bin": {
-      "windows": "C:\\Program Files (x86)\\UltraStar-Manager\\UltraStar-Manager.exe"
-    },
-    "icon": "win-ultrastar-manager.png",
     "hidden": false,
     "cli": false
   },
@@ -4634,14 +4623,14 @@
     "cli": false
   },
   {
-    "id": "win-powertoys-preview",
-    "name": "PowerToys (Preview)",
+    "id": "win-powertoys",
+    "name": "PowerToys",
     "vendor": "",
     "category": "Utilities",
     "bin": {
       "windows": "%LOCALAPPDATA%\\PowerToys\\PowerToys.exe"
     },
-    "icon": "win-powertoys-preview.png",
+    "icon": "win-powertoys.png",
     "hidden": false,
     "cli": false
   },
@@ -4840,18 +4829,6 @@
       "macos": "Terminal"
     },
     "icon": "mac-terminal.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-thermaltake-tool",
-    "name": "Thermaltake Tool",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "C:\\Program Files\\Tt\\Tool\\LibHWInfo.exe"
-    },
-    "icon": "win-thermaltake-tool.png",
     "hidden": false,
     "cli": false
   },

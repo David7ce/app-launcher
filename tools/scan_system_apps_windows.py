@@ -84,6 +84,8 @@ BUNDLED_RUNTIME_RE = re.compile(r"\s+with (?:Java|Python|\.NET) Runtime.*$", re.
 LOCALE_SUFFIX_RE = re.compile(r"\s+-\s+[a-z]{2}(?:-[A-Za-z]{2,4})?\s*$")
 #   "WinMerge x64 (Current user, 64-bit)" -> "WinMerge x64" (then ARCH strips x64)
 INSTALL_SCOPE_RE = re.compile(r"\s*\((?:current user|all users|user)\b[^)]*\)\s*$", re.IGNORECASE)
+#   "PowerToys (Preview)" -> "PowerToys": a release-channel tag, not part of the name
+CHANNEL_SUFFIX_RE = re.compile(r"\s*\((?:preview|beta|alpha|nightly|canary|insider|rc\d*)\)\s*$", re.IGNORECASE)
 #   "Tesseract-OCR - open source OCR engine" -> "Tesseract-OCR"
 # A tagline after " - ": starts lowercase and runs to several words. Digits
 # (" - 12.0.40664") and locales (" - en-us", handled above) don't match.
@@ -105,6 +107,7 @@ def clean_name(name: str) -> str:
         LOCALE_SUFFIX_RE,
         INSTALL_SCOPE_RE,
         ARCH_SUFFIX_RE,
+        CHANNEL_SUFFIX_RE,
         VERSION_SUFFIX_RE,
         LOOSE_VERSION_RE,
         BARE_VERSION_WORD_RE,
@@ -287,12 +290,19 @@ def find_real_exe(dirs: list[str], name: str) -> str | None:
     for d in dict.fromkeys(dirs):
         if not d or not Path(d).is_dir():
             continue
+        loose = None
         for exe in sorted(Path(d).glob("*.exe")):
             stem = _alnum(exe.stem)
             if is_installer_exe(str(exe)) or len(stem) < 4:
                 continue
-            if stem == key or key.startswith(stem) or stem.startswith(key):
-                return str(exe)
+            if stem == key:
+                return str(exe)  # an exact match always wins
+            # "PowerToys" also prefixes PowerToys.ActionRunner.exe, which sorts
+            # first — so a prefix match is only a fallback.
+            if loose is None and (key.startswith(stem) or stem.startswith(key)):
+                loose = str(exe)
+        if loose:
+            return loose
     return None
 
 

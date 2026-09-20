@@ -30,6 +30,8 @@ const categoriesEl = document.getElementById("categories");
 const errorBannerEl = document.getElementById("error-banner");
 const searchEl = document.getElementById("search");
 const editToggleEl = document.getElementById("edit-toggle");
+const cliToggleEl = document.getElementById("cli-toggle");
+const cliPanelEl = document.getElementById("cli-panel");
 
 // installedApps: the fixed result of the catalog + is_installed check,
 // computed once at startup. overrides: user hide/rename/recategorize edits,
@@ -66,8 +68,13 @@ function categoryIconPath(category) {
 }
 
 function iconPath(app) {
-  if (app.cli) return "assets/icons/category/cli-tool.png";
   return `assets/icons/${app.icon}`;
+}
+
+// What a tile shows when it has no icon of its own: CLI tools get the terminal
+// glyph, everything else its category's.
+function fallbackIconPath(app) {
+  return app.cli ? "assets/icons/category/cli-tool.png" : categoryIconPath(app.category);
 }
 
 function effective(app) {
@@ -127,8 +134,8 @@ function makeIcon(app) {
   img.alt = "";
   img.onerror = () => {
     img.onerror = null;
-    img.src = categoryIconPath(app.category);
-    if (!app.cli && !localIcons.has(app.id)) fetchLocalIcon(app);
+    img.src = fallbackIconPath(app);
+    if (!localIcons.has(app.id)) fetchLocalIcon(app);
   };
   return img;
 }
@@ -204,6 +211,7 @@ function makeTile(app) {
   button.className = "tile";
   button.type = "button";
   button.dataset.name = app.name.toLowerCase();
+  button.title = app.name; // labels are clamped to two lines
   button.append(makeIcon(app));
   const label = document.createElement("span");
   label.textContent = app.name;
@@ -301,36 +309,39 @@ function makeCliSection(cliApps) {
   icon.setAttribute("aria-hidden", "true");
   const label = document.createElement("span");
   label.textContent = `CLI Tools (${cliApps.length})`;
-  const toggleBtn = document.createElement("button");
-  toggleBtn.type = "button";
-  toggleBtn.className = "cli-toggle";
-  const visible = cliToolsVisible();
-  toggleBtn.textContent = visible ? "Hide" : "Show";
-  toggleBtn.addEventListener("click", () => {
-    setCliToolsVisible(!cliToolsVisible());
-    render();
-  });
-  heading.append(icon, label, toggleBtn);
+  heading.append(icon, label);
   section.appendChild(heading);
 
-  if (visible) {
-    const note = document.createElement("p");
-    note.className = "cli-note";
-    note.textContent = "Terminal-only tools — opens in a terminal instead of a normal window.";
-    section.appendChild(note);
+  const note = document.createElement("p");
+  note.className = "cli-note";
+  note.textContent = "Terminal-only tools — opens in a terminal instead of a normal window.";
+  section.appendChild(note);
 
-    const grid = document.createElement("div");
-    grid.className = "grid";
-    for (const app of cliApps) {
-      grid.appendChild(makeTile(app));
-    }
-    section.appendChild(grid);
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  for (const app of cliApps) {
+    grid.appendChild(makeTile(app));
   }
+  section.appendChild(grid);
 
   return section;
 }
 
-function renderCategories(grouped, hiddenApps, cliApps) {
+// CLI tools live in a panel to the left of the categories, switched on and off
+// from the header. Hidden, the categories reflow to use the whole width; shown,
+// they reflow into what is left.
+function renderCliPanel(cliApps) {
+  const visible = cliToolsVisible() && cliApps.length > 0;
+  cliToggleEl.hidden = cliApps.length === 0;
+  cliToggleEl.textContent = `⌨ CLI Tools (${cliApps.length})`;
+  cliToggleEl.classList.toggle("active", visible);
+  cliToggleEl.setAttribute("aria-pressed", String(visible));
+  cliPanelEl.replaceChildren();
+  if (cliApps.length > 0) cliPanelEl.appendChild(makeCliSection(cliApps));
+  cliPanelEl.hidden = !visible;
+}
+
+function renderCategories(grouped, hiddenApps, hasCliApps) {
   categoriesEl.replaceChildren();
   let renderedAny = false;
 
@@ -361,12 +372,7 @@ function renderCategories(grouped, hiddenApps, cliApps) {
     categoriesEl.appendChild(section);
   }
 
-  if (cliApps.length > 0) {
-    renderedAny = true;
-    categoriesEl.appendChild(makeCliSection(cliApps));
-  }
-
-  if (!renderedAny) {
+  if (!renderedAny && !hasCliApps) {
     const empty = document.createElement("p");
     empty.id = "empty-state";
     empty.textContent = "No catalog apps found installed on this machine.";
@@ -389,7 +395,11 @@ function applySearch(query) {
   const noResultsEl = document.getElementById("no-results");
   let anyVisible = false;
 
-  for (const section of categoriesEl.querySelectorAll("section.category:not(.hidden-panel)")) {
+  const cliSection = cliPanelEl.querySelector("section.category");
+  const sections = [...categoriesEl.querySelectorAll("section.category:not(.hidden-panel)")];
+  if (cliSection) sections.push(cliSection);
+
+  for (const section of sections) {
     let sectionHasVisible = false;
     for (const tile of section.querySelectorAll(".tile-wrapper")) {
       const matches = !q || tile.querySelector(".tile").dataset.name.includes(q);
@@ -397,8 +407,11 @@ function applySearch(query) {
       if (matches) sectionHasVisible = true;
     }
     section.hidden = !sectionHasVisible;
-    if (sectionHasVisible) anyVisible = true;
+    // Tools in a panel the user has switched off don't count as results.
+    if (sectionHasVisible && (section !== cliSection || cliToolsVisible())) anyVisible = true;
   }
+  // An empty panel would otherwise keep its column and squeeze the categories.
+  if (cliSection) cliPanelEl.hidden = !cliToolsVisible() || cliSection.hidden;
 
   if (noResultsEl) {
     noResultsEl.hidden = anyVisible || !q;
@@ -410,7 +423,7 @@ function render() {
   const visible = merged.filter((app) => !app.hidden);
   const hiddenApps = merged.filter((app) => app.hidden);
 
-  // CLI tools get their own section instead of being scattered across the
+  // CLI tools get their own panel instead of being scattered across the
   // 10 regular categories — grouped together since they're a different
   // kind of tile (opens a terminal, not a normal app window).
   const cliApps = visible.filter((app) => app.cli).sort((a, b) => a.name.localeCompare(b.name));
@@ -425,7 +438,8 @@ function render() {
     apps.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  renderCategories(grouped, hiddenApps, cliApps);
+  renderCliPanel(cliApps);
+  renderCategories(grouped, hiddenApps, cliApps.length > 0);
   if (searchEl.value) applySearch(searchEl.value);
 }
 
@@ -456,6 +470,10 @@ async function main() {
   render();
 
   searchEl.addEventListener("input", () => applySearch(searchEl.value));
+  cliToggleEl.addEventListener("click", () => {
+    setCliToolsVisible(!cliToolsVisible());
+    render();
+  });
   editToggleEl.addEventListener("click", () => {
     editMode = !editMode;
     editToggleEl.classList.toggle("active", editMode);

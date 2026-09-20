@@ -217,13 +217,6 @@
     "icon_source": "steam.png"
   },
   {
-    "id": "win-thermaltake-tool",
-    "name": "Thermaltake Tool",
-    "bin": "C:\\Program Files\\Tt\\Tool\\LibHWInfo.exe",
-    "category": "Utilities",
-    "icon_source": null
-  },
-  {
     "id": "win-ultrastar-deluxe",
     "name": "UltraStar Deluxe",
     "bin": "C:\\Program Files (x86)\\UltraStar Deluxe\\ultrastardx.exe",
@@ -392,11 +385,11 @@
     "icon_source": "playtorriomov.png"
   },
   {
-    "id": "win-powertoys-preview",
-    "name": "PowerToys (Preview)",
+    "id": "win-powertoys",
+    "name": "PowerToys",
     "bin": "%LOCALAPPDATA%\\PowerToys\\PowerToys.exe",
     "category": "Utilities",
-    "icon_source": "powertoys-preview.png"
+    "icon_source": "powertoys.png"
   },
   {
     "id": "win-zed",
@@ -408,7 +401,7 @@
   {
     "id": "win-ollama",
     "name": "Ollama",
-    "bin": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama app.exe",
+    "bin": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe",
     "category": "Utilities",
     "icon_source": null
   },

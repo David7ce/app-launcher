@@ -126,7 +126,19 @@ shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
 - **Icons for packaged apps.** MusicBee, Microsoft Store, Settings and Windows
   Terminal (no exe to extract from) get their logo from the package manifest.
   Failed extractions are retried after a week instead of forever.
-- **Tests:** 26 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
+- **CLI Tools panel + strict tile grid.** CLI tools moved from a collapsible
+  card into a panel on the left, switched by a `⌨ CLI Tools (N)` button next to
+  Edit; the categories re-flow into the remaining width automatically (and use
+  the full width when the panel is off). Every tile is now the same fixed box
+  (96×98, icon at a fixed spot, label clamped to two lines), so the grid lines
+  up across all cards. CLI tools show their own logo when one exists (27 of 50
+  now do) instead of always the generic glyph.
+- **Catalog:** `(Preview)` is dropped from names (PowerToys); UltraStar Creator
+  and Manager are folded into the single UltraStar Deluxe tile; Thermaltake
+  Tool is excluded; Hermes Agent added as a CLI tool. `find_real_exe` prefers an
+  exact name (PowerToys resolved to `PowerToys.ActionRunner.exe` once the name
+  got shorter).
+- **Tests:** 27 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
 - **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
   build` on Windows/macOS now works (`bundle.targets` is `all`, with the
   Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch

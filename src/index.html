@@ -9,10 +9,16 @@
 <body>
   <header>
     <input id="search" type="search" placeholder="Search apps…" autocomplete="off" />
-    <button id="edit-toggle" type="button">✎ Edit</button>
+    <div class="header-actions">
+      <button id="cli-toggle" type="button" aria-pressed="true" hidden>⌨ CLI Tools</button>
+      <button id="edit-toggle" type="button">✎ Edit</button>
+    </div>
   </header>
   <div id="error-banner" hidden></div>
-  <main id="categories"></main>
+  <div id="layout">
+    <aside id="cli-panel" aria-label="CLI Tools" hidden></aside>
+    <main id="categories"></main>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>

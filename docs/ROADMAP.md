@@ -62,7 +62,7 @@ CI proves every installer *builds*. None has been installed and launched.
 
 ## Tests — thin
 
-`tools/test_tools.py` (26 cases: catalog merge, icon placement, scan helpers,
+`tools/test_tools.py` (27 cases: catalog merge, icon placement, scan helpers,
 catalog invariants) and 10 Rust unit tests (name matching, env expansion,
 `.desktop`/theme icon lookup) exist. Still untested:
 
