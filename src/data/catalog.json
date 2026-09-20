@@ -107,20 +107,6 @@
     "cli": true
   },
   {
-    "id": "dotnet-runtime",
-    "name": "Dotnet Runtime",
-    "vendor": "",
-    "category": "Development",
-    "bin": {
-      "linux": "dotnet-runtime-6.0",
-      "windows": "",
-      "macos": "Dotnet"
-    },
-    "icon": "dotnet-runtime.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "gcc",
     "name": "GCC",
     "vendor": "",
@@ -326,7 +312,7 @@
   },
   {
     "id": "kubectl",
-    "name": "Kubernetes",
+    "name": "kubectl",
     "vendor": "",
     "category": "Development",
     "bin": {
@@ -459,6 +445,18 @@
     "icon": "nodejs.png",
     "hidden": false,
     "cli": true
+  },
+  {
+    "id": "win-notepadplusplus",
+    "name": "Notepad++",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "C:\\Program Files\\Notepad++\\notepad++.exe"
+    },
+    "icon": "win-notepadplusplus.png",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "ollama",
@@ -597,7 +595,10 @@
     },
     "icon": "responsively.png",
     "hidden": false,
-    "cli": false
+    "cli": false,
+    "aka": [
+      "win-responsivelyapp"
+    ]
   },
   {
     "id": "rust",
@@ -678,7 +679,10 @@
     },
     "icon": "win-tesseract-ocr.png",
     "hidden": false,
-    "cli": true
+    "cli": true,
+    "aka": [
+      "win-tesseract-ocr-open-source-ocr-engine"
+    ]
   },
   {
     "id": "unity",
@@ -762,7 +766,7 @@
   },
   {
     "id": "wordpress",
-    "name": "Wordpress",
+    "name": "WordPress",
     "vendor": "",
     "category": "Development",
     "bin": {
@@ -2876,7 +2880,7 @@
     "id": "espanso",
     "name": "Espanso",
     "vendor": "",
-    "category": "Office",
+    "category": "Utilities",
     "bin": {
       "linux": "espanso",
       "windows": "espanso.exe",
@@ -2993,7 +2997,7 @@
     "id": "kiwix",
     "name": "Kiwix",
     "vendor": "",
-    "category": "Office",
+    "category": "Education",
     "bin": {
       "linux": "kiwix",
       "windows": "kiwix.exe",
@@ -3132,18 +3136,6 @@
     "cli": false
   },
   {
-    "id": "win-microsoft-office-home-2024",
-    "name": "Microsoft Office Home 2024",
-    "vendor": "",
-    "category": "Office",
-    "bin": {
-      "windows": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe"
-    },
-    "icon": "win-microsoft-office-home-2024.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
     "id": "win-powerpoint",
     "name": "Microsoft PowerPoint",
     "vendor": "Microsoft",
@@ -3270,7 +3262,7 @@
   },
   {
     "id": "onlyoffice",
-    "name": "OnlyOffice",
+    "name": "ONLYOFFICE",
     "vendor": "",
     "category": "Office",
     "bin": {
@@ -3463,7 +3455,7 @@
   },
   {
     "id": "kstars",
-    "name": "Kstars",
+    "name": "KStars",
     "vendor": "",
     "category": "Science",
     "bin": {
@@ -4327,13 +4319,16 @@
     "id": "win-winmerge",
     "name": "WinMerge",
     "vendor": "",
-    "category": "System",
+    "category": "Utilities",
     "bin": {
       "windows": "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe"
     },
     "icon": "win-winmerge.png",
     "hidden": false,
-    "cli": false
+    "cli": false,
+    "aka": [
+      "win-winmerge-x64-current-user-64-bit"
+    ]
   },
   {
     "id": "win-wintoys",
@@ -4548,7 +4543,7 @@
   },
   {
     "id": "dua-cli",
-    "name": "Dua",
+    "name": "dua",
     "vendor": "",
     "category": "Utilities",
     "bin": {
@@ -4733,7 +4728,7 @@
     "id": "win-golden-cheetah",
     "name": "Golden Cheetah",
     "vendor": "",
-    "category": "Utilities",
+    "category": "Science",
     "bin": {
       "windows": "C:\\Program Files\\Golden Cheetah\\GoldenCheetah.exe"
     },
@@ -4745,7 +4740,7 @@
     "id": "gpxsee",
     "name": "GPXSee",
     "vendor": "",
-    "category": "Utilities",
+    "category": "Science",
     "bin": {
       "linux": "gpxsee",
       "windows": "C:\\Program Files\\GPXSee\\gpxsee.exe",
@@ -4950,7 +4945,7 @@
     "id": "win-mytourbook",
     "name": "MyTourbook",
     "vendor": "",
-    "category": "Utilities",
+    "category": "Science",
     "bin": {
       "windows": "C:\\Program Files\\MyTourbook\\mytourbook.exe"
     },
@@ -4969,18 +4964,6 @@
       "macos": "Nextcloud"
     },
     "icon": "nextcloud-desktop.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-notepadplusplus",
-    "name": "Notepad++",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "C:\\Program Files\\Notepad++\\notepad++.exe"
-    },
-    "icon": "win-notepadplusplus.png",
     "hidden": false,
     "cli": false
   },
@@ -5033,7 +5016,10 @@
     },
     "icon": "win-powertoys.png",
     "hidden": false,
-    "cli": false
+    "cli": false,
+    "aka": [
+      "win-powertoys-preview"
+    ]
   },
   {
     "id": "putty",

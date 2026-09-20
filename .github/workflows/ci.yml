@@ -3,10 +3,21 @@ name: CI
 # release.yml only runs on version tags, so a compile break on master (e.g. a
 # Windows-only function called without a cfg stub) went unnoticed until the
 # next release. This runs on every push and PR instead.
+# Docs-only changes can't break a build, so they skip it; and a newer push
+# cancels the run it superseded instead of queueing behind it.
 on:
   push:
     branches: [master]
-  pull_request: {}
+    paths-ignore: ["**.md", "docs/**", "LICENSE"]
+  pull_request:
+    paths-ignore: ["**.md", "docs/**", "LICENSE"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   rust:
@@ -16,7 +27,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install Linux system dependencies
         if: matrix.os == 'ubuntu-latest'
@@ -31,6 +42,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
+          # Only master writes the cache; PR runs read it but don't churn it.
+          save-if: ${{ github.ref == 'refs/heads/master' }}
 
       # --locked also catches a Cargo.toml edit committed without its Cargo.lock,
       # which is what broke the first v0.2.0 release build.
@@ -45,8 +58,8 @@ jobs:
   python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
       - name: Catalog/scan tests

@@ -94,7 +94,7 @@
     "id": "win-notepadplusplus",
     "name": "Notepad++",
     "bin": "C:\\Program Files\\Notepad++\\notepad++.exe",
-    "category": "Utilities",
+    "category": "Development",
     "icon_source": "notepadplusplus.png"
   },
   {

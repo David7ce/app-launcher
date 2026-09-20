@@ -32,7 +32,7 @@ jobs:
             args: "--bundles dmg,app --target x86_64-apple-darwin"
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install Linux system dependencies
         if: matrix.platform == 'ubuntu-latest'
@@ -61,7 +61,7 @@ jobs:
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # linuxdeploy bundles an old `strip` that can't parse the
@@ -84,7 +84,7 @@ jobs:
       - name: Install build dependencies
         run: pacman -Syu --noconfirm --needed base-devel git rust webkit2gtk-4.1 sudo
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build package as non-root user
         run: |
@@ -104,7 +104,7 @@ jobs:
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "App Launcher ${{ steps.tag.outputs.tag }}"
@@ -118,7 +118,7 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:gnome-47
       options: --privileged
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
@@ -137,7 +137,7 @@ jobs:
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "App Launcher ${{ steps.tag.outputs.tag }}"

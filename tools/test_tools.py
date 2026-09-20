@@ -9,6 +9,8 @@ Everything here is pure logic, so it runs on any OS (the Windows scan imports
 """
 import json
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -179,6 +181,19 @@ class ScanHelpers(unittest.TestCase):
         # A parenthesised part that is not a channel tag stays.
         self.assertEqual(sw.clean_name("Lucas Chess (R)"), "Lucas Chess (R)")
 
+    @unittest.skipUnless(shutil.which("magick"), "needs ImageMagick")
+    def test_ico_is_converted_to_a_real_png_at_its_largest_size(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ico, png = str(Path(tmp, "a.ico")), Path(tmp, "a.png")
+            # A two-frame icon: 16px red, 64px blue.
+            subprocess.run(["magick", "-size", "16x16", "xc:red", "-size", "64x64", "xc:blue", ico], check=True)
+            self.assertTrue(sw.ico_to_png(ico, png))
+            data = png.read_bytes()
+            self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")
+            width = int.from_bytes(data[16:20], "big")
+            self.assertGreaterEqual(width, 64)  # the big frame, not the 16px one
+        self.assertFalse(sw.ico_to_png(str(Path(tmp, "missing.ico")), Path(tmp, "b.png")))
+
     def test_guess_category_covers_dev_tools_named_without_word_breaks(self):
         self.assertEqual(sw.guess_category("ResponsivelyApp"), "Development")
         self.assertEqual(sw.guess_category("Inno Setup"), "Development")
@@ -241,6 +256,26 @@ class CatalogIntegrity(unittest.TestCase):
         valid = {"Development", "Education", "Graphics", "Internet", "Games",
                  "Multimedia", "Office", "Science", "System", "Utilities"}
         self.assertFalse([e["id"] for e in self.catalog if e["category"] not in valid])
+
+    def test_renamed_ids_are_recorded_and_never_collide_with_live_ids(self):
+        ids = {e["id"] for e in self.catalog}
+        for entry in self.catalog:
+            for old in entry.get("aka", []):
+                self.assertNotIn(old, ids, f"{old} is both an old and a current id")
+        by_id = {e["id"]: e for e in self.catalog}
+        self.assertIn("win-powertoys-preview", by_id["win-powertoys"]["aka"])
+
+    def test_hand_corrections_win_and_the_office_suite_is_not_an_app(self):
+        by_id = {e["id"]: e for e in self.catalog}
+        self.assertNotIn("win-microsoft-office-home-2024", by_id)
+        for app_id, category in bc.CATEGORY_OVERRIDES.items():
+            if app_id in by_id:
+                self.assertEqual(by_id[app_id]["category"], category, app_id)
+        for app_id, name in bc.NAME_OVERRIDES.items():
+            if app_id in by_id:
+                self.assertEqual(by_id[app_id]["name"], name, app_id)
+        # Notepad++ is a code editor; Windows Notepad is a separate, simpler tile.
+        self.assertEqual(by_id["win-notepadplusplus"]["category"], "Development")
 
     def test_terminal_only_tools_are_listed_as_cli_and_gui_apps_are_not(self):
         by_id = {e["id"]: e for e in self.catalog}

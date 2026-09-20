@@ -85,8 +85,8 @@ CLI_SUBCATEGORIES = {"CLI Utility", "Compiler"}
 # exits (git, bun, pandoc, nmap) or has no window at all needs the terminal
 # wrapper, while GUI apps that merely happen to be console-subsystem exes
 # (darktable, scrcpy, UltraStar) must NOT be listed — a PE-header check would
-# misfile those, so this stays a hand-kept list. Interactive shells that already
-# open fine on their own (PowerShell, mitmproxy) are left out.
+# misfile those, so this stays a hand-kept list. Programs that are already a
+# full-screen TUI with their own window (mitmproxy) are left out.
 CLI_ID_OVERRIDES = {
     "btop", "htop", "fastfetch", "neofetch", "rsync", "tmux", "tree", "curl",
     "ansible", "borg", "claude-code", "codex", "deno", "distrobox", "docker",
@@ -99,6 +99,39 @@ CLI_ID_OVERRIDES = {
     # read EOF and exit at once, so PowerShell "did not open". They go through the
     # terminal path, which gives them a window (see `windows_cli_spawn`).
     "powershell",
+}
+
+# Hand corrections to what the sources guessed, applied last so they win over
+# every source (dataset, vendor, scans). Names use the product's own spelling;
+# categories follow freedesktop's meaning (a GPS track viewer is Geography, i.e.
+# Science; an offline encyclopedia is Education) rather than the dataset's or
+# the keyword guess's. Add to these instead of editing catalog.json by hand.
+NAME_OVERRIDES = {
+    "kubectl": "kubectl",  # the dataset calls it "Kubernetes"
+    "wordpress": "WordPress",
+    "kstars": "KStars",
+    "onlyoffice": "ONLYOFFICE",
+    "dua-cli": "dua",
+}
+CATEGORY_OVERRIDES = {
+    "kiwix": "Education",
+    "gpxsee": "Science",
+    "win-mytourbook": "Science",
+    "win-golden-cheetah": "Science",
+    "win-winmerge": "Utilities",  # a diff tool, like meld
+    "espanso": "Utilities",  # a text expander, not an office app
+}
+
+# Ids an app used to have. Scan-derived ids follow the cleaned display name
+# (`win-powertoys-preview` -> `win-powertoys`), so improving a name changes the id
+# and would orphan whatever the user renamed, hid or recategorised under the old
+# one. Each entry lists its old ids as `aka`; the frontend moves saved edits over.
+# Add a line here whenever an id changes, rather than letting it change silently.
+RENAMED_FROM = {
+    "win-powertoys": ["win-powertoys-preview"],
+    "responsively": ["win-responsivelyapp"],
+    "win-tesseract-ocr": ["win-tesseract-ocr-open-source-ocr-engine"],
+    "win-winmerge": ["win-winmerge-x64-current-user-64-bit"],
 }
 
 # Catalog entries that exist on Windows but came from a source that only knew
@@ -403,6 +436,10 @@ EXCLUDED_IDS = {
     "org.kde.kjournaldbrowser",  # systemd journal log viewer, sysadmin meta tool
     "org.kde.kmenuedit",  # editor for the start menu this launcher replaces
     "win-thermaltake-tool",  # vendor RGB utility, uninstalled from the dev machine
+    # The Office *suite* installer (OfficeClickToRun.exe): not an app you launch.
+    # Word, Excel, PowerPoint and OneNote have their own tiles.
+    "win-microsoft-office-home-2024",
+    "dotnet-runtime",  # a runtime, not something with a window to open
     # UltraStar is one program: the game (UltraStar Deluxe) plus two companion
     # editors it installs as separate entries. One tile is enough, same call as
     # the Kontact/KMail sub-tools above.
@@ -490,6 +527,10 @@ def main() -> None:
         if entry["id"] in CLI_ID_OVERRIDES:
             entry["cli"] = True
     for entry in result:
+        entry["name"] = NAME_OVERRIDES.get(entry["id"], entry["name"])
+        entry["category"] = CATEGORY_OVERRIDES.get(entry["id"], entry["category"])
+        if entry["id"] in RENAMED_FROM:
+            entry["aka"] = RENAMED_FROM[entry["id"]]
         windows = entry["bin"].get("windows")
         if entry["id"] in WINDOWS_START_NAMES and not (windows and "\\" in windows):
             entry["bin"]["windows"] = f"start:{WINDOWS_START_NAMES[entry['id']]}"

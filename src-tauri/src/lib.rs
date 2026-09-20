@@ -315,6 +315,23 @@ fn get_icon(app: tauri::AppHandle, id: String, bin: PlatformBin, name: Option<St
     icons::fallback(&app, &id, &bin, name.as_deref())
 }
 
+/// Terminal emulators tried in order: (program, the flag that precedes the
+/// command to run). `xterm` is handled separately, as the last resort.
+const LINUX_TERMINALS: &[(&str, &str)] = &[
+    ("konsole", "-e"),
+    ("gnome-terminal", "--"),
+    ("xfce4-terminal", "-e"),
+    ("alacritty", "-e"),
+    ("kitty", "-e"),
+];
+
+/// The arguments that run `bin` inside a terminal emulator and keep the window
+/// open afterwards: `bash -c "<bin>; echo; read"`. Pure, so it is unit-tested.
+fn terminal_args(flag: &str, bin: &str) -> Vec<String> {
+    let hold = format!("{bin}; echo; read -n1 -s -r -p 'Press any key to close...'");
+    vec![flag.into(), "bash".into(), "-c".into(), hold]
+}
+
 /// A CLI tool spawned bare has no terminal attached, so it either exits
 /// instantly or produces output nobody sees — "clicking it does nothing"
 /// from the user's side. Open one of the common terminal emulators instead,
@@ -323,20 +340,9 @@ fn get_icon(app: tauri::AppHandle, id: String, bin: PlatformBin, name: Option<St
 /// quick command like `tree` finishes. Tried in a fixed order; the first
 /// one actually installed wins.
 fn linux_terminal_spawn(bin: &str) -> std::io::Result<std::process::Child> {
-    const TERMINALS: &[(&str, &str)] = &[
-        ("konsole", "-e"),
-        ("gnome-terminal", "--"),
-        ("xfce4-terminal", "-e"),
-        ("alacritty", "-e"),
-        ("kitty", "-e"),
-    ];
-    let hold_cmd = format!("{bin}; echo; read -n1 -s -r -p 'Press any key to close...'");
-    for (terminal, flag) in TERMINALS {
+    for (terminal, flag) in LINUX_TERMINALS {
         if which::which(terminal).is_ok() {
-            return Command::new(terminal)
-                .arg(flag)
-                .args(["bash", "-c", &hold_cmd])
-                .spawn();
+            return Command::new(terminal).args(terminal_args(flag, bin)).spawn();
         }
     }
     // xterm's `-hold` keeps the window open after the command exits, no
@@ -373,13 +379,24 @@ fn windows_cli_spawn(target: &str, name: Option<&str>) -> std::io::Result<std::p
     if exe.as_os_str().is_empty() || target.starts_with("start:") && !exe.is_absolute() {
         return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "program not found"));
     }
-    // `start`'s first quoted argument is a window title, hence the empty "".
-    let mut command = Command::new("cmd");
-    command.args(["/c", "start", ""]);
-    if !is_interactive_shell(&exe) {
-        command.args(["cmd", "/k"]);
+    Command::new("cmd")
+        .args(windows_cli_args(&exe))
+        .creation_flags(CREATE_NO_WINDOW)
+        .spawn()
+}
+
+/// Arguments for `cmd` that open `exe` in a console window of its own:
+/// `/c start "" [cmd /k] <exe>`. `start`'s first quoted argument is a window
+/// title, hence the empty `""`; a shell runs directly, any other tool is wrapped
+/// in `cmd /k` so its output stays readable. Pure, so it is unit-tested.
+#[cfg_attr(not(windows), allow(dead_code))]
+fn windows_cli_args(exe: &Path) -> Vec<std::ffi::OsString> {
+    let mut args: Vec<std::ffi::OsString> = vec!["/c".into(), "start".into(), "".into()];
+    if !is_interactive_shell(exe) {
+        args.extend(["cmd".into(), "/k".into()]);
     }
-    command.arg(exe).creation_flags(CREATE_NO_WINDOW).spawn()
+    args.push(exe.as_os_str().to_owned());
+    args
 }
 
 /// A program that is itself an interactive prompt. It gets a window of its own;
@@ -602,6 +619,34 @@ mod tests {
         for tool in ["git.exe", "pandoc.exe", "python.exe"] {
             assert!(!is_interactive_shell(Path::new(tool)), "{tool}");
         }
+    }
+
+    #[test]
+    fn linux_terminal_command_runs_the_tool_and_holds_the_window() {
+        let args = terminal_args("-e", "tree");
+        assert_eq!(&args[..3], ["-e", "bash", "-c"]);
+        assert!(args[3].starts_with("tree; echo; read"), "{}", args[3]);
+        // gnome-terminal wants `--` rather than `-e`; the flag is passed through.
+        assert_eq!(terminal_args("--", "git")[0], "--");
+        // Every emulator in the list has a flag, and konsole (the one verified
+        // on real hardware) is tried first.
+        assert!(LINUX_TERMINALS.iter().all(|(t, f)| !t.is_empty() && !f.is_empty()));
+        assert_eq!(LINUX_TERMINALS[0], ("konsole", "-e"));
+    }
+
+    #[test]
+    fn windows_cli_command_wraps_tools_but_not_shells() {
+        let os = |v: &[&str]| v.iter().map(std::ffi::OsString::from).collect::<Vec<_>>();
+        // A tool that prints usage and exits is wrapped in `cmd /k` so it stays readable.
+        assert_eq!(
+            windows_cli_args(Path::new("pandoc.exe")),
+            os(&["/c", "start", "", "cmd", "/k", "pandoc.exe"])
+        );
+        // A shell already has a prompt: it just gets its own window.
+        assert_eq!(
+            windows_cli_args(Path::new("pwsh.exe")),
+            os(&["/c", "start", "", "pwsh.exe"])
+        );
     }
 
     #[test]

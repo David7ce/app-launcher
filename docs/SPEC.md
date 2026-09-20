@@ -12,7 +12,7 @@ Display order on screen is this fixed order; empty categories (no installed apps
 
 ## Catalog schema — `src/data/catalog.json`
 
-Flat JSON array, one object per app. This file is the **single source of truth**, hand-edited directly going forward (deliberately no separate "overrides" layer — one file to touch, not two).
+Flat JSON array, one object per app. The file is **generated** by `tools/build_catalog.py` from `tools/sources/` (see "Data sources"), so it is not edited by hand: a hand edit is overwritten by the next build. Corrections go into the tables at the top of `build_catalog.py` instead — `NAME_OVERRIDES`, `CATEGORY_OVERRIDES`, `EXCLUDED_IDS`, `CLI_ID_OVERRIDES`, `EXISTS_ON_WINDOWS`, `WINDOWS_START_NAMES` and `RENAMED_FROM` — which are reviewable and tested.
 
 ```json
 {
@@ -35,6 +35,7 @@ Flat JSON array, one object per app. This file is the **single source of truth**
 | `category` | One of the 10 fixed categories above                                                                                                                                                                                                                                                                               |
 | `bin`      | Per-OS launch identifier, keyed `linux`/`windows`/`macos` — **any key can be absent**, meaning the app doesn't exist on that OS. On Linux/Windows it's the executable name checked on `$PATH`; on macOS it's the `.app` bundle's display name (no `$PATH` for GUI apps there — see "Cross-platform support" below) |
 | `icon`     | Filename under `src/assets/icons/` (always PNG, see "Icon format"); if missing at runtime, frontend falls back to `assets/icons/category/<category>.png`                                                                                                                                                                              |
+| `aka`      | Optional. Ids this entry used to have (`RENAMED_FROM` in `build_catalog.py`). Scan-derived ids follow the cleaned display name, so a better name changes the id; on startup the frontend moves any rename/hide/recategorise the user saved under an old id to the new one, instead of silently orphaning it. Add a line there whenever an id changes.                                                                                                                                                                                                       |
 | `hidden`   | Manual override to hide an entry without deleting it                                                                                                                                                                                                                                                               |
 | `cli`      | Terminal-only tool (no real GUI icon will ever exist for it) — frontend shows the dedicated `assets/icons/category/cli-tool.png` glyph instead of trying `icon`/category fallback, so it reads as "no icon expected" rather than "icon missing by accident"                                                        |
 
@@ -85,8 +86,8 @@ it stays reviewed-code rather than confirmed-working.
 
 Priority order, each tried in sequence per catalog entry, all resolved **once at authoring time** — the running app never touches the network:
 
-1. **dashboard-icons** (`homarr-labs/dashboard-icons`, CC0-1.0, git-clonable): `https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/<slug>.png`. Primary source, ~1800 apps covered, purpose-built for exactly this (app-dashboard tiles).
-2. **Iconify's `simple-icons` set** (CC0, brand marks), via the public render endpoint `https://api.iconify.design/simple-icons/<slug>.svg` — tried under a couple of slug variants (hyphens/underscores stripped, since simple-icons names rarely match our ids verbatim, e.g. `intellij-idea` → `intellijidea`). These are monochrome brand glyphs; loaded via `<img>`, their `fill="currentColor"` does **not** inherit the page's CSS color (an external image document is style-isolated), so they render as a flat black shape — still a real, recognizable logo rather than a generic category glyph.
+1. **dashboard-icons** (`homarr-labs/dashboard-icons`, Apache-2.0 — checked against the repository, an earlier version of this document wrongly said CC0 — git-clonable): `https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/<slug>.png`. Primary source, ~1800 apps covered, purpose-built for exactly this (app-dashboard tiles).
+2. **Iconify's `simple-icons` set** (CC0-1.0 for the collection; the brand marks themselves remain their owners' trademarks), via the public render endpoint `https://api.iconify.design/simple-icons/<slug>.svg` — tried under a couple of slug variants (hyphens/underscores stripped, since simple-icons names rarely match our ids verbatim, e.g. `intellij-idea` → `intellijidea`). These are monochrome brand glyphs; loaded via `<img>`, their `fill="currentColor"` does **not** inherit the page's CSS color (an external image document is style-isolated), so they render as a flat black shape — still a real, recognizable logo rather than a generic category glyph.
 3. **UXWing** (free for commercial use, no attribution required, but no bulk API — hand-pick one icon at a time): available for one-off per-app icons if you want to improve on a specific miss, but not used for bulk fetching.
 4. **Magnific AI** (user's existing subscription): manual last resort to generate/upscale a one-off icon for anything still missing after 1–3. Dropped into `src/assets/icons/` by hand.
 

@@ -3,97 +3,63 @@
 **Pending work only.** For what has already shipped, see
 [`RELEASES.md`](RELEASES.md); for the full commit history, `git log`.
 
+Everything that could be finished from the Windows development machine has been. What is left
+either needs hardware or an OS that isn't available here, or is a larger piece of work that hasn't
+been started.
+
 ---
 
-## macOS — never run on real hardware
+## Needs real hardware or a real system
 
-The largest remaining gap. Every macOS code path is unverified.
+### macOS — never run on real hardware
 
-- [ ] **Run the app on a Mac at all.** `is_installed` and `launch_app` have
-      only ever been compiled in CI, never executed.
-- [ ] **Run `tools/scan_system_apps_macos.py` on real hardware.** It has only
-      passed a synthetic-fixture self-test (`--self-test`), which proves the
-      plist-reading logic works but says nothing about real `/Applications`
-      contents. Its output has never been merged into the catalog.
-- [ ] **Resolve apps by more than an exact bundle name.** `is_installed` looks
-      for a case-sensitive `<name>.app` in exactly three directories. That
-      misses anything installed elsewhere, and the catalog's guessed names are
-      wrong for acronyms (`Vlc` for `VLC`). Needs `mdfind`/Spotlight or a
-      bundle-id lookup.
-- [ ] **Verify the `.icns` icon fallback on a Mac.** `get_icon` converts a
-      bundle's `CFBundleIconFile` with `plutil` + `sips` at runtime; the path
-      logic is compiled and unit-tested, but neither tool has ever run. Apps
-      that ship only an asset catalog (`CFBundleIconName`) have no `.icns` and
-      keep the glyph, and the *scan* still doesn't stage icons.
-- [ ] **Verify CLI tools on macOS.** `launch_app` leaves macOS as a bare
-      `open -a` with no terminal wrapping; this is believed unreachable because
-      CLI tools aren't `.app` bundles, but that assumption has never been
-      tested.
+Every macOS code path is unverified: it is compiled and linted by CI, nothing more.
 
-## Windows — remaining gaps
+- [ ] **Run the app on a Mac at all.** `is_installed`, `launch_app` and `get_icon` have only ever
+      been compiled, never executed.
+- [ ] **Run `tools/scan_system_apps_macos.py` on real hardware.** It has only passed a
+      synthetic-fixture self-test (`--self-test`), which proves the plist-reading logic but says
+      nothing about real `/Applications` contents. Its output has never been merged into the
+      catalog, and it doesn't stage icons.
+- [ ] **Resolve apps by more than an exact bundle name.** `is_installed` looks for a
+      case-sensitive `<name>.app` in three directories, which misses anything installed elsewhere
+      and gets acronyms wrong (`Vlc` for `VLC`). Needs `mdfind`/Spotlight or a bundle-id lookup.
+- [ ] **Verify the `.icns` icon fallback.** It converts `CFBundleIconFile` with `plutil` + `sips`;
+      neither has ever run. Apps that ship only an asset catalog (`CFBundleIconName`) have no
+      `.icns` and keep the glyph.
+- [ ] **Verify CLI tools.** `launch_app` leaves macOS as a bare `open -a` with no terminal
+      wrapping, on the untested assumption that CLI tools never show up there (they aren't `.app`
+      bundles).
 
-Windows runs, launches apps, and resolves beyond `$PATH` (v0.2.x).
+### Packaging — nothing has been installed from a real package
 
-- [ ] **Start Menu apps are added by hand.** Real apps found only in the Start
-      Menu are listed in `vendor_apps.json` (36 so far); anything else has to be
-      added the same way. Deliberately not added: Windows admin snap-ins
-      (Event Viewer, Services, Task Scheduler, Computer Management, ODBC, ...),
-      WSL distro launchers (Ubuntu, archlinux) and the individual LibreOffice /
-      Blackmagic / Inno Setup shortcuts — say if you want any of them.
-- [ ] **Convert `.ico`-only icons properly.** Icons come from the `.exe`'s
-      embedded resources, but a DisplayIcon pointing at a standalone `.ico`
-      is still only copied, not converted.
+CI proves every installer *builds*; none has been installed and launched.
 
-## Packaging — nothing has been installed from a real package
+- [ ] **Install and run each artifact** on a real system: `.deb`, `.rpm` (inspected with
+      `rpm -qip`/`-qlp` but never `rpm -i`'d), Arch `.pkg.tar.zst`, Flatpak, `.msi`/NSIS, `.dmg`.
 
-CI proves every installer *builds*. None has been installed and launched.
+### Linux
 
-- [ ] **Install and run each artifact on a real system**: `.deb`, `.rpm`,
-      Arch `.pkg.tar.zst`, Flatpak, `.msi`/NSIS, `.dmg`. The Linux RPM was
-      built and inspected (`rpm -qip`/`-qlp`) but never `rpm -i`'d.
-- [ ] **Cut a real version-tagged release and confirm the artifacts.** v0.2.0's
-      tag was pushed and all five CI jobs went green, but the resulting
-      packages have not been downloaded and tried, and the GitHub Release is
-      still a **draft** awaiting manual publishing.
-- [ ] **Flathub-compliant Flatpak.** The current manifest builds with network
-      access allowed, which is fine for direct `.flatpak` distribution but
-      would be rejected by Flathub. Needs an offline/sandboxed rebuild via
-      `cargo-sources.json` (`flatpak-cargo-generator.py`).
+- [ ] **Run the icon fallback on a real desktop.** `get_icon` resolves a missing icon from the
+      `.desktop` file's `Icon=` through the theme directories (hicolor and breeze layouts, pixmaps,
+      Flatpak exports). It is unit-tested against fixture directories and compiled by CI, but has
+      not met a real icon theme, and it ignores the user's *active* theme (the scan asks KDE/GNOME
+      for it).
 
-## Tests — thin
+## Could be done next
 
-`tools/test_tools.py` (30 cases: catalog merge, icon placement, scan helpers,
-catalog invariants) and 10 Rust unit tests (name matching, env expansion,
-`.desktop`/theme icon lookup) exist. Still untested:
-
-- [ ] **Launch-command construction per OS** in `launch_app` (it spawns
-      directly, so it needs to be split into a pure "build the command" step).
-- [ ] **The frontend** (`main.js`) has no automated tests; the editor bug fixed
-      after v0.2.0 was found by driving it manually with a mocked Tauri bridge.
-
-## Icons — coverage
-
-- [ ] **150 of 377 catalog entries have no icon file** (15 are CLI tools that
-      use the CLI glyph by design, so 135 real gaps) and fall back to the
-      category glyph. Most are uninstalled or obscure apps, but the count is
-      worth reducing.
-- [ ] **Run the Linux icon fallback on a real desktop.** `get_icon` resolves
-      a missing icon from the `.desktop` file's `Icon=` through the theme
-      directories (both hicolor and breeze layouts, plus pixmaps and Flatpak
-      exports). It is unit-tested against fixture directories and compiled by
-      CI, but has not been run against a real icon theme, and ignores the
-      user's *active* theme (the scan asks KDE/GNOME for it).
-
-## Catalog data quality
-
-- [ ] **Scan-derived ids follow the cleaned name**, so cleaning a name better
-      (`win-winmerge-x64-current-user-64-bit` → `win-winmerge`) orphans any
-      per-user override saved against the old id. Harmless while there are few
-      users; worth pinning ids before a wider release.
-
-## Repo hygiene
-
-- [ ] **Third-party icon attribution.** Icons come from dashboard-icons, Iconify
-      and KDE breeze-icons (LGPL); brand logos remain their owners'
-      trademarks. `LICENSE` covers the code only — add a short notice to the
-      README.
+- [ ] **Flathub-compliant Flatpak.** The manifest builds with network access allowed, fine for a
+      direct `.flatpak` but rejected by Flathub. It needs an offline, sandboxed build via
+      `cargo-sources.json` (`flatpak-cargo-generator.py`). Only worth doing to submit to Flathub.
+- [ ] **Frontend tests.** `main.js` has none. The pills, the column layout, the editor and the
+      override migration were verified by driving the real app (`tools/drive_app.js`) and earlier
+      with a mocked Tauri bridge, but nothing re-runs that in CI.
+- [ ] **More Windows apps by name.** Apps found only in the Start Menu are listed by hand in
+      `tools/sources/vendor_apps.json`. Deliberately not added: Windows admin snap-ins (Event
+      Viewer, Services, Task Scheduler, Computer Management, ODBC, ...), WSL distro launchers
+      (Ubuntu, archlinux) and individual LibreOffice / Blackmagic / Inno Setup shortcuts.
+- [ ] **Icon coverage.** 181 of 408 catalog entries have no shipped icon (25 of them CLI tools,
+      which use the CLI glyph by design). Most are apps that weren't installed on the machine the
+      icons were collected from. On Windows the runtime fallback fills the gaps for anything that
+      *is* installed; on Linux and macOS that fallback is unverified (see above), so those tiles
+      may show the category glyph.

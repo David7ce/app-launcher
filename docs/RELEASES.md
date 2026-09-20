@@ -5,6 +5,82 @@ What has actually shipped, newest first. For work not yet done, see
 
 ---
 
+## v0.3.0 — 2026-09-20
+
+Windows goes from "runs" to "finds nearly everything you have installed", the interface is
+reworked so the whole launcher fits one screen, and CI now guards every push.
+
+### Interface
+
+- **All / GUI / CLI filter pills**, with counts, replace the collapsible CLI section. CLI Tools is
+  the first card, followed by the categories, in one flow. Search and the pills combine.
+- **Everything fits one screen.** Cards are dealt into the shortest column instead of CSS
+  multi-column, which left the right third of the window empty because tall cards can't split. On
+  a 1920×1057 window all 143 tiles are visible with no scrolling; 6, 4, 2 or 1 columns as the
+  window narrows.
+- **A strict tile grid**: every tile is the same fixed 80×80 box, icons a fixed 30px, labels
+  clamped to two lines (full name in the tooltip).
+- **CLI tools show their own logo** when one exists (27 of 50), not only the generic glyph.
+- **The editor's Save and Reset now update the tile immediately** (they showed stale data until
+  Edit was toggled), and the hover toolbar is reachable from the keyboard.
+- **Renamed apps keep your edits.** An entry lists its old ids (`aka`), and saved renames, hides and
+  recategorisations are moved to the new id.
+
+### Windows
+
+- **Start Menu and Store apps are found.** A catalog entry whose exe isn't on `$PATH` or in App
+  Paths is looked up by name in the Start Menu (classic shortcuts and UWP packages) and launched
+  through `shell:AppsFolder`. About 24 more apps appeared, and 36 Start Menu apps were added
+  (Camera, Photos, Affinity ×3, AdGuard, Wintoys, Raindrop, Minecraft Launcher, Adobe Acrobat,
+  WSL, ...). `bin.windows` can be `start:<Start Menu name>` when the names differ.
+- **CLI tools open properly.** About 30 terminal tools (git, bun, pandoc, nmap, python, node,
+  PowerShell, Command Prompt, WSL, ...) flashed a console and vanished. They now open in a window
+  that stays open. Root cause: a child process inherits the app's null stdin, so `cmd /k` read EOF
+  and exited; launching through `cmd /c start` fixes it.
+- **Launch targets are no longer the uninstaller.** The scan trusted `DisplayIcon`, which usually
+  points at `unins000.exe`, so Steam, Ollama, CapCut, Npcap and Tesseract would have launched their
+  uninstaller. Also fixed: the quoted `"path",0` form (qBittorrent was missing), and per-user paths
+  are stored as `%LOCALAPPDATA%`/`%USERPROFILE%` instead of one machine's profile.
+- **Icons for anything without a shipped one**, taken from the installed exe, the package's
+  manifest, or the shell's own Start tile, cached under the app cache dir. An upside-down bug in
+  the shell-tile extractor was fixed and the cache versioned. Standalone `.ico` files are now really
+  converted to PNG.
+- **Fixed:** 32 entries silently dropped as "duplicates" (they shared an empty launch key);
+  Notepad++ overwriting Notepad (`+` is now part of a name); the wrong Dolphin (it was the Dolphin
+  web-browser logo) and Calculator icons; `python3.exe` resolving to the Store stub; the Microsoft
+  Office *suite* installer appearing as an app.
+
+### Linux and macOS
+
+- **Icon fallback**: Linux resolves the `.desktop` file's `Icon=` through the theme directories;
+  macOS converts the bundle's `.icns` with `sips`. Unit-tested and compiled by CI, but not yet run
+  on real desktops.
+- **Fixed a build break**: Linux and macOS had not compiled since the App Paths change (a
+  Windows-only function was called without a stub). CI now builds all three on every push.
+
+### Catalog
+
+- Cleaner names (`WinMerge x64 (Current user, 64-bit)` → `WinMerge`, no `(Preview)`, no taglines)
+  and hand corrections kept in reviewable tables: Kiwix → Education, GPX/cycling analysers →
+  Science, WinMerge → Utilities, `kubectl`/`WordPress`/`KStars`/`ONLYOFFICE` spelled properly.
+  UltraStar's three tiles are one; Hermes Agent added as a CLI tool.
+
+### Project
+
+- **CI on every push and pull request**: `clippy -D warnings` and `cargo test` on Linux, Windows
+  and macOS, plus the Python tests; superseded runs are cancelled and docs-only changes skipped.
+  It caught four cross-platform bugs during this release.
+- **Dependencies**: GitHub Actions moved to their Node 24 majors (`checkout` v7, `setup-python`
+  v7, `action-gh-release` v3, `tauri-action` v1); Rust crates updated (tauri 2.11.6).
+- **Tests**: 33 Python and 14 Rust. **LICENSE** (MIT) and a third-party icon attribution table
+  added; a real CSP replaces `csp: null`; the overrides file is written atomically; a local
+  `cargo tauri build` works on Windows and macOS.
+
+**Known limits:** macOS has never run on real hardware, and the CI-built installers have not been
+installed on real systems. See [`ROADMAP.md`](ROADMAP.md).
+
+---
+
 ## v0.2.0 — 2026-09-20
 
 **Windows support verified on real hardware.** Until this release the Windows
@@ -53,115 +129,8 @@ Also in this release:
 Arch `.pkg.tar.zst`, Flatpak, `.msi`, NSIS `.exe`, and `.dmg`/`.app` for
 macOS.
 
-**Known gap:** Windows resolution is still `$PATH`-only, so Start Menu
-shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
-`ROADMAP.md`.
-
-### Post-release fixes (on `master`, not yet tagged)
-
-- **Windows resolution now consults the registry's `App Paths` key**, not just
-  `$PATH`. Most GUI installers register there and nowhere on `$PATH`, so
-  several installed apps were reported as absent — VLC, Inkscape and four
-  Office apps (Word, Excel, PowerPoint, OneNote) all failed to appear.
-  86 → 92 of 210 Windows entries now resolve. `launch_app` resolves to the
-  full path before spawning, since a bare executable name fails even when the
-  app was just reported as present.
-- **`tools/backfill_icons.py`** fills in icons for apps that resolve outside
-  the registry's Uninstall keys (which is all the system scan can see) —
-  12 more, including all four Office apps and VLC.
-- **macOS now builds for both architectures.** `macos-latest` is Apple
-  Silicon, so the v0.2.0 release shipped an `aarch64` `.dmg` only and Intel
-  Macs had nothing; an explicit `x86_64-apple-darwin` build was added.
-
-- **In-app editor: Save and Reset now update the tile.** Both swapped the
-  stale tile back without re-rendering, so a rename or recategorize only showed
-  after toggling Edit off and on. The hover toolbar is also reachable by
-  keyboard focus now.
-- **Robustness:** `is_installed`/`launch_app` run off the main thread (~380
-  lookups at startup used to block the UI); `overrides.json` is written
-  atomically and a corrupt one is backed up to `overrides.json.bak` instead of
-  being silently overwritten; one failing `is_installed` no longer aborts the
-  whole dashboard.
-- **Linux/macOS build fixed.** `windows_registry_lookup` was `#[cfg(windows)]`
-  but called without a guard, so neither OS compiled since the App Paths
-  change. It has a `cfg(not(windows))` stub now, and a new `ci.yml` builds,
-  lints and tests on Linux, Windows and macOS for every push and PR.
-- **Launch targets were sometimes the uninstaller.** The Windows scan trusted
-  `DisplayIcon`, which very often points at `unins000.exe` / `uninstall.exe` /
-  a cached installer: Steam, Ollama, CapCut, Npcap and Tesseract would have
-  launched their uninstaller. Those are now rejected, and the real exe is
-  looked for beside them or in `InstallLocation` (Steam → `steam.exe`, Ollama →
-  `ollama app.exe`); apps with no match are dropped rather than guessed. Also
-  fixed the quoted form `"C:\path\app.exe",0`, which was silently skipped
-  (qBittorrent was missing because of it).
-- **No more machine-specific paths.** The scan writes `%LOCALAPPDATA%` /
-  `%APPDATA%` / `%USERPROFILE%`-relative launch paths (27 entries used to
-  hard-code `C:\Users\<name>\...`) and `lib.rs` expands them.
-- **Icons for apps the catalog can't ship.** An installed tile with no shipped
-  icon now gets one extracted from its exe at runtime, cached under the app
-  cache dir (Windows only). Shipped icons stay the primary source.
-- **Start Menu / UWP resolution (Windows).** A catalog entry that exists on
-  Windows but whose exe can't be found on `$PATH` or in App Paths is now looked
-  up by display name in the Start Menu (`Get-StartApps`, cached once) and
-  launched through `shell:AppsFolder`. ~24 more apps on this machine, including
-  Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox and Store apps.
-  Matching is exact on a normalized name, and only for entries that declare a
-  Windows slot — an empty `bin.windows` now means "on Windows, exe unknown" —
-  so KDE Dolphin is not matched to the Dolphin emulator.
-- **Icon fallback on Linux and macOS.** Linux resolves the `.desktop` `Icon=`
-  through the theme directories; macOS converts the bundle's `.icns` with
-  `sips`. Unit-tested and CI-compiled, not yet run on real desktops.
-- **Scan name noise:** `(Current user, 64-bit)`, ` - <tagline>` suffixes and
-  dangling dashes are cleaned, OpenAL is filtered as a runtime, and
-  ResponsivelyApp/Inno Setup get Development. `ResponsivelyApp` no longer
-  duplicates `Responsively App`.
-- **CLI tools open properly on Windows.** `bun`, `pandoc`, `git`, `nmap`,
-  `starship`, `deno`, `hugo`, `tesseract`, `node`, `python` and ~20 more were
-  ordinary tiles that flashed a console and vanished. They are now listed
-  under CLI Tools, and clicking one opens a console that stays open. Getting
-  that to work needed `cmd /c start "" cmd /k <exe>`: a direct `cmd /k` child
-  inherits the app's null stdin, reads EOF and exits at once. Verified by
-  clicking the tiles in the real app. `python3.exe` (the Store stub) is now
-  `python.exe`.
-- **Icons for packaged apps.** MusicBee, Microsoft Store, Settings and Windows
-  Terminal (no exe to extract from) get their logo from the package manifest.
-  Failed extractions are retried after a week instead of forever.
-- **CLI Tools panel + strict tile grid.** CLI tools moved from a collapsible
-  card into a panel on the left, switched by a `⌨ CLI Tools (N)` button next to
-  Edit; the categories re-flow into the remaining width automatically (and use
-  the full width when the panel is off). Every tile is now the same fixed box
-  (96×98, icon at a fixed spot, label clamped to two lines), so the grid lines
-  up across all cards. CLI tools show their own logo when one exists (27 of 50
-  now do) instead of always the generic glyph.
-- **Catalog:** `(Preview)` is dropped from names (PowerToys); UltraStar Creator
-  and Manager are folded into the single UltraStar Deluxe tile; Thermaltake
-  Tool is excluded; Hermes Agent added as a CLI tool. `find_real_exe` prefers an
-  exact name (PowerToys resolved to `PowerToys.ActionRunner.exe` once the name
-  got shorter).
-- **All / GUI / CLI pills, one screen.** The CLI Tools side panel is replaced by
-  three filter pills (with counts) and CLI Tools becomes the first card in one
-  flow with the categories. Cards are dealt into the shortest column, so all
-  columns fill and the whole launcher fits a 1920×1057 window; tiles shrank to
-  80×80 with 30px icons.
-- **Many more Windows apps.** Start Menu apps missing from the catalog — 36 new
-  entries (Camera, Photos, Affinity ×3, AdGuard, Wintoys, Raindrop, Minecraft
-  Launcher, Moblo 3D, Adobe Acrobat, WSL, ...) and Windows slots for
-  DaVinci Resolve, Dolphin, KDE Connect, Okular and others. 32 entries had been
-  silently dropped as "duplicates" because they all shared an empty launch key.
-  `Notepad++` no longer overwrites `Notepad` (a `+` is now part of a name).
-  `bin.windows` may be `start:<Start Menu name>` when the name differs.
-- **Shell-rendered icons were upside down.** The Start Menu icon extractor (used
-  for AdGuard, Control Panel, Remote Desktop, Sandbox, Raindrop, Acrobat, ...)
-  read a bottom-up bitmap as top-down. It now checks the DIB's orientation, and
-  the icon cache is versioned (`icons-v2`) so old flipped icons are not reused.
-- **Wrong icons:** Dolphin is now the KDE Dolphin icon (it was the Dolphin *web
-  browser* logo), Calculator uses the Store app's logo instead of `calc.exe`'s.
-  PowerShell (and Command Prompt, WSL) open properly under CLI Tools.
-- **Tests:** 30 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
-- **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
-  build` on Windows/macOS now works (`bundle.targets` is `all`, with the
-  Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch
-  scripts removed from `tools/`.
+**Known gap (fixed in v0.3.0):** Windows resolution was `$PATH`-only, so Start Menu
+shortcuts, the registry `App Paths` key and UWP/Store packages were missed.
 
 > The first v0.2.0 CI run failed the Arch job: the version bump in
 > `Cargo.toml` was committed but `Cargo.lock` was regenerated only afterwards,

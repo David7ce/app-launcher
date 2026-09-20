@@ -140,7 +140,7 @@ def slugify(name: str) -> str:
 # app that also matches a curated entry never reaches this (the curated
 # category wins in build_catalog.py).
 CATEGORY_KEYWORDS = [
-    # A `` after "+" never matches (both sides are non-word), so a name ending
+    # A word boundary after "+" never matches (both sides are non-word), so a name ending
     # in one needs its own rule.
     (r"notepad\+\+", "Development"),
     (r"\b(android studio|visual studio|intellij|pycharm|webstorm|eclipse|unity|"
@@ -202,6 +202,34 @@ def extract_exe_icon(exe_path: str, dest_png: Path) -> bool:
     except (OSError, subprocess.TimeoutExpired):
         return False
     return result.returncode == 0 and dest_png.is_file() and dest_png.stat().st_size > 0
+
+
+def ico_to_png(ico: str, dest_png: Path) -> bool:
+    """Convert a standalone .ico to a PNG at its largest frame. An .ico holds
+    several sizes; copying the file under a `.png` name (what this used to do)
+    ships something that is not a PNG at all. Needs ImageMagick (`magick`), like
+    the other icon tools; returns False without it, leaving the category glyph."""
+    import shutil
+    import subprocess
+
+    if not shutil.which("magick"):
+        return False
+    try:
+        # One "<width> <frame index>;" record per frame (";" rather than a
+        # newline, which is awkward to pass through some shells).
+        frames = subprocess.run(
+            ["magick", "identify", "-format", "%w %p;", ico],
+            capture_output=True, text=True, timeout=30, check=True,
+        ).stdout.split(";")
+        sizes = [tuple(int(x) for x in frame.split()) for frame in frames if frame.strip()]
+        _, index = max(sizes)  # widest frame
+        subprocess.run(
+            ["magick", f"{ico}[{index}]", "-background", "none", "-resize", "256x256", str(dest_png)],
+            capture_output=True, timeout=30, check=True,
+        )
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return False
+    return dest_png.is_file() and dest_png.stat().st_size > 0
 
 
 # (hive, subkey) pairs to enumerate — HKLM's two views (native + WOW6432Node
@@ -385,12 +413,8 @@ def main() -> None:
         if extract_exe_icon(entry["bin"], dest_png):
             entry["icon_source"] = dest_png.name
             icons_copied += 1
-        elif icon_path:
-            import shutil
-            dest_ico = ICON_CACHE / f"{slugify(entry['name'])}.ico"
-            if not dest_ico.exists():
-                shutil.copy(icon_path, dest_ico)
-            entry["icon_source"] = dest_ico.name
+        elif icon_path and ico_to_png(icon_path, dest_png):
+            entry["icon_source"] = dest_png.name
             icons_copied += 1
         else:
             entry["icon_source"] = None

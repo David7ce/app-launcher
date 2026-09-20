@@ -44,6 +44,23 @@ cd src-tauri && cargo test                            # Rust unit tests
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — pending work only.
 - [`docs/SPEC.md`](docs/SPEC.md) — technical spec: categories, catalog schema, Rust commands, icon pipeline.
 
+## Third-party assets and licenses
+
+The code is MIT-licensed ([`LICENSE`](LICENSE)). The icons in `src/assets/icons/` are not part of
+that grant — they are other people's artwork, used only to identify the app they belong to:
+
+| Source | Used for | License |
+|---|---|---|
+| [dashboard-icons](https://github.com/homarr-labs/dashboard-icons) | most app icons | Apache-2.0 |
+| [Simple Icons](https://github.com/simple-icons/simple-icons) (via Iconify) | brand marks | CC0-1.0 for the collection |
+| [KDE breeze-icons](https://github.com/KDE/breeze-icons) | KDE application icons | LGPL-2.1 |
+| Extracted from installed apps | icons taken from an app's own executable or package at build time | the app's own license |
+| Hand-drawn category and CLI glyphs (`category/`) | the fallback tiles | MIT, like the code |
+
+All product names, logos and trademarks belong to their respective owners; their presence here
+implies no affiliation or endorsement. If you are a rights holder and want an icon removed, open
+an issue.
+
 ## Platform status
 
 | Platform | Status |

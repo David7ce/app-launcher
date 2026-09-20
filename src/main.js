@@ -480,6 +480,19 @@ async function main() {
     overrides = {};
   }
 
+  // An app whose id changed (`aka` lists its old ids) keeps the edits the user
+  // saved under the old one.
+  let migrated = false;
+  for (const entry of catalog) {
+    for (const oldId of entry.aka ?? []) {
+      if (!(oldId in overrides)) continue;
+      if (!(entry.id in overrides)) overrides[entry.id] = overrides[oldId];
+      delete overrides[oldId];
+      migrated = true;
+    }
+  }
+  if (migrated) persistOverrides();
+
   const candidates = catalog.filter((entry) => !entry.hidden);
   const checks = await Promise.all(
     // One failing lookup must not take the whole dashboard down with it.
