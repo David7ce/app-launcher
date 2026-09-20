@@ -7,6 +7,7 @@ __pycache__/
 tools/icon_cache/
 
 .claude/
+.playwright-mcp/
 .agent/
 
 # Local build output

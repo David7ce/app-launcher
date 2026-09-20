@@ -73,6 +73,39 @@ shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
   Silicon, so the v0.2.0 release shipped an `aarch64` `.dmg` only and Intel
   Macs had nothing; an explicit `x86_64-apple-darwin` build was added.
 
+- **In-app editor: Save and Reset now update the tile.** Both swapped the
+  stale tile back without re-rendering, so a rename or recategorize only showed
+  after toggling Edit off and on. The hover toolbar is also reachable by
+  keyboard focus now.
+- **Robustness:** `is_installed`/`launch_app` run off the main thread (~380
+  lookups at startup used to block the UI); `overrides.json` is written
+  atomically and a corrupt one is backed up to `overrides.json.bak` instead of
+  being silently overwritten; one failing `is_installed` no longer aborts the
+  whole dashboard.
+- **Linux/macOS build fixed.** `windows_registry_lookup` was `#[cfg(windows)]`
+  but called without a guard, so neither OS compiled since the App Paths
+  change. It has a `cfg(not(windows))` stub now, and a new `ci.yml` builds,
+  lints and tests on Linux, Windows and macOS for every push and PR.
+- **Launch targets were sometimes the uninstaller.** The Windows scan trusted
+  `DisplayIcon`, which very often points at `unins000.exe` / `uninstall.exe` /
+  a cached installer: Steam, Ollama, CapCut, Npcap and Tesseract would have
+  launched their uninstaller. Those are now rejected, and the real exe is
+  looked for beside them or in `InstallLocation` (Steam → `steam.exe`, Ollama →
+  `ollama app.exe`); apps with no match are dropped rather than guessed. Also
+  fixed the quoted form `"C:\path\app.exe",0`, which was silently skipped
+  (qBittorrent was missing because of it).
+- **No more machine-specific paths.** The scan writes `%LOCALAPPDATA%` /
+  `%APPDATA%` / `%USERPROFILE%`-relative launch paths (27 entries used to
+  hard-code `C:\Users\<name>\...`) and `lib.rs` expands them.
+- **Icons for apps the catalog can't ship.** An installed tile with no shipped
+  icon now gets one extracted from its exe at runtime, cached under the app
+  cache dir (Windows only). Shipped icons stay the primary source.
+- **Tests:** 22 Python cases (`tools/test_tools.py`) and 4 Rust unit tests.
+- **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
+  build` on Windows/macOS now works (`bundle.targets` is `all`, with the
+  Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch
+  scripts removed from `tools/`.
+
 > The first v0.2.0 CI run failed the Arch job: the version bump in
 > `Cargo.toml` was committed but `Cargo.lock` was regenerated only afterwards,
 > so the tagged commit had a stale lock file. The PKGBUILD builds with

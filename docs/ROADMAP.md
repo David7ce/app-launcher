@@ -50,13 +50,6 @@ CI proves every installer *builds*. None has been installed and launched.
 - [ ] **Install and run each artifact on a real system**: `.deb`, `.rpm`,
       Arch `.pkg.tar.zst`, Flatpak, `.msi`/NSIS, `.dmg`. The Linux RPM was
       built and inspected (`rpm -qip`/`-qlp`) but never `rpm -i`'d.
-- [ ] **Fix `cargo tauri build` when run locally on Windows/macOS.**
-      `tauri.conf.json` pins `bundle.targets` to `["appimage", "rpm"]`, which
-      are Linux-only — so a plain local build on Windows or macOS has no valid
-      target. CI is unaffected because it passes `--bundles` explicitly, but a
-      local build appears to complete without producing an installer. Needs a
-      per-platform default (or documentation telling people to pass
-      `--bundles`).
 - [ ] **Cut a real version-tagged release and confirm the artifacts.** v0.2.0's
       tag was pushed and all five CI jobs went green, but the resulting
       packages have not been downloaded and tried, and the GitHub Release is
@@ -66,19 +59,47 @@ CI proves every installer *builds*. None has been installed and launched.
       would be rejected by Flathub. Needs an offline/sandboxed rebuild via
       `cargo-sources.json` (`flatpak-cargo-generator.py`).
 
-## Tests — the Rust app has none
+## Tests — thin
 
-The predecessor Python project had 46 `unittest` cases; this one has zero.
-The riskiest untested logic is the catalog build (name/category joining, scan
-merging, icon placement) and the per-OS resolution in `lib.rs`.
+`tools/test_tools.py` (22 cases: catalog merge, icon placement, scan helpers,
+catalog invariants) and four `lib.rs` unit tests exist. Still untested:
 
-- [ ] **Add tests for `build_catalog.py`**: `normalize_name` joining, the
-      Windows basename/name merge, `place_scan_icons` pruning, `EXCLUDED_IDS`.
-- [ ] **Add tests for `lib.rs`**: `PlatformBin::for_current_os`, and the
-      launch-command construction per OS.
+- [ ] **Launch-command construction per OS** in `launch_app` (it spawns
+      directly, so it needs to be split into a pure "build the command" step).
+- [ ] **The frontend** (`main.js`) has no automated tests; the editor bug fixed
+      after v0.2.0 was found by driving it manually with a mocked Tauri bridge.
 
 ## Icons — coverage
 
-- [ ] **162 of 383 catalog entries have no icon file** and fall back to the
+- [ ] **150 of 383 catalog entries have no icon file** (17 are CLI tools that
+      use the CLI glyph by design, so 135 real gaps) and fall back to the
       category glyph. Most are uninstalled or obscure apps, but the count is
       worth reducing.
+- [ ] **Local icon fallback on Linux and macOS.** On Windows an installed app
+      with no shipped icon now gets one extracted from its exe at runtime
+      (`get_icon`). Linux (`.desktop` `Icon=` theme lookup) and macOS (`.icns`
+      conversion) still just show the category glyph.
+
+## Catalog data quality
+
+- [ ] **Scan name cleaning still leaks noise**: `WinMerge x64 (Current user,
+      64-bit)`, `Tesseract-OCR - open source OCR engine`. Non-apps also slip
+      through the scan (`Inno Setup`, `OpenAL`) — extend
+      `NON_APP_NAME_PATTERNS`/`EXCLUDED_IDS`.
+- [ ] **AdGuard is no longer picked up by the scan**: its `DisplayIcon` is a
+      cached installer and no matching exe sits beside it or in
+      `InstallLocation`. Needs a Start Menu / App Paths lookup (same gap as the
+      Windows resolution item above).
+
+## Repo hygiene
+
+- [ ] **Confirm the new `ci.yml` is green on Linux and macOS.** It was added
+      after `windows_registry_lookup` was found to be `#[cfg(windows)]` yet
+      called unguarded — a compile break on Linux/macOS since 59fca7e that a
+      Windows-only machine could not reproduce. A `cfg(not(windows))` stub now
+      fixes it, but that has only been reasoned about, not compiled, off
+      Windows.
+- [ ] **Third-party icon attribution.** Icons come from dashboard-icons, Iconify
+      and KDE breeze-icons (LGPL); brand logos remain their owners'
+      trademarks. `LICENSE` covers the code only — add a short notice to the
+      README.

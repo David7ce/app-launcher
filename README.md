@@ -31,6 +31,13 @@ cargo tauri build    # produce installers for this platform (see tauri.conf.json
 
 The catalog (`src/data/catalog.json`) and icons (`src/assets/icons/`) are pre-generated and checked in — see `tools/` if you need to regenerate them.
 
+Tests:
+
+```sh
+python -m unittest discover -s tools -p "test_*.py"   # catalog build + scan helpers
+cd src-tauri && cargo test                            # Rust unit tests
+```
+
 ## Docs
 
 - [`docs/RELEASES.md`](docs/RELEASES.md) — what has shipped, per release.

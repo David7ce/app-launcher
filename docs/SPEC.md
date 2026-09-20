@@ -34,9 +34,9 @@ Flat JSON array, one object per app. This file is the **single source of truth**
 | `vendor`   | Provenance only (Mozilla, KDE, GNOME, Microsoft, Apple, etc.) — not used for grouping in v1, kept for future "by company" view if ever wanted                                                                                                                                                                      |
 | `category` | One of the 10 fixed categories above                                                                                                                                                                                                                                                                               |
 | `bin`      | Per-OS launch identifier, keyed `linux`/`windows`/`macos` — **any key can be absent**, meaning the app doesn't exist on that OS. On Linux/Windows it's the executable name checked on `$PATH`; on macOS it's the `.app` bundle's display name (no `$PATH` for GUI apps there — see "Cross-platform support" below) |
-| `icon`     | Filename under `src/assets/icons/` (PNG or SVG); if missing at runtime, frontend falls back to `assets/icons/category/<category>.svg`                                                                                                                                                                              |
+| `icon`     | Filename under `src/assets/icons/` (always PNG, see "Icon format"); if missing at runtime, frontend falls back to `assets/icons/category/<category>.png`                                                                                                                                                                              |
 | `hidden`   | Manual override to hide an entry without deleting it                                                                                                                                                                                                                                                               |
-| `cli`      | Terminal-only tool (no real GUI icon will ever exist for it) — frontend shows the dedicated `assets/icons/category/cli-tool.svg` glyph instead of trying `icon`/category fallback, so it reads as "no icon expected" rather than "icon missing by accident"                                                        |
+| `cli`      | Terminal-only tool (no real GUI icon will ever exist for it) — frontend shows the dedicated `assets/icons/category/cli-tool.png` glyph instead of trying `icon`/category fallback, so it reads as "no icon expected" rather than "icon missing by accident"                                                        |
 
 ## Data sources for seeding the catalog
 
@@ -106,6 +106,24 @@ Priority order, each tried in sequence per catalog entry, all resolved **once at
 
 Explicitly **not used for bulk/automated fetching**: SVGRepo — its icons are aggregated from many sources with mixed, icon-by-icon licensing and no site-wide grant, which is incompatible with an unattended sync script. Fine to use manually if a specific icon's license is checked first, but `sync_icons.py` should not scrape it.
 
+### Shipped vs. generated on the machine
+
+Icons are **shipped, not generated per machine**: everything in
+`src/assets/icons/` is produced at authoring time (the scans and `sync_icons.py`
+run on the maintainer's machine) and committed, so the app is deterministic,
+works offline, and looks the same everywhere. Two consequences worth knowing:
+
+- An icon extracted by the Windows scan is only useful if the same app exists
+  on the user's machine; the launch target it came from is what decides that.
+- A tile that resolves locally but has **no shipped icon** used to show the
+  category glyph. On Windows the running app now closes that gap itself:
+  when an `<img>` fails, `main.js` calls the `get_icon` command, which resolves
+  the exe and runs `src-tauri/src/extract_icon.ps1` (the same script the scan
+  uses) with `CREATE_NO_WINDOW`, caches the PNG under `app_cache_dir()/icons/`,
+  and returns a `data:` URL (already allowed by the CSP). A failed extraction
+  leaves a `<id>.none` marker so it isn't retried every launch. Linux and macOS
+  return nothing and keep the category glyph — see `ROADMAP.md`.
+
 ### Icon format: PNG only, vector sources archived
 
 Every icon the app actually ships — dashboard-icons, Iconify, the system-theme scan, the 10 generated category glyphs, the CLI-tool glyph — is normalized to **PNG** at vendoring time (via `magick`/ImageMagick), so `src/assets/icons/` is uniform: no per-icon "is this svg or png" branching anywhere in `main.js` or `build_catalog.py`. This wasn't the original design (earlier phases mixed PNG and SVG, whichever the source happened to provide) — unified after the fact once the mix started causing real bugs (see the two above: the XML-escaping bug and the icon-extension mismatch bug, both a direct consequence of two formats needing separate handling).
@@ -140,7 +158,7 @@ Two Tauri commands, intentionally minimal, both taking a `PlatformBin { linux: O
 - `is_installed(bin: PlatformBin) -> bool` — `bin.for_current_os()` (matches on `std::env::consts::OS`) returns `None` → `false` immediately with no further check. Otherwise:
   - **Linux**: `which::which(name)` — `$PATH` only, which is how desktop apps are launched there.
   - **macOS**: checks for a `<name>.app` bundle under `/Applications`, `/System/Applications`, `$HOME/Applications` via plain `Path::exists()` (no `$PATH` for GUI apps there).
-  - **Windows**: an absolute path (what the system scan produces) just has to exist. A bare name is searched on `$PATH` via `which::which` (Windows-aware — checks `PATHEXT`, so a bare `git` resolves `git.exe`), then in the registry's **`App Paths` key** (`HKCU` + `HKLM`, 64-bit and `WOW6432Node` views). That key is how most GUI installers — Office, VLC, Inkscape — register themselves for the `Run` dialog, and they are *not* on `$PATH`; a PATH-only search reported them as not installed, so they never appeared (86 → 92 of 210 entries after adding it). Note the value is usually an **unquoted path containing spaces**, so the full string is tried before its first whitespace-delimited token — splitting up front truncates `C:\Program Files\VideoLAN\VLC\vlc.exe` to `C:\Program` and silently reports the app as missing.
+  - **Windows**: `%VAR%` references are expanded first (`expand_env`), because the scan writes per-user launch paths as `%LOCALAPPDATA%\...`/`%APPDATA%\...`/`%USERPROFILE%\...` rather than one machine's `C:\Users\<name>\...`. An absolute path (what the system scan produces) just has to exist. A bare name is searched on `$PATH` via `which::which` (Windows-aware — checks `PATHEXT`, so a bare `git` resolves `git.exe`), then in the registry's **`App Paths` key** (`HKCU` + `HKLM`, 64-bit and `WOW6432Node` views). That key is how most GUI installers — Office, VLC, Inkscape — register themselves for the `Run` dialog, and they are *not* on `$PATH`; a PATH-only search reported them as not installed, so they never appeared (86 → 92 of 210 entries after adding it). Note the value is usually an **unquoted path containing spaces**, so the full string is tried before its first whitespace-delimited token — splitting up front truncates `C:\Program Files\VideoLAN\VLC\vlc.exe` to `C:\Program` and silently reports the app as missing.
 - Called once per catalog entry from the frontend at startup (not a system scan — a targeted lookup against a known, finite list of ids from `catalog.json`).
 - `launch_app(bin: PlatformBin, cli: bool) -> Result<(), String>` — macOS: `Command::new("open").args(["-a", name]).spawn()`. Linux **when `cli` is false**: `Command::new(name).spawn()`, same as before. When `cli` is true, see "CLI tools open in a terminal" below — a bare CLI tool spawned with no terminal attached is why "clicking `tree` does nothing" was a real complaint (see `RELEASES.md`). **Windows** resolves through the same registry lookup first, because spawning a bare `vlc.exe` fails even when `is_installed` just reported it as present. Any error is returned as a string for the frontend to display, never a panic/crash.
 
@@ -188,7 +206,7 @@ Plain HTML/CSS/JS, no framework, no build step. Flow:
 1. `fetch('./data/catalog.json')`.
 2. For each entry where `hidden` is not `true`, call `invoke('is_installed', { bin })` (parallelized with `Promise.all`).
 3. Keep only entries that resolved `true`; group by `category` in the fixed 10-category order; skip categories with zero entries.
-4. Render one `<section class="category">` per non-empty category (a bordered, rounded card — see layout below), each containing an inner CSS grid of tiles: a 34px icon (28px at ≤520px; CLI entries always get `assets/icons/category/cli-tool.svg`, others try `icon`, `onerror` falls back to `assets/icons/category/<category>.svg`) + name. The category heading itself is prefixed with a small emoji per category (`CATEGORY_ICONS` in `main.js`: 💻🎓🎨🌐🎮🎬📄🔬⚙️🧰) so a category reads at a glance even before the label text.
+4. Render one `<section class="category">` per non-empty category (a bordered, rounded card — see layout below), each containing an inner CSS grid of tiles: a 34px icon (28px at ≤520px; CLI entries always get `assets/icons/category/cli-tool.png`, others try `icon`, `onerror` falls back to `assets/icons/category/<category>.png`) + name. The category heading itself is prefixed with a small emoji per category (`CATEGORY_ICONS` in `main.js`: 💻🎓🎨🌐🎮🎬📄🔬⚙️🧰) so a category reads at a glance even before the label text.
 5. Click on a tile → `invoke('launch_app', { bin })`; on promise rejection, show a small inline error banner instead of failing silently.
 6. A `#search` text input, centered in the header, filters tiles by name (substring, case-insensitive) live via `input` events; a category card hides itself when every tile inside it is filtered out; a "no apps match" message shows when the query matches nothing.
 7. **Layout**: `header` is a 3-column grid (`1fr minmax(220px,420px) 1fr`) so `#search` sits truly centered regardless of the title's width, collapsing to a stacked single column below 520px. `#categories` uses **CSS multi-column** (`column-count`, not `display: grid`) with a column count that scales with window width — 1 by default, 2 at ≥700px, 3 at ≥1050px, 4 at ≥1350px, 5 at ≥1650px — and `section.category { break-inside: avoid }`. This is deliberate, not the obvious choice: a regular grid gives every card in a row the height of its tallest row-mate, so with 10 categories that vary a lot in size (some have 2 apps, some have 15+) a lot of the page height is empty padding next to short cards. Multi-column instead flows each card into whichever column is currently shortest, balancing total height across columns — this is what actually fixed the "grows too tall, needs a scrollbar" complaint, verified by screenshot (352 apps, zero scrolling at a normal window size). Each category card's own inner tile grid (`auto-fill, minmax(64px, 1fr)`, tuned small enough that even a narrow card fits at least 3–4 icons per row) is independent of the outer column count. A hover lift (`transform` + `box-shadow`) plus `cursor: pointer` gives tile affordance, `prefers-color-scheme` handles light/dark — no theme system beyond that for v1.
@@ -232,8 +250,8 @@ Five jobs, all independent (no `needs:` between them — each one uploads its ow
 
 ## Explicitly out of scope (do not build without being asked)
 
-- Windows/macOS **runtime testing or bug-fixing** — CI proves the code *compiles and bundles* on both (see "Cross-platform support" above), but nothing has actually clicked a tile and launched an app on either OS; don't assume a Windows/macOS behavior report is accurate without checking on real hardware.
-- A Windows/macOS `scan_system_apps.py` equivalent (Start Menu/registry scanning, `mdfind`/Spotlight scanning) — not attempted; those platforms currently rely entirely on the dataset/vendor-entry heuristics.
+- macOS **runtime testing or bug-fixing** — CI proves the code *compiles and bundles*, but nothing has clicked a tile and launched an app there; don't assume a macOS behavior report is accurate without checking on real hardware. (Windows is verified on real hardware.)
+- `mdfind`/Spotlight scanning on macOS, and Start Menu / UWP scanning on Windows — see `ROADMAP.md`.
 - **Runtime** enumeration of installed software — the app itself still only ever does a targeted `is_installed` check against the fixed, pre-built catalog. `scan_system_apps.py` discovering apps is an offline maintenance step (like `build_catalog.py` or `sync_icons.py`), not something the running app does.
 - Submitting the Flatpak to Flathub, or reworking its build to be Flathub-compliant (offline/sandboxed via `cargo-sources.json`) — the current manifest is for direct `.flatpak` distribution only.
 - Installing/testing the `.rpm`, `.deb`, or Arch package on a real system — CI proves they *build*; nothing has installed one and launched the app from a real package manager yet.

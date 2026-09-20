@@ -1,0 +1,53 @@
+name: CI
+
+# release.yml only runs on version tags, so a compile break on master (e.g. a
+# Windows-only function called without a cfg stub) went unnoticed until the
+# next release. This runs on every push and PR instead.
+on:
+  push:
+    branches: [master]
+  pull_request: {}
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      # --locked also catches a Cargo.toml edit committed without its Cargo.lock,
+      # which is what broke the first v0.2.0 release build.
+      - name: Clippy
+        working-directory: src-tauri
+        run: cargo clippy --locked --all-targets -- -D warnings
+
+      - name: Test
+        working-directory: src-tauri
+        run: cargo test --locked
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Catalog/scan tests
+        run: python -m unittest discover -s tools -p "test_*.py"
