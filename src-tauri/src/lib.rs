@@ -385,6 +385,9 @@ fn windows_cli_spawn(target: &str, name: Option<&str>) -> std::io::Result<std::p
 /// A program that is itself an interactive prompt. It gets a window of its own;
 /// wrapping it in `cmd /k` would leave a shell running inside a shell, and
 /// closing it would drop you into a stray `cmd` prompt.
+// Only `windows_cli_spawn` calls it, but it is plain path logic that the tests
+// exercise on every OS, so it is compiled everywhere.
+#[cfg_attr(not(windows), allow(dead_code))]
 fn is_interactive_shell(exe: &Path) -> bool {
     let name = exe.file_name().and_then(|n| n.to_str()).map(str::to_ascii_lowercase);
     matches!(
