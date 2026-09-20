@@ -67,6 +67,18 @@ class GuessBins(unittest.TestCase):
         self.assertEqual(out["windows"], "Code.exe")
 
 
+class DedupeKey(unittest.TestCase):
+    def test_entries_found_by_name_are_never_duplicates_of_each_other(self):
+        camera = {"id": "win-camera", "bin": {"windows": ""}}
+        photos = {"id": "win-photos", "bin": {"windows": ""}}
+        self.assertNotEqual(bc.dedupe_key(camera), bc.dedupe_key(photos))
+
+    def test_entries_sharing_a_binary_still_collide(self):
+        a = {"id": "a", "bin": {"linux": "gimp"}}
+        b = {"id": "b", "bin": {"linux": "gimp", "windows": "gimp.exe"}}
+        self.assertEqual(bc.dedupe_key(a), bc.dedupe_key(b))
+
+
 class MergeWindowsScan(unittest.TestCase):
     def setUp(self):
         self.curated = {
@@ -240,6 +252,19 @@ class CatalogIntegrity(unittest.TestCase):
         for gui in ("darktable", "scrcpy", "win-ultrastar-deluxe"):
             if gui in by_id:
                 self.assertFalse(by_id[gui]["cli"], gui)
+
+    def test_apps_that_exist_on_windows_only_by_name_are_in_the_catalog(self):
+        by_id = {e["id"]: e for e in self.catalog}
+        # Real Windows apps found through the Start Menu; they were once lost by
+        # the duplicate-binary pass, and Notepad++ once overwrote Notepad.
+        for app_id in ("win-camera", "win-photos", "win-adguard", "win-wintoys",
+                       "win-raindrop", "win-affinity-photo", "win-affinity-designer",
+                       "win-minecraft-launcher", "win-moblo-3d", "win-adobe-acrobat",
+                       "win-notepad", "win-notepadplusplus", "win-wsl", "davinci-resolve"):
+            self.assertIn(app_id, by_id, app_id)
+        self.assertNotIn("notepad++", by_id["win-notepad"]["bin"].get("windows", "").lower())
+        self.assertTrue(by_id["powershell"]["cli"])
+        self.assertTrue(by_id["win-wsl"]["cli"])
 
     def test_no_orphan_icons_and_none_named_wrongly(self):
         referenced = {e["icon"] for e in self.catalog}

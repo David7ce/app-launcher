@@ -47,7 +47,9 @@ _TRAILING_YEAR_RE = re.compile(r"\s+(?:19|20)\d{2}\s*$")
 
 
 def normalize_name(name: str) -> str:
-    lowered = _TRAILING_YEAR_RE.sub("", name.lower())
+    # "+" is part of a name ("Notepad++" is not "Notepad"), so spell it out
+    # before the alphanumeric filter would drop it and merge the two.
+    lowered = _TRAILING_YEAR_RE.sub("", name.lower()).replace("+", "plus")
     stripped = _NAME_NOISE_RE.sub(" ", lowered)
     key = re.sub(r"[^a-z0-9]", "", stripped)
     # "Responsively App" loses its " app" word above, but "ResponsivelyApp" is
@@ -93,6 +95,25 @@ CLI_ID_OVERRIDES = {
     "podman", "python", "rclone", "sqlite", "starship", "terraform", "vagrant",
     "yt-dlp",
     "win-bun", "win-tesseract-ocr",  # scan-created ids (no dataset entry)
+    # Interactive shells count too: launched without a console of their own they
+    # read EOF and exit at once, so PowerShell "did not open". They go through the
+    # terminal path, which gives them a window (see `windows_cli_spawn`).
+    "powershell",
+}
+
+# Catalog entries that exist on Windows but came from a source that only knew
+# Linux (a dataset row with no winget id, or the Linux .desktop scan). An empty
+# `bin.windows` means "on Windows, exe unknown — find it by name in the Start
+# Menu" (see SPEC.md), which is how they are resolved at runtime.
+EXISTS_ON_WINDOWS = {
+    "audiveris", "davinci-resolve", "dolphin", "okular", "org.kde.kdeconnect.app",
+}
+
+# Same, but the Start Menu spells the name differently from the catalog
+# ("Google Earth" vs "Google Earth Pro"): `bin.windows = "start:<Start name>"`.
+WINDOWS_START_NAMES = {
+    "google-earth": "Google Earth Pro",
+    "musescore": "MuseScore Studio 4",
 }
 
 # Dataset-derived entries whose default `<id>.png` icon guess is wrong —
@@ -332,7 +353,16 @@ def dedupe_key(entry: dict) -> str | None:
     # tested on. Falling back to windows/macos still catches a collision
     # between two placeholder entries that share a bin on the same OS.
     bin_obj = entry["bin"]
-    return bin_obj.get("linux") or bin_obj.get("windows") or bin_obj.get("macos")
+    # An empty (or `start:`-less) Windows slot means "found by name", so it says
+    # nothing about which binary is launched: two such entries are not the same
+    # app. Without this every one of them shared the key "" and all but the
+    # first were dropped as duplicates.
+    return (
+        bin_obj.get("linux")
+        or bin_obj.get("windows")
+        or bin_obj.get("macos")
+        or f"id:{entry['id']}"
+    )
 
 
 def is_cli(app_id: str, subcategory: str | None) -> bool:
@@ -459,6 +489,12 @@ def main() -> None:
     for entry in result:
         if entry["id"] in CLI_ID_OVERRIDES:
             entry["cli"] = True
+    for entry in result:
+        windows = entry["bin"].get("windows")
+        if entry["id"] in WINDOWS_START_NAMES and not (windows and "\\" in windows):
+            entry["bin"]["windows"] = f"start:{WINDOWS_START_NAMES[entry['id']]}"
+        elif entry["id"] in EXISTS_ON_WINDOWS and windows is None:
+            entry["bin"]["windows"] = ""
     icons_placed, icons_pruned = place_scan_icons(result)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")

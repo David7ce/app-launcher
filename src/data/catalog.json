@@ -555,7 +555,7 @@
     },
     "icon": "powershell.png",
     "hidden": false,
-    "cli": false
+    "cli": true
   },
   {
     "id": "python",
@@ -749,6 +749,18 @@
     "cli": false
   },
   {
+    "id": "win-windbg",
+    "name": "WinDbg",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-windbg.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "wordpress",
     "name": "Wordpress",
     "vendor": "",
@@ -934,6 +946,18 @@
     "cli": false
   },
   {
+    "id": "win-minecraft-launcher",
+    "name": "Minecraft Launcher",
+    "vendor": "",
+    "category": "Games",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-minecraft-launcher.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "pcsx2",
     "name": "PCSX2",
     "vendor": "",
@@ -1023,6 +1047,42 @@
       "windows": "xemu.exe"
     },
     "icon": "xemu.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-affinity-designer",
+    "name": "Affinity Designer",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-affinity-designer.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-affinity-photo",
+    "name": "Affinity Photo",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-affinity-photo.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-affinity-studio",
+    "name": "Affinity Studio",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": "start:Affinity"
+    },
+    "icon": "win-affinity-studio.png",
     "hidden": false,
     "cli": false
   },
@@ -1161,6 +1221,18 @@
     "cli": false
   },
   {
+    "id": "win-jpegview",
+    "name": "JPEGView",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-jpegview.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "org.kde.kolourpaint",
     "name": "KolourPaint",
     "vendor": "",
@@ -1200,6 +1272,18 @@
     "cli": false
   },
   {
+    "id": "win-moblo-3d",
+    "name": "Moblo 3D",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-moblo-3d.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "mypaint",
     "name": "MyPaint",
     "vendor": "",
@@ -1234,6 +1318,18 @@
       "macos": "Photos"
     },
     "icon": "mac-photos.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-photos",
+    "name": "Photos",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-photos.png",
     "hidden": false,
     "cli": false
   },
@@ -1321,6 +1417,18 @@
       "linux": "stabilitymatrix"
     },
     "icon": "stability-matrix.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-tonfotos",
+    "name": "Tonfotos",
+    "vendor": "",
+    "category": "Graphics",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-tonfotos.png",
     "hidden": false,
     "cli": false
   },
@@ -1471,6 +1579,18 @@
     "cli": false
   },
   {
+    "id": "win-folo",
+    "name": "Folo",
+    "vendor": "",
+    "category": "Internet",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-folo.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "google-chrome",
     "name": "Google Chrome",
     "vendor": "",
@@ -1503,7 +1623,8 @@
     "vendor": "",
     "category": "Internet",
     "bin": {
-      "linux": "kdeconnect-app"
+      "linux": "kdeconnect-app",
+      "windows": ""
     },
     "icon": "org.kde.kdeconnect.app.png",
     "hidden": false,
@@ -1660,6 +1781,18 @@
       "macos": "Opera"
     },
     "icon": "opera.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-raindrop",
+    "name": "Raindrop.io",
+    "vendor": "",
+    "category": "Internet",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-raindrop.png",
     "hidden": false,
     "cli": false
   },
@@ -1887,7 +2020,8 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "linux": "audiveris"
+      "linux": "audiveris",
+      "windows": ""
     },
     "icon": "audiveris.png",
     "hidden": false,
@@ -1920,6 +2054,18 @@
     "cli": false
   },
   {
+    "id": "win-camera",
+    "name": "Camera",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-camera.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "win-capcut",
     "name": "CapCut",
     "vendor": "",
@@ -1937,7 +2083,8 @@
     "vendor": "",
     "category": "Multimedia",
     "bin": {
-      "linux": "davinci-resolve"
+      "linux": "davinci-resolve",
+      "windows": ""
     },
     "icon": "davinci-resolve.png",
     "hidden": false,
@@ -1983,6 +2130,30 @@
     "cli": true
   },
   {
+    "id": "win-fl-studio",
+    "name": "FL Studio",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-fl-studio.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-fxsound",
+    "name": "FxSound",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-fxsound.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "mac-garageband",
     "name": "GarageBand",
     "vendor": "Apple",
@@ -1991,6 +2162,18 @@
       "macos": "GarageBand"
     },
     "icon": "mac-garageband.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-guitar-pro",
+    "name": "Guitar Pro",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-guitar-pro.png",
     "hidden": false,
     "cli": false
   },
@@ -2173,7 +2356,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "musescore",
-      "windows": "musescore.exe",
+      "windows": "start:MuseScore Studio 4",
       "macos": "Musescore"
     },
     "icon": "musescore.png",
@@ -2202,6 +2385,18 @@
       "windows": "musicbee.exe"
     },
     "icon": "musicbee.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-neuralampmodeler",
+    "name": "NeuralAmpModeler",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-neuralampmodeler.png",
     "hidden": false,
     "cli": false
   },
@@ -2511,6 +2706,18 @@
     "cli": false
   },
   {
+    "id": "win-zen-player",
+    "name": "Zen Player",
+    "vendor": "",
+    "category": "Multimedia",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-zen-player.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "activitywatch",
     "name": "ActivityWatch",
     "vendor": "",
@@ -2521,6 +2728,18 @@
       "macos": "Activitywatch"
     },
     "icon": "activitywatch.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-adobe-acrobat",
+    "name": "Adobe Acrobat",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-adobe-acrobat.png",
     "hidden": false,
     "cli": false
   },
@@ -2568,7 +2787,7 @@
     "vendor": "Microsoft",
     "category": "Office",
     "bin": {
-      "windows": "calc.exe"
+      "windows": "start:Calculator"
     },
     "icon": "win-calculator.png",
     "hidden": false,
@@ -2966,7 +3185,7 @@
     "vendor": "Microsoft",
     "category": "Office",
     "bin": {
-      "windows": "C:\\Program Files\\Notepad++\\notepad++.exe"
+      "windows": "notepad.exe"
     },
     "icon": "win-notepad.png",
     "hidden": false,
@@ -3030,7 +3249,8 @@
     "vendor": "KDE",
     "category": "Office",
     "bin": {
-      "linux": "okular"
+      "linux": "okular",
+      "windows": ""
     },
     "icon": "okular.png",
     "hidden": false,
@@ -3089,6 +3309,18 @@
     "cli": true
   },
   {
+    "id": "win-pdfsam",
+    "name": "PDFsam Basic",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-pdfsam.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "qalculate",
     "name": "Qalculate!",
     "vendor": "",
@@ -3111,6 +3343,18 @@
       "macos": "Reminders"
     },
     "icon": "mac-reminders.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-sticky-notes",
+    "name": "Sticky Notes",
+    "vendor": "",
+    "category": "Office",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-sticky-notes.png",
     "hidden": false,
     "cli": false
   },
@@ -3210,7 +3454,7 @@
     "category": "Science",
     "bin": {
       "linux": "flathub-com.google.EarthPro",
-      "windows": "",
+      "windows": "start:Google Earth Pro",
       "macos": "Google Earth Pro"
     },
     "icon": "google-earth.png",
@@ -3268,6 +3512,18 @@
       "macos": "Activity Monitor"
     },
     "icon": "mac-activity-monitor.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-adguard",
+    "name": "AdGuard",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-adguard.png",
     "hidden": false,
     "cli": false
   },
@@ -3377,6 +3633,30 @@
     "icon": "btop.png",
     "hidden": false,
     "cli": true
+  },
+  {
+    "id": "win-command-prompt",
+    "name": "Command Prompt",
+    "vendor": "Microsoft",
+    "category": "System",
+    "bin": {
+      "windows": "cmd.exe"
+    },
+    "icon": "win-command-prompt.png",
+    "hidden": false,
+    "cli": true
+  },
+  {
+    "id": "win-control-panel",
+    "name": "Control Panel",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-control-panel.png",
+    "hidden": false,
+    "cli": false
   },
   {
     "id": "cryptomator",
@@ -3661,6 +3941,42 @@
     "cli": true
   },
   {
+    "id": "win-nvidia-app",
+    "name": "NVIDIA App",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-nvidia-app.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-nvidia-control-panel",
+    "name": "NVIDIA Control Panel",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-nvidia-control-panel.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-pc-manager",
+    "name": "PC Manager",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-pc-manager.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "pi-hole",
     "name": "Pi-hole",
     "vendor": "",
@@ -3737,6 +4053,30 @@
       "macos": "Qemu"
     },
     "icon": "qemu.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-registry-editor",
+    "name": "Registry Editor",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-registry-editor.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-remote-desktop",
+    "name": "Remote Desktop Connection",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-remote-desktop.png",
     "hidden": false,
     "cli": false
   },
@@ -3933,6 +4273,30 @@
     "cli": false
   },
   {
+    "id": "win-windows-sandbox",
+    "name": "Windows Sandbox",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-windows-sandbox.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-windows-security",
+    "name": "Windows Security",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-windows-security.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "windscribe",
     "name": "Windscribe",
     "vendor": "",
@@ -3972,6 +4336,18 @@
     "cli": false
   },
   {
+    "id": "win-wintoys",
+    "name": "Wintoys",
+    "vendor": "",
+    "category": "System",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-wintoys.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "wireguard",
     "name": "WireGuard",
     "vendor": "",
@@ -3998,6 +4374,18 @@
     "icon": "wireshark.png",
     "hidden": false,
     "cli": false
+  },
+  {
+    "id": "win-wsl",
+    "name": "WSL",
+    "vendor": "Microsoft",
+    "category": "System",
+    "bin": {
+      "windows": "wsl.exe"
+    },
+    "icon": "win-wsl.png",
+    "hidden": false,
+    "cli": true
   },
   {
     "id": "xen",
@@ -4137,7 +4525,8 @@
     "vendor": "KDE",
     "category": "Utilities",
     "bin": {
-      "linux": "dolphin"
+      "linux": "dolphin",
+      "windows": ""
     },
     "icon": "dolphin.png",
     "hidden": false,
@@ -4584,6 +4973,18 @@
     "cli": false
   },
   {
+    "id": "win-notepadplusplus",
+    "name": "Notepad++",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": "C:\\Program Files\\Notepad++\\notepad++.exe"
+    },
+    "icon": "win-notepadplusplus.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "onionshare",
     "name": "OnionShare",
     "vendor": "",
@@ -4729,6 +5130,18 @@
     "cli": true
   },
   {
+    "id": "win-sefirah",
+    "name": "Sefirah",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-sefirah.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "shutter",
     "name": "Shutter",
     "vendor": "",
@@ -4737,6 +5150,18 @@
       "linux": "shutter"
     },
     "icon": "shutter.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
+    "id": "win-snipping-tool",
+    "name": "Snipping Tool",
+    "vendor": "",
+    "category": "Utilities",
+    "bin": {
+      "windows": ""
+    },
+    "icon": "win-snipping-tool.png",
     "hidden": false,
     "cli": false
   },

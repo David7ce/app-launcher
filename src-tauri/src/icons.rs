@@ -13,7 +13,9 @@
 //! Everything except the actual PowerShell/`sips` invocations is plain path
 //! logic compiled on every OS, so it is unit-tested wherever the tests run.
 
-use crate::{macos_bundle_path, windows_resolve, windows_start_app, start_app_exe, PlatformBin};
+use crate::{
+    macos_bundle_path, start_app_exe, start_menu_name, windows_resolve, windows_start_app, PlatformBin,
+};
 use base64::Engine;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -22,6 +24,11 @@ use tauri::Manager;
 
 /// Bigger than any sensible app icon; refuse rather than ship a huge data URL.
 const MAX_ICON_BYTES: u64 = 1_500_000;
+
+/// Where extracted icons are cached, under the app cache dir. Bump the version
+/// whenever an extractor's *output* changes (v2: the Start Menu extractor used to
+/// return images upside down), or icons cached by the old code would stay wrong.
+const CACHE_DIR: &str = "icons-v2";
 
 const RETRY_FAILED_AFTER: std::time::Duration = std::time::Duration::from_secs(7 * 24 * 60 * 60);
 
@@ -50,7 +57,7 @@ fn cached_png(
     id: &str,
     generate: impl FnOnce(&Path, &Path) -> bool,
 ) -> Option<Vec<u8>> {
-    let dir = app.path().app_cache_dir().ok()?.join("icons");
+    let dir = app.path().app_cache_dir().ok()?.join(CACHE_DIR);
     fs::create_dir_all(&dir).ok()?;
     let safe: String = id
         .chars()
@@ -104,14 +111,20 @@ fn windows(app: &tauri::AppHandle, id: &str, bin: &PlatformBin, name: Option<&st
         .as_deref()
         .and_then(windows_resolve)
         .filter(|p| !p.to_string_lossy().contains("\\WindowsApps\\"));
-    let start_id = || name.and_then(windows_start_app);
+    let target = bin.windows.as_deref().unwrap_or("");
+    let start_id = || start_menu_name(target, name).and_then(windows_start_app);
     let bytes = match exe.or_else(|| start_id().and_then(start_app_exe)) {
         Some(exe) => cached_png(app, id, |dir, png| extract_exe_icon(&exe, dir, png))?,
-        // No exe behind it: a packaged (MSIX/UWP/Store) app, whose AppID is
-        // `<family>!<app>`. Its logo comes from the package manifest.
+        // No exe behind it. A packaged (MSIX/UWP/Store) app has an AppID of
+        // `<family>!<app>` and its logo in the package manifest; failing that
+        // (or for a classic app registered by bare AppID, or a system tool)
+        // the shell can still render the Start tile.
         None => {
-            let app_id = start_id().filter(|id| id.contains('!'))?;
-            cached_png(app, id, |dir, png| extract_appx_icon(app_id, dir, png))?
+            let app_id = start_id()?;
+            cached_png(app, id, |dir, png| {
+                (app_id.contains('!') && extract_appx_icon(app_id, dir, png))
+                    || extract_start_icon(app_id, dir, png)
+            })?
         }
     };
     Some(data_url("image/png", &bytes))
@@ -134,6 +147,18 @@ fn extract_appx_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
     use std::sync::OnceLock;
     static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
     run_script(&SCRIPT, dir, "extract_appx_icon.ps1", include_str!("extract_appx_icon.ps1"), &[
+        "-AppId".as_ref(),
+        app_id.as_ref(),
+        "-Out".as_ref(),
+        png.as_os_str(),
+    ])
+}
+
+#[cfg(windows)]
+fn extract_start_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
+    use std::sync::OnceLock;
+    static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
+    run_script(&SCRIPT, dir, "extract_start_icon.ps1", include_str!("extract_start_icon.ps1"), &[
         "-AppId".as_ref(),
         app_id.as_ref(),
         "-Out".as_ref(),
@@ -175,6 +200,11 @@ fn extract_exe_icon(_exe: &Path, _dir: &Path, _png: &Path) -> bool {
 
 #[cfg(not(windows))]
 fn extract_appx_icon(_app_id: &str, _dir: &Path, _png: &Path) -> bool {
+    false
+}
+
+#[cfg(not(windows))]
+fn extract_start_icon(_app_id: &str, _dir: &Path, _png: &Path) -> bool {
     false
 }
 

@@ -30,8 +30,8 @@ const categoriesEl = document.getElementById("categories");
 const errorBannerEl = document.getElementById("error-banner");
 const searchEl = document.getElementById("search");
 const editToggleEl = document.getElementById("edit-toggle");
-const cliToggleEl = document.getElementById("cli-toggle");
-const cliPanelEl = document.getElementById("cli-panel");
+const pillEls = [...document.querySelectorAll(".pill")];
+const messagesEl = document.getElementById("messages");
 
 // installedApps: the fixed result of the catalog + is_installed check,
 // computed once at startup. overrides: user hide/rename/recategorize edits,
@@ -41,20 +41,25 @@ let installedApps = [];
 let overrides = {};
 let editMode = false;
 
-function cliToolsVisible() {
+// Which kinds of tile to show: everything, only GUI apps, or only CLI tools.
+// A display preference like the search box, so it lives in localStorage and not
+// in overrides.json.
+const VIEWS = ["all", "gui", "cli"];
+
+function currentView() {
   try {
-    return localStorage.getItem("cliToolsVisible") !== "false";
+    const view = localStorage.getItem("view");
+    return VIEWS.includes(view) ? view : "all";
   } catch {
-    return true;
+    return "all";
   }
 }
 
-function setCliToolsVisible(visible) {
+function setView(view) {
   try {
-    localStorage.setItem("cliToolsVisible", visible ? "true" : "false");
+    localStorage.setItem("view", view);
   } catch {
-    // localStorage unavailable (e.g. private-browsing-style restrictions) —
-    // the toggle just won't persist across restarts, no big deal.
+    // localStorage unavailable — the choice just won't survive a restart.
   }
 }
 
@@ -310,12 +315,8 @@ function makeCliSection(cliApps) {
   const label = document.createElement("span");
   label.textContent = `CLI Tools (${cliApps.length})`;
   heading.append(icon, label);
+  heading.title = "Terminal-only tools — clicking one opens it in a terminal window";
   section.appendChild(heading);
-
-  const note = document.createElement("p");
-  note.className = "cli-note";
-  note.textContent = "Terminal-only tools — opens in a terminal instead of a normal window.";
-  section.appendChild(note);
 
   const grid = document.createElement("div");
   grid.className = "grid";
@@ -327,28 +328,50 @@ function makeCliSection(cliApps) {
   return section;
 }
 
-// CLI tools live in a panel to the left of the categories, switched on and off
-// from the header. Hidden, the categories reflow to use the whole width; shown,
-// they reflow into what is left.
-function renderCliPanel(cliApps) {
-  const visible = cliToolsVisible() && cliApps.length > 0;
-  cliToggleEl.hidden = cliApps.length === 0;
-  cliToggleEl.textContent = `⌨ CLI Tools (${cliApps.length})`;
-  cliToggleEl.classList.toggle("active", visible);
-  cliToggleEl.setAttribute("aria-pressed", String(visible));
-  cliPanelEl.replaceChildren();
-  if (cliApps.length > 0) cliPanelEl.appendChild(makeCliSection(cliApps));
-  cliPanelEl.hidden = !visible;
+function renderPills(view, counts) {
+  for (const pill of pillEls) {
+    const active = pill.dataset.view === view;
+    pill.classList.toggle("active", active);
+    pill.setAttribute("aria-pressed", String(active));
+    pill.querySelector(".count").textContent = counts[pill.dataset.view];
+  }
 }
 
-function renderCategories(grouped, hiddenApps, hasCliApps) {
-  categoriesEl.replaceChildren();
-  let renderedAny = false;
+// Cards are dealt into columns by hand rather than with CSS multi-column: that
+// balances *height*, but tall cards can't split, so it happily leaves the
+// right-hand columns empty. Putting each card in the currently shortest column
+// fills the whole width, so more of the launcher is visible at once.
+const MIN_CARD_WIDTH = 270;
+const CARD_GAP = 14;
+let cards = [];
+let columnCount = 0;
 
-  for (const category of CATEGORY_ORDER) {
+function layoutCards() {
+  const width = categoriesEl.clientWidth;
+  columnCount = Math.max(1, Math.floor((width + CARD_GAP) / (MIN_CARD_WIDTH + CARD_GAP)));
+  const columns = Array.from({ length: columnCount }, () => {
+    const column = document.createElement("div");
+    column.className = "col";
+    return column;
+  });
+  categoriesEl.replaceChildren(...columns);
+  for (const card of cards) {
+    // Measured as they go in, so a card lands where there is actually room.
+    const shortest = columns.reduce((a, b) => (a.offsetHeight <= b.offsetHeight ? a : b));
+    shortest.appendChild(card);
+  }
+}
+
+function renderCategories(grouped, hiddenApps, cliApps, view) {
+  cards = [];
+  messagesEl.replaceChildren();
+
+  // CLI Tools is the first card, then the regular categories in their fixed order.
+  if (view !== "gui" && cliApps.length > 0) cards.push(makeCliSection(cliApps));
+
+  for (const category of view === "cli" ? [] : CATEGORY_ORDER) {
     const apps = grouped.get(category);
     if (!apps || apps.length === 0) continue;
-    renderedAny = true;
 
     const section = document.createElement("section");
     section.className = "category";
@@ -369,25 +392,26 @@ function renderCategories(grouped, hiddenApps, hasCliApps) {
     }
 
     section.append(heading, grid);
-    categoriesEl.appendChild(section);
+    cards.push(section);
   }
 
-  if (!renderedAny && !hasCliApps) {
+  if (cards.length === 0) {
     const empty = document.createElement("p");
     empty.id = "empty-state";
-    empty.textContent = "No catalog apps found installed on this machine.";
-    categoriesEl.appendChild(empty);
+    empty.textContent =
+      view === "cli" ? "No CLI tools found on this machine." : "No catalog apps found installed on this machine.";
+    messagesEl.appendChild(empty);
   }
 
-  if (editMode) {
-    categoriesEl.appendChild(makeHiddenPanel(hiddenApps));
-  }
+  if (editMode) cards.push(makeHiddenPanel(hiddenApps));
 
   const noResults = document.createElement("p");
   noResults.id = "no-results";
   noResults.hidden = true;
   noResults.textContent = "No apps match your search.";
-  categoriesEl.appendChild(noResults);
+  messagesEl.appendChild(noResults);
+
+  layoutCards();
 }
 
 function applySearch(query) {
@@ -395,11 +419,7 @@ function applySearch(query) {
   const noResultsEl = document.getElementById("no-results");
   let anyVisible = false;
 
-  const cliSection = cliPanelEl.querySelector("section.category");
-  const sections = [...categoriesEl.querySelectorAll("section.category:not(.hidden-panel)")];
-  if (cliSection) sections.push(cliSection);
-
-  for (const section of sections) {
+  for (const section of categoriesEl.querySelectorAll("section.category:not(.hidden-panel)")) {
     let sectionHasVisible = false;
     for (const tile of section.querySelectorAll(".tile-wrapper")) {
       const matches = !q || tile.querySelector(".tile").dataset.name.includes(q);
@@ -407,15 +427,14 @@ function applySearch(query) {
       if (matches) sectionHasVisible = true;
     }
     section.hidden = !sectionHasVisible;
-    // Tools in a panel the user has switched off don't count as results.
-    if (sectionHasVisible && (section !== cliSection || cliToolsVisible())) anyVisible = true;
+    if (sectionHasVisible) anyVisible = true;
   }
-  // An empty panel would otherwise keep its column and squeeze the categories.
-  if (cliSection) cliPanelEl.hidden = !cliToolsVisible() || cliSection.hidden;
 
   if (noResultsEl) {
     noResultsEl.hidden = anyVisible || !q;
   }
+  // Filtering empties some cards, so re-deal the rest to keep columns even.
+  layoutCards();
 }
 
 function render() {
@@ -423,8 +442,8 @@ function render() {
   const visible = merged.filter((app) => !app.hidden);
   const hiddenApps = merged.filter((app) => app.hidden);
 
-  // CLI tools get their own panel instead of being scattered across the
-  // 10 regular categories — grouped together since they're a different
+  // CLI tools get their own card, shown first, instead of being scattered across
+  // the 10 regular categories — grouped together since they're a different
   // kind of tile (opens a terminal, not a normal app window).
   const cliApps = visible.filter((app) => app.cli).sort((a, b) => a.name.localeCompare(b.name));
   const guiApps = visible.filter((app) => !app.cli);
@@ -438,8 +457,9 @@ function render() {
     apps.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  renderCliPanel(cliApps);
-  renderCategories(grouped, hiddenApps, cliApps.length > 0);
+  const view = currentView();
+  renderPills(view, { all: visible.length, gui: guiApps.length, cli: cliApps.length });
+  renderCategories(grouped, hiddenApps, cliApps, view);
   if (searchEl.value) applySearch(searchEl.value);
 }
 
@@ -470,10 +490,17 @@ async function main() {
   render();
 
   searchEl.addEventListener("input", () => applySearch(searchEl.value));
-  cliToggleEl.addEventListener("click", () => {
-    setCliToolsVisible(!cliToolsVisible());
-    render();
+  // Only a change in how many columns fit needs a re-deal, not every pixel.
+  window.addEventListener("resize", () => {
+    const fits = Math.max(1, Math.floor((categoriesEl.clientWidth + CARD_GAP) / (MIN_CARD_WIDTH + CARD_GAP)));
+    if (fits !== columnCount) layoutCards();
   });
+  for (const pill of pillEls) {
+    pill.addEventListener("click", () => {
+      setView(pill.dataset.view);
+      render();
+    });
+  }
   editToggleEl.addEventListener("click", () => {
     editMode = !editMode;
     editToggleEl.classList.toggle("active", editMode);

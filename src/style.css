@@ -12,9 +12,9 @@
 
   /* Every tile is the same box, so icons and labels line up in a strict grid:
      the icon sits at a fixed spot, and the label is clamped to two lines. */
-  --tile-w: 96px;
-  --tile-height: 98px;
-  --icon-size: 40px;
+  --tile-w: 80px;
+  --tile-height: 80px;
+  --icon-size: 30px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +42,7 @@ body {
 }
 
 header {
-  padding: 20px 32px 4px;
+  padding: 16px 32px 2px;
   display: grid;
   grid-template-columns: 1fr minmax(220px, 420px) 1fr;
   align-items: center;
@@ -94,6 +94,41 @@ header {
   color: #fff;
 }
 
+/* All / GUI / CLI filter. */
+.pills {
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  gap: 6px;
+}
+
+.pill {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background: var(--tile-hover);
+}
+
+.pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.pill .count {
+  margin-left: 5px;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
 #error-banner {
   margin: 12px 32px 0;
   padding: 10px 14px;
@@ -103,56 +138,35 @@ header {
   font-size: 13px;
 }
 
-/* CLI Tools panel on the left, categories filling the rest. The panel is
-   sticky and scrolls on its own, so a long tool list never pushes the
-   categories down. */
-#layout {
+/* One flow of cards, CLI Tools first, dealt into columns by main.js (see
+   `layoutCards`): each card goes into the shortest column, so the whole width is
+   used. The column count follows the window width, with no breakpoints. */
+#categories {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  padding: 12px 32px 40px;
-  max-width: 1900px;
+  gap: 14px;
+  padding: 10px 32px 20px;
+  max-width: 2000px;
   margin: 0 auto;
 }
 
-#cli-panel {
-  flex: 0 0 328px; /* card padding + three 96px tiles */
-  position: sticky;
-  top: 12px;
-  max-height: calc(100vh - 24px);
-  overflow-y: auto;
-}
-
-#cli-panel[hidden] {
-  display: none;
-}
-
-#cli-panel section.category {
-  margin-bottom: 0;
-}
-
-/* A regular grid gives every card in a row the same height as the tallest
-   one, so one big category forces empty space next to its shorter
-   row-mates. CSS multi-column flows each card into whichever column is
-   shortest so far instead, balancing total height across columns.
-   `column-width` (not a fixed count) lets the browser fit as many columns as
-   the space left of the CLI panel allows, and stretch them to fill it — so
-   opening or closing the panel re-spaces everything with no breakpoints. */
-#categories {
+.col {
   flex: 1 1 0;
   min-width: 0;
-  column-width: 340px;
-  column-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#messages {
+  padding: 0 32px 24px;
 }
 
 section.category {
-  break-inside: avoid;
-  display: inline-block;
   width: 100%;
-  margin-bottom: 20px;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px 16px 16px;
+  border-radius: 14px;
+  padding: 12px 12px 10px;
   background: var(--tile-bg);
 }
 
@@ -164,12 +178,12 @@ section.category h2 {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
-  margin: 0 0 14px;
+  margin: 0 0 8px;
 }
 
 section.category h2 .category-icon {
@@ -186,7 +200,7 @@ section.category h2 .category-icon {
   grid-template-columns: repeat(auto-fill, var(--tile-w));
   justify-content: space-between;
   grid-auto-rows: var(--tile-height);
-  gap: 4px 0;
+  gap: 2px 0;
 }
 
 .tile-wrapper {
@@ -203,10 +217,10 @@ section.category h2 .category-icon {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 7px;
+  gap: 5px;
   width: 100%;
   height: 100%;
-  padding: 11px 4px 6px;
+  padding: 8px 3px 4px;
   border: 1px solid transparent;
   border-radius: 12px;
   background: transparent;
@@ -234,7 +248,7 @@ section.category h2 .category-icon {
   flex: none;
   width: var(--icon-size);
   height: var(--icon-size);
-  border-radius: 8px;
+  border-radius: 6px;
   object-fit: contain;
   background: transparent;
 }
@@ -242,9 +256,9 @@ section.category h2 .category-icon {
 .tile span {
   flex: none;
   width: 100%;
-  font-size: 12px;
+  font-size: 11px;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
   overflow: hidden;
   overflow-wrap: anywhere;
   /* Two lines at most, ellipsis after that; the full name is in the tooltip. */
@@ -387,16 +401,6 @@ section.category h2 .category-icon {
   border-style: dashed;
 }
 
-.cli-section h2 {
-  margin-bottom: 8px;
-}
-
-.cli-note {
-  color: var(--muted);
-  font-size: 12px;
-  margin: 0 0 12px;
-}
-
 #empty-state,
 #no-results {
   color: var(--muted);
@@ -404,24 +408,17 @@ section.category h2 .category-icon {
   text-align: center;
 }
 
-/* Narrow windows: no room for a side panel, so it stacks above the categories
-   as a normal card and the categories drop to a single column. */
 @media (max-width: 900px) {
-  #layout {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 10px 16px 32px;
-  }
-
-  #cli-panel {
-    flex: none;
-    position: static;
-    max-height: none;
-    overflow: visible;
-  }
-
   header {
-    padding: 16px 16px 4px;
+    padding: 14px 16px 2px;
+  }
+
+  #categories {
+    padding: 10px 16px 20px;
+  }
+
+  #messages {
+    padding: 0 16px 24px;
   }
 
   #error-banner {
@@ -429,28 +426,32 @@ section.category h2 .category-icon {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 720px) {
   header {
-    grid-template-columns: 1fr;
-    row-gap: 12px;
+    grid-template-columns: 1fr auto;
+    row-gap: 10px;
   }
 
-  #search,
-  .header-actions {
+  .pills {
     grid-column: 1;
+    grid-row: 1;
   }
 
   .header-actions {
-    justify-self: stretch;
+    grid-column: 2;
+    grid-row: 1;
   }
 
-  .header-actions button {
-    flex: 1;
+  #search {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
+}
 
+@media (max-width: 520px) {
   :root {
-    --tile-w: 84px;
-    --tile-height: 92px;
-    --icon-size: 34px;
+    --tile-w: 74px;
+    --tile-height: 78px;
+    --icon-size: 28px;
   }
 }

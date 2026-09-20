@@ -138,7 +138,26 @@ shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
   Tool is excluded; Hermes Agent added as a CLI tool. `find_real_exe` prefers an
   exact name (PowerToys resolved to `PowerToys.ActionRunner.exe` once the name
   got shorter).
-- **Tests:** 27 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
+- **All / GUI / CLI pills, one screen.** The CLI Tools side panel is replaced by
+  three filter pills (with counts) and CLI Tools becomes the first card in one
+  flow with the categories. Cards are dealt into the shortest column, so all
+  columns fill and the whole launcher fits a 1920×1057 window; tiles shrank to
+  80×80 with 30px icons.
+- **Many more Windows apps.** Start Menu apps missing from the catalog — 36 new
+  entries (Camera, Photos, Affinity ×3, AdGuard, Wintoys, Raindrop, Minecraft
+  Launcher, Moblo 3D, Adobe Acrobat, WSL, ...) and Windows slots for
+  DaVinci Resolve, Dolphin, KDE Connect, Okular and others. 32 entries had been
+  silently dropped as "duplicates" because they all shared an empty launch key.
+  `Notepad++` no longer overwrites `Notepad` (a `+` is now part of a name).
+  `bin.windows` may be `start:<Start Menu name>` when the name differs.
+- **Shell-rendered icons were upside down.** The Start Menu icon extractor (used
+  for AdGuard, Control Panel, Remote Desktop, Sandbox, Raindrop, Acrobat, ...)
+  read a bottom-up bitmap as top-down. It now checks the DIB's orientation, and
+  the icon cache is versioned (`icons-v2`) so old flipped icons are not reused.
+- **Wrong icons:** Dolphin is now the KDE Dolphin icon (it was the Dolphin *web
+  browser* logo), Calculator uses the Store app's logo instead of `calc.exe`'s.
+  PowerShell (and Command Prompt, WSL) open properly under CLI Tools.
+- **Tests:** 30 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
 - **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
   build` on Windows/macOS now works (`bundle.targets` is `all`, with the
   Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch

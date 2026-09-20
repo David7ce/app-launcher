@@ -34,12 +34,12 @@ The largest remaining gap. Every macOS code path is unverified.
 
 Windows runs, launches apps, and resolves beyond `$PATH` (v0.2.x).
 
-- [ ] **Start Menu entries that aren't in the catalog.** Catalog entries
-      declared for Windows are now also found by display name in the Start
-      Menu (classic and UWP), which recovered ~24 apps on this machine
-      (Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox, ...). What
-      is still missed is anything *not in the curated dataset* — e.g. AdGuard —
-      because the scan doesn't add Start Menu entries as new catalog entries.
+- [ ] **Start Menu apps are added by hand.** Real apps found only in the Start
+      Menu are listed in `vendor_apps.json` (36 so far); anything else has to be
+      added the same way. Deliberately not added: Windows admin snap-ins
+      (Event Viewer, Services, Task Scheduler, Computer Management, ODBC, ...),
+      WSL distro launchers (Ubuntu, archlinux) and the individual LibreOffice /
+      Blackmagic / Inno Setup shortcuts — say if you want any of them.
 - [ ] **Convert `.ico`-only icons properly.** Icons come from the `.exe`'s
       embedded resources, but a DisplayIcon pointing at a standalone `.ico`
       is still only copied, not converted.
@@ -62,7 +62,7 @@ CI proves every installer *builds*. None has been installed and launched.
 
 ## Tests — thin
 
-`tools/test_tools.py` (27 cases: catalog merge, icon placement, scan helpers,
+`tools/test_tools.py` (30 cases: catalog merge, icon placement, scan helpers,
 catalog invariants) and 10 Rust unit tests (name matching, env expansion,
 `.desktop`/theme icon lookup) exist. Still untested:
 

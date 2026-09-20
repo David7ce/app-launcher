@@ -199,7 +199,7 @@
       "vendor": "Microsoft",
       "category": "Office",
       "bin": {
-        "windows": "calc.exe"
+        "windows": "start:Calculator"
       }
     },
     {
@@ -588,6 +588,314 @@
       "bin": {
         "linux": "hermes",
         "windows": "hermes.exe"
+      },
+      "cli": true
+    },
+    {
+      "id": "win-affinity-studio",
+      "name": "Affinity Studio",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": "start:Affinity"
+      }
+    },
+    {
+      "id": "win-affinity-designer",
+      "name": "Affinity Designer",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-affinity-photo",
+      "name": "Affinity Photo",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-photos",
+      "name": "Photos",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-moblo-3d",
+      "name": "Moblo 3D",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-jpegview",
+      "name": "JPEGView",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-tonfotos",
+      "name": "Tonfotos",
+      "vendor": "",
+      "category": "Graphics",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-camera",
+      "name": "Camera",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-fl-studio",
+      "name": "FL Studio",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-fxsound",
+      "name": "FxSound",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-guitar-pro",
+      "name": "Guitar Pro",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-neuralampmodeler",
+      "name": "NeuralAmpModeler",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-zen-player",
+      "name": "Zen Player",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-minecraft-launcher",
+      "name": "Minecraft Launcher",
+      "vendor": "",
+      "category": "Games",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-raindrop",
+      "name": "Raindrop.io",
+      "vendor": "",
+      "category": "Internet",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-folo",
+      "name": "Folo",
+      "vendor": "",
+      "category": "Internet",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-adobe-acrobat",
+      "name": "Adobe Acrobat",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-pdfsam",
+      "name": "PDFsam Basic",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-sticky-notes",
+      "name": "Sticky Notes",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-windbg",
+      "name": "WinDbg",
+      "vendor": "",
+      "category": "Development",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-adguard",
+      "name": "AdGuard",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-wintoys",
+      "name": "Wintoys",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-windows-security",
+      "name": "Windows Security",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-registry-editor",
+      "name": "Registry Editor",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-control-panel",
+      "name": "Control Panel",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-remote-desktop",
+      "name": "Remote Desktop Connection",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-pc-manager",
+      "name": "PC Manager",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-nvidia-app",
+      "name": "NVIDIA App",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-nvidia-control-panel",
+      "name": "NVIDIA Control Panel",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-windows-sandbox",
+      "name": "Windows Sandbox",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-snipping-tool",
+      "name": "Snipping Tool",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-sefirah",
+      "name": "Sefirah",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "win-wsl",
+      "name": "WSL",
+      "vendor": "Microsoft",
+      "category": "System",
+      "bin": {
+        "windows": "wsl.exe"
+      },
+      "cli": true
+    },
+    {
+      "id": "win-command-prompt",
+      "name": "Command Prompt",
+      "vendor": "Microsoft",
+      "category": "System",
+      "bin": {
+        "windows": "cmd.exe"
       },
       "cli": true
     }

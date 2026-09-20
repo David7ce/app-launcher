@@ -91,11 +91,11 @@
     "icon_source": "mozilla-thunderbird-x64-en-us.png"
   },
   {
-    "id": "win-notepad",
+    "id": "win-notepadplusplus",
     "name": "Notepad++",
     "bin": "C:\\Program Files\\Notepad++\\notepad++.exe",
     "category": "Utilities",
-    "icon_source": "notepad.png"
+    "icon_source": "notepadplusplus.png"
   },
   {
     "id": "win-tesseract-ocr",

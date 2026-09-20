@@ -8,17 +8,19 @@
 </head>
 <body>
   <header>
+    <div class="pills" role="group" aria-label="Show">
+      <button class="pill" type="button" data-view="all">All<span class="count"></span></button>
+      <button class="pill" type="button" data-view="gui">GUI<span class="count"></span></button>
+      <button class="pill" type="button" data-view="cli">CLI<span class="count"></span></button>
+    </div>
     <input id="search" type="search" placeholder="Search apps…" autocomplete="off" />
     <div class="header-actions">
-      <button id="cli-toggle" type="button" aria-pressed="true" hidden>⌨ CLI Tools</button>
       <button id="edit-toggle" type="button">✎ Edit</button>
     </div>
   </header>
   <div id="error-banner" hidden></div>
-  <div id="layout">
-    <aside id="cli-panel" aria-label="CLI Tools" hidden></aside>
-    <main id="categories"></main>
-  </div>
+  <main id="categories"></main>
+  <div id="messages"></div>
   <script src="main.js"></script>
 </body>
 </html>

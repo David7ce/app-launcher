@@ -127,7 +127,8 @@ def slugify(name: str) -> str:
     # key — which is frequently a GUID or an Inno Setup `..._is1` suffix
     # (e.g. "win-{c7054d61-...}" or "win-darktable_is1"). Falls back to the
     # raw key only if the name slugifies to nothing.
-    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+    # "+" is spelled out: "Notepad++" must not collide with "Notepad".
+    slug = re.sub(r"[^a-z0-9]+", "-", name.lower().replace("+", "plus")).strip("-")
     return slug or "app"
 
 
@@ -139,6 +140,9 @@ def slugify(name: str) -> str:
 # app that also matches a curated entry never reaches this (the curated
 # category wins in build_catalog.py).
 CATEGORY_KEYWORDS = [
+    # A `` after "+" never matches (both sides are non-word), so a name ending
+    # in one needs its own rule.
+    (r"notepad\+\+", "Development"),
     (r"\b(android studio|visual studio|intellij|pycharm|webstorm|eclipse|unity|"
      r"unreal|godot|jetbrains|sublime|notepad\+\+|vim|emacs|zed|"
      r"python|node|bun|deno|dotnet|\.net|jdk|java|golang|rust|git|"

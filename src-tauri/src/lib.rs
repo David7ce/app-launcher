@@ -156,8 +156,8 @@ fn expand_env(s: &str) -> String {
 /// Windows-aware (checks PATHEXT, so a bare "git" resolves "git.exe").
 pub(crate) fn windows_resolve(name: &str) -> Option<PathBuf> {
     let name = expand_env(name);
-    if name.is_empty() {
-        return None; // "on Windows, exe unknown" — see PlatformBin
+    if name.is_empty() || name.starts_with("start:") {
+        return None; // "exe unknown" / "look in the Start Menu" — see PlatformBin
     }
     if name.contains('\\') || name.contains('/') {
         let path = PathBuf::from(&name);
@@ -166,12 +166,22 @@ pub(crate) fn windows_resolve(name: &str) -> Option<PathBuf> {
     which::which(&name).ok().or_else(|| windows_registry_lookup(&name))
 }
 
+/// The Start Menu name to look for, for a `bin.windows` slot that has no exe.
+/// The slot can spell it out as `start:<Start Menu name>` — needed when it
+/// differs from the catalog name (the catalog says "Affinity Studio", the Start
+/// Menu just "Affinity") — and otherwise the catalog display name is used.
+pub(crate) fn start_menu_name<'a>(target: &'a str, name: Option<&'a str>) -> Option<&'a str> {
+    target.strip_prefix("start:").or(name)
+}
+
 /// Comparison key for matching a catalog display name against a Start Menu
 /// one: drops `(...)` groups, architecture/vendor filler and trailing version
 /// numbers, then keeps lowercase alphanumerics. `"QGIS Desktop 4.2.0"`,
 /// `"Oracle VirtualBox"` and `"Microsoft Excel"` meet `"QGIS"`, `"VirtualBox"`
-/// and `"Excel"`.
+/// and `"Excel"`. A `+` counts ("Notepad++" is not "Notepad").
 fn norm_app_name(name: &str) -> String {
+    let name = name.replace('+', "plus");
+    let name = name.as_str();
     const NOISE: &[&str] = &[
         "x64", "x86", "64bit", "32bit", "64-bit", "32-bit", "microsoft", "oracle", "the", "desktop",
         "windows",
@@ -289,7 +299,9 @@ fn is_installed(bin: PlatformBin, name: Option<String>) -> bool {
         "macos" => macos_bundle_path(target).is_some(),
         "windows" => {
             windows_resolve(target).is_some()
-                || name.as_deref().and_then(windows_start_app).is_some()
+                || start_menu_name(target, name.as_deref())
+                    .and_then(windows_start_app)
+                    .is_some()
         }
         // Linux: $PATH only, which is how desktop apps are launched there.
         _ => which::which(target).is_ok(),
@@ -356,17 +368,29 @@ fn windows_cli_spawn(target: &str, name: Option<&str>) -> std::io::Result<std::p
     use std::os::windows::process::CommandExt;
 
     let exe = windows_resolve(target)
-        .or_else(|| name.and_then(windows_start_app).and_then(start_app_exe))
+        .or_else(|| start_menu_name(target, name).and_then(windows_start_app).and_then(start_app_exe))
         .unwrap_or_else(|| PathBuf::from(expand_env(target)));
-    if exe.as_os_str().is_empty() {
+    if exe.as_os_str().is_empty() || target.starts_with("start:") && !exe.is_absolute() {
         return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "program not found"));
     }
     // `start`'s first quoted argument is a window title, hence the empty "".
-    Command::new("cmd")
-        .args(["/c", "start", "", "cmd", "/k"])
-        .arg(exe)
-        .creation_flags(CREATE_NO_WINDOW)
-        .spawn()
+    let mut command = Command::new("cmd");
+    command.args(["/c", "start", ""]);
+    if !is_interactive_shell(&exe) {
+        command.args(["cmd", "/k"]);
+    }
+    command.arg(exe).creation_flags(CREATE_NO_WINDOW).spawn()
+}
+
+/// A program that is itself an interactive prompt. It gets a window of its own;
+/// wrapping it in `cmd /k` would leave a shell running inside a shell, and
+/// closing it would drop you into a stray `cmd` prompt.
+fn is_interactive_shell(exe: &Path) -> bool {
+    let name = exe.file_name().and_then(|n| n.to_str()).map(str::to_ascii_lowercase);
+    matches!(
+        name.as_deref(),
+        Some("pwsh.exe" | "powershell.exe" | "cmd.exe" | "wsl.exe" | "bash.exe")
+    )
 }
 
 // Only reached when `consts::OS` is "windows"; exists so other OSes compile.
@@ -382,7 +406,11 @@ fn launch_app(bin: PlatformBin, cli: bool, name: Option<String>) -> Result<(), S
     };
     // What to call the app in an error message; an empty Windows slot has no
     // command of its own.
-    let label = if target.is_empty() { name.as_deref().unwrap_or("app") } else { target };
+    let label = if target.is_empty() || target.starts_with("start:") {
+        name.as_deref().unwrap_or("app")
+    } else {
+        target
+    };
     let result = match std::env::consts::OS {
         // The standard way to launch a macOS app by name regardless of its
         // exact path. Unverified: never run on real macOS. CLI tools aren't
@@ -399,7 +427,7 @@ fn launch_app(bin: PlatformBin, cli: bool, name: Option<String>) -> Result<(), S
             // "not found" even though `is_installed` just said it exists.
             if let Some(exe) = windows_resolve(target) {
                 Command::new(exe).spawn()
-            } else if let Some(id) = name.as_deref().and_then(windows_start_app) {
+            } else if let Some(id) = start_menu_name(target, name.as_deref()).and_then(windows_start_app) {
                 // Start Menu entry (classic shortcut or UWP/Store package):
                 // the shell knows how to start either from its AppID.
                 Command::new("explorer").arg(format!("shell:AppsFolder\\{id}")).spawn()
@@ -547,6 +575,30 @@ mod tests {
         // A name that is a number survives.
         assert_eq!(norm_app_name("2048"), "2048");
         assert_eq!(norm_app_name("(x64)"), "");
+    }
+
+    #[test]
+    fn a_plus_keeps_names_apart_and_start_slots_can_name_the_start_entry() {
+        assert_ne!(norm_app_name("Notepad++"), norm_app_name("Notepad"));
+        assert_eq!(norm_app_name("Notepad++"), norm_app_name("Notepad++ (64-bit x64)"));
+        // "start:<name>" overrides the catalog name; anything else uses it.
+        assert_eq!(start_menu_name("start:Affinity", Some("Affinity Studio")), Some("Affinity"));
+        assert_eq!(start_menu_name("", Some("Camera")), Some("Camera"));
+        assert_eq!(start_menu_name("foo.exe", None), None);
+        // A start: slot is never mistaken for an executable.
+        assert!(windows_resolve("start:Affinity").is_none());
+    }
+
+    #[test]
+    fn interactive_shells_are_recognised_but_tools_are_not() {
+        // Bare names only: `Path` splits on `\` only on Windows, and this test
+        // runs on every OS in CI.
+        for shell in ["pwsh.exe", "wsl.exe", "PowerShell.EXE", "cmd.exe"] {
+            assert!(is_interactive_shell(Path::new(shell)), "{shell}");
+        }
+        for tool in ["git.exe", "pandoc.exe", "python.exe"] {
+            assert!(!is_interactive_shell(Path::new(tool)), "{tool}");
+        }
     }
 
     #[test]
