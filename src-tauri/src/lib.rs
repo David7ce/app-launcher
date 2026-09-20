@@ -1,13 +1,21 @@
+mod icons;
+
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::OnceLock;
 use tauri::Manager;
+
+#[cfg(windows)]
+pub(crate) const CREATE_NO_WINDOW: u32 = 0x0800_0000;
 
 /// Per-OS launch identifier for a catalog entry. Any field can be absent —
 /// absent means the app doesn't exist on that OS, so `is_installed` returns
 /// false without checking anything, giving "only show installed" for free.
+/// On Windows an *empty* string means "exists on Windows, exe unknown": it is
+/// then found by display name in the Start Menu.
 #[derive(serde::Deserialize)]
-struct PlatformBin {
+pub(crate) struct PlatformBin {
     linux: Option<String>,
     windows: Option<String>,
     macos: Option<String>,
@@ -24,18 +32,17 @@ impl PlatformBin {
     }
 }
 
-/// macOS has no $PATH for GUI apps — check for a `<name>.app` bundle in the
+/// macOS has no $PATH for GUI apps — look for a `<name>.app` bundle in the
 /// usual install locations instead. Exact, case-sensitive match only; no
 /// Spotlight/mdfind fuzzy lookup. Unverified: never run on real macOS.
-fn macos_app_installed(name: &str) -> bool {
-    let mut dirs = vec![
-        "/Applications".to_string(),
-        "/System/Applications".to_string(),
-    ];
-    if let Ok(home) = std::env::var("HOME") {
-        dirs.push(format!("{home}/Applications"));
+pub(crate) fn macos_bundle_path(name: &str) -> Option<PathBuf> {
+    let mut dirs = vec![PathBuf::from("/Applications"), PathBuf::from("/System/Applications")];
+    if let Some(home) = std::env::var_os("HOME") {
+        dirs.push(Path::new(&home).join("Applications"));
     }
-    dirs.iter().any(|dir| Path::new(dir).join(format!("{name}.app")).exists())
+    dirs.into_iter()
+        .map(|dir| dir.join(format!("{name}.app")))
+        .find(|bundle| bundle.exists())
 }
 
 /// Windows: resolve a bare executable name the way the `Run` dialog and
@@ -147,8 +154,11 @@ fn expand_env(s: &str) -> String {
 /// path (what the system scan produces) just has to exist; a bare name is
 /// searched on $PATH and then in the registry's App Paths key. `which` is
 /// Windows-aware (checks PATHEXT, so a bare "git" resolves "git.exe").
-fn windows_resolve(name: &str) -> Option<PathBuf> {
+pub(crate) fn windows_resolve(name: &str) -> Option<PathBuf> {
     let name = expand_env(name);
+    if name.is_empty() {
+        return None; // "on Windows, exe unknown" — see PlatformBin
+    }
     if name.contains('\\') || name.contains('/') {
         let path = PathBuf::from(&name);
         return path.is_file().then_some(path);
@@ -156,101 +166,140 @@ fn windows_resolve(name: &str) -> Option<PathBuf> {
     which::which(&name).ok().or_else(|| windows_registry_lookup(&name))
 }
 
+/// Comparison key for matching a catalog display name against a Start Menu
+/// one: drops `(...)` groups, architecture/vendor filler and trailing version
+/// numbers, then keeps lowercase alphanumerics. `"QGIS Desktop 4.2.0"`,
+/// `"Oracle VirtualBox"` and `"Microsoft Excel"` meet `"QGIS"`, `"VirtualBox"`
+/// and `"Excel"`.
+fn norm_app_name(name: &str) -> String {
+    const NOISE: &[&str] = &[
+        "x64", "x86", "64bit", "32bit", "64-bit", "32-bit", "microsoft", "oracle", "the", "desktop",
+    ];
+    let mut flat = String::new();
+    let mut depth = 0u32;
+    for c in name.chars() {
+        match c {
+            '(' => depth += 1,
+            ')' => depth = depth.saturating_sub(1),
+            _ if depth == 0 => flat.push(c),
+            _ => {}
+        }
+    }
+    let lowered = flat.to_lowercase();
+    let mut tokens: Vec<&str> = lowered.split_whitespace().filter(|t| !NOISE.contains(t)).collect();
+    let is_version = |t: &str| {
+        let t = t.strip_prefix('v').unwrap_or(t);
+        t.chars().any(|c| c.is_ascii_digit()) && t.chars().all(|c| c.is_ascii_digit() || c == '.')
+    };
+    // Never strip the last remaining token: a name that *is* a number ("2048").
+    while tokens.len() > 1 && tokens.last().is_some_and(|t| is_version(t)) {
+        tokens.pop();
+    }
+    tokens.concat().chars().filter(char::is_ascii_alphanumeric).collect()
+}
+
+/// `(normalized name, AppID)` for every Start Menu entry, classic shortcuts and
+/// UWP/Store packages alike. `Get-StartApps` is a PowerShell cmdlet and takes a
+/// second or two, so it runs at most once, on first use.
+#[cfg(windows)]
+fn read_start_apps() -> Vec<(String, String)> {
+    use std::os::windows::process::CommandExt;
+
+    let script = "[Console]::OutputEncoding=[Text.Encoding]::UTF8; \
+                  ConvertTo-Json -InputObject @(Get-StartApps | Select-Object Name,AppID) -Compress";
+    let Ok(out) = Command::new("powershell")
+        .args(["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command", script])
+        .creation_flags(CREATE_NO_WINDOW)
+        .output()
+    else {
+        return Vec::new();
+    };
+    let text = String::from_utf8_lossy(&out.stdout);
+    let Ok(serde_json::Value::Array(items)) = serde_json::from_str(text.trim_start_matches('\u{feff}')) else {
+        return Vec::new();
+    };
+    items
+        .iter()
+        .filter_map(|item| {
+            let name = item.get("Name")?.as_str()?;
+            let id = item.get("AppID")?.as_str()?;
+            Some((norm_app_name(name), id.to_string()))
+        })
+        .collect()
+}
+
+#[cfg(not(windows))]
+fn read_start_apps() -> Vec<(String, String)> {
+    Vec::new()
+}
+
+/// AppID of the Start Menu entry named like `name`, if any. Matching is on the
+/// normalized name, exactly — never a prefix — so unrelated apps that merely
+/// start with the same word are not picked up.
+pub(crate) fn windows_start_app(name: &str) -> Option<&'static str> {
+    static APPS: OnceLock<Vec<(String, String)>> = OnceLock::new();
+    let key = norm_app_name(name);
+    if key.is_empty() {
+        return None;
+    }
+    APPS.get_or_init(read_start_apps)
+        .iter()
+        .find(|(n, _)| *n == key)
+        .map(|(_, id)| id.as_str())
+}
+
+/// A classic Start Menu AppID is either an absolute path or
+/// `{KnownFolderGUID}\relative\path.exe`; turn the latter into an environment
+/// path (`%ProgramW6432%\...`). UWP ids (`Vendor.App_hash!App`) have no exe.
+fn expand_start_app_id(app_id: &str) -> String {
+    const KNOWN_FOLDERS: &[(&str, &str)] = &[
+        ("{6D809377-6AF0-444B-8957-A3773F02200E}", "%ProgramW6432%"),
+        ("{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}", "%ProgramFiles(x86)%"),
+        ("{905E63B6-C1BF-494E-B29C-65B732D3D21A}", "%ProgramFiles%"),
+        ("{F1B32785-6FBA-4FCF-9D55-7B8E7F157091}", "%LOCALAPPDATA%"),
+    ];
+    let upper = app_id.to_ascii_uppercase();
+    for (guid, var) in KNOWN_FOLDERS {
+        if upper.starts_with(guid) {
+            return format!("{var}{}", &app_id[guid.len()..]);
+        }
+    }
+    app_id.to_string()
+}
+
+pub(crate) fn start_app_exe(app_id: &str) -> Option<PathBuf> {
+    let path = PathBuf::from(expand_env(&expand_start_app_id(app_id)));
+    (path.is_absolute() && path.is_file()).then_some(path)
+}
+
 // `async` makes Tauri run these on its thread pool: a plain command runs on the
 // main thread, and the frontend fires one `is_installed` per catalog entry
 // (~380) at startup, each a PATH search plus registry reads on Windows.
+//
+// `name` is the catalog display name. It is only used on Windows, as a last
+// resort for entries with a Windows slot whose exe can't be found — apps that
+// live in neither $PATH nor App Paths (Discord, LibreOffice, Store apps).
 #[tauri::command(async)]
-fn is_installed(bin: PlatformBin) -> bool {
-    let Some(name) = bin.for_current_os() else {
+fn is_installed(bin: PlatformBin, name: Option<String>) -> bool {
+    let Some(target) = bin.for_current_os() else {
         return false;
     };
     match std::env::consts::OS {
-        "macos" => macos_app_installed(name),
-        "windows" => windows_resolve(name).is_some(),
+        "macos" => macos_bundle_path(target).is_some(),
+        "windows" => {
+            windows_resolve(target).is_some()
+                || name.as_deref().and_then(windows_start_app).is_some()
+        }
         // Linux: $PATH only, which is how desktop apps are launched there.
-        _ => which::which(name).is_ok(),
+        _ => which::which(target).is_ok(),
     }
 }
 
-#[cfg(windows)]
-mod local_icon {
-    use super::{windows_resolve, PlatformBin};
-    use base64::Engine;
-    use std::fs;
-    use std::os::windows::process::CommandExt;
-    use std::path::{Path, PathBuf};
-    use std::process::Command;
-    use std::sync::OnceLock;
-    use tauri::Manager;
-
-    const SCRIPT: &str = include_str!("extract_icon.ps1");
-    const CREATE_NO_WINDOW: u32 = 0x0800_0000;
-
-    /// Written once per run: parallel first-time extractions would otherwise
-    /// rewrite the file while another PowerShell is reading it.
-    fn script_path(dir: &Path) -> Option<&'static PathBuf> {
-        static PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
-        PATH.get_or_init(|| {
-            let path = dir.join("extract_icon.ps1");
-            fs::write(&path, SCRIPT).ok().map(|_| path)
-        })
-        .as_ref()
-    }
-
-    /// Icon for a tile that has none shipped, pulled from the installed
-    /// executable itself and cached under the app cache dir as a PNG. A
-    /// failure leaves a `.none` marker so it isn't retried on every launch.
-    pub fn data_url(app: &tauri::AppHandle, id: &str, bin: &PlatformBin) -> Option<String> {
-        let exe = windows_resolve(bin.windows.as_deref()?)?;
-        let dir = app.path().app_cache_dir().ok()?.join("icons");
-        fs::create_dir_all(&dir).ok()?;
-        let safe: String = id
-            .chars()
-            .map(|c| if c.is_ascii_alphanumeric() || c == '-' { c } else { '_' })
-            .collect();
-        let png = dir.join(format!("{safe}.png"));
-        let none = dir.join(format!("{safe}.none"));
-        if none.exists() {
-            return None;
-        }
-        if !png.is_file() {
-            let ok = script_path(&dir).is_some_and(|script| {
-                Command::new("powershell")
-                    .args(["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File"])
-                    .arg(script)
-                    .arg("-Exe")
-                    .arg(&exe)
-                    .arg("-Out")
-                    .arg(&png)
-                    .creation_flags(CREATE_NO_WINDOW)
-                    .status()
-                    .is_ok_and(|s| s.success())
-            });
-            if !ok || !png.is_file() {
-                let _ = fs::write(&none, "");
-                return None;
-            }
-        }
-        let bytes = fs::read(&png).ok()?;
-        let b64 = base64::engine::general_purpose::STANDARD.encode(bytes);
-        Some(format!("data:image/png;base64,{b64}"))
-    }
-}
-
-/// Fallback icon for an installed app whose shipped icon is missing. Only
-/// implemented for Windows (extracted from the exe); elsewhere `None` keeps
-/// the category glyph. Returns a `data:` URL, which the CSP already allows.
+/// Fallback icon for an installed app whose shipped icon is missing, as a
+/// `data:` URL (which the CSP allows), or `None` to keep the category glyph.
 #[tauri::command(async)]
-fn get_icon(app: tauri::AppHandle, id: String, bin: PlatformBin) -> Option<String> {
-    #[cfg(windows)]
-    {
-        local_icon::data_url(&app, &id, &bin)
-    }
-    #[cfg(not(windows))]
-    {
-        let _ = (app, id, bin);
-        None
-    }
+fn get_icon(app: tauri::AppHandle, id: String, bin: PlatformBin, name: Option<String>) -> Option<String> {
+    icons::fallback(&app, &id, &bin, name.as_deref())
 }
 
 /// A CLI tool spawned bare has no terminal attached, so it either exits
@@ -290,35 +339,47 @@ fn linux_terminal_spawn(bin: &str) -> std::io::Result<std::process::Child> {
 }
 
 #[tauri::command(async)]
-fn launch_app(bin: PlatformBin, cli: bool) -> Result<(), String> {
-    let Some(name) = bin.for_current_os() else {
+fn launch_app(bin: PlatformBin, cli: bool, name: Option<String>) -> Result<(), String> {
+    let Some(target) = bin.for_current_os() else {
         return Err("no launch command configured for this OS".to_string());
     };
+    // What to call the app in an error message; an empty Windows slot has no
+    // command of its own.
+    let label = if target.is_empty() { name.as_deref().unwrap_or("app") } else { target };
     let result = match std::env::consts::OS {
         // The standard way to launch a macOS app by name regardless of its
         // exact path. Unverified: never run on real macOS. CLI tools aren't
         // given the terminal-wrapping treatment here — is_installed's
         // .app-bundle check means a bare CLI tool essentially never shows
         // as installed on macOS anyway, so this path is rarely reached.
-        "macos" => Command::new("open").args(["-a", name]).spawn(),
-        "linux" if cli => linux_terminal_spawn(name),
+        "macos" => Command::new("open").args(["-a", target]).spawn(),
+        "linux" if cli => linux_terminal_spawn(target),
         // cmd /k runs the command and stays open at an interactive prompt
         // afterwards, same idea as the Linux bash/read wrapper. Unverified
         // on real Windows.
-        "windows" if cli => Command::new("cmd").args(["/k", &expand_env(name)]).spawn(),
+        "windows" if cli && !target.is_empty() => {
+            Command::new("cmd").args(["/k", &expand_env(target)]).spawn()
+        }
         "windows" => {
             // Resolve to a full path first: an app registered only in the
             // registry's App Paths key (Office, VLC, Inkscape) is invisible
             // to a bare `Command::new("vlc.exe")`, which would fail with
             // "not found" even though `is_installed` just said it exists.
-            let target = windows_resolve(name).unwrap_or_else(|| PathBuf::from(expand_env(name)));
-            Command::new(target).spawn()
+            if let Some(exe) = windows_resolve(target) {
+                Command::new(exe).spawn()
+            } else if let Some(id) = name.as_deref().and_then(windows_start_app) {
+                // Start Menu entry (classic shortcut or UWP/Store package):
+                // the shell knows how to start either from its AppID.
+                Command::new("explorer").arg(format!("shell:AppsFolder\\{id}")).spawn()
+            } else {
+                Command::new(expand_env(target)).spawn()
+            }
         }
-        _ => Command::new(name).spawn(),
+        _ => Command::new(target).spawn(),
     };
     result
         .map(|_| ())
-        .map_err(|e| format!("failed to launch '{name}': {e}"))
+        .map_err(|e| format!("failed to launch '{label}': {e}"))
 }
 
 // User edits (hide/rename/recategorize) can't be written back into
@@ -415,7 +476,9 @@ mod tests {
             _ => bin(Some("l"), Some("w"), None),
         };
         assert!(only_other_os.for_current_os().is_none());
-        assert!(!is_installed(only_other_os));
+        // Even a matching Start Menu name must not resurrect an app that the
+        // catalog says doesn't exist on this OS (KDE Dolphin vs the emulator).
+        assert!(!is_installed(only_other_os, Some("Calculator".into())));
     }
 
     #[test]
@@ -431,11 +494,59 @@ mod tests {
         assert_eq!(expand_env("plain"), "plain");
     }
 
+    #[test]
+    fn norm_app_name_meets_catalog_and_start_menu_spellings() {
+        for (catalog, start) in [
+            ("Microsoft Excel", "Excel"),
+            ("QGIS", "QGIS Desktop 4.2.0"),
+            ("VirtualBox", "Oracle VirtualBox"),
+            ("GIMP", "GIMP 3.2.6"),
+            ("Node.js", "Node.js"),
+            ("MPC-HC", "MPC-HC x64"),
+            ("Lucas Chess", "Lucas Chess (R)"),
+            ("Visual Studio", "Visual Studio 2022"),
+        ] {
+            assert_eq!(norm_app_name(catalog), norm_app_name(start), "{catalog} / {start}");
+        }
+        // Exact match only: siblings and prefixes stay distinct.
+        assert_ne!(norm_app_name("Calculator"), norm_app_name("Calculator Suite"));
+        assert_ne!(norm_app_name("Unity"), norm_app_name("Unity Hub"));
+        // A name that is a number survives.
+        assert_eq!(norm_app_name("2048"), "2048");
+        assert_eq!(norm_app_name("(x64)"), "");
+    }
+
+    #[test]
+    fn start_menu_app_ids_expand_known_folders() {
+        assert_eq!(
+            expand_start_app_id(r"{6D809377-6AF0-444B-8957-A3773F02200E}\Inkscape\bin\inkscape.exe"),
+            r"%ProgramW6432%\Inkscape\bin\inkscape.exe"
+        );
+        assert_eq!(
+            expand_start_app_id(r"{7c5a40ef-a0fb-4bfc-874a-c0f2e0b9fa8e}\Foo\foo.exe"),
+            r"%ProgramFiles(x86)%\Foo\foo.exe"
+        );
+        // Already a path, or a UWP id: left alone.
+        assert_eq!(expand_start_app_id(r"C:\Apps\x.exe"), r"C:\Apps\x.exe");
+        assert_eq!(
+            expand_start_app_id("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"),
+            "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"
+        );
+        assert!(start_app_exe("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App").is_none());
+    }
+
+    #[test]
+    fn macos_bundle_lookup_needs_an_exact_bundle_name() {
+        assert!(macos_bundle_path("Definitely Not An App 12345").is_none());
+    }
+
     #[cfg(windows)]
     #[test]
     fn windows_resolve_finds_a_system_exe_by_name_and_by_env_path() {
         assert!(windows_resolve("cmd.exe").is_some());
         assert!(windows_resolve(r"%SystemRoot%\System32\cmd.exe").is_some());
         assert!(windows_resolve("definitely-not-installed-xyz.exe").is_none());
+        // The empty "exe unknown" slot never resolves on its own.
+        assert!(windows_resolve("").is_none());
     }
 }

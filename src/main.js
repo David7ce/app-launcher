@@ -74,6 +74,9 @@ function effective(app) {
   const o = overrides[app.id] || {};
   return {
     ...app,
+    // The user's rename must not change what the backend looks for: it matches
+    // this against the Start Menu on Windows.
+    catalogName: app.name,
     name: o.name ?? app.name,
     category: o.category ?? app.category,
     hidden: o.hidden ?? false,
@@ -105,7 +108,7 @@ const localIcons = new Map();
 async function fetchLocalIcon(app) {
   localIcons.set(app.id, null);
   try {
-    const url = await invoke("get_icon", { id: app.id, bin: app.bin });
+    const url = await invoke("get_icon", { id: app.id, bin: app.bin, name: app.catalogName });
     if (!url) return;
     localIcons.set(app.id, url);
     // A re-render may have replaced the tile that asked, so update by id.
@@ -209,7 +212,7 @@ function makeTile(app) {
   button.addEventListener("click", async () => {
     if (editMode) return;
     try {
-      await invoke("launch_app", { bin: app.bin, cli: !!app.cli });
+      await invoke("launch_app", { bin: app.bin, cli: !!app.cli, name: app.catalogName });
     } catch (err) {
       showError(`Couldn't launch ${app.name}: ${err}`);
     }
@@ -446,7 +449,7 @@ async function main() {
   const candidates = catalog.filter((entry) => !entry.hidden);
   const checks = await Promise.all(
     // One failing lookup must not take the whole dashboard down with it.
-    candidates.map((entry) => invoke("is_installed", { bin: entry.bin }).catch(() => false))
+    candidates.map((entry) => invoke("is_installed", { bin: entry.bin, name: entry.name }).catch(() => false))
   );
   installedApps = candidates.filter((_, i) => checks[i]);
 
