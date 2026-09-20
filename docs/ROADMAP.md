@@ -20,9 +20,11 @@ The largest remaining gap. Every macOS code path is unverified.
       misses anything installed elsewhere, and the catalog's guessed names are
       wrong for acronyms (`Vlc` for `VLC`). Needs `mdfind`/Spotlight or a
       bundle-id lookup.
-- [ ] **Extract `.icns` icons.** macOS apps currently all fall back to the
-      category glyph. Needs `.icns` → PNG conversion (an `sips`/`iconutil`
-      step, or a pure-Python reader).
+- [ ] **Verify the `.icns` icon fallback on a Mac.** `get_icon` converts a
+      bundle's `CFBundleIconFile` with `plutil` + `sips` at runtime; the path
+      logic is compiled and unit-tested, but neither tool has ever run. Apps
+      that ship only an asset catalog (`CFBundleIconName`) have no `.icns` and
+      keep the glyph, and the *scan* still doesn't stage icons.
 - [ ] **Verify CLI tools on macOS.** `launch_app` leaves macOS as a bare
       `open -a` with no terminal wrapping; this is believed unreachable because
       CLI tools aren't `.app` bundles, but that assumption has never been
@@ -32,11 +34,15 @@ The largest remaining gap. Every macOS code path is unverified.
 
 Windows runs, launches apps, and resolves beyond `$PATH` (v0.2.x).
 
-- [ ] **Resolve Start Menu shortcuts and UWP/Store packages.** The registry's
-      `App Paths` key is now consulted, which covers most classic GUI
-      installers, but Start Menu `.lnk` targets and `shell:AppsFolder`
-      packages are still missed. On this machine that is ~19 further apps
-      (Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox, ...).
+- [ ] **Start Menu entries that aren't in the catalog.** Catalog entries
+      declared for Windows are now also found by display name in the Start
+      Menu (classic and UWP), which recovered ~24 apps on this machine
+      (Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox, ...). What
+      is still missed is anything *not in the curated dataset* — e.g. AdGuard —
+      because the scan doesn't add Start Menu entries as new catalog entries.
+- [ ] **UWP/Store tiles have no icon.** Their AppID has no exe to extract from,
+      so Microsoft Store, Settings and similar keep the category glyph; the
+      package's logo asset would have to be read from its manifest.
 - [ ] **Verify the `cmd /k` CLI-tool path** on real hardware. Written by
       analogy with the Linux terminal wrapping, never exercised.
 - [ ] **Convert `.ico`-only icons properly.** Icons come from the `.exe`'s
@@ -61,8 +67,9 @@ CI proves every installer *builds*. None has been installed and launched.
 
 ## Tests — thin
 
-`tools/test_tools.py` (22 cases: catalog merge, icon placement, scan helpers,
-catalog invariants) and four `lib.rs` unit tests exist. Still untested:
+`tools/test_tools.py` (25 cases: catalog merge, icon placement, scan helpers,
+catalog invariants) and 10 Rust unit tests (name matching, env expansion,
+`.desktop`/theme icon lookup) exist. Still untested:
 
 - [ ] **Launch-command construction per OS** in `launch_app` (it spawns
       directly, so it needs to be split into a pure "build the command" step).
@@ -71,34 +78,26 @@ catalog invariants) and four `lib.rs` unit tests exist. Still untested:
 
 ## Icons — coverage
 
-- [ ] **150 of 383 catalog entries have no icon file** (17 are CLI tools that
+- [ ] **150 of 377 catalog entries have no icon file** (15 are CLI tools that
       use the CLI glyph by design, so 135 real gaps) and fall back to the
       category glyph. Most are uninstalled or obscure apps, but the count is
       worth reducing.
-- [ ] **Local icon fallback on Linux and macOS.** On Windows an installed app
-      with no shipped icon now gets one extracted from its exe at runtime
-      (`get_icon`). Linux (`.desktop` `Icon=` theme lookup) and macOS (`.icns`
-      conversion) still just show the category glyph.
+- [ ] **Run the Linux icon fallback on a real desktop.** `get_icon` resolves
+      a missing icon from the `.desktop` file's `Icon=` through the theme
+      directories (both hicolor and breeze layouts, plus pixmaps and Flatpak
+      exports). It is unit-tested against fixture directories and compiled by
+      CI, but has not been run against a real icon theme, and ignores the
+      user's *active* theme (the scan asks KDE/GNOME for it).
 
 ## Catalog data quality
 
-- [ ] **Scan name cleaning still leaks noise**: `WinMerge x64 (Current user,
-      64-bit)`, `Tesseract-OCR - open source OCR engine`. Non-apps also slip
-      through the scan (`Inno Setup`, `OpenAL`) — extend
-      `NON_APP_NAME_PATTERNS`/`EXCLUDED_IDS`.
-- [ ] **AdGuard is no longer picked up by the scan**: its `DisplayIcon` is a
-      cached installer and no matching exe sits beside it or in
-      `InstallLocation`. Needs a Start Menu / App Paths lookup (same gap as the
-      Windows resolution item above).
+- [ ] **Scan-derived ids follow the cleaned name**, so cleaning a name better
+      (`win-winmerge-x64-current-user-64-bit` → `win-winmerge`) orphans any
+      per-user override saved against the old id. Harmless while there are few
+      users; worth pinning ids before a wider release.
 
 ## Repo hygiene
 
-- [ ] **Confirm the new `ci.yml` is green on Linux and macOS.** It was added
-      after `windows_registry_lookup` was found to be `#[cfg(windows)]` yet
-      called unguarded — a compile break on Linux/macOS since 59fca7e that a
-      Windows-only machine could not reproduce. A `cfg(not(windows))` stub now
-      fixes it, but that has only been reasoned about, not compiled, off
-      Windows.
 - [ ] **Third-party icon attribution.** Icons come from dashboard-icons, Iconify
       and KDE breeze-icons (LGPL); brand logos remain their owners'
       trademarks. `LICENSE` covers the code only — add a short notice to the

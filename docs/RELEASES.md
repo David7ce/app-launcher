@@ -100,7 +100,22 @@ shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
 - **Icons for apps the catalog can't ship.** An installed tile with no shipped
   icon now gets one extracted from its exe at runtime, cached under the app
   cache dir (Windows only). Shipped icons stay the primary source.
-- **Tests:** 22 Python cases (`tools/test_tools.py`) and 4 Rust unit tests.
+- **Start Menu / UWP resolution (Windows).** A catalog entry that exists on
+  Windows but whose exe can't be found on `$PATH` or in App Paths is now looked
+  up by display name in the Start Menu (`Get-StartApps`, cached once) and
+  launched through `shell:AppsFolder`. ~24 more apps on this machine, including
+  Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox and Store apps.
+  Matching is exact on a normalized name, and only for entries that declare a
+  Windows slot — an empty `bin.windows` now means "on Windows, exe unknown" —
+  so KDE Dolphin is not matched to the Dolphin emulator.
+- **Icon fallback on Linux and macOS.** Linux resolves the `.desktop` `Icon=`
+  through the theme directories; macOS converts the bundle's `.icns` with
+  `sips`. Unit-tested and CI-compiled, not yet run on real desktops.
+- **Scan name noise:** `(Current user, 64-bit)`, ` - <tagline>` suffixes and
+  dangling dashes are cleaned, OpenAL is filtered as a runtime, and
+  ResponsivelyApp/Inno Setup get Development. `ResponsivelyApp` no longer
+  duplicates `Responsively App`.
+- **Tests:** 25 Python cases (`tools/test_tools.py`) and 10 Rust unit tests.
 - **Security/build:** a real CSP replaces `csp: null`; a local `cargo tauri
   build` on Windows/macOS now works (`bundle.targets` is `all`, with the
   Linux-only override in `tauri.linux.conf.json`); `LICENSE` added; scratch
