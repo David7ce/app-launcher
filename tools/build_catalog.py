@@ -49,7 +49,13 @@ _TRAILING_YEAR_RE = re.compile(r"\s+(?:19|20)\d{2}\s*$")
 def normalize_name(name: str) -> str:
     lowered = _TRAILING_YEAR_RE.sub("", name.lower())
     stripped = _NAME_NOISE_RE.sub(" ", lowered)
-    return re.sub(r"[^a-z0-9]", "", stripped)
+    key = re.sub(r"[^a-z0-9]", "", stripped)
+    # "Responsively App" loses its " app" word above, but "ResponsivelyApp" is
+    # one word — so drop a glued-on trailing "app" too. Guarded by length so a
+    # short name that merely ends in "app" is left alone.
+    if key.endswith("app") and len(key) > 8:
+        key = key[:-3]
+    return key
 
 # Preference order for guessing a Linux executable name from the dataset's
 # package identifiers. Package name often equals the binary name but not
@@ -114,14 +120,18 @@ def guess_windows_bin(pkg_manager: dict, linux_bin: str) -> str | None:
     # as Windows bins produces entries that can never resolve, so the tile
     # silently never appears. Only guess when the name is a plausible bare
     # executable: no hyphens, no version-ish dots, no path separators. A
-    # missing guess is strictly better than a wrong one — the app just stays
-    # hidden on Windows until the real path is known (the Windows system scan
-    # supplies exact paths for anything actually installed).
+    # missing guess is strictly better than a wrong one. But the app *does*
+    # exist on Windows (it has a winget id), so the slot is present with an
+    # empty value rather than absent: `lib.rs` then resolves it by display name
+    # against the Start Menu, which is how apps that install outside $PATH and
+    # App Paths (Discord, LibreOffice, KeePassXC, ...) are found. An absent
+    # key still means "not on Windows", so unrelated Linux apps that merely
+    # share a name with a Windows one (KDE Dolphin vs the emulator) stay hidden.
     if not pkg_manager.get("windows_winget"):
         return None
     if re.fullmatch(r"[A-Za-z0-9_]+", linux_bin):
         return f"{linux_bin}.exe"
-    return None
+    return ""
 
 
 def guess_macos_bin(pkg_manager: dict) -> str | None:
@@ -140,7 +150,7 @@ def guess_macos_bin(pkg_manager: dict) -> str | None:
 def build_bin(pkg_manager: dict, linux_bin: str, app_id: str) -> dict[str, str]:
     bin_obj = {"linux": linux_bin}
     windows = guess_windows_bin(pkg_manager, linux_bin)
-    if windows:
+    if windows is not None:  # "" is meaningful: on Windows, exe unknown
         bin_obj["windows"] = windows
     macos = guess_macos_bin(pkg_manager)
     if macos:

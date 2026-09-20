@@ -56,6 +56,7 @@ NON_APP_NAME_PATTERNS = [
     r"^Git version ",
     r"^Denuvo Anti-Cheat$",
     r"^Bonjour$",
+    r"^OpenAL",  # audio runtime installed by games, not an app
     r"^Microsoft Update Health Tools$",
 ]
 
@@ -81,6 +82,14 @@ ARCH_SUFFIX_RE = re.compile(
 )
 BUNDLED_RUNTIME_RE = re.compile(r"\s+with (?:Java|Python|\.NET) Runtime.*$", re.IGNORECASE)
 LOCALE_SUFFIX_RE = re.compile(r"\s+-\s+[a-z]{2}(?:-[A-Za-z]{2,4})?\s*$")
+#   "WinMerge x64 (Current user, 64-bit)" -> "WinMerge x64" (then ARCH strips x64)
+INSTALL_SCOPE_RE = re.compile(r"\s*\((?:current user|all users|user)\b[^)]*\)\s*$", re.IGNORECASE)
+#   "Tesseract-OCR - open source OCR engine" -> "Tesseract-OCR"
+# A tagline after " - ": starts lowercase and runs to several words. Digits
+# (" - 12.0.40664") and locales (" - en-us", handled above) don't match.
+TAGLINE_SUFFIX_RE = re.compile(r"\s+-\s+[a-z]\w*(?:\s+\w+)+$")
+# What is left when a version was stripped from "Foo Runtime - 1.2.3".
+DANGLING_DASH_RE = re.compile(r"\s+-\s*$")
 LOOSE_VERSION_RE = re.compile(r"\s+v\.?\s*[A-Z]?\d[\w.]*\s*$", re.IGNORECASE)
 BARE_VERSION_WORD_RE = re.compile(r"\s+version\s*$", re.IGNORECASE)
 
@@ -94,10 +103,13 @@ def clean_name(name: str) -> str:
     for pattern in (
         BUNDLED_RUNTIME_RE,
         LOCALE_SUFFIX_RE,
+        INSTALL_SCOPE_RE,
         ARCH_SUFFIX_RE,
         VERSION_SUFFIX_RE,
         LOOSE_VERSION_RE,
         BARE_VERSION_WORD_RE,
+        DANGLING_DASH_RE,
+        TAGLINE_SUFFIX_RE,
     ):
         cleaned = pattern.sub("", cleaned)
     return cleaned.strip() or name
@@ -128,7 +140,7 @@ CATEGORY_KEYWORDS = [
      r"unreal|godot|jetbrains|sublime|notepad\+\+|vim|emacs|zed|"
      r"python|node|bun|deno|dotnet|\.net|jdk|java|golang|rust|git|"
      r"docker|postman|insomnia|dbeaver|pgadmin|laragon|xampp|wamp|"
-     r"tesseract|source sdk|responsively)\b", "Development"),
+     r"tesseract|source sdk|inno setup|responsively\w*)\b", "Development"),
     (r"\b(gimp|photoshop|illustrator|inkscape|krita|blender|darktable|digikam|"
      r"eagle|upscayl|rapidraw|affinity|kdenlive|openshot|shotcut|figma|"
      r"canva|paint|screenshot|sharex|flameshot|greenshot|screenpresso)\b", "Graphics"),

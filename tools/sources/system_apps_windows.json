@@ -98,8 +98,8 @@
     "icon_source": "notepad.png"
   },
   {
-    "id": "win-tesseract-ocr-open-source-ocr-engine",
-    "name": "Tesseract-OCR - open source OCR engine",
+    "id": "win-tesseract-ocr",
+    "name": "Tesseract-OCR",
     "bin": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
     "category": "Development",
     "icon_source": null
@@ -203,13 +203,6 @@
     "icon_source": "obs-studio.png"
   },
   {
-    "id": "win-openal",
-    "name": "OpenAL",
-    "bin": "C:\\Program Files (x86)\\OpenAL\\oalinst.exe",
-    "category": "Utilities",
-    "icon_source": "openal.png"
-  },
-  {
     "id": "win-qbittorrent",
     "name": "qBittorrent",
     "bin": "C:\\Program Files\\qBittorrent\\qbittorrent.exe",
@@ -290,7 +283,7 @@
     "id": "win-responsivelyapp",
     "name": "ResponsivelyApp",
     "bin": "%LOCALAPPDATA%\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe",
-    "category": "Utilities",
+    "category": "Development",
     "icon_source": "responsivelyapp.png"
   },
   {
@@ -346,7 +339,7 @@
     "id": "win-inno-setup",
     "name": "Inno Setup",
     "bin": "%LOCALAPPDATA%\\Programs\\Inno Setup 7\\ISIDE.exe",
-    "category": "Utilities",
+    "category": "Development",
     "icon_source": "inno-setup.png"
   },
   {
@@ -385,11 +378,11 @@
     "icon_source": "sumatrapdf.png"
   },
   {
-    "id": "win-winmerge-x64-current-user-64-bit",
-    "name": "WinMerge x64 (Current user, 64-bit)",
+    "id": "win-winmerge",
+    "name": "WinMerge",
     "bin": "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe",
     "category": "System",
-    "icon_source": "winmerge-x64-current-user-64-bit.png"
+    "icon_source": "winmerge.png"
   },
   {
     "id": "win-playtorriomov",
@@ -427,11 +420,11 @@
     "icon_source": "telegram-desktop.png"
   },
   {
-    "id": "win-microsoft-visual-studio-code-user",
-    "name": "Microsoft Visual Studio Code (User)",
+    "id": "win-microsoft-visual-studio-code",
+    "name": "Microsoft Visual Studio Code",
     "bin": "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe",
     "category": "Development",
-    "icon_source": "microsoft-visual-studio-code-user.png"
+    "icon_source": "microsoft-visual-studio-code.png"
   },
   {
     "id": "win-wave",

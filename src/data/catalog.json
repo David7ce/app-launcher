@@ -43,6 +43,7 @@
     "category": "Development",
     "bin": {
       "linux": "claude-code",
+      "windows": "",
       "macos": "Claude Code"
     },
     "icon": "claude-code.png",
@@ -56,6 +57,7 @@
     "category": "Development",
     "bin": {
       "linux": "claude-desktop",
+      "windows": "",
       "macos": "Claude"
     },
     "icon": "claude-desktop.png",
@@ -69,6 +71,7 @@
     "category": "Development",
     "bin": {
       "linux": "codex-bin",
+      "windows": "",
       "macos": "Codex"
     },
     "icon": "codex.png",
@@ -82,6 +85,7 @@
     "category": "Development",
     "bin": {
       "linux": "dbeaver-ce",
+      "windows": "",
       "macos": "Dbeaver Community"
     },
     "icon": "dbeaver.png",
@@ -109,6 +113,7 @@
     "category": "Development",
     "bin": {
       "linux": "dotnet-runtime-6.0",
+      "windows": "",
       "macos": "Dotnet"
     },
     "icon": "dotnet-runtime.png",
@@ -164,6 +169,7 @@
     "category": "Development",
     "bin": {
       "linux": "github-desktop-bin",
+      "windows": "",
       "macos": "Github"
     },
     "icon": "github-desktop.png",
@@ -226,6 +232,18 @@
     "cli": false
   },
   {
+    "id": "win-inno-setup",
+    "name": "Inno Setup",
+    "vendor": "",
+    "category": "Development",
+    "bin": {
+      "windows": "%LOCALAPPDATA%\\Programs\\Inno Setup 7\\ISIDE.exe"
+    },
+    "icon": "win-inno-setup.png",
+    "hidden": false,
+    "cli": false
+  },
+  {
     "id": "insomnia",
     "name": "Insomnia",
     "vendor": "",
@@ -246,6 +264,7 @@
     "category": "Development",
     "bin": {
       "linux": "intellij-idea-community-edition",
+      "windows": "",
       "macos": "Intellij Idea"
     },
     "icon": "intellij-idea.png",
@@ -299,6 +318,7 @@
     "category": "Development",
     "bin": {
       "linux": "kubernetes-client",
+      "windows": "",
       "macos": "Kubectl"
     },
     "icon": "kubectl.png",
@@ -338,6 +358,7 @@
     "category": "Development",
     "bin": {
       "linux": "llama.cpp",
+      "windows": "",
       "macos": "Llama.cpp"
     },
     "icon": "llama-cpp.png",
@@ -351,6 +372,7 @@
     "category": "Development",
     "bin": {
       "linux": "mariadb-server",
+      "windows": "",
       "macos": "Mariadb"
     },
     "icon": "mariadb.png",
@@ -390,6 +412,7 @@
     "category": "Development",
     "bin": {
       "linux": "mongodb-org",
+      "windows": "",
       "macos": "Mongodb Community"
     },
     "icon": "mongodb.png",
@@ -445,6 +468,7 @@
     "category": "Development",
     "bin": {
       "linux": "opencode-bin",
+      "windows": "",
       "macos": "Sst/tap/opencode"
     },
     "icon": "opencode.png",
@@ -458,6 +482,7 @@
     "category": "Development",
     "bin": {
       "linux": "java-latest-openjdk",
+      "windows": "",
       "macos": "Openjdk"
     },
     "icon": "openjdk.png",
@@ -484,6 +509,7 @@
     "category": "Development",
     "bin": {
       "linux": "postgresql-server",
+      "windows": "",
       "macos": "Postgresql"
     },
     "icon": "postgresql.png",
@@ -539,6 +565,7 @@
     "category": "Development",
     "bin": {
       "linux": "qt-creator",
+      "windows": "",
       "macos": "Qt Creator"
     },
     "icon": "qt.png",
@@ -552,6 +579,7 @@
     "category": "Development",
     "bin": {
       "linux": "responsively-app-bin",
+      "windows": "%LOCALAPPDATA%\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe",
       "macos": "Responsively"
     },
     "icon": "responsively.png",
@@ -606,6 +634,7 @@
     "category": "Development",
     "bin": {
       "linux": "sublime-text",
+      "windows": "",
       "macos": "Sublime Text"
     },
     "icon": "sublime-text-4.png",
@@ -627,14 +656,14 @@
     "cli": false
   },
   {
-    "id": "win-tesseract-ocr-open-source-ocr-engine",
-    "name": "Tesseract-OCR - open source OCR engine",
+    "id": "win-tesseract-ocr",
+    "name": "Tesseract-OCR",
     "vendor": "",
     "category": "Development",
     "bin": {
       "windows": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
     },
-    "icon": "win-tesseract-ocr-open-source-ocr-engine.png",
+    "icon": "win-tesseract-ocr.png",
     "hidden": false,
     "cli": false
   },
@@ -780,6 +809,7 @@
     "category": "Games",
     "bin": {
       "linux": "dolphin-emu",
+      "windows": "",
       "macos": "Dolphin"
     },
     "icon": "dolphin-emu.png",
@@ -807,8 +837,8 @@
     "category": "Games",
     "bin": {
       "linux": "com.heroicgameslauncher.hgl",
-      "macos": "Heroic",
-      "windows": "C:\\Program Files\\Heroic\\Heroic.exe"
+      "windows": "C:\\Program Files\\Heroic\\Heroic.exe",
+      "macos": "Heroic"
     },
     "icon": "heroic-games-launcher.png",
     "hidden": false,
@@ -1352,6 +1382,7 @@
     "category": "Internet",
     "bin": {
       "linux": "brave-browser",
+      "windows": "",
       "macos": "Brave Browser"
     },
     "icon": "brave.png",
@@ -1405,6 +1436,7 @@
     "category": "Internet",
     "bin": {
       "linux": "element-desktop",
+      "windows": "",
       "macos": "Element"
     },
     "icon": "element.png",
@@ -1456,6 +1488,7 @@
     "category": "Internet",
     "bin": {
       "linux": "google-chrome",
+      "windows": "",
       "macos": "Google Chrome"
     },
     "icon": "google-chrome.png",
@@ -1634,6 +1667,7 @@
     "category": "Internet",
     "bin": {
       "linux": "opera-stable",
+      "windows": "",
       "macos": "Opera"
     },
     "icon": "opera.png",
@@ -1659,6 +1693,7 @@
     "category": "Internet",
     "bin": {
       "linux": "signal-desktop",
+      "windows": "",
       "macos": "Signal"
     },
     "icon": "signal.png",
@@ -1698,8 +1733,8 @@
     "category": "Internet",
     "bin": {
       "linux": "telegram-desktop",
-      "macos": "Telegram Desktop",
-      "windows": "%APPDATA%\\Telegram Desktop\\Telegram.exe"
+      "windows": "%APPDATA%\\Telegram Desktop\\Telegram.exe",
+      "macos": "Telegram Desktop"
     },
     "icon": "telegram.png",
     "hidden": false,
@@ -1726,6 +1761,7 @@
     "category": "Internet",
     "bin": {
       "linux": "torbrowser-launcher",
+      "windows": "",
       "macos": "Tor Browser"
     },
     "icon": "tor-browser.png",
@@ -1739,6 +1775,7 @@
     "category": "Internet",
     "bin": {
       "linux": "ungoogled-chromium",
+      "windows": "",
       "macos": "Ungoogled Chromium"
     },
     "icon": "ungoogled-chromium.png",
@@ -1752,6 +1789,7 @@
     "category": "Internet",
     "bin": {
       "linux": "vivaldi-stable",
+      "windows": "",
       "macos": "Vivaldi"
     },
     "icon": "vivaldi.png",
@@ -1765,6 +1803,7 @@
     "category": "Internet",
     "bin": {
       "linux": "whatsapp-for-linux",
+      "windows": "",
       "macos": "Whatsapp"
     },
     "icon": "whatsapp.png",
@@ -1778,6 +1817,7 @@
     "category": "Internet",
     "bin": {
       "linux": "zen-browser-bin",
+      "windows": "",
       "macos": "Zen"
     },
     "icon": "zen-browser.png",
@@ -1791,6 +1831,7 @@
     "category": "Internet",
     "bin": {
       "linux": "zoom-client",
+      "windows": "",
       "macos": "Zoom"
     },
     "icon": "zoom.png",
@@ -1882,6 +1923,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "bitwig-studio",
+      "windows": "",
       "macos": "Bitwig Studio"
     },
     "icon": "bitwig-studio.png",
@@ -1944,6 +1986,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "ffmpeg-free",
+      "windows": "",
       "macos": "Ffmpeg"
     },
     "icon": "ffmpeg.png",
@@ -1983,8 +2026,8 @@
     "category": "Multimedia",
     "bin": {
       "linux": "handy-bin",
-      "macos": "Handy",
-      "windows": "%LOCALAPPDATA%\\Handy\\handy.exe"
+      "windows": "%LOCALAPPDATA%\\Handy\\handy.exe",
+      "macos": "Handy"
     },
     "icon": "handy.png",
     "hidden": false,
@@ -2180,8 +2223,8 @@
     "category": "Multimedia",
     "bin": {
       "linux": "obs-studio",
-      "macos": "Obs",
-      "windows": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe"
+      "windows": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe",
+      "macos": "Obs"
     },
     "icon": "obs-studio.png",
     "hidden": false,
@@ -2325,8 +2368,8 @@
     "category": "Multimedia",
     "bin": {
       "linux": "spotify-client",
-      "macos": "Spotify",
-      "windows": "%APPDATA%\\Spotify\\Spotify.exe"
+      "windows": "%APPDATA%\\Spotify\\Spotify.exe",
+      "macos": "Spotify"
     },
     "icon": "spotify.png",
     "hidden": false,
@@ -2443,6 +2486,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "yt-dlp",
+      "windows": "",
       "macos": "Yt Dlp"
     },
     "icon": "yt-dlp.png",
@@ -2456,6 +2500,7 @@
     "category": "Multimedia",
     "bin": {
       "linux": "youtube-dl",
+      "windows": "",
       "macos": "Youtube Dl"
     },
     "icon": "ytdownloader.png",
@@ -2483,6 +2528,7 @@
     "category": "Office",
     "bin": {
       "linux": "activitywatch-bin",
+      "windows": "",
       "macos": "Activitywatch"
     },
     "icon": "activitywatch.png",
@@ -2692,6 +2738,7 @@
     "category": "Office",
     "bin": {
       "linux": "joplin-desktop",
+      "windows": "",
       "macos": "Joplin"
     },
     "icon": "joplin.png",
@@ -2829,6 +2876,7 @@
     "category": "Office",
     "bin": {
       "linux": "ledger-live-bin",
+      "windows": "",
       "macos": "Ledger Live"
     },
     "icon": "ledger-live.png",
@@ -2856,6 +2904,7 @@
     "category": "Office",
     "bin": {
       "linux": "logseq-desktop-bin",
+      "windows": "",
       "macos": "Logseq"
     },
     "icon": "logseq.png",
@@ -2953,6 +3002,7 @@
     "category": "Office",
     "bin": {
       "linux": "notion-desktop",
+      "windows": "",
       "macos": "Notion"
     },
     "icon": "notion.png",
@@ -3143,6 +3193,7 @@
     "category": "Office",
     "bin": {
       "linux": "zotero-bin",
+      "windows": "",
       "macos": "Zotero"
     },
     "icon": "zotero.png",
@@ -3170,6 +3221,7 @@
     "category": "Science",
     "bin": {
       "linux": "flathub-com.google.EarthPro",
+      "windows": "",
       "macos": "Google Earth Pro"
     },
     "icon": "google-earth.png",
@@ -3584,8 +3636,8 @@
     "category": "System",
     "bin": {
       "linux": "mullvad-vpn",
-      "macos": "Mullvadvpn",
-      "windows": "C:\\Program Files\\Mullvad VPN\\Mullvad VPN.exe"
+      "windows": "C:\\Program Files\\Mullvad VPN\\Mullvad VPN.exe",
+      "macos": "Mullvadvpn"
     },
     "icon": "mullvad-vpn.png",
     "hidden": false,
@@ -3678,7 +3730,8 @@
     "vendor": "",
     "category": "System",
     "bin": {
-      "linux": "protonup-qt"
+      "linux": "protonup-qt",
+      "windows": ""
     },
     "icon": "proton-qt.png",
     "hidden": false,
@@ -3705,6 +3758,7 @@
     "category": "System",
     "bin": {
       "linux": "rustdesk-bin",
+      "windows": "",
       "macos": "Rustdesk"
     },
     "icon": "rustdesk.png",
@@ -3896,6 +3950,7 @@
     "category": "System",
     "bin": {
       "linux": "windscribe-cli",
+      "windows": "",
       "macos": "Windscribe"
     },
     "icon": "windscribe.png",
@@ -3916,14 +3971,14 @@
     "cli": false
   },
   {
-    "id": "win-winmerge-x64-current-user-64-bit",
-    "name": "WinMerge x64 (Current user, 64-bit)",
+    "id": "win-winmerge",
+    "name": "WinMerge",
     "vendor": "",
     "category": "System",
     "bin": {
       "windows": "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe"
     },
-    "icon": "win-winmerge-x64-current-user-64-bit.png",
+    "icon": "win-winmerge.png",
     "hidden": false,
     "cli": false
   },
@@ -3934,6 +3989,7 @@
     "category": "System",
     "bin": {
       "linux": "wireguard-tools",
+      "windows": "",
       "macos": "Wireguard Tools"
     },
     "icon": "wireguard.png",
@@ -4105,6 +4161,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "nautilus-dropbox",
+      "windows": "",
       "macos": "Dropbox"
     },
     "icon": "dropbox.png",
@@ -4118,6 +4175,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "dua-cli",
+      "windows": "",
       "macos": "Dua Cli"
     },
     "icon": "dua-cli.png",
@@ -4183,6 +4241,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "fd-find",
+      "windows": "",
       "macos": "Fd"
     },
     "icon": "fd.png",
@@ -4340,18 +4399,6 @@
       "macos": "Homeassistant Cli"
     },
     "icon": "home-assistant.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-inno-setup",
-    "name": "Inno Setup",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "%LOCALAPPDATA%\\Programs\\Inno Setup 7\\ISIDE.exe"
-    },
-    "icon": "win-inno-setup.png",
     "hidden": false,
     "cli": false
   },
@@ -4540,6 +4587,7 @@
     "category": "Utilities",
     "bin": {
       "linux": "nextcloud-client",
+      "windows": "",
       "macos": "Nextcloud"
     },
     "icon": "nextcloud-desktop.png",
@@ -4557,18 +4605,6 @@
       "macos": "Onionshare"
     },
     "icon": "onionshare.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-openal",
-    "name": "OpenAL",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "C:\\Program Files (x86)\\OpenAL\\oalinst.exe"
-    },
-    "icon": "win-openal.png",
     "hidden": false,
     "cli": false
   },
@@ -4673,18 +4709,6 @@
       "macos": "Redshift"
     },
     "icon": "redshift.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "win-responsivelyapp",
-    "name": "ResponsivelyApp",
-    "vendor": "",
-    "category": "Utilities",
-    "bin": {
-      "windows": "%LOCALAPPDATA%\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe"
-    },
-    "icon": "win-responsivelyapp.png",
     "hidden": false,
     "cli": false
   },
@@ -4890,7 +4914,8 @@
     "vendor": "",
     "category": "Utilities",
     "bin": {
-      "linux": "ventoy-bin"
+      "linux": "ventoy-bin",
+      "windows": ""
     },
     "icon": "ventoy.png",
     "hidden": false,

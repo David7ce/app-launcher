@@ -37,6 +37,10 @@ class NormalizeName(unittest.TestCase):
     def test_a_name_that_is_a_number_survives(self):
         self.assertEqual(bc.normalize_name("2048"), "2048")
 
+    def test_a_glued_trailing_app_is_dropped_but_short_names_are_not(self):
+        self.assertEqual(bc.normalize_name("ResponsivelyApp"), bc.normalize_name("Responsively App"))
+        self.assertEqual(bc.normalize_name("Snapp"), "snapp")
+
     def test_locale_tags_are_dropped(self):
         self.assertEqual(bc.normalize_name("Foo en-US"), bc.normalize_name("Foo"))
 
@@ -44,9 +48,13 @@ class NormalizeName(unittest.TestCase):
 class GuessBins(unittest.TestCase):
     def test_windows_guess_needs_winget_and_a_plain_executable_name(self):
         self.assertEqual(bc.guess_windows_bin({"windows_winget": "x"}, "git"), "git.exe")
-        # A package id is not an executable name.
-        self.assertIsNone(bc.guess_windows_bin({"windows_winget": "x"}, "dbeaver-ce"))
+        # A package id is not an executable name: present but empty, so the app
+        # is still known to exist on Windows and can be found by name.
+        self.assertEqual(bc.guess_windows_bin({"windows_winget": "x"}, "dbeaver-ce"), "")
+        # No winget id: not a Windows app, the slot stays absent.
         self.assertIsNone(bc.guess_windows_bin({}, "git"))
+        self.assertNotIn("windows", bc.build_bin({}, "git", "git"))
+        self.assertEqual(bc.build_bin({"windows_winget": "x"}, "dbeaver-ce", "dbeaver")["windows"], "")
 
     def test_macos_guess_title_cases_the_brew_slug(self):
         self.assertEqual(
@@ -146,7 +154,20 @@ class ScanHelpers(unittest.TestCase):
         # A bare year is part of the product name.
         self.assertEqual(sw.clean_name("Microsoft Office Home 2024"), "Microsoft Office Home 2024")
 
+    def test_clean_name_strips_install_scope_and_taglines(self):
+        self.assertEqual(sw.clean_name("WinMerge x64 (Current user, 64-bit)"), "WinMerge")
+        self.assertEqual(sw.clean_name("Tesseract-OCR - open source OCR engine"), "Tesseract-OCR")
+        # A dash followed by a version is left for the version patterns, and a
+        # dangling dash must not survive them.
+        self.assertEqual(sw.clean_name("Foo Runtime - 1.2.3"), "Foo Runtime")
+
+    def test_guess_category_covers_dev_tools_named_without_word_breaks(self):
+        self.assertEqual(sw.guess_category("ResponsivelyApp"), "Development")
+        self.assertEqual(sw.guess_category("Inno Setup"), "Development")
+        self.assertEqual(sw.guess_category("Some Unknown Thing"), "Utilities")
+
     def test_runtimes_and_updates_are_not_apps(self):
+        self.assertTrue(sw.is_non_app("OpenAL"))
         self.assertTrue(sw.is_non_app("Microsoft .NET Runtime - 10.0.12 (x64)"))
         self.assertTrue(sw.is_non_app("Microsoft Visual C++ 2015-2022 Redistributable"))
         self.assertFalse(sw.is_non_app("Visual Studio Code"))
