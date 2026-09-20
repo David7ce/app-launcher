@@ -23,7 +23,7 @@ import json
 import os
 import re
 import sys
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 ROOT = Path(__file__).resolve().parent.parent
 # Staging area for extracted icons — build_catalog.py copies the ones that
@@ -259,7 +259,7 @@ INSTALLER_EXE_RE = re.compile(r"unins|uninst|setup|install|update|patch", re.IGN
 
 def is_installer_exe(path: str) -> bool:
     p = path.replace("/", "\\").lower()
-    return "\\package cache\\" in p or bool(INSTALLER_EXE_RE.search(Path(p).stem))
+    return "\\package cache\\" in p or bool(INSTALLER_EXE_RE.search(PureWindowsPath(p).stem))
 
 
 def _alnum(s: str) -> str:
