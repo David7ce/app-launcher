@@ -18,12 +18,12 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; img-src 'self' data:"
     }
   },
   "bundle": {
     "active": true,
-    "targets": ["appimage", "rpm"],
+    "targets": "all",
     "category": "Utility",
     "shortDescription": "Categorized home dashboard for launching installed desktop apps",
     "icon": [

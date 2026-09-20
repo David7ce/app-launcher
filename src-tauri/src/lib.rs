@@ -107,25 +107,149 @@ fn windows_registry_lookup(name: &str) -> Option<PathBuf> {
     None
 }
 
-#[tauri::command]
+// Only Windows has an App Paths key; the callers below are not cfg-gated (they
+// branch on `consts::OS` at runtime), so every other OS needs a stub to compile.
+#[cfg(not(windows))]
+fn windows_registry_lookup(_name: &str) -> Option<PathBuf> {
+    None
+}
+
+/// Expand `%VAR%` references so the catalog can carry per-user paths such as
+/// `%LOCALAPPDATA%\Programs\Foo\foo.exe` instead of one machine's
+/// `C:\Users\<name>\...`. Unknown variables are left untouched.
+fn expand_env(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut rest = s;
+    while let Some(start) = rest.find('%') {
+        out.push_str(&rest[..start]);
+        let after = &rest[start + 1..];
+        let Some(end) = after.find('%') else {
+            out.push('%');
+            rest = after;
+            break;
+        };
+        let var = &after[..end];
+        match std::env::var(var) {
+            Ok(value) if !var.is_empty() => out.push_str(&value),
+            _ => {
+                out.push('%');
+                out.push_str(var);
+                out.push('%');
+            }
+        }
+        rest = &after[end + 1..];
+    }
+    out.push_str(rest);
+    out
+}
+
+/// Windows: turn a catalog `bin` into a real executable path. An absolute
+/// path (what the system scan produces) just has to exist; a bare name is
+/// searched on $PATH and then in the registry's App Paths key. `which` is
+/// Windows-aware (checks PATHEXT, so a bare "git" resolves "git.exe").
+fn windows_resolve(name: &str) -> Option<PathBuf> {
+    let name = expand_env(name);
+    if name.contains('\\') || name.contains('/') {
+        let path = PathBuf::from(&name);
+        return path.is_file().then_some(path);
+    }
+    which::which(&name).ok().or_else(|| windows_registry_lookup(&name))
+}
+
+// `async` makes Tauri run these on its thread pool: a plain command runs on the
+// main thread, and the frontend fires one `is_installed` per catalog entry
+// (~380) at startup, each a PATH search plus registry reads on Windows.
+#[tauri::command(async)]
 fn is_installed(bin: PlatformBin) -> bool {
     let Some(name) = bin.for_current_os() else {
         return false;
     };
     match std::env::consts::OS {
         "macos" => macos_app_installed(name),
-        "windows" => {
-            // An absolute path (what the system scan produces) just has to
-            // exist; a bare name is searched on $PATH and then in the
-            // registry's App Paths key. `which` is Windows-aware (checks
-            // PATHEXT, so a bare "git" resolves "git.exe").
-            if name.contains('\\') || name.contains('/') {
-                return Path::new(name).is_file();
-            }
-            which::which(name).is_ok() || windows_registry_lookup(name).is_some()
-        }
+        "windows" => windows_resolve(name).is_some(),
         // Linux: $PATH only, which is how desktop apps are launched there.
         _ => which::which(name).is_ok(),
+    }
+}
+
+#[cfg(windows)]
+mod local_icon {
+    use super::{windows_resolve, PlatformBin};
+    use base64::Engine;
+    use std::fs;
+    use std::os::windows::process::CommandExt;
+    use std::path::{Path, PathBuf};
+    use std::process::Command;
+    use std::sync::OnceLock;
+    use tauri::Manager;
+
+    const SCRIPT: &str = include_str!("extract_icon.ps1");
+    const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+
+    /// Written once per run: parallel first-time extractions would otherwise
+    /// rewrite the file while another PowerShell is reading it.
+    fn script_path(dir: &Path) -> Option<&'static PathBuf> {
+        static PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
+        PATH.get_or_init(|| {
+            let path = dir.join("extract_icon.ps1");
+            fs::write(&path, SCRIPT).ok().map(|_| path)
+        })
+        .as_ref()
+    }
+
+    /// Icon for a tile that has none shipped, pulled from the installed
+    /// executable itself and cached under the app cache dir as a PNG. A
+    /// failure leaves a `.none` marker so it isn't retried on every launch.
+    pub fn data_url(app: &tauri::AppHandle, id: &str, bin: &PlatformBin) -> Option<String> {
+        let exe = windows_resolve(bin.windows.as_deref()?)?;
+        let dir = app.path().app_cache_dir().ok()?.join("icons");
+        fs::create_dir_all(&dir).ok()?;
+        let safe: String = id
+            .chars()
+            .map(|c| if c.is_ascii_alphanumeric() || c == '-' { c } else { '_' })
+            .collect();
+        let png = dir.join(format!("{safe}.png"));
+        let none = dir.join(format!("{safe}.none"));
+        if none.exists() {
+            return None;
+        }
+        if !png.is_file() {
+            let ok = script_path(&dir).is_some_and(|script| {
+                Command::new("powershell")
+                    .args(["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File"])
+                    .arg(script)
+                    .arg("-Exe")
+                    .arg(&exe)
+                    .arg("-Out")
+                    .arg(&png)
+                    .creation_flags(CREATE_NO_WINDOW)
+                    .status()
+                    .is_ok_and(|s| s.success())
+            });
+            if !ok || !png.is_file() {
+                let _ = fs::write(&none, "");
+                return None;
+            }
+        }
+        let bytes = fs::read(&png).ok()?;
+        let b64 = base64::engine::general_purpose::STANDARD.encode(bytes);
+        Some(format!("data:image/png;base64,{b64}"))
+    }
+}
+
+/// Fallback icon for an installed app whose shipped icon is missing. Only
+/// implemented for Windows (extracted from the exe); elsewhere `None` keeps
+/// the category glyph. Returns a `data:` URL, which the CSP already allows.
+#[tauri::command(async)]
+fn get_icon(app: tauri::AppHandle, id: String, bin: PlatformBin) -> Option<String> {
+    #[cfg(windows)]
+    {
+        local_icon::data_url(&app, &id, &bin)
+    }
+    #[cfg(not(windows))]
+    {
+        let _ = (app, id, bin);
+        None
     }
 }
 
@@ -165,7 +289,7 @@ fn linux_terminal_spawn(bin: &str) -> std::io::Result<std::process::Child> {
     ))
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 fn launch_app(bin: PlatformBin, cli: bool) -> Result<(), String> {
     let Some(name) = bin.for_current_os() else {
         return Err("no launch command configured for this OS".to_string());
@@ -181,13 +305,13 @@ fn launch_app(bin: PlatformBin, cli: bool) -> Result<(), String> {
         // cmd /k runs the command and stays open at an interactive prompt
         // afterwards, same idea as the Linux bash/read wrapper. Unverified
         // on real Windows.
-        "windows" if cli => Command::new("cmd").args(["/k", name]).spawn(),
+        "windows" if cli => Command::new("cmd").args(["/k", &expand_env(name)]).spawn(),
         "windows" => {
             // Resolve to a full path first: an app registered only in the
             // registry's App Paths key (Office, VLC, Inkscape) is invisible
             // to a bare `Command::new("vlc.exe")`, which would fail with
             // "not found" even though `is_installed` just said it exists.
-            let target = windows_registry_lookup(name).unwrap_or_else(|| PathBuf::from(name));
+            let target = windows_resolve(name).unwrap_or_else(|| PathBuf::from(expand_env(name)));
             Command::new(target).spawn()
         }
         _ => Command::new(name).spawn(),
@@ -216,14 +340,23 @@ fn load_overrides(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
         return Ok(serde_json::json!({}));
     }
     let text = fs::read_to_string(&path).map_err(|e| e.to_string())?;
-    serde_json::from_str(&text).map_err(|e| e.to_string())
+    serde_json::from_str(&text).or_else(|_| {
+        // Unparseable (hand-edited, truncated by a crash): the frontend falls
+        // back to no overrides and its next save would overwrite this file,
+        // silently destroying whatever was salvageable. Keep a copy first.
+        let _ = fs::rename(&path, path.with_extension("json.bak"));
+        Ok(serde_json::json!({}))
+    })
 }
 
 #[tauri::command]
 fn save_overrides(app: tauri::AppHandle, overrides: serde_json::Value) -> Result<(), String> {
     let path = overrides_path(&app)?;
     let text = serde_json::to_string_pretty(&overrides).map_err(|e| e.to_string())?;
-    fs::write(&path, text).map_err(|e| e.to_string())
+    // Write-then-rename so a crash mid-write can't leave a truncated file.
+    let tmp = path.with_extension("json.tmp");
+    fs::write(&tmp, text).map_err(|e| e.to_string())?;
+    fs::rename(&tmp, &path).map_err(|e| e.to_string())
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -241,10 +374,68 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             is_installed,
+            get_icon,
             launch_app,
             load_overrides,
             save_overrides
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn bin(linux: Option<&str>, windows: Option<&str>, macos: Option<&str>) -> PlatformBin {
+        PlatformBin {
+            linux: linux.map(String::from),
+            windows: windows.map(String::from),
+            macos: macos.map(String::from),
+        }
+    }
+
+    #[test]
+    fn for_current_os_picks_this_platforms_slot() {
+        let b = bin(Some("l"), Some("w"), Some("m"));
+        let expected = match std::env::consts::OS {
+            "linux" => Some("l"),
+            "windows" => Some("w"),
+            "macos" => Some("m"),
+            _ => None,
+        };
+        assert_eq!(b.for_current_os(), expected);
+    }
+
+    #[test]
+    fn missing_slot_means_not_installed() {
+        let only_other_os = match std::env::consts::OS {
+            "linux" => bin(None, Some("w"), Some("m")),
+            "windows" => bin(Some("l"), None, Some("m")),
+            _ => bin(Some("l"), Some("w"), None),
+        };
+        assert!(only_other_os.for_current_os().is_none());
+        assert!(!is_installed(only_other_os));
+    }
+
+    #[test]
+    fn expand_env_substitutes_known_and_keeps_unknown() {
+        std::env::set_var("APP_LAUNCHER_TEST_DIR", r"C:\Users\someone");
+        assert_eq!(
+            expand_env(r"%APP_LAUNCHER_TEST_DIR%\bin\x.exe"),
+            r"C:\Users\someone\bin\x.exe"
+        );
+        assert_eq!(expand_env(r"%NO_SUCH_VAR_XYZ%\x"), r"%NO_SUCH_VAR_XYZ%\x");
+        assert_eq!(expand_env("100%"), "100%");
+        assert_eq!(expand_env("a%%b"), "a%%b");
+        assert_eq!(expand_env("plain"), "plain");
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_resolve_finds_a_system_exe_by_name_and_by_env_path() {
+        assert!(windows_resolve("cmd.exe").is_some());
+        assert!(windows_resolve(r"%SystemRoot%\System32\cmd.exe").is_some());
+        assert!(windows_resolve("definitely-not-installed-xyz.exe").is_none());
+    }
 }

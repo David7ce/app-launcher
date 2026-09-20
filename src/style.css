@@ -231,7 +231,8 @@ section.category h2 .category-icon {
   transition: opacity 0.1s ease;
 }
 
-.tile-wrapper:hover .tile-toolbar {
+.tile-wrapper:hover .tile-toolbar,
+.tile-wrapper:focus-within .tile-toolbar {
   opacity: 1;
 }
 

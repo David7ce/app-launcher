@@ -31,3 +31,5 @@ which = "6"
 # dialog / `start` lookup, and is invisible to a PATH search.
 [target.'cfg(windows)'.dependencies]
 winreg = "0.55"
+# Encodes the extracted icon PNG as a data: URL for the frontend.
+base64 = "0.22"

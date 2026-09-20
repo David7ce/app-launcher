@@ -98,18 +98,41 @@ function clearOverride(id) {
   persistOverrides();
 }
 
+// Icons the backend extracted from the installed app itself, for tiles whose
+// shipped icon is missing: id -> data URL, or null while looking / if none.
+const localIcons = new Map();
+
+async function fetchLocalIcon(app) {
+  localIcons.set(app.id, null);
+  try {
+    const url = await invoke("get_icon", { id: app.id, bin: app.bin });
+    if (!url) return;
+    localIcons.set(app.id, url);
+    // A re-render may have replaced the tile that asked, so update by id.
+    for (const img of document.querySelectorAll("img[data-icon-id]")) {
+      if (img.dataset.iconId === app.id) img.src = url;
+    }
+  } catch {
+    // No local icon — the category glyph stays.
+  }
+}
+
 function makeIcon(app) {
   const img = document.createElement("img");
-  img.src = iconPath(app);
+  img.dataset.iconId = app.id;
+  img.src = localIcons.get(app.id) || iconPath(app);
   img.alt = "";
   img.onerror = () => {
     img.onerror = null;
     img.src = categoryIconPath(app.category);
+    if (!app.cli && !localIcons.has(app.id)) fetchLocalIcon(app);
   };
   return img;
 }
 
-function makeEditForm(app, onDone) {
+// onCancel just swaps the tile back; save/reset re-render instead, since the
+// old tile still shows the pre-edit name/category.
+function makeEditForm(app, onCancel) {
   const form = document.createElement("div");
   form.className = "tile tile-edit-form";
 
@@ -145,7 +168,7 @@ function makeEditForm(app, onDone) {
       patch.category = select.value;
     }
     if (Object.keys(patch).length > 0) setOverride(app.id, patch);
-    onDone();
+    render();
   });
 
   const cancelBtn = document.createElement("button");
@@ -153,7 +176,7 @@ function makeEditForm(app, onDone) {
   cancelBtn.textContent = "✕";
   cancelBtn.title = "Cancel (Esc)";
   cancelBtn.className = "edit-cancel";
-  cancelBtn.addEventListener("click", onDone);
+  cancelBtn.addEventListener("click", onCancel);
 
   const resetBtn = document.createElement("button");
   resetBtn.type = "button";
@@ -162,7 +185,7 @@ function makeEditForm(app, onDone) {
   resetBtn.className = "edit-reset";
   resetBtn.addEventListener("click", () => {
     clearOverride(app.id);
-    onDone();
+    render();
   });
 
   buttons.append(saveBtn, cancelBtn, resetBtn);
@@ -407,6 +430,7 @@ async function main() {
   let catalog;
   try {
     const res = await fetch("./data/catalog.json");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     catalog = await res.json();
   } catch (err) {
     showError(`Couldn't load the app catalog: ${err}`);
@@ -421,7 +445,8 @@ async function main() {
 
   const candidates = catalog.filter((entry) => !entry.hidden);
   const checks = await Promise.all(
-    candidates.map((entry) => invoke("is_installed", { bin: entry.bin }))
+    // One failing lookup must not take the whole dashboard down with it.
+    candidates.map((entry) => invoke("is_installed", { bin: entry.bin }).catch(() => false))
   );
   installedApps = candidates.filter((_, i) => checks[i]);
 
