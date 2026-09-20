@@ -500,19 +500,8 @@ fn save_overrides(app: tauri::AppHandle, overrides: serde_json::Value) -> Result
     fs::rename(&tmp, &path).map_err(|e| e.to_string())
 }
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .setup(|app| {
-            if cfg!(debug_assertions) {
-                app.handle().plugin(
-                    tauri_plugin_log::Builder::default()
-                        .level(log::LevelFilter::Info)
-                        .build(),
-                )?;
-            }
-            Ok(())
-        })
         .invoke_handler(tauri::generate_handler![
             is_installed,
             get_icon,

@@ -12,13 +12,12 @@ Two tiers, tried in order per entry:
    `fill="currentColor"` to black when rasterized with no surrounding
    CSS context, same as it would loaded via <img> anyway, so this is a
    flat black glyph rather than a colored one, but still a real,
-   recognizable icon rather than a generic category fallback. The SVG
-   itself is archived to tools/icon_sources/ — not shipped with the
-   app, kept only because it's the losslessly-editable original.
+   recognizable icon rather than a generic category fallback. The SVG is
+   only an intermediate and is not kept.
 
 Placeholder entries with no `linux` bin (they can never show up on this OS)
 are skipped — no point spending a lookup on something that can't be
-displayed here. CLI tools are *not* skipped: a tile in the CLI Tools panel
+displayed here. CLI tools are *not* skipped: a tile in the CLI Tools card
 shows the tool's own logo when one exists (git, docker, python, ...), and only
 falls back to the generic CLI glyph when it doesn't.
 
@@ -30,16 +29,15 @@ per-category fallback glyph.
 import concurrent.futures
 import json
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 
 import requests
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 CATALOG = ROOT / "src" / "data" / "catalog.json"
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
-SVG_ARCHIVE = ROOT / "tools" / "icon_sources"
-MISSING_FILE = ROOT / "tools" / "missing_icons.txt"
 
 DASHBOARD_ICONS_URL = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/{slug}.png"
 ICONIFY_URL = "https://api.iconify.design/simple-icons/{slug}.svg"
@@ -86,22 +84,25 @@ def fetch_iconify(entry_id: str) -> bool:
         except requests.RequestException:
             continue
         if resp.status_code == 200 and resp.content.startswith(b"<svg"):
-            # Archived as SVG (it's a vector, no quality lost by keeping the
-            # original around) but shipped to the app as PNG, same as every
-            # other icon source — see "Icon format" in SPEC.md.
-            svg_path = SVG_ARCHIVE / f"{entry_id}.svg"
-            svg_path.write_bytes(resp.content)
+            # Rasterized to PNG like every other icon source (see "Icon
+            # format" in SPEC.md); the SVG is only an intermediate.
+            with tempfile.NamedTemporaryFile(suffix=".svg", delete=False) as fh:
+                fh.write(resp.content)
+            svg_path = Path(fh.name)
             # -density matters: without it, ImageMagick's built-in MSVG
             # delegate (no rsvg-convert on this box) rasterizes at the
             # SVG's native ~24x24 size and then -resize upscales that tiny
             # bitmap, producing a blurry blob instead of a crisp glyph.
             # Rendering at 384 DPI (72 * 128/24, simple-icons' viewBox is
             # always 24x24) makes MSVG rasterize straight to full size.
-            subprocess.run(
-                ["magick", "-density", "384", str(svg_path), "-background", "none",
-                 "-resize", "128x128", str(dest)],
-                check=True,
-            )
+            try:
+                subprocess.run(
+                    ["magick", "-density", "384", str(svg_path), "-background", "none",
+                     "-resize", "128x128", str(dest)],
+                    check=True,
+                )
+            finally:
+                svg_path.unlink(missing_ok=True)
             return True
     return False
 
@@ -112,7 +113,6 @@ def fetch_one(entry_id: str) -> bool:
 
 def main() -> None:
     ICONS_DIR.mkdir(parents=True, exist_ok=True)
-    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     ids = sorted({
         entry["id"] for entry in catalog
@@ -124,9 +124,10 @@ def main() -> None:
         for entry_id, ok in zip(ids, pool.map(fetch_one, ids)):
             (hits if ok else misses).append(entry_id)
 
-    MISSING_FILE.write_text("\n".join(misses) + "\n")
     print(f"fetched or already had: {len(hits)}/{len(ids)}")
-    print(f"missing: {len(misses)} — see {MISSING_FILE.relative_to(ROOT)}")
+    print(f"missing: {len(misses)}")
+    if misses:
+        print("  " + ", ".join(misses))
     print("missing entries fall back to the per-category glyph at runtime; "
           "no action required unless you want to hand-source specific ones.")
 

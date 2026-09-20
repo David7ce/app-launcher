@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Merge tools/sources/* into src/data/catalog.json.
+"""Merge tools/data/* into src/data/catalog.json.
 
 One-off maintenance script, not run by the app itself. Safe to re-run: it
 regenerates the file from sources each time, so if you've hand-edited
@@ -12,13 +12,13 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCES = ROOT / "tools" / "sources"
+DATA = ROOT / "tools" / "data"
 OUT = ROOT / "src" / "data" / "catalog.json"
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
 # Icons extracted by a system scan are staged here by the scan script (which
 # doesn't know an app's final catalog id), then copied into ICONS_DIR under
 # the id that actually references them — see `place_scan_icons`.
-ICON_CACHE = ROOT / "tools" / "icon_cache"
+ICON_CACHE = ROOT / "tools" / "icons" / "cache"
 
 
 def default_icon(app_id: str) -> str:
@@ -451,12 +451,12 @@ EXCLUDED_IDS = {
 
 
 def main() -> None:
-    desktop_pkgs = json.loads((SOURCES / "desktop-pkgs.json").read_text())["packages"]
-    vendor_apps = json.loads((SOURCES / "vendor_apps.json").read_text())["apps"]
-    cat_map = json.loads((SOURCES / "category_map.json").read_text())
-    system_apps = load_json_list(SOURCES / "system_apps.json")
-    system_apps_windows = load_json_list(SOURCES / "system_apps_windows.json")
-    system_apps_macos = load_json_list(SOURCES / "system_apps_macos.json")
+    desktop_pkgs = json.loads((DATA / "desktop-pkgs.json").read_text())["packages"]
+    vendor_apps = json.loads((DATA / "vendor_apps.json").read_text())["apps"]
+    cat_map = json.loads((DATA / "category_map.json").read_text())
+    system_apps = load_json_list(DATA / "system_apps.json")
+    system_apps_windows = load_json_list(DATA / "system_apps_windows.json")
+    system_apps_macos = load_json_list(DATA / "system_apps_macos.json")
 
     catalog: dict[str, dict] = {}
     skipped_no_linux_bin = []

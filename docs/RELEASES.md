@@ -5,6 +5,33 @@ What has actually shipped, newest first. For work not yet done, see
 
 ---
 
+## Unreleased
+
+A leaner release pipeline and a tidier repository.
+
+### Release
+
+- **Four artifacts instead of twelve**: a Windows NSIS installer, an Apple-silicon macOS `.dmg`, a Linux
+  `.tar.gz` and a Flatpak. Dropped: the `.msi`, Intel macOS, `.deb`, `.rpm`, AppImage and the Arch package
+  (and its `-debug` twin).
+- **The workflow creates the draft release once, up front**, with notes pulled from this file, so the build
+  jobs only upload to it. Cutting a release is now: write the section here, bump the version, tag.
+- **A smaller, faster Windows build**: NSIS only (no WiX), a size-optimised release profile
+  (`opt-level = "s"`, `strip`, `panic = "abort"`), an `rlib`-only library and no logging plugin.
+
+### Repository
+
+- **Clearer layout.** `tools/` is now `data/` (inputs), `scan/` (`linux.py`, `windows.py`, `macos.py`),
+  `icons/` (`sync.py`, `backfill.py`, `make_glyphs.py`, `glyphs/`), `tests/` and `dev/`; the PowerShell helpers
+  moved from `src-tauri/src/` to `src-tauri/scripts/`. See the layout in the README.
+- **Removed what nothing used**: the 27 archived icon SVGs (the fallback-glyph sources are kept), the
+  generated `missing_icons.txt`, the unused Windows-Store logos, the Android config, `tauri.linux.conf.json`,
+  the mobile entry point, `tauri-plugin-log`, and the Arch packaging.
+- Fewer dependencies and lock-file entries, a stale "no search" line in the README fixed, and SPEC's packaging
+  and CI sections rewritten to match.
+
+---
+
 ## v0.3.0 — 2026-09-20
 
 Windows goes from "runs" to "finds nearly everything you have installed", the interface is

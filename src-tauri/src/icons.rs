@@ -134,7 +134,7 @@ fn windows(app: &tauri::AppHandle, id: &str, bin: &PlatformBin, name: Option<&st
 fn extract_exe_icon(exe: &Path, dir: &Path, png: &Path) -> bool {
     use std::sync::OnceLock;
     static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
-    run_script(&SCRIPT, dir, "extract_icon.ps1", include_str!("extract_icon.ps1"), &[
+    run_script(&SCRIPT, dir, "extract_icon.ps1", include_str!("../scripts/extract_icon.ps1"), &[
         "-Exe".as_ref(),
         exe.as_os_str(),
         "-Out".as_ref(),
@@ -146,7 +146,7 @@ fn extract_exe_icon(exe: &Path, dir: &Path, png: &Path) -> bool {
 fn extract_appx_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
     use std::sync::OnceLock;
     static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
-    run_script(&SCRIPT, dir, "extract_appx_icon.ps1", include_str!("extract_appx_icon.ps1"), &[
+    run_script(&SCRIPT, dir, "extract_appx_icon.ps1", include_str!("../scripts/extract_appx_icon.ps1"), &[
         "-AppId".as_ref(),
         app_id.as_ref(),
         "-Out".as_ref(),
@@ -158,7 +158,7 @@ fn extract_appx_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
 fn extract_start_icon(app_id: &str, dir: &Path, png: &Path) -> bool {
     use std::sync::OnceLock;
     static SCRIPT: OnceLock<Option<PathBuf>> = OnceLock::new();
-    run_script(&SCRIPT, dir, "extract_start_icon.ps1", include_str!("extract_start_icon.ps1"), &[
+    run_script(&SCRIPT, dir, "extract_start_icon.ps1", include_str!("../scripts/extract_start_icon.ps1"), &[
         "-AppId".as_ref(),
         app_id.as_ref(),
         "-Out".as_ref(),

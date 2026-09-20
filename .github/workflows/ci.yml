@@ -33,7 +33,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+          sudo apt-get install -y libwebkit2gtk-4.1-dev
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -63,4 +63,4 @@ jobs:
         with:
           python-version: "3.13"
       - name: Catalog/scan tests
-        run: python -m unittest discover -s tools -p "test_*.py"
+        run: python -m unittest discover -s tools/tests

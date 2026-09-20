@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Windows equivalent of scan_system_apps.py — enumerate installed
+"""Windows equivalent of scan/linux.py — enumerate installed
 programs via the registry's Uninstall keys and write
-tools/sources/system_apps_windows.json for build_catalog.py to merge in
+tools/data/system_apps_windows.json for build_catalog.py to merge in
 (into the `windows` slot of each entry's per-OS `bin` object).
 
 Verified on real Windows (68 installed programs found). Windows-only:
@@ -25,11 +25,11 @@ import re
 import sys
 from pathlib import Path, PureWindowsPath
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 # Staging area for extracted icons — build_catalog.py copies the ones that
 # end up referenced into src/assets/icons/ under their final `<id>.png` name.
-ICON_CACHE = ROOT / "tools" / "icon_cache"
-OUT = ROOT / "tools" / "sources" / "system_apps_windows.json"
+ICON_CACHE = ROOT / "tools" / "icons" / "cache"
+OUT = ROOT / "tools" / "data" / "system_apps_windows.json"
 
 # Registry Uninstall entries include a lot that isn't a launchable app:
 # runtimes, redistributables, drivers, and update packages all register
@@ -179,12 +179,12 @@ def guess_category(name: str) -> str:
     return "Utilities"
 
 
-# The extractor lives in src-tauri/src/extract_icon.ps1 so the running app
+# The extractor lives in src-tauri/scripts/extract_icon.ps1 so the running app
 # (which uses it for tiles with no shipped icon) and this scan share one copy.
 # Pure-Python can't read a PE resource section, and shelling out avoids a
 # pywin32/Pillow dependency. Verified on real Windows: a 7-Zip install produced
 # a clean 256x256 PNG.
-ICON_EXTRACT_PS = ROOT / "src-tauri" / "src" / "extract_icon.ps1"
+ICON_EXTRACT_PS = ROOT / "src-tauri" / "scripts" / "extract_icon.ps1"
 
 
 def extract_exe_icon(exe_path: str, dest_png: Path) -> bool:
@@ -396,7 +396,7 @@ def main() -> None:
             continue
         seen_ids.add(entry["id"])
         icon_path = entry.pop("icon_path")
-        # Icons are staged in tools/icon_cache/, NOT written into
+        # Icons are staged in tools/icons/cache/, NOT written into
         # src/assets/icons/ directly: this scan doesn't know the app's final
         # catalog id (the catalog merges a scanned app into a curated entry,
         # e.g. "Microsoft Visual Studio Code (User)" -> `visual-studio-code`).

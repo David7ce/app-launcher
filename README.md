@@ -1,41 +1,58 @@
 # app-launcher
 
-A simple, categorized home dashboard for launching installed desktop apps — icon + title tiles grouped into fixed categories, no keystroke search, no command palette.
+A simple, categorized home dashboard for launching installed desktop apps — icon + title tiles grouped into fixed categories, with no command palette.
 
 Built with Tauri (Rust backend, plain HTML/CSS/JS frontend, no npm framework). Linux and Windows are both verified by running the app; macOS code paths exist and build in CI but are otherwise untested on real hardware.
 
 ## Features
 
-- Scans this machine's installed apps (curated dataset + local `.desktop`/registry/`.app`-bundle scan) and shows only what's actually installed, grouped into 10 categories.
-- Click a tile to launch; CLI tools launch inside a terminal.
-- Live search/filter, responsive multi-column layout.
-- In-app editor: hide, rename, or recategorize any tile (stored per-user, doesn't touch the shipped catalog).
+- Shows only the apps actually installed on the machine, grouped into 10 categories. The catalog is built from a curated dataset plus a scan of each OS's own records (`.desktop` files, the Windows registry and Start Menu, `.app` bundles).
+- Click a tile to launch it; command-line tools open in a terminal.
+- **All / GUI / CLI** filter pills and live search.
+- In-app editor: hide, rename or recategorize any tile (stored per user, never touches the shipped catalog).
 
 ## Installing
 
-Download the latest release for your platform from the [Releases page](https://github.com/David7ce/app-launcher/releases):
+Download from the [Releases page](https://github.com/David7ce/app-launcher/releases):
 
-- **Linux**: `.rpm` (Fedora/openSUSE), `.deb` (Debian/Ubuntu), `.AppImage` (portable, any distro), Arch `.pkg.tar.zst`, or Flatpak `.flatpak`.
-- **Windows**: `.msi` or NSIS installer.
-- **macOS**: `.dmg`.
+| Platform | File |
+|---|---|
+| Windows | `app-launcher_<version>_x64-setup.exe` (NSIS installer) |
+| macOS (Apple silicon only) | `app-launcher_<version>_aarch64.dmg` |
+| Linux | `app-launcher-<version>-linux-x86_64.tar.gz` (needs GTK 3 and WebKitGTK 4.1) or `app-launcher.flatpak` |
 
 ## Building from source
 
-Requires Rust, Cargo, and [`tauri-cli`](https://tauri.app):
+Requires Rust and [`tauri-cli`](https://tauri.app):
 
 ```sh
 cd src-tauri
-cargo tauri dev      # run in dev mode
-cargo tauri build    # produce installers for this platform (see tauri.conf.json for targets)
+cargo tauri dev                    # run in dev mode
+cargo tauri build --bundles nsis   # Windows installer (use `dmg` on macOS)
+cargo build --release --features custom-protocol   # plain binary, as the Linux tarball uses
 ```
 
-The catalog (`src/data/catalog.json`) and icons (`src/assets/icons/`) are pre-generated and checked in — see `tools/` if you need to regenerate them.
-
-Tests:
+The catalog (`src/data/catalog.json`) and icons (`src/assets/icons/`) are generated and checked in; `tools/` regenerates them.
 
 ```sh
-python -m unittest discover -s tools -p "test_*.py"   # catalog build + scan helpers
-cd src-tauri && cargo test                            # Rust unit tests
+python -m unittest discover -s tools/tests     # catalog build + scan helpers
+cd src-tauri && cargo test                     # Rust unit tests
+```
+
+## Repository layout
+
+```
+src/            the frontend (index.html, main.js, style.css), the catalog and the icons
+src-tauri/      the Rust backend and Tauri config; scripts/ holds PowerShell helpers embedded in the binary
+tools/          catalog and icon maintenance; never run by the app
+  build_catalog.py   merges data/ into src/data/catalog.json
+  data/              curated inputs, and the per-OS scan results
+  scan/              scan the machine for installed apps (linux.py, windows.py, macos.py)
+  icons/             fetch, extract and generate icon files
+  tests/             the Python tests
+  dev/               drive_app.js: run JS in the real, running window
+packaging/      Flatpak manifest and the Linux tarball's files
+docs/           RELEASES.md, ROADMAP.md, SPEC.md
 ```
 
 ## Docs

@@ -17,7 +17,7 @@ Every macOS code path is unverified: it is compiled and linted by CI, nothing mo
 
 - [ ] **Run the app on a Mac at all.** `is_installed`, `launch_app` and `get_icon` have only ever
       been compiled, never executed.
-- [ ] **Run `tools/scan_system_apps_macos.py` on real hardware.** It has only passed a
+- [ ] **Run `tools/scan/macos.py` on real hardware.** It has only passed a
       synthetic-fixture self-test (`--self-test`), which proves the plist-reading logic but says
       nothing about real `/Applications` contents. Its output has never been merged into the
       catalog, and it doesn't stage icons.
@@ -35,8 +35,9 @@ Every macOS code path is unverified: it is compiled and linted by CI, nothing mo
 
 CI proves every installer *builds*; none has been installed and launched.
 
-- [ ] **Install and run each artifact** on a real system: `.deb`, `.rpm` (inspected with
-      `rpm -qip`/`-qlp` but never `rpm -i`'d), Arch `.pkg.tar.zst`, Flatpak, `.msi`/NSIS, `.dmg`.
+- [ ] **Install and run each artifact** on a real system: the Windows NSIS installer, the macOS
+      `.dmg`, the Linux `.tar.gz` and the Flatpak. CI proves they build; the v0.3.0 `.deb` was
+      inspected (contents and dependencies) but nothing has been installed and launched.
 
 ### Linux
 
@@ -52,10 +53,10 @@ CI proves every installer *builds*; none has been installed and launched.
       direct `.flatpak` but rejected by Flathub. It needs an offline, sandboxed build via
       `cargo-sources.json` (`flatpak-cargo-generator.py`). Only worth doing to submit to Flathub.
 - [ ] **Frontend tests.** `main.js` has none. The pills, the column layout, the editor and the
-      override migration were verified by driving the real app (`tools/drive_app.js`) and earlier
+      override migration were verified by driving the real app (`tools/dev/drive_app.js`) and earlier
       with a mocked Tauri bridge, but nothing re-runs that in CI.
 - [ ] **More Windows apps by name.** Apps found only in the Start Menu are listed by hand in
-      `tools/sources/vendor_apps.json`. Deliberately not added: Windows admin snap-ins (Event
+      `tools/data/vendor_apps.json`. Deliberately not added: Windows admin snap-ins (Event
       Viewer, Services, Task Scheduler, Computer Management, ODBC, ...), WSL distro launchers
       (Ubuntu, archlinux) and individual LibreOffice / Blackmagic / Inno Setup shortcuts.
 - [ ] **Icon coverage.** 181 of 408 catalog entries have no shipped icon (25 of them CLI tools,

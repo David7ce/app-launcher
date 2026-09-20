@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fill in missing icons for catalog entries that resolve on this machine.
 
-The Windows system scan (`scan_system_apps_windows.py`) only sees apps the
+The Windows system scan (`scan/windows.py`) only sees apps the
 registry lists under its Uninstall keys. Plenty of launchable apps never
 appear there — Office's Word/Excel/PowerPoint/OneNote, for instance, are
 installed as one suite and registered only in the App Paths key — so they
@@ -14,7 +14,7 @@ icon out of the executable's own resources for anything still missing one.
 Windows-only: the equivalent gaps on Linux/macOS are handled by their own
 scans (the Linux `.desktop` icon-theme lookup, and — not yet implemented —
 macOS `.icns` extraction). Run from the repo root; icons are staged into
-tools/icon_cache/ and placed by `build_catalog.py`.
+tools/icons/cache/ and placed by `build_catalog.py`.
 """
 import json
 import os
@@ -22,14 +22,14 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 CATALOG = ROOT / "src" / "data" / "catalog.json"
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
-ICON_CACHE = ROOT / "tools" / "icon_cache"
+ICON_CACHE = ROOT / "tools" / "icons" / "cache"
 
 # Reuse the scan's extractor rather than duplicating the PowerShell shim.
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from scan_system_apps_windows import extract_exe_icon, slugify  # noqa: E402
+sys.path.insert(0, str(ROOT / "tools"))
+from scan.windows import extract_exe_icon, slugify  # noqa: E402
 
 APP_PATHS_SUBKEYS = [
     ("HKEY_CURRENT_USER", r"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths"),
@@ -102,7 +102,7 @@ def main() -> None:
     print(f"\nentries missing an icon: {considered}")
     print(f"  resolved on this machine: {resolved}")
     print(f"  icon extracted:          {filled}")
-    print("staged into tools/icon_cache/ — run build_catalog.py to place them")
+    print("staged into tools/icons/cache/ — run build_catalog.py to place them")
 
 
 if __name__ == "__main__":

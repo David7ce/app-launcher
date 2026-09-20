@@ -4,7 +4,7 @@ __pycache__/
 # Staging area for icons a system scan extracted from .exe/.app bundles.
 # build_catalog.py copies the referenced ones into src/assets/icons/ under
 # their final <id>.png name; this directory is a rebuildable intermediate.
-tools/icon_cache/
+tools/icons/cache/
 
 .claude/
 .playwright-mcp/

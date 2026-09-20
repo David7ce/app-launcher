@@ -1,118 +1,143 @@
-name: Build and publish installers
+name: Release
 
+# Publishes four artifacts to a draft GitHub Release:
+#   Windows  - NSIS installer
+#   macOS    - .dmg for Apple silicon
+#   Linux    - .tar.gz and a Flatpak bundle
+# Push a `v*` tag for a real release, or run it by hand for a throwaway `dev-N`
+# prerelease. The release stays a draft; publish it once the assets look right.
 on:
   push:
-    tags:
-      - "v*"
+    tags: ["v*"]
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
+env:
+  CARGO_INCREMENTAL: 0
+
 jobs:
-  tauri-bundles:
+  # Creates the draft release once, up front, so the build jobs below only
+  # upload to it instead of racing to create it.
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+      notes: ${{ steps.meta.outputs.notes }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Work out the tag and release notes
+        id: meta
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            tag="$GITHUB_REF_NAME"
+            prerelease=false
+            # This version's section of docs/RELEASES.md, without its heading.
+            notes=$(awk -v h="## $tag" 'index($0, h) == 1 { on = 1; next } on && /^---$/ { exit } on' docs/RELEASES.md)
+          else
+            tag="dev-$GITHUB_RUN_NUMBER"
+            prerelease=true
+            notes="Test build of $GITHUB_SHA."
+          fi
+          { echo "tag=$tag"; echo "prerelease=$prerelease"; echo "notes<<NOTES_EOF"; echo "$notes"; echo "NOTES_EOF"; } >> "$GITHUB_OUTPUT"
+
+      - name: Create the draft release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.meta.outputs.tag }}
+          PRERELEASE: ${{ steps.meta.outputs.prerelease }}
+          NOTES: ${{ steps.meta.outputs.notes }}
+        run: |
+          # Re-running a failed workflow finds the release already there.
+          gh release view "$TAG" >/dev/null 2>&1 && exit 0
+          flags=(--draft --title "App Launcher $TAG" --notes "$NOTES")
+          [[ "$PRERELEASE" == true ]] && flags+=(--prerelease)
+          [[ "$GITHUB_REF" != refs/tags/* ]] && flags+=(--target "$GITHUB_SHA")
+          gh release create "$TAG" "${flags[@]}"
+
+  # Windows and macOS go through the Tauri bundler, one installer format each:
+  # NSIS alone (no WiX/MSI, which downloads and runs a second toolchain), and a
+  # .dmg on the arm64 runner, which is Apple silicon natively.
+  installer:
+    needs: release
     strategy:
       fail-fast: false
       matrix:
         include:
-          - platform: ubuntu-latest
-            args: "--bundles deb,rpm,appimage"
-          - platform: windows-latest
-            args: "--bundles nsis,msi"
-          # Both macOS architectures. `macos-latest` is Apple Silicon, so
-          # without the second entry Intel Macs got no build at all — the
-          # v0.2.0 release shipped an aarch64 .dmg only. Cross-compiling
-          # x86_64 from the same arm64 runner is well supported; `targets:`
-          # below installs the extra Rust target.
-          - platform: macos-latest
-            target: aarch64-apple-darwin
-            args: "--bundles dmg,app --target aarch64-apple-darwin"
-          - platform: macos-latest
-            target: x86_64-apple-darwin
-            args: "--bundles dmg,app --target x86_64-apple-darwin"
-    runs-on: ${{ matrix.platform }}
+          - os: windows-latest
+            bundles: nsis
+          - os: macos-latest
+            bundles: dmg
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
 
-      - name: Install Linux system dependencies
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.target }}
+      - uses: dtolnay/rust-toolchain@stable
 
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
 
-      - name: Compute release tag
-        id: tag
-        shell: bash
-        run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # linuxdeploy bundles an old `strip` that can't parse the
-          # .relr.dyn section newer toolchains emit -- skip stripping
-          # rather than have the whole AppImage bundle fail (see SPEC.md
-          # "Installer packaging").
-          NO_STRIP: 1
         with:
-          tagName: ${{ steps.tag.outputs.tag }}
-          releaseName: "App Launcher ${{ steps.tag.outputs.tag }}"
-          releaseBody: "Automated build. See assets below for installers."
+          tagName: ${{ needs.release.outputs.tag }}
+          releaseName: "App Launcher ${{ needs.release.outputs.tag }}"
+          releaseBody: ${{ needs.release.outputs.notes }}
           releaseDraft: true
-          prerelease: ${{ steps.tag.outputs.prerelease }}
-          args: ${{ matrix.args }}
+          prerelease: ${{ needs.release.outputs.prerelease == 'true' }}
+          args: --bundles ${{ matrix.bundles }}
 
-  arch-package:
+  # A plain binary in a tarball: no Tauri bundler, no AppImage/deb/rpm tooling.
+  linux-tarball:
+    needs: release
     runs-on: ubuntu-latest
-    container: archlinux:latest
     steps:
-      - name: Install build dependencies
-        run: pacman -Syu --noconfirm --needed base-devel git rust webkit2gtk-4.1 sudo
-
       - uses: actions/checkout@v7
 
-      - name: Build package as non-root user
+      - name: Install build dependencies
         run: |
-          useradd -m builder
-          chown -R builder:builder "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          su builder -c "cd '$GITHUB_WORKSPACE/packaging/arch' && makepkg -f --noconfirm"
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev
 
-      - name: Compute release tag
-        id: tag
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Build
+        working-directory: src-tauri
+        run: cargo build --release --locked --features custom-protocol
+
+      - name: Package
+        env:
+          TAG: ${{ needs.release.outputs.tag }}
         run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-          fi
+          name="app-launcher-$TAG-linux-x86_64"
+          mkdir "$name"
+          install -m755 src-tauri/target/release/app-launcher "$name/app-launcher"
+          install -m644 packaging/linux/app-launcher.desktop packaging/linux/README.txt LICENSE "$name/"
+          install -m644 src-tauri/icons/icon.png "$name/app-launcher.png"
+          tar -czf "$name.tar.gz" "$name"
+          echo "ASSET=$name.tar.gz" >> "$GITHUB_ENV"
 
       - uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          name: "App Launcher ${{ steps.tag.outputs.tag }}"
+          tag_name: ${{ needs.release.outputs.tag }}
           draft: true
-          prerelease: ${{ steps.tag.outputs.prerelease }}
-          files: packaging/arch/*.pkg.tar.zst
+          prerelease: ${{ needs.release.outputs.prerelease == 'true' }}
+          files: ${{ env.ASSET }}
 
-  flatpak-bundle:
+  flatpak:
+    needs: release
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-47
@@ -126,21 +151,9 @@ jobs:
           manifest-path: packaging/flatpak/dev.d7.app-launcher.json
           cache: false
 
-      - name: Compute release tag
-        id: tag
-        run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=dev-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          name: "App Launcher ${{ steps.tag.outputs.tag }}"
+          tag_name: ${{ needs.release.outputs.tag }}
           draft: true
-          prerelease: ${{ steps.tag.outputs.prerelease }}
+          prerelease: ${{ needs.release.outputs.prerelease == 'true' }}
           files: app-launcher.flatpak

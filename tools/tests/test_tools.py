@@ -2,7 +2,7 @@
 
 Plain `unittest`, no fixtures or third-party packages. Run from the repo root:
 
-    python -m unittest discover -s tools -p "test_*.py"
+    python -m unittest discover -s tools/tests
 
 Everything here is pure logic, so it runs on any OS (the Windows scan imports
 `winreg` lazily for exactly this reason).
@@ -17,10 +17,10 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import build_catalog as bc  # noqa: E402
-import scan_system_apps_windows as sw  # noqa: E402
+from scan import windows as sw  # noqa: E402
 
 
 class NormalizeName(unittest.TestCase):

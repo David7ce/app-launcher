@@ -20,7 +20,7 @@
       "name": "app-launcher",
       "buildsystem": "simple",
       "build-commands": [
-        "cargo build --release --manifest-path=src-tauri/Cargo.toml",
+        "cargo build --release --manifest-path=src-tauri/Cargo.toml --features custom-protocol",
         "install -Dm755 src-tauri/target/release/app-launcher /app/bin/app-launcher",
         "install -Dm644 src-tauri/icons/icon.png /app/share/icons/hicolor/512x512/apps/dev.d7.app-launcher.png",
         "install -Dm644 packaging/flatpak/dev.d7.app-launcher.desktop /app/share/applications/dev.d7.app-launcher.desktop"

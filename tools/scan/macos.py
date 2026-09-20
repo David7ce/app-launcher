@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""macOS equivalent of scan_system_apps.py — scan installed .app bundles
-and write tools/sources/system_apps_macos.json for build_catalog.py to
+"""macOS equivalent of scan/linux.py — scan installed .app bundles
+and write tools/data/system_apps_macos.json for build_catalog.py to
 merge in (into the `macos` slot of each entry's per-OS `bin` object, same
 non-destructive merge as the Linux scan uses).
 
@@ -26,9 +26,9 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
-OUT = ROOT / "tools" / "sources" / "system_apps_macos.json"
+OUT = ROOT / "tools" / "data" / "system_apps_macos.json"
 
 APPLICATION_DIRS = [
     Path("/Applications"),
@@ -143,7 +143,7 @@ def main() -> None:
 def self_test() -> None:
     """Exercises parse_app_bundle() against a synthetic .app bundle, since
     there's no real macOS machine to test this against. Run with
-    `python3 scan_system_apps_macos.py --self-test`."""
+    `python3 tools/scan/macos.py --self-test`."""
     import tempfile
 
     with tempfile.TemporaryDirectory() as tmp:

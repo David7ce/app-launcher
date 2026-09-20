@@ -5,10 +5,9 @@ glyph) as PNG — the uniform format every icon in the app ships as (see
 
 Authored as SVG first, since a rounded-rect-plus-label vector is much
 easier to hand-tweak than raw pixels, then rasterized to PNG via
-ImageMagick (`magick`). The SVG source is archived to
-tools/icon_sources/category/ — not shipped with the app, just kept
-around because it's the losslessly-editable original if these ever need
-retouching, unlike the rasterized PNG.
+ImageMagick (`magick`). The SVG sources live in tools/icons/glyphs/ — not
+shipped with the app, but they are the editable originals (unlike the
+rasterized PNGs) and this script regenerates the PNGs from them.
 
 Hand-authored instead of sourced from UXWing/SvgRepo: zero licensing
 questions, zero network dependency, trivially reproducible. One-off
@@ -18,9 +17,9 @@ import subprocess
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 OUT = ROOT / "src" / "assets" / "icons" / "category"
-SVG_ARCHIVE = ROOT / "tools" / "icon_sources" / "category"
+GLYPH_SOURCES = ROOT / "tools" / "icons" / "glyphs"
 
 # category -> (background color, short label)
 GLYPHS = {
@@ -55,7 +54,7 @@ CLI_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" view
 
 
 def write_glyph(name: str, svg: str) -> None:
-    svg_path = SVG_ARCHIVE / f"{name}.svg"
+    svg_path = GLYPH_SOURCES / f"{name}.svg"
     svg_path.write_text(svg)
     subprocess.run(
         ["magick", str(svg_path), "-background", "none", "-resize", "128x128", str(OUT / f"{name}.png")],
@@ -65,7 +64,7 @@ def write_glyph(name: str, svg: str) -> None:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
+    GLYPH_SOURCES.mkdir(parents=True, exist_ok=True)
     for category, (color, label) in GLYPHS.items():
         font_size = 16 if len(label) <= 3 else 13
         # Text content in SVG is XML — a raw "<" (as in the "</>" label)
@@ -75,7 +74,7 @@ def main() -> None:
         write_glyph(category, svg)
     write_glyph("cli-tool", CLI_SVG)
     print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph "
-          f"to {OUT.relative_to(ROOT)} (SVG sources archived in {SVG_ARCHIVE.relative_to(ROOT)})")
+          f"to {OUT.relative_to(ROOT)} (SVG sources in {GLYPH_SOURCES.relative_to(ROOT)})")
 
 
 if __name__ == "__main__":

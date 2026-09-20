@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Scan this machine's installed .desktop files and write them to
-tools/sources/system_apps.json for build_catalog.py to merge in.
+tools/data/system_apps.json for build_catalog.py to merge in.
 
 Why: the curated desktop-pkgs.json dataset only covers ~250 well-known
 apps. Every real Linux desktop already has a complete, authoritative list
@@ -25,10 +25,9 @@ import shutil
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
-SVG_ARCHIVE = ROOT / "tools" / "icon_sources"
-OUT = ROOT / "tools" / "sources" / "system_apps.json"
+OUT = ROOT / "tools" / "data" / "system_apps.json"
 
 APPLICATION_DIRS = [
     Path("/usr/share/applications"),
@@ -190,7 +189,6 @@ def parse_desktop_file(path: Path) -> dict | None:
 
 def main() -> None:
     ICONS_DIR.mkdir(parents=True, exist_ok=True)
-    SVG_ARCHIVE.mkdir(parents=True, exist_ok=True)
     theme_priority = [active_icon_theme(), "breeze", "Adwaita", "hicolor"]
 
     seen_paths: set[Path] = set()
@@ -218,11 +216,8 @@ def main() -> None:
                     if icon_path.suffix == ".svg":
                         # Every icon the app ships is PNG (see "Icon format"
                         # in SPEC.md) — rasterize theme SVGs at copy time.
-                        # The system theme itself is the permanent source
-                        # for these (re-derivable any time by re-running
-                        # this scan), but archive a copy anyway for a
-                        # complete, uniform icon_sources/ collection.
-                        shutil.copy(icon_path, SVG_ARCHIVE / f"{parsed['id']}.svg")
+                        # The system theme stays the source; re-run this scan
+                        # to re-derive them.
                         subprocess.run(
                             ["magick", str(icon_path), "-background", "none",
                              "-resize", "128x128", str(dest)],
