@@ -94,7 +94,7 @@ CLI_ID_OVERRIDES = {
     "kubectl", "lazygit", "llama-cpp", "nmap", "nodejs", "opencode", "pandoc",
     "podman", "python", "rclone", "sqlite", "starship", "terraform", "vagrant",
     "yt-dlp",
-    "win-bun", "win-tesseract-ocr",  # scan-created ids (no dataset entry)
+    "bun", "tesseract-ocr",  # scan-created ids (no dataset entry)
     # Interactive shells count too: launched without a console of their own they
     # read EOF and exit at once, so PowerShell "did not open". They go through the
     # terminal path, which gives them a window (see `windows_cli_spawn`).
@@ -116,22 +116,22 @@ NAME_OVERRIDES = {
 CATEGORY_OVERRIDES = {
     "kiwix": "Education",
     "gpxsee": "Science",
-    "win-mytourbook": "Science",
-    "win-golden-cheetah": "Science",
-    "win-winmerge": "Utilities",  # a diff tool, like meld
+    "mytourbook": "Science",
+    "golden-cheetah": "Science",
+    "winmerge": "Utilities",  # a diff tool, like meld
     "espanso": "Utilities",  # a text expander, not an office app
 }
 
 # Ids an app used to have. Scan-derived ids follow the cleaned display name
-# (`win-powertoys-preview` -> `win-powertoys`), so improving a name changes the id
+# (`powertoys-preview` -> `powertoys`), so improving a name changes the id
 # and would orphan whatever the user renamed, hid or recategorised under the old
 # one. Each entry lists its old ids as `aka`; the frontend moves saved edits over.
 # Add a line here whenever an id changes, rather than letting it change silently.
 RENAMED_FROM = {
-    "win-powertoys": ["win-powertoys-preview"],
+    "powertoys": ["win-powertoys-preview"],
     "responsively": ["win-responsivelyapp"],
-    "win-tesseract-ocr": ["win-tesseract-ocr-open-source-ocr-engine"],
-    "win-winmerge": ["win-winmerge-x64-current-user-64-bit"],
+    "tesseract-ocr": ["win-tesseract-ocr-open-source-ocr-engine"],
+    "winmerge": ["win-winmerge-x64-current-user-64-bit"],
 }
 
 # Catalog entries that exist on Windows but came from a source that only knew
@@ -311,13 +311,17 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
             if scan_icon and not (ICONS_DIR / (existing.get("icon") or "")).exists():
                 existing["_scan_icon"] = scan_icon
             continue
+        # A scan-created id is just the cleaned name's slug ("word", not
+        # "win-word"); if a curated entry already owns that id, keep them apart.
+        taken = {e["id"] for e in by_bin.values()}
+        new_id = entry["id"] if entry["id"] not in taken else f"{entry['id']}-windows"
         new_entry = {
-            "id": entry["id"],
+            "id": new_id,
             "name": entry["name"],
             "vendor": "",
             "category": entry["category"],
             "bin": bin_obj,
-            "icon": f"{entry['id']}.png",
+            "icon": f"{new_id}.png",
             "hidden": False,
             "cli": cli,
         }
@@ -435,16 +439,16 @@ EXCLUDED_IDS = {
     "org.kde.kdebugsettings",  # dev-only debug-logging config, not a user app
     "org.kde.kjournaldbrowser",  # systemd journal log viewer, sysadmin meta tool
     "org.kde.kmenuedit",  # editor for the start menu this launcher replaces
-    "win-thermaltake-tool",  # vendor RGB utility, uninstalled from the dev machine
+    "thermaltake-tool",  # vendor RGB utility, uninstalled from the dev machine
     # The Office *suite* installer (OfficeClickToRun.exe): not an app you launch.
     # Word, Excel, PowerPoint and OneNote have their own tiles.
-    "win-microsoft-office-home-2024",
+    "microsoft-office-home-2024",
     "dotnet-runtime",  # a runtime, not something with a window to open
     # UltraStar is one program: the game (UltraStar Deluxe) plus two companion
     # editors it installs as separate entries. One tile is enough, same call as
     # the Kontact/KMail sub-tools above.
-    "win-ultrastar-creator",
-    "win-ultrastar-manager",
+    "ultrastar-creator",
+    "ultrastar-manager",
     "im-chooser",  # input-method setup wizard, onboarding-ish system config
     "setroubleshoot",  # SELinux diagnostic tool, same spirit as the crash reporters above
 }
@@ -529,8 +533,14 @@ def main() -> None:
     for entry in result:
         entry["name"] = NAME_OVERRIDES.get(entry["id"], entry["name"])
         entry["category"] = CATEGORY_OVERRIDES.get(entry["id"], entry["category"])
-        if entry["id"] in RENAMED_FROM:
-            entry["aka"] = RENAMED_FROM[entry["id"]]
+        aka = list(RENAMED_FROM.get(entry["id"], []))
+        # Windows-only entries (Start Menu apps, scan-created ones) used to be
+        # prefixed `win-`, which named their icon files `win-<name>.png`; the
+        # prefix is gone, and edits saved under the old id follow the new one.
+        if set(entry["bin"]) == {"windows"}:
+            aka.append(f"win-{entry['id']}")
+        if aka:
+            entry["aka"] = aka
         windows = entry["bin"].get("windows")
         if entry["id"] in WINDOWS_START_NAMES and not (windows and "\\" in windows):
             entry["bin"]["windows"] = f"start:{WINDOWS_START_NAMES[entry['id']]}"

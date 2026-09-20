@@ -1,433 +1,433 @@
 [
   {
-    "id": "win-heroic",
+    "id": "heroic",
     "name": "Heroic",
     "bin": "C:\\Program Files\\Heroic\\Heroic.exe",
     "category": "Games",
     "icon_source": "heroic.png"
   },
   {
-    "id": "win-mullvad-vpn",
+    "id": "mullvad-vpn",
     "name": "Mullvad VPN",
     "bin": "C:\\Program Files\\Mullvad VPN\\Mullvad VPN.exe",
     "category": "System",
     "icon_source": "mullvad-vpn.png"
   },
   {
-    "id": "win-upscayl",
+    "id": "upscayl",
     "name": "Upscayl",
     "bin": "C:\\Program Files\\Upscayl\\Upscayl.exe",
     "category": "Graphics",
     "icon_source": "upscayl.png"
   },
   {
-    "id": "win-7-zip",
+    "id": "7-zip",
     "name": "7-Zip",
     "bin": "C:\\Program Files\\7-Zip\\7zFM.exe",
     "category": "Utilities",
     "icon_source": "7-zip.png"
   },
   {
-    "id": "win-sharex",
+    "id": "sharex",
     "name": "ShareX",
     "bin": "C:\\Program Files\\ShareX\\ShareX.exe",
     "category": "Graphics",
     "icon_source": "sharex.png"
   },
   {
-    "id": "win-kudu",
+    "id": "kudu",
     "name": "Kudu",
     "bin": "C:\\Program Files\\Kudu\\Kudu.exe",
     "category": "Utilities",
     "icon_source": "kudu.png"
   },
   {
-    "id": "win-android-studio",
+    "id": "android-studio",
     "name": "Android Studio",
     "bin": "C:\\Program Files\\Android\\Android Studio\\bin\\studio.exe",
     "category": "Development",
     "icon_source": null
   },
   {
-    "id": "win-autofirma",
+    "id": "autofirma",
     "name": "Autofirma",
     "bin": "C:\\Program Files\\Autofirma\\Autofirma\\Autofirma.exe",
     "category": "Utilities",
     "icon_source": "autofirma.png"
   },
   {
-    "id": "win-darktable",
+    "id": "darktable",
     "name": "darktable",
     "bin": "C:\\Program Files\\darktable\\bin\\darktable.exe",
     "category": "Graphics",
     "icon_source": "darktable.png"
   },
   {
-    "id": "win-gpxsee",
+    "id": "gpxsee",
     "name": "GPXSee",
     "bin": "C:\\Program Files\\GPXSee\\gpxsee.exe",
     "category": "Utilities",
     "icon_source": "gpxsee.png"
   },
   {
-    "id": "win-microsoft-office-home-2024",
+    "id": "microsoft-office-home-2024",
     "name": "Microsoft Office Home 2024",
     "bin": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
     "category": "Office",
     "icon_source": "microsoft-office-home-2024.png"
   },
   {
-    "id": "win-mozilla-firefox-x64-en-us",
+    "id": "mozilla-firefox-x64-en-us",
     "name": "Mozilla Firefox (x64 en-US)",
     "bin": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
     "category": "Internet",
     "icon_source": "mozilla-firefox-x64-en-us.png"
   },
   {
-    "id": "win-mozilla-thunderbird-x64-en-us",
+    "id": "mozilla-thunderbird-x64-en-us",
     "name": "Mozilla Thunderbird (x64 en-US)",
     "bin": "C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe",
     "category": "Internet",
     "icon_source": "mozilla-thunderbird-x64-en-us.png"
   },
   {
-    "id": "win-notepadplusplus",
+    "id": "notepadplusplus",
     "name": "Notepad++",
     "bin": "C:\\Program Files\\Notepad++\\notepad++.exe",
     "category": "Development",
     "icon_source": "notepadplusplus.png"
   },
   {
-    "id": "win-tesseract-ocr",
+    "id": "tesseract-ocr",
     "name": "Tesseract-OCR",
     "bin": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
     "category": "Development",
     "icon_source": null
   },
   {
-    "id": "win-unity",
+    "id": "unity",
     "name": "Unity",
     "bin": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.11f1\\Editor\\Unity.exe",
     "category": "Development",
     "icon_source": "unity.png"
   },
   {
-    "id": "win-pcsx2",
+    "id": "pcsx2",
     "name": "PCSX2",
     "bin": "C:\\Program Files\\PCSX2\\pcsx2-qt.exe",
     "category": "Games",
     "icon_source": "pcsx2.png"
   },
   {
-    "id": "win-mpc-hc",
+    "id": "mpc-hc",
     "name": "MPC-HC",
     "bin": "C:\\Program Files\\MPC-HC\\mpc-hc64.exe",
     "category": "Multimedia",
     "icon_source": "mpc-hc.png"
   },
   {
-    "id": "win-mytourbook",
+    "id": "mytourbook",
     "name": "MyTourbook",
     "bin": "C:\\Program Files\\MyTourbook\\mytourbook.exe",
     "category": "Utilities",
     "icon_source": "mytourbook.png"
   },
   {
-    "id": "win-amazon-kindle",
+    "id": "amazon-kindle",
     "name": "Amazon Kindle",
     "bin": "C:\\Program Files (x86)\\Amazon\\Kindle\\Kindle.exe",
     "category": "Office",
     "icon_source": "amazon-kindle.png"
   },
   {
-    "id": "win-balabolka",
+    "id": "balabolka",
     "name": "Balabolka",
     "bin": "C:\\Program Files (x86)\\Balabolka\\balabolka.exe",
     "category": "Multimedia",
     "icon_source": "balabolka.png"
   },
   {
-    "id": "win-digikam",
+    "id": "digikam",
     "name": "digiKam",
     "bin": "C:\\Program Files\\digiKam\\digikam.exe",
     "category": "Graphics",
     "icon_source": "digikam.png"
   },
   {
-    "id": "win-eagle",
+    "id": "eagle",
     "name": "Eagle",
     "bin": "C:\\Program Files\\Eagle\\Eagle.exe",
     "category": "Graphics",
     "icon_source": "eagle.png"
   },
   {
-    "id": "win-visual-studio-community-2022",
+    "id": "visual-studio-community-2022",
     "name": "Visual Studio Community 2022",
     "bin": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe",
     "category": "Development",
     "icon_source": "visual-studio-community-2022.png"
   },
   {
-    "id": "win-freefilesync",
+    "id": "freefilesync",
     "name": "FreeFileSync",
     "bin": "C:\\Program Files\\FreeFileSync\\FreeFileSync.exe",
     "category": "Utilities",
     "icon_source": "freefilesync.png"
   },
   {
-    "id": "win-golden-cheetah",
+    "id": "golden-cheetah",
     "name": "Golden Cheetah",
     "bin": "C:\\Program Files\\Golden Cheetah\\GoldenCheetah.exe",
     "category": "Utilities",
     "icon_source": "golden-cheetah.png"
   },
   {
-    "id": "win-handbrake",
+    "id": "handbrake",
     "name": "HandBrake",
     "bin": "C:\\Program Files\\HandBrake\\HandBrake.exe",
     "category": "Multimedia",
     "icon_source": "handbrake.png"
   },
   {
-    "id": "win-laragon",
+    "id": "laragon",
     "name": "Laragon",
     "bin": "C:\\laragon\\Laragon.exe",
     "category": "Development",
     "icon_source": "laragon.png"
   },
   {
-    "id": "win-obs-studio",
+    "id": "obs-studio",
     "name": "OBS Studio",
     "bin": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe",
     "category": "Multimedia",
     "icon_source": "obs-studio.png"
   },
   {
-    "id": "win-qbittorrent",
+    "id": "qbittorrent",
     "name": "qBittorrent",
     "bin": "C:\\Program Files\\qBittorrent\\qbittorrent.exe",
     "category": "Utilities",
     "icon_source": "qbittorrent.png"
   },
   {
-    "id": "win-steam",
+    "id": "steam",
     "name": "Steam",
     "bin": "C:\\Program Files (x86)\\Steam\\steam.exe",
     "category": "Games",
     "icon_source": "steam.png"
   },
   {
-    "id": "win-ultrastar-deluxe",
+    "id": "ultrastar-deluxe",
     "name": "UltraStar Deluxe",
     "bin": "C:\\Program Files (x86)\\UltraStar Deluxe\\ultrastardx.exe",
     "category": "Games",
     "icon_source": "ultrastar-deluxe.png"
   },
   {
-    "id": "win-ultrastar-creator",
+    "id": "ultrastar-creator",
     "name": "UltraStar-Creator",
     "bin": "C:\\Program Files (x86)\\UltraStar-Creator\\UltraStar-Creator.exe",
     "category": "Games",
     "icon_source": "ultrastar-creator.png"
   },
   {
-    "id": "win-ultrastar-manager",
+    "id": "ultrastar-manager",
     "name": "UltraStar-Manager",
     "bin": "C:\\Program Files (x86)\\UltraStar-Manager\\UltraStar-Manager.exe",
     "category": "Games",
     "icon_source": "ultrastar-manager.png"
   },
   {
-    "id": "win-wireshark",
+    "id": "wireshark",
     "name": "Wireshark",
     "bin": "C:\\Program Files\\Wireshark\\Wireshark.exe",
     "category": "System",
     "icon_source": "wireshark.png"
   },
   {
-    "id": "win-openscreen",
+    "id": "openscreen",
     "name": "Openscreen",
     "bin": "%LOCALAPPDATA%\\Programs\\Openscreen\\Openscreen.exe",
     "category": "Utilities",
     "icon_source": "openscreen.png"
   },
   {
-    "id": "win-koodo-reader",
+    "id": "koodo-reader",
     "name": "Koodo Reader",
     "bin": "%LOCALAPPDATA%\\Programs\\koodo-reader\\Koodo Reader.exe",
     "category": "Office",
     "icon_source": "koodo-reader.png"
   },
   {
-    "id": "win-iptvnator",
+    "id": "iptvnator",
     "name": "IPTVnator",
     "bin": "%LOCALAPPDATA%\\Programs\\iptvnator\\IPTVnator.exe",
     "category": "Multimedia",
     "icon_source": "iptvnator.png"
   },
   {
-    "id": "win-youtube-music",
+    "id": "youtube-music",
     "name": "YouTube Music",
     "bin": "%LOCALAPPDATA%\\Programs\\youtube-music\\YouTube Music.exe",
     "category": "Multimedia",
     "icon_source": "youtube-music.png"
   },
   {
-    "id": "win-responsivelyapp",
+    "id": "responsivelyapp",
     "name": "ResponsivelyApp",
     "bin": "%LOCALAPPDATA%\\Programs\\ResponsivelyApp\\ResponsivelyApp.exe",
     "category": "Development",
     "icon_source": "responsivelyapp.png"
   },
   {
-    "id": "win-obsidian",
+    "id": "obsidian",
     "name": "Obsidian",
     "bin": "%LOCALAPPDATA%\\Programs\\Obsidian\\Obsidian.exe",
     "category": "Multimedia",
     "icon_source": "obsidian.png"
   },
   {
-    "id": "win-bun",
+    "id": "bun",
     "name": "Bun",
     "bin": "%USERPROFILE%\\.bun\\bin\\bun.exe",
     "category": "Development",
     "icon_source": null
   },
   {
-    "id": "win-capcut",
+    "id": "capcut",
     "name": "CapCut",
     "bin": "%LOCALAPPDATA%\\CapCut\\Apps\\CapCut.exe",
     "category": "Multimedia",
     "icon_source": "capcut.png"
   },
   {
-    "id": "win-chromium",
+    "id": "chromium",
     "name": "Chromium",
     "bin": "%LOCALAPPDATA%\\Chromium\\Application\\chrome.exe",
     "category": "Internet",
     "icon_source": "chromium.png"
   },
   {
-    "id": "win-lucas-chess",
+    "id": "lucas-chess",
     "name": "Lucas Chess",
     "bin": "%LOCALAPPDATA%\\Programs\\LucasChessR\\bin\\LucasR.exe",
     "category": "Games",
     "icon_source": "lucas-chess.png"
   },
   {
-    "id": "win-gimp",
+    "id": "gimp",
     "name": "GIMP",
     "bin": "%LOCALAPPDATA%\\Programs\\GIMP 3\\bin\\gimp-3.exe",
     "category": "Graphics",
     "icon_source": "gimp.png"
   },
   {
-    "id": "win-handy",
+    "id": "handy",
     "name": "Handy",
     "bin": "%LOCALAPPDATA%\\Handy\\handy.exe",
     "category": "Utilities",
     "icon_source": "handy.png"
   },
   {
-    "id": "win-inno-setup",
+    "id": "inno-setup",
     "name": "Inno Setup",
     "bin": "%LOCALAPPDATA%\\Programs\\Inno Setup 7\\ISIDE.exe",
     "category": "Development",
     "icon_source": "inno-setup.png"
   },
   {
-    "id": "win-kodi",
+    "id": "kodi",
     "name": "Kodi",
     "bin": "C:\\Program Files\\Kodi\\Kodi.exe",
     "category": "Multimedia",
     "icon_source": "kodi.png"
   },
   {
-    "id": "win-megasync",
+    "id": "megasync",
     "name": "MEGAsync",
     "bin": "%LOCALAPPDATA%\\MEGAsync\\MEGAsync.exe",
     "category": "Utilities",
     "icon_source": "megasync.png"
   },
   {
-    "id": "win-rapidraw",
+    "id": "rapidraw",
     "name": "RapidRAW",
     "bin": "%LOCALAPPDATA%\\RapidRAW\\RapidRAW.exe",
     "category": "Graphics",
     "icon_source": "rapidraw.png"
   },
   {
-    "id": "win-spotify",
+    "id": "spotify",
     "name": "Spotify",
     "bin": "%APPDATA%\\Spotify\\Spotify.exe",
     "category": "Multimedia",
     "icon_source": "spotify.png"
   },
   {
-    "id": "win-sumatrapdf",
+    "id": "sumatrapdf",
     "name": "SumatraPDF",
     "bin": "%LOCALAPPDATA%\\SumatraPDF\\SumatraPDF.exe",
     "category": "Office",
     "icon_source": "sumatrapdf.png"
   },
   {
-    "id": "win-winmerge",
+    "id": "winmerge",
     "name": "WinMerge",
     "bin": "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe",
     "category": "System",
     "icon_source": "winmerge.png"
   },
   {
-    "id": "win-playtorriomov",
+    "id": "playtorriomov",
     "name": "PlayTorrioMov",
     "bin": "%LOCALAPPDATA%\\Programs\\PlayTorrioMov\\PlayTorrioMov.exe",
     "category": "Multimedia",
     "icon_source": "playtorriomov.png"
   },
   {
-    "id": "win-powertoys",
+    "id": "powertoys",
     "name": "PowerToys",
     "bin": "%LOCALAPPDATA%\\PowerToys\\PowerToys.exe",
     "category": "Utilities",
     "icon_source": "powertoys.png"
   },
   {
-    "id": "win-zed",
+    "id": "zed",
     "name": "Zed",
     "bin": "%LOCALAPPDATA%\\Programs\\Zed\\Zed.exe",
     "category": "Development",
     "icon_source": "zed.png"
   },
   {
-    "id": "win-ollama",
+    "id": "ollama",
     "name": "Ollama",
     "bin": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe",
     "category": "Utilities",
     "icon_source": null
   },
   {
-    "id": "win-telegram-desktop",
+    "id": "telegram-desktop",
     "name": "Telegram Desktop",
     "bin": "%APPDATA%\\Telegram Desktop\\Telegram.exe",
     "category": "Internet",
     "icon_source": "telegram-desktop.png"
   },
   {
-    "id": "win-microsoft-visual-studio-code",
+    "id": "microsoft-visual-studio-code",
     "name": "Microsoft Visual Studio Code",
     "bin": "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe",
     "category": "Development",
     "icon_source": "microsoft-visual-studio-code.png"
   },
   {
-    "id": "win-wave",
+    "id": "wave",
     "name": "WAVE",
     "bin": "%LOCALAPPDATA%\\Programs\\WAVE\\wave.exe",
     "category": "Multimedia",
     "icon_source": "wave.png"
   },
   {
-    "id": "win-stremio",
+    "id": "stremio",
     "name": "Stremio",
     "bin": "%LOCALAPPDATA%\\Programs\\Stremio\\stremio-shell-ng.exe",
     "category": "Multimedia",

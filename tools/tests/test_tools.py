@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import build_catalog as bc  # noqa: E402
 from scan import windows as sw  # noqa: E402
+from icons import backfill  # noqa: E402
 
 
 class NormalizeName(unittest.TestCase):
@@ -135,6 +136,46 @@ class MergeWindowsScan(unittest.TestCase):
         self.curated["cli"] = True
         bc.merge_system_scan(self.by_bin, [self.scan(name="GIMP")], "windows")
         self.assertTrue(self.curated["cli"])
+
+
+class ScanCreatedIds(unittest.TestCase):
+    def test_a_new_entry_gets_the_plain_slug_unless_a_curated_id_owns_it(self):
+        taken = {"id": "foo", "name": "Foo Curated", "vendor": "", "category": "Office",
+                 "bin": {"linux": "foo"}, "icon": "foo.png", "hidden": False, "cli": False}
+        by_bin = {"foo": taken}
+        scanned = {"id": "foo", "name": "Foo Scanned", "bin": r"C:\Foo\foo.exe", "category": "Utilities"}
+        bc.merge_system_scan(by_bin, [scanned], "windows")
+        added = by_bin[r"C:\Foo\foo.exe"]
+        self.assertEqual(added["id"], "foo-windows")
+        self.assertEqual(added["icon"], "foo-windows.png")
+        # ...and a free slug is used as is, with no `win-` prefix.
+        free = {"id": "bar", "name": "Bar", "bin": r"C:\Bar\bar.exe", "category": "Utilities"}
+        bc.merge_system_scan(by_bin, [free], "windows")
+        self.assertEqual(by_bin[r"C:\Bar\bar.exe"]["id"], "bar")
+
+
+class StartMenuLookup(unittest.TestCase):
+    """The build-time lookup must pick the same Start Menu entry the running app
+    will (`norm_app_name` in lib.rs), or a shipped icon would be the wrong app's."""
+
+    def test_names_meet_like_the_rust_side(self):
+        for catalog, start in [
+            ("Microsoft Excel", "Excel"), ("QGIS", "QGIS Desktop 4.2.0"), ("VirtualBox", "Oracle VirtualBox"),
+            ("GIMP", "GIMP 3.2.6"), ("Node.js", "Node.js"), ("MPC-HC", "MPC-HC x64"),
+            ("Visual Studio", "Visual Studio 2022"), ("Windows Terminal", "Terminal"),
+        ]:
+            self.assertEqual(backfill.norm_app_name(catalog), backfill.norm_app_name(start), f"{catalog} / {start}")
+        self.assertNotEqual(backfill.norm_app_name("Notepad++"), backfill.norm_app_name("Notepad"))
+        self.assertNotEqual(backfill.norm_app_name("Calculator"), backfill.norm_app_name("Calculator Suite"))
+        self.assertEqual(backfill.norm_app_name("2048"), "2048")
+
+    def test_known_folder_app_ids_expand(self):
+        self.assertEqual(
+            backfill.expand_start_app_id(r"{6D809377-6AF0-444B-8957-A3773F02200E}\Inkscape\bin\inkscape.exe"),
+            r"%ProgramW6432%\Inkscape\bin\inkscape.exe",
+        )
+        self.assertEqual(backfill.expand_start_app_id("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"),
+                         "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App")
 
 
 class PlaceScanIcons(unittest.TestCase):
@@ -263,11 +304,15 @@ class CatalogIntegrity(unittest.TestCase):
             for old in entry.get("aka", []):
                 self.assertNotIn(old, ids, f"{old} is both an old and a current id")
         by_id = {e["id"]: e for e in self.catalog}
-        self.assertIn("win-powertoys-preview", by_id["win-powertoys"]["aka"])
+        self.assertIn("win-powertoys-preview", by_id["powertoys"]["aka"])
+        # The `win-` prefix is gone from every id (and so from every icon file name),
+        # and each Windows-only entry remembers the id it used to have.
+        self.assertEqual([i for i in ids if i.startswith("win-")], [])
+        self.assertIn("win-camera", by_id["camera"]["aka"])
 
     def test_hand_corrections_win_and_the_office_suite_is_not_an_app(self):
         by_id = {e["id"]: e for e in self.catalog}
-        self.assertNotIn("win-microsoft-office-home-2024", by_id)
+        self.assertNotIn("microsoft-office-home-2024", by_id)
         for app_id, category in bc.CATEGORY_OVERRIDES.items():
             if app_id in by_id:
                 self.assertEqual(by_id[app_id]["category"], category, app_id)
@@ -275,16 +320,16 @@ class CatalogIntegrity(unittest.TestCase):
             if app_id in by_id:
                 self.assertEqual(by_id[app_id]["name"], name, app_id)
         # Notepad++ is a code editor; Windows Notepad is a separate, simpler tile.
-        self.assertEqual(by_id["win-notepadplusplus"]["category"], "Development")
+        self.assertEqual(by_id["notepadplusplus"]["category"], "Development")
 
     def test_terminal_only_tools_are_listed_as_cli_and_gui_apps_are_not(self):
         by_id = {e["id"]: e for e in self.catalog}
         # These print usage and exit (or have no window), so they need the terminal.
-        for tool in ("git", "win-bun", "pandoc", "nmap", "starship", "deno", "nodejs"):
+        for tool in ("git", "bun", "pandoc", "nmap", "starship", "deno", "nodejs"):
             if tool in by_id:
                 self.assertTrue(by_id[tool]["cli"], tool)
         # Console-subsystem exes that are really GUI apps must stay ordinary tiles.
-        for gui in ("darktable", "scrcpy", "win-ultrastar-deluxe"):
+        for gui in ("darktable", "scrcpy", "ultrastar-deluxe"):
             if gui in by_id:
                 self.assertFalse(by_id[gui]["cli"], gui)
 
@@ -292,14 +337,27 @@ class CatalogIntegrity(unittest.TestCase):
         by_id = {e["id"]: e for e in self.catalog}
         # Real Windows apps found through the Start Menu; they were once lost by
         # the duplicate-binary pass, and Notepad++ once overwrote Notepad.
-        for app_id in ("win-camera", "win-photos", "win-adguard", "win-wintoys",
-                       "win-raindrop", "win-affinity-photo", "win-affinity-designer",
-                       "win-minecraft-launcher", "win-moblo-3d", "win-adobe-acrobat",
-                       "win-notepad", "win-notepadplusplus", "win-wsl", "davinci-resolve"):
+        for app_id in ("camera", "photos", "adguard", "wintoys",
+                       "raindrop", "affinity-photo", "affinity-designer",
+                       "minecraft-launcher", "moblo-3d", "adobe-acrobat",
+                       "notepad", "notepadplusplus", "wsl", "davinci-resolve"):
             self.assertIn(app_id, by_id, app_id)
-        self.assertNotIn("notepad++", by_id["win-notepad"]["bin"].get("windows", "").lower())
+        self.assertNotIn("notepad++", by_id["notepad"]["bin"].get("windows", "").lower())
         self.assertTrue(by_id["powershell"]["cli"])
-        self.assertTrue(by_id["win-wsl"]["cli"])
+        self.assertTrue(by_id["wsl"]["cli"])
+
+    def test_asset_paths_in_the_frontend_match_real_files_exactly(self):
+        # Windows and macOS ignore case, Linux does not: a path that differs from the
+        # file name only by case works on a Windows dev machine and 404s in the Linux
+        # build (it happened once, with `CLI-tool.png` vs `cli-tool.png`).
+        import re
+        main_js = (bc.ROOT / "src" / "main.js").read_text(encoding="utf-8")
+        for path in set(re.findall(r"assets/icons/category/[A-Za-z0-9_.-]+\.png", main_js)):
+            folder, name = Path(bc.ROOT / "src" / path).parent, Path(path).name
+            self.assertIn(name, os.listdir(folder), f"{path} does not match a file name exactly")
+        for category in ("Development", "Education", "Games", "Graphics", "Internet",
+                         "Multimedia", "Office", "Science", "System", "Utilities"):
+            self.assertIn(f"{category}.png", os.listdir(bc.ROOT / "src/assets/icons/category"))
 
     def test_no_orphan_icons_and_none_named_wrongly(self):
         referenced = {e["icon"] for e in self.catalog}

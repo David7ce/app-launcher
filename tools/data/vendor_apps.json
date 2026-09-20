@@ -176,7 +176,7 @@
       "cli": true
     },
     {
-      "id": "win-notepad",
+      "id": "notepad",
       "name": "Notepad",
       "vendor": "Microsoft",
       "category": "Office",
@@ -185,7 +185,7 @@
       }
     },
     {
-      "id": "win-paint",
+      "id": "paint",
       "name": "Paint",
       "vendor": "Microsoft",
       "category": "Graphics",
@@ -194,7 +194,7 @@
       }
     },
     {
-      "id": "win-calculator",
+      "id": "calculator",
       "name": "Calculator",
       "vendor": "Microsoft",
       "category": "Office",
@@ -203,7 +203,7 @@
       }
     },
     {
-      "id": "win-explorer",
+      "id": "explorer",
       "name": "File Explorer",
       "vendor": "Microsoft",
       "category": "Utilities",
@@ -212,7 +212,7 @@
       }
     },
     {
-      "id": "win-terminal",
+      "id": "terminal",
       "name": "Windows Terminal",
       "vendor": "Microsoft",
       "category": "Utilities",
@@ -221,7 +221,7 @@
       }
     },
     {
-      "id": "win-task-manager",
+      "id": "task-manager",
       "name": "Task Manager",
       "vendor": "Microsoft",
       "category": "System",
@@ -230,7 +230,7 @@
       }
     },
     {
-      "id": "win-settings",
+      "id": "settings",
       "name": "Settings",
       "vendor": "Microsoft",
       "category": "System",
@@ -239,7 +239,7 @@
       }
     },
     {
-      "id": "win-word",
+      "id": "word",
       "name": "Microsoft Word",
       "vendor": "Microsoft",
       "category": "Office",
@@ -248,7 +248,7 @@
       }
     },
     {
-      "id": "win-excel",
+      "id": "excel",
       "name": "Microsoft Excel",
       "vendor": "Microsoft",
       "category": "Office",
@@ -257,7 +257,7 @@
       }
     },
     {
-      "id": "win-powerpoint",
+      "id": "powerpoint",
       "name": "Microsoft PowerPoint",
       "vendor": "Microsoft",
       "category": "Office",
@@ -266,7 +266,7 @@
       }
     },
     {
-      "id": "win-outlook",
+      "id": "outlook",
       "name": "Microsoft Outlook",
       "vendor": "Microsoft",
       "category": "Internet",
@@ -275,7 +275,7 @@
       }
     },
     {
-      "id": "win-onenote",
+      "id": "onenote",
       "name": "OneNote",
       "vendor": "Microsoft",
       "category": "Office",
@@ -284,7 +284,7 @@
       }
     },
     {
-      "id": "win-skype",
+      "id": "skype",
       "name": "Skype",
       "vendor": "Microsoft",
       "category": "Internet",
@@ -293,7 +293,7 @@
       }
     },
     {
-      "id": "win-xbox",
+      "id": "xbox",
       "name": "Xbox",
       "vendor": "Microsoft",
       "category": "Games",
@@ -302,7 +302,7 @@
       }
     },
     {
-      "id": "win-media-player",
+      "id": "media-player",
       "name": "Media Player",
       "vendor": "Microsoft",
       "category": "Multimedia",
@@ -311,7 +311,7 @@
       }
     },
     {
-      "id": "win-visual-studio",
+      "id": "visual-studio",
       "name": "Visual Studio",
       "vendor": "Microsoft",
       "category": "Development",
@@ -320,7 +320,7 @@
       }
     },
     {
-      "id": "win-store",
+      "id": "store",
       "name": "Microsoft Store",
       "vendor": "Microsoft",
       "category": "System",
@@ -592,7 +592,7 @@
       "cli": true
     },
     {
-      "id": "win-affinity-studio",
+      "id": "affinity-studio",
       "name": "Affinity Studio",
       "vendor": "",
       "category": "Graphics",
@@ -601,7 +601,7 @@
       }
     },
     {
-      "id": "win-affinity-designer",
+      "id": "affinity-designer",
       "name": "Affinity Designer",
       "vendor": "",
       "category": "Graphics",
@@ -610,7 +610,7 @@
       }
     },
     {
-      "id": "win-affinity-photo",
+      "id": "affinity-photo",
       "name": "Affinity Photo",
       "vendor": "",
       "category": "Graphics",
@@ -619,7 +619,7 @@
       }
     },
     {
-      "id": "win-photos",
+      "id": "photos",
       "name": "Photos",
       "vendor": "",
       "category": "Graphics",
@@ -628,7 +628,7 @@
       }
     },
     {
-      "id": "win-moblo-3d",
+      "id": "moblo-3d",
       "name": "Moblo 3D",
       "vendor": "",
       "category": "Graphics",
@@ -637,7 +637,7 @@
       }
     },
     {
-      "id": "win-jpegview",
+      "id": "jpegview",
       "name": "JPEGView",
       "vendor": "",
       "category": "Graphics",
@@ -646,7 +646,7 @@
       }
     },
     {
-      "id": "win-tonfotos",
+      "id": "tonfotos",
       "name": "Tonfotos",
       "vendor": "",
       "category": "Graphics",
@@ -655,7 +655,7 @@
       }
     },
     {
-      "id": "win-camera",
+      "id": "camera",
       "name": "Camera",
       "vendor": "",
       "category": "Multimedia",
@@ -664,7 +664,7 @@
       }
     },
     {
-      "id": "win-fl-studio",
+      "id": "fl-studio",
       "name": "FL Studio",
       "vendor": "",
       "category": "Multimedia",
@@ -673,7 +673,7 @@
       }
     },
     {
-      "id": "win-fxsound",
+      "id": "fxsound",
       "name": "FxSound",
       "vendor": "",
       "category": "Multimedia",
@@ -682,7 +682,7 @@
       }
     },
     {
-      "id": "win-guitar-pro",
+      "id": "guitar-pro",
       "name": "Guitar Pro",
       "vendor": "",
       "category": "Multimedia",
@@ -691,7 +691,7 @@
       }
     },
     {
-      "id": "win-neuralampmodeler",
+      "id": "neuralampmodeler",
       "name": "NeuralAmpModeler",
       "vendor": "",
       "category": "Multimedia",
@@ -700,7 +700,7 @@
       }
     },
     {
-      "id": "win-zen-player",
+      "id": "zen-player",
       "name": "Zen Player",
       "vendor": "",
       "category": "Multimedia",
@@ -709,7 +709,7 @@
       }
     },
     {
-      "id": "win-minecraft-launcher",
+      "id": "minecraft-launcher",
       "name": "Minecraft Launcher",
       "vendor": "",
       "category": "Games",
@@ -718,7 +718,7 @@
       }
     },
     {
-      "id": "win-raindrop",
+      "id": "raindrop",
       "name": "Raindrop.io",
       "vendor": "",
       "category": "Internet",
@@ -727,7 +727,7 @@
       }
     },
     {
-      "id": "win-folo",
+      "id": "folo",
       "name": "Folo",
       "vendor": "",
       "category": "Internet",
@@ -736,7 +736,7 @@
       }
     },
     {
-      "id": "win-adobe-acrobat",
+      "id": "adobe-acrobat",
       "name": "Adobe Acrobat",
       "vendor": "",
       "category": "Office",
@@ -745,7 +745,7 @@
       }
     },
     {
-      "id": "win-pdfsam",
+      "id": "pdfsam",
       "name": "PDFsam Basic",
       "vendor": "",
       "category": "Office",
@@ -754,7 +754,7 @@
       }
     },
     {
-      "id": "win-sticky-notes",
+      "id": "sticky-notes",
       "name": "Sticky Notes",
       "vendor": "",
       "category": "Office",
@@ -763,7 +763,7 @@
       }
     },
     {
-      "id": "win-windbg",
+      "id": "windbg",
       "name": "WinDbg",
       "vendor": "",
       "category": "Development",
@@ -772,7 +772,7 @@
       }
     },
     {
-      "id": "win-adguard",
+      "id": "adguard",
       "name": "AdGuard",
       "vendor": "",
       "category": "System",
@@ -781,7 +781,7 @@
       }
     },
     {
-      "id": "win-wintoys",
+      "id": "wintoys",
       "name": "Wintoys",
       "vendor": "",
       "category": "System",
@@ -790,7 +790,7 @@
       }
     },
     {
-      "id": "win-windows-security",
+      "id": "windows-security",
       "name": "Windows Security",
       "vendor": "",
       "category": "System",
@@ -799,7 +799,7 @@
       }
     },
     {
-      "id": "win-registry-editor",
+      "id": "registry-editor",
       "name": "Registry Editor",
       "vendor": "",
       "category": "System",
@@ -808,7 +808,7 @@
       }
     },
     {
-      "id": "win-control-panel",
+      "id": "control-panel",
       "name": "Control Panel",
       "vendor": "",
       "category": "System",
@@ -817,7 +817,7 @@
       }
     },
     {
-      "id": "win-remote-desktop",
+      "id": "remote-desktop",
       "name": "Remote Desktop Connection",
       "vendor": "",
       "category": "System",
@@ -826,7 +826,7 @@
       }
     },
     {
-      "id": "win-pc-manager",
+      "id": "pc-manager",
       "name": "PC Manager",
       "vendor": "",
       "category": "System",
@@ -835,7 +835,7 @@
       }
     },
     {
-      "id": "win-nvidia-app",
+      "id": "nvidia-app",
       "name": "NVIDIA App",
       "vendor": "",
       "category": "System",
@@ -844,7 +844,7 @@
       }
     },
     {
-      "id": "win-nvidia-control-panel",
+      "id": "nvidia-control-panel",
       "name": "NVIDIA Control Panel",
       "vendor": "",
       "category": "System",
@@ -853,7 +853,7 @@
       }
     },
     {
-      "id": "win-windows-sandbox",
+      "id": "windows-sandbox",
       "name": "Windows Sandbox",
       "vendor": "",
       "category": "System",
@@ -862,7 +862,7 @@
       }
     },
     {
-      "id": "win-snipping-tool",
+      "id": "snipping-tool",
       "name": "Snipping Tool",
       "vendor": "",
       "category": "Utilities",
@@ -871,7 +871,7 @@
       }
     },
     {
-      "id": "win-sefirah",
+      "id": "sefirah",
       "name": "Sefirah",
       "vendor": "",
       "category": "Utilities",
@@ -880,7 +880,7 @@
       }
     },
     {
-      "id": "win-wsl",
+      "id": "wsl",
       "name": "WSL",
       "vendor": "Microsoft",
       "category": "System",
@@ -890,7 +890,7 @@
       "cli": true
     },
     {
-      "id": "win-command-prompt",
+      "id": "command-prompt",
       "name": "Command Prompt",
       "vendor": "Microsoft",
       "category": "System",
@@ -898,6 +898,294 @@
         "windows": "cmd.exe"
       },
       "cli": true
+    },
+    {
+      "id": "libreoffice-writer",
+      "name": "LibreOffice Writer",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "libreoffice-calc",
+      "name": "LibreOffice Calc",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "libreoffice-impress",
+      "name": "LibreOffice Impress",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "libreoffice-draw",
+      "name": "LibreOffice Draw",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "libreoffice-base",
+      "name": "LibreOffice Base",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "libreoffice-math",
+      "name": "LibreOffice Math",
+      "vendor": "",
+      "category": "Office",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "blackmagic-raw-player",
+      "name": "Blackmagic RAW Player",
+      "vendor": "",
+      "category": "Multimedia",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "grass-gis",
+      "name": "GRASS GIS",
+      "vendor": "",
+      "category": "Science",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "saga-gis",
+      "name": "SAGA GIS",
+      "vendor": "",
+      "category": "Science",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "cmake-gui",
+      "name": "CMake",
+      "vendor": "",
+      "category": "Development",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "ubuntu-wsl",
+      "name": "Ubuntu (WSL)",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "archlinux-wsl",
+      "name": "Arch Linux (WSL)",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "event-viewer",
+      "name": "Event Viewer",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "task-scheduler",
+      "name": "Task Scheduler",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "computer-management",
+      "name": "Computer Management",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "resource-monitor",
+      "name": "Resource Monitor",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "performance-monitor",
+      "name": "Performance Monitor",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "system-information",
+      "name": "System Information",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "system-configuration",
+      "name": "System Configuration",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "disk-cleanup",
+      "name": "Disk Cleanup",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "optimize-drives",
+      "name": "Optimize Drives",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": "start:Defragment and Optimize Drives"
+      }
+    },
+    {
+      "id": "component-services",
+      "name": "Component Services",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "odbc-data-sources",
+      "name": "ODBC Data Sources",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "memory-diagnostic",
+      "name": "Memory Diagnostic",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "firewall",
+      "name": "Firewall",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": "start:Windows Defender Firewall with Advanced Security"
+      }
+    },
+    {
+      "id": "local-security-policy",
+      "name": "Local Security Policy",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "windows-backup",
+      "name": "Windows Backup",
+      "vendor": "",
+      "category": "System",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "character-map",
+      "name": "Character Map",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "on-screen-keyboard",
+      "name": "On-Screen Keyboard",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "magnifier",
+      "name": "Magnifier",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
+    },
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "vendor": "",
+      "category": "Utilities",
+      "bin": {
+        "windows": ""
+      }
     }
   ]
 }

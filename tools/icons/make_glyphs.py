@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the 10 generic per-category fallback glyphs (plus the CLI-tool
+"""Generate the 10 generic per-category fallback glyphs (plus the cli-tool
 glyph) as PNG — the uniform format every icon in the app ships as (see
 "Icon format" in SPEC.md).
 
@@ -72,8 +72,8 @@ def main() -> None:
         # invalid XML that silently fails to render.
         svg = SVG_TEMPLATE.format(color=color, label=escape(label), font_size=font_size)
         write_glyph(category, svg)
-    write_glyph("CLI-tool", CLI_SVG)
-    print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph "
+    write_glyph("cli-tool", CLI_SVG)
+    print(f"wrote {len(GLYPHS)} category glyphs + 1 cli-tool glyph "
           f"to {OUT.relative_to(ROOT)} (SVG sources in {GLYPH_SOURCES.relative_to(ROOT)})")
 
 

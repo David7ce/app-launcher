@@ -187,21 +187,38 @@ def guess_category(name: str) -> str:
 ICON_EXTRACT_PS = ROOT / "src-tauri" / "scripts" / "extract_icon.ps1"
 
 
-def extract_exe_icon(exe_path: str, dest_png: Path) -> bool:
+SCRIPTS = ROOT / "src-tauri" / "scripts"
+
+
+def _run_icon_script(script: Path, args: list[str], dest_png: Path) -> bool:
     import subprocess
 
-    if not Path(exe_path).is_file():
-        return False
     try:
         result = subprocess.run(
             ["powershell", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass",
-             "-File", str(ICON_EXTRACT_PS), "-Exe", exe_path, "-Out", str(dest_png)],
+             "-File", str(script), *args, "-Out", str(dest_png)],
             capture_output=True,
-            timeout=30,
+            timeout=60,
         )
     except (OSError, subprocess.TimeoutExpired):
         return False
     return result.returncode == 0 and dest_png.is_file() and dest_png.stat().st_size > 0
+
+
+def extract_exe_icon(exe_path: str, dest_png: Path) -> bool:
+    return Path(exe_path).is_file() and _run_icon_script(ICON_EXTRACT_PS, ["-Exe", exe_path], dest_png)
+
+
+def extract_appx_icon(app_id: str, dest_png: Path) -> bool:
+    """A packaged (Store/MSIX) app's logo, from its manifest — the same script the
+    running app uses for tiles with no shipped icon."""
+    return _run_icon_script(SCRIPTS / "extract_appx_icon.ps1", ["-AppId", app_id], dest_png)
+
+
+def extract_start_icon(app_id: str, dest_png: Path) -> bool:
+    """The shell's own icon for a Start Menu entry (for apps with neither an exe
+    path nor a package manifest)."""
+    return _run_icon_script(SCRIPTS / "extract_start_icon.ps1", ["-AppId", app_id], dest_png)
 
 
 def ico_to_png(ico: str, dest_png: Path) -> bool:
@@ -373,7 +390,7 @@ def read_entry(winreg, entry_key, subkey_name: str) -> dict | None:
 
     clean = clean_name(name)
     return {
-        "id": f"win-{slugify(clean)}",
+        "id": slugify(clean),
         "name": clean,
         "bin": bin_path,
         "category": guess_category(clean),
