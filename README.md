@@ -36,6 +36,7 @@ The catalog (`src/data/catalog.json`) and icons (`src/assets/icons/`) are genera
 
 ```sh
 python -m unittest discover -s tools/tests     # catalog build + scan helpers
+(cd tools/tests/frontend && npm ci && npm test) # the frontend, run under jsdom
 cd src-tauri && cargo test                     # Rust unit tests
 ```
 
@@ -49,7 +50,7 @@ tools/          catalog and icon maintenance; never run by the app
   data/              curated inputs, and the per-OS scan results
   scan/              scan the machine for installed apps (linux.py, windows.py, macos.py)
   icons/             fetch, extract and generate icon files
-  tests/             the Python tests
+  tests/             the Python tests; tests/frontend/ runs src/main.js under jsdom
   dev/               drive_app.js: run JS in the real, running window
 packaging/      Flatpak manifest and the Linux tarball's files
 docs/           RELEASES.md, ROADMAP.md, SPEC.md

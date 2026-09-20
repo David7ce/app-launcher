@@ -5,24 +5,51 @@ What has actually shipped, newest first. For work not yet done, see
 
 ---
 
-## Unreleased
+## v0.4.0 — 2026-09-20
 
-A leaner release pipeline and a tidier repository.
+A leaner release pipeline, a tidier repository, shorter icon names, and every roadmap item that can
+be finished from a Windows machine.
 
 ### Release
 
 - **Four artifacts instead of twelve**: a Windows NSIS installer, an Apple-silicon macOS `.dmg`, a Linux
   `.tar.gz` and a Flatpak. Dropped: the `.msi`, Intel macOS, `.deb`, `.rpm`, AppImage and the Arch package
   (and its `-debug` twin).
-- **The workflow creates the draft release once, up front**, with notes pulled from this file, so the build
-  jobs only upload to it. Cutting a release is now: write the section here, bump the version, tag.
+- **The workflow creates the draft release once, up front**, with notes pulled from `docs/RELEASES.md`, so
+  the build jobs only upload to it. A tag with no notes section fails loudly instead of publishing an empty
+  release. Cutting a release is: write the section here, bump the version, tag.
 - **A smaller, faster Windows build**: NSIS only (no WiX), a size-optimised release profile
-  (`opt-level = "s"`, `strip`, `panic = "abort"`), an `rlib`-only library and no logging plugin.
-  Measured with a warm cache: the Windows job went from 238s to 131s, the Linux job from 179s to 82s; the
-  installers shrank about 10% (Windows 7.5 → 6.8 MB, macOS 8.7 → 7.8 MB). The Flatpak (~7 min, no build
-  cache) is now the slowest job.
-- **A release with no notes fails loudly.** The workflow reads the tag's section of this file, and stops if
-  it is missing instead of publishing an empty release.
+  (`opt-level = "s"`, `strip`, `panic = "abort"`), an `rlib`-only library and no logging plugin. Measured
+  with a warm cache, the Windows job went from 238s to 131s and the Linux job from 179s to 82s; the
+  installers shrank about 10% (Windows 7.5 → 6.8 MB, macOS 8.7 → 7.8 MB).
+- **The Flatpak builds offline**, as Flathub requires: every crate is listed with its checksum in
+  `packaging/flatpak/cargo-sources.json`, and CI checks the file still matches `Cargo.lock`.
+
+### Catalog
+
+- **Icon files are named after the app**: `word.png`, not `win-word.png`. The `win-` prefix is gone from
+  all 73 ids that had it, and each entry keeps its old id in `aka`, so a rename or hide you saved under the
+  old id follows the app.
+- **32 more Windows apps**, previously held back: the LibreOffice apps (Writer, Calc, Impress, Draw, Base,
+  Math), the Windows admin tools (Event Viewer, Services, Task Scheduler, Computer Management, Resource and
+  Performance Monitor, System Information and Configuration, Disk Cleanup, ...), the WSL distros, GRASS and
+  SAGA GIS, CMake, Character Map, Magnifier, Narrator and the on-screen keyboard.
+- **75 more icons ship with the app.** The build now extracts them from the Start Menu (the app's exe, the
+  package's manifest, or the shell's own tile), so a fresh install shows them without extracting anything:
+  246 of 321 Windows entries ship an icon, and only 136 of 440 entries lack one (was 181 of 408).
+
+### Fixes
+
+- **Linux and macOS would have lost the CLI fallback icon.** `main.js` pointed at `CLI-tool.png` while the
+  file is `cli-tool.png`: harmless on Windows, a 404 on a case-sensitive filesystem. It had not been
+  released; the new frontend tests caught it, and a test now checks that every asset path in the frontend
+  matches a real file name exactly.
+
+### Tests
+
+- **The frontend has tests now**: 11 run the real `index.html` and `main.js` under jsdom with a stubbed
+  Tauri bridge — the pills, the column dealing, search, the editor, hiding, the id migration, launching and
+  the icon fallback — in their own CI job. With 37 Python and 14 Rust tests, all of it runs on every push.
 
 ### Repository
 
@@ -32,8 +59,9 @@ A leaner release pipeline and a tidier repository.
 - **Removed what nothing used**: the 27 archived icon SVGs (the fallback-glyph sources are kept), the
   generated `missing_icons.txt`, the unused Windows-Store logos, the Android config, `tauri.linux.conf.json`,
   the mobile entry point, `tauri-plugin-log`, and the Arch packaging.
-- Fewer dependencies and lock-file entries, a stale "no search" line in the README fixed, and SPEC's packaging
-  and CI sections rewritten to match.
+
+**Known limits:** macOS has never run on real hardware, and the Linux tarball and Flatpak have not been
+installed on a real system. See [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
