@@ -674,7 +674,7 @@
     "bin": {
       "windows": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe"
     },
-    "icon": "win-visual-studio-community-2022.png",
+    "icon": "win-visual-studio.png",
     "hidden": false,
     "cli": false
   },
@@ -755,7 +755,7 @@
       "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\Zed\\Zed.exe",
       "macos": "Zed"
     },
-    "icon": "win-zed.png",
+    "icon": "zed.png",
     "hidden": false,
     "cli": false
   },
@@ -859,7 +859,7 @@
       "linux": "lucaschess",
       "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\LucasChessR\\bin\\LucasR.exe"
     },
-    "icon": "win-lucas-chess.png",
+    "icon": "lucaschess.png",
     "hidden": false,
     "cli": false
   },
@@ -900,7 +900,7 @@
       "macos": "Pcsx2",
       "windows": "C:\\Program Files\\PCSX2\\pcsx2-qt.exe"
     },
-    "icon": "win-pcsx2.png",
+    "icon": "pcsx2.png",
     "hidden": false,
     "cli": false
   },
@@ -1031,7 +1031,7 @@
       "windows": "C:\\Program Files\\darktable\\bin\\darktable.exe",
       "macos": "Darktable"
     },
-    "icon": "win-darktable.png",
+    "icon": "darktable.png",
     "hidden": false,
     "cli": false
   },
@@ -1045,7 +1045,7 @@
       "windows": "C:\\Program Files\\digiKam\\digikam.exe",
       "macos": "Digikam"
     },
-    "icon": "win-digikam.png",
+    "icon": "digikam.png",
     "hidden": false,
     "cli": false
   },
@@ -1239,7 +1239,7 @@
       "linux": "rapidraw",
       "windows": "C:\\Users\\d7\\AppData\\Local\\RapidRAW\\RapidRAW.exe"
     },
-    "icon": "win-rapidraw.png",
+    "icon": "rapidraw.png",
     "hidden": false,
     "cli": false
   },
@@ -1315,7 +1315,7 @@
       "windows": "C:\\Program Files\\Upscayl\\Upscayl.exe",
       "macos": "Upscayl"
     },
-    "icon": "win-upscayl.png",
+    "icon": "upscayl.png",
     "hidden": false,
     "cli": false
   },
@@ -1637,18 +1637,6 @@
       "macos": "Opera"
     },
     "icon": "opera.png",
-    "hidden": false,
-    "cli": false
-  },
-  {
-    "id": "org.kde.pimdataexporter",
-    "name": "PIM Data Exporter",
-    "vendor": "",
-    "category": "Internet",
-    "bin": {
-      "linux": "pimdataexporter"
-    },
-    "icon": "org.kde.pimdataexporter.png",
     "hidden": false,
     "cli": false
   },
@@ -1998,7 +1986,7 @@
       "macos": "Handy",
       "windows": "C:\\Users\\d7\\AppData\\Local\\Handy\\handy.exe"
     },
-    "icon": "win-handy.png",
+    "icon": "handy.png",
     "hidden": false,
     "cli": false
   },
@@ -2036,7 +2024,7 @@
       "linux": "iptvnator",
       "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\iptvnator\\IPTVnator.exe"
     },
-    "icon": "win-iptvnator.png",
+    "icon": "iptvnator.png",
     "hidden": false,
     "cli": false
   },
@@ -2128,7 +2116,7 @@
       "linux": "mpc-hc",
       "windows": "C:\\Program Files\\MPC-HC\\mpc-hc64.exe"
     },
-    "icon": "win-mpc-hc.png",
+    "icon": "mpc-hc.png",
     "hidden": false,
     "cli": false
   },
@@ -2805,7 +2793,7 @@
       "linux": "koodoreader",
       "windows": "C:\\Users\\d7\\AppData\\Local\\Programs\\koodo-reader\\Koodo Reader.exe"
     },
-    "icon": "win-koodo-reader.png",
+    "icon": "koodoreader.png",
     "hidden": false,
     "cli": false
   },
@@ -4309,7 +4297,7 @@
       "macos": "Freefilesync",
       "windows": "C:\\Program Files\\FreeFileSync\\FreeFileSync.exe"
     },
-    "icon": "win-freefilesync.png",
+    "icon": "freefilesync.png",
     "hidden": false,
     "cli": false
   },
@@ -4362,7 +4350,7 @@
       "windows": "C:\\Program Files\\GPXSee\\gpxsee.exe",
       "macos": "Gpxsee"
     },
-    "icon": "win-gpxsee.png",
+    "icon": "gpxsee.png",
     "hidden": false,
     "cli": false
   },
@@ -4537,7 +4525,7 @@
       "linux": "megasync",
       "windows": "C:\\Users\\d7\\AppData\\Local\\MEGAsync\\MEGAsync.exe"
     },
-    "icon": "win-megasync.png",
+    "icon": "mega.png",
     "hidden": false,
     "cli": false
   },

@@ -33,8 +33,8 @@ The catalog (`src/data/catalog.json`) and icons (`src/assets/icons/`) are pre-ge
 
 ## Docs
 
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) — phases, current status, what's next.
-- [`docs/PLAN.md`](docs/PLAN.md) — the original implementation plan (context, file layout, build steps, verification).
+- [`docs/RELEASES.md`](docs/RELEASES.md) — what has shipped, per release.
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — pending work only.
 - [`docs/SPEC.md`](docs/SPEC.md) — technical spec: categories, catalog schema, Rust commands, icon pipeline.
 
 ## Platform status

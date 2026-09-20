@@ -15,6 +15,10 @@ ROOT = Path(__file__).resolve().parent.parent
 SOURCES = ROOT / "tools" / "sources"
 OUT = ROOT / "src" / "data" / "catalog.json"
 ICONS_DIR = ROOT / "src" / "assets" / "icons"
+# Icons extracted by a system scan are staged here by the scan script (which
+# doesn't know an app's final catalog id), then copied into ICONS_DIR under
+# the id that actually references them — see `place_scan_icons`.
+ICON_CACHE = ROOT / "tools" / "icon_cache"
 
 
 def default_icon(app_id: str) -> str:
@@ -220,21 +224,64 @@ def merge_system_scan(by_bin: dict[str, dict], entries: list[dict], os_key: str)
             # actually vendored, which renders as a placeholder. The scan
             # extracted a real icon from the exe's own resources, so prefer
             # it whenever the curated file isn't actually on disk.
-            scan_icon = entry.get("icon")
+            scan_icon = entry.get("icon_source")
             if scan_icon and not (ICONS_DIR / (existing.get("icon") or "")).exists():
-                existing["icon"] = scan_icon
+                existing["_scan_icon"] = scan_icon
             continue
-        by_bin[key] = {
+        new_entry = {
             "id": entry["id"],
             "name": entry["name"],
             "vendor": "",
             "category": entry["category"],
             "bin": bin_obj,
-            "icon": entry["icon"] or f"{entry['id']}.png",
+            "icon": f"{entry['id']}.png",
             "hidden": False,
             "cli": cli,
         }
+        # A staged icon is applied by `place_scan_icons` under the final
+        # `<id>.png` name, same as for a matched entry.
+        if entry.get("icon_source"):
+            new_entry["_scan_icon"] = entry["icon_source"]
+        by_bin[key] = new_entry
     return new_count
+
+
+def place_scan_icons(entries: list[dict]) -> tuple[int, int]:
+    """Copy scan-staged icons into ICONS_DIR as `<catalog-id>.png`, and
+    delete any icon file no longer referenced by the catalog.
+
+    Keeps `src/assets/icons/` self-consistent: every file is named after the
+    id that uses it, and nothing is left behind. Before this, the Windows
+    scan named files after the *registry* display name, so a file like
+    `win-microsoft-visual-studio-code-user.png` was referenced by the entry
+    `visual-studio-code` — nothing linked the two but the JSON — and every
+    app the catalog later dropped left an orphan behind (62 of them, 1.4 MB).
+    """
+    import shutil
+
+    placed = 0
+    for entry in entries:
+        staged = entry.pop("_scan_icon", None)
+        if not staged:
+            continue
+        src = ICON_CACHE / staged
+        if not src.exists():
+            continue
+        dest = ICONS_DIR / f"{entry['id']}.png"
+        entry["icon"] = dest.name
+        shutil.copy(src, dest)
+        placed += 1
+
+    referenced = {e["icon"] for e in entries if e.get("icon")}
+    pruned = 0
+    # Only top-level files: category/ holds the fallback glyphs, which are
+    # referenced by convention (`category/<Category>.png`) rather than from
+    # any catalog entry's `icon` field.
+    for path in ICONS_DIR.glob("*"):
+        if path.is_file() and path.name not in referenced:
+            path.unlink()
+            pruned += 1
+    return placed, pruned
 
 
 def dedupe_key(entry: dict) -> str | None:
@@ -275,6 +322,7 @@ EXCLUDED_IDS = {
     "org.kde.headerthemeeditor",
     "org.kde.sieveeditor",
     "org.kde.akonadiimportwizard",
+    "org.kde.pimdataexporter",  # Kontact's export sub-tool, same icon/app as Kontact itself
     "org.freedesktop.GnomeAbrt",  # "Problem Reporting" crash applet, not a real app
     "org.kde.drkonqi.coredump.gui",  # "Crashed Processes Viewer" — same idea, KDE's version
     "org.kde.plasma-welcome",  # "Welcome Center" — first-run onboarding screen, not an app
@@ -357,10 +405,12 @@ def main() -> None:
         (e for e in by_bin.values() if e["id"] not in EXCLUDED_IDS),
         key=lambda e: (e["category"], e["name"].lower()),
     )
+    icons_placed, icons_pruned = place_scan_icons(result)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n")
 
     print(f"wrote {len(result)} entries to {OUT.relative_to(ROOT)}")
+    print(f"icons: {icons_placed} placed as <id>.png, {icons_pruned} orphaned file(s) pruned")
     print(f"skipped {len(skipped_no_linux_bin)} dataset entries with no plausible Linux bin "
           f"(flatpak/macOS/Windows-only in the source data)")
     if dropped_dupes:

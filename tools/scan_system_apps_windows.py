@@ -29,7 +29,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ICONS_DIR = ROOT / "src" / "assets" / "icons"
+# Staging area for extracted icons — build_catalog.py copies the ones that
+# end up referenced into src/assets/icons/ under their final `<id>.png` name.
+ICON_CACHE = ROOT / "tools" / "icon_cache"
 OUT = ROOT / "tools" / "sources" / "system_apps_windows.json"
 
 # Registry Uninstall entries include a lot that isn't a launchable app:
@@ -299,7 +301,7 @@ def main() -> None:
         print("this script only runs on Windows (needs the winreg module) — nothing to do here")
         return
 
-    ICONS_DIR.mkdir(parents=True, exist_ok=True)
+    ICON_CACHE.mkdir(parents=True, exist_ok=True)
     seen_ids = set()
     results = []
     icons_copied = icons_missing = 0
@@ -309,24 +311,32 @@ def main() -> None:
             continue
         seen_ids.add(entry["id"])
         icon_path = entry.pop("icon_path")
-        dest_png = ICONS_DIR / f"win-{slugify(entry['name'])}.png"
+        # Icons are staged in tools/icon_cache/, NOT written into
+        # src/assets/icons/ directly: this scan doesn't know the app's final
+        # catalog id (the catalog merges a scanned app into a curated entry,
+        # e.g. "Microsoft Visual Studio Code (User)" -> `visual-studio-code`).
+        # Naming the shipped file here produced names like
+        # `win-microsoft-visual-studio-code-user.png` that no longer matched
+        # the id referencing them, plus an orphan for every app the catalog
+        # later dropped. build_catalog.py does the final `<id>.png` naming.
+        dest_png = ICON_CACHE / f"{slugify(entry['name'])}.png"
         # Prefer the exe's own embedded icon at its largest size — that's the
         # real app artwork and works for essentially every installed program,
         # unlike DisplayIcon, which usually points at the exe's resource and
         # is therefore not a standalone .ico file at all. The .ico path is
         # kept as a cheap fallback for the rare entry that ships one.
         if extract_exe_icon(entry["bin"], dest_png):
-            entry["icon"] = dest_png.name
+            entry["icon_source"] = dest_png.name
             icons_copied += 1
         elif icon_path:
             import shutil
-            dest_ico = ICONS_DIR / f"win-{slugify(entry['name'])}.ico"
+            dest_ico = ICON_CACHE / f"{slugify(entry['name'])}.ico"
             if not dest_ico.exists():
                 shutil.copy(icon_path, dest_ico)
-            entry["icon"] = dest_ico.name
+            entry["icon_source"] = dest_ico.name
             icons_copied += 1
         else:
-            entry["icon"] = None
+            entry["icon_source"] = None
             icons_missing += 1
         results.append(entry)
 
