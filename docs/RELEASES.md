@@ -53,6 +53,18 @@ Also in this release:
 shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
 `ROADMAP.md`.
 
+**Artifacts** (all built and published by CI, on a re-run — see below):
+`.deb`, `.rpm`, `.AppImage`, Arch `.pkg.tar.zst`, Flatpak, `.msi`, NSIS
+`.exe`, and `.dmg`/`.app` for macOS.
+
+> The first v0.2.0 CI run failed the Arch job: the version bump in
+> `Cargo.toml` was committed but `Cargo.lock` was regenerated only afterwards,
+> so the tagged commit had a stale lock file. The PKGBUILD builds with
+> `--locked`, which refuses to update it, so the build aborted. The tag was
+> moved forward to the commit with the consistent lock file and all five jobs
+> went green. **Lesson: after a version bump, run a build before tagging** so
+> `Cargo.lock` is committed alongside `Cargo.toml`.
+
 ---
 
 ## v0.1.1 — 2026-09-11

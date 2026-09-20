@@ -49,9 +49,17 @@ CI proves every installer *builds*. None has been installed and launched.
 - [ ] **Install and run each artifact on a real system**: `.deb`, `.rpm`,
       Arch `.pkg.tar.zst`, Flatpak, `.msi`/NSIS, `.dmg`. The Linux RPM was
       built and inspected (`rpm -qip`/`-qlp`) but never `rpm -i`'d.
+- [ ] **Fix `cargo tauri build` when run locally on Windows/macOS.**
+      `tauri.conf.json` pins `bundle.targets` to `["appimage", "rpm"]`, which
+      are Linux-only — so a plain local build on Windows or macOS has no valid
+      target. CI is unaffected because it passes `--bundles` explicitly, but a
+      local build appears to complete without producing an installer. Needs a
+      per-platform default (or documentation telling people to pass
+      `--bundles`).
 - [ ] **Cut a real version-tagged release and confirm the artifacts.** v0.2.0's
-      tag was pushed, so CI ran, but the resulting packages have not been
-      downloaded and tried.
+      tag was pushed and all five CI jobs went green, but the resulting
+      packages have not been downloaded and tried, and the GitHub Release is
+      still a **draft** awaiting manual publishing.
 - [ ] **Flathub-compliant Flatpak.** The current manifest builds with network
       access allowed, which is fine for direct `.flatpak` distribution but
       would be rejected by Flathub. Needs an offline/sandboxed rebuild via

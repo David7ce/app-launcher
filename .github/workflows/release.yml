@@ -19,8 +19,17 @@ jobs:
             args: "--bundles deb,rpm,appimage"
           - platform: windows-latest
             args: "--bundles nsis,msi"
+          # Both macOS architectures. `macos-latest` is Apple Silicon, so
+          # without the second entry Intel Macs got no build at all — the
+          # v0.2.0 release shipped an aarch64 .dmg only. Cross-compiling
+          # x86_64 from the same arm64 runner is well supported; `targets:`
+          # below installs the extra Rust target.
           - platform: macos-latest
-            args: "--bundles dmg,app"
+            target: aarch64-apple-darwin
+            args: "--bundles dmg,app --target aarch64-apple-darwin"
+          - platform: macos-latest
+            target: x86_64-apple-darwin
+            args: "--bundles dmg,app --target x86_64-apple-darwin"
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +42,8 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
 
       - uses: Swatinem/rust-cache@v2
         with:
