@@ -49,13 +49,29 @@ Also in this release:
   catalog later dropped left an orphan behind (62 files, 1.4 MB). `build_catalog.py`
   now prunes anything unreferenced.
 
+**Artifacts** (all built and published by CI): `.deb`, `.rpm`, `.AppImage`,
+Arch `.pkg.tar.zst`, Flatpak, `.msi`, NSIS `.exe`, and `.dmg`/`.app` for
+macOS.
+
 **Known gap:** Windows resolution is still `$PATH`-only, so Start Menu
 shortcuts, the registry `App Paths` key and UWP/Store packages are missed. See
 `ROADMAP.md`.
 
-**Artifacts** (all built and published by CI, on a re-run — see below):
-`.deb`, `.rpm`, `.AppImage`, Arch `.pkg.tar.zst`, Flatpak, `.msi`, NSIS
-`.exe`, and `.dmg`/`.app` for macOS.
+### Post-release fixes (on `master`, not yet tagged)
+
+- **Windows resolution now consults the registry's `App Paths` key**, not just
+  `$PATH`. Most GUI installers register there and nowhere on `$PATH`, so
+  several installed apps were reported as absent — VLC, Inkscape and four
+  Office apps (Word, Excel, PowerPoint, OneNote) all failed to appear.
+  86 → 92 of 210 Windows entries now resolve. `launch_app` resolves to the
+  full path before spawning, since a bare executable name fails even when the
+  app was just reported as present.
+- **`tools/backfill_icons.py`** fills in icons for apps that resolve outside
+  the registry's Uninstall keys (which is all the system scan can see) —
+  12 more, including all four Office apps and VLC.
+- **macOS now builds for both architectures.** `macos-latest` is Apple
+  Silicon, so the v0.2.0 release shipped an `aarch64` `.dmg` only and Intel
+  Macs had nothing; an explicit `x86_64-apple-darwin` build was added.
 
 > The first v0.2.0 CI run failed the Arch job: the version bump in
 > `Cargo.toml` was committed but `Cargo.lock` was regenerated only afterwards,

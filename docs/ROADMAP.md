@@ -30,17 +30,18 @@ The largest remaining gap. Every macOS code path is unverified.
 
 ## Windows — remaining gaps
 
-Windows now runs and launches apps (v0.2.0), but only finds things on `$PATH`.
+Windows runs, launches apps, and resolves beyond `$PATH` (v0.2.x).
 
-- [ ] **Resolve apps beyond `$PATH`.** Currently misses Start Menu shortcuts,
-      the registry `App Paths` key, and UWP/Store packages
-      (`shell:AppsFolder`) — which is most GUI software on Windows.
+- [ ] **Resolve Start Menu shortcuts and UWP/Store packages.** The registry's
+      `App Paths` key is now consulted, which covers most classic GUI
+      installers, but Start Menu `.lnk` targets and `shell:AppsFolder`
+      packages are still missed. On this machine that is ~19 further apps
+      (Discord, LibreOffice, Node.js, QGIS, KeePassXC, VirtualBox, ...).
 - [ ] **Verify the `cmd /k` CLI-tool path** on real hardware. Written by
       analogy with the Linux terminal wrapping, never exercised.
-- [ ] **Convert `.ico`-only icons properly.** Icons now come from the `.exe`'s
-      embedded resources, but a DisplayIcon that points at a standalone `.ico`
-      is still only copied, not converted — and a few apps still fall back to
-      the category glyph.
+- [ ] **Convert `.ico`-only icons properly.** Icons come from the `.exe`'s
+      embedded resources, but a DisplayIcon pointing at a standalone `.ico`
+      is still only copied, not converted.
 
 ## Packaging — nothing has been installed from a real package
 
