@@ -18,6 +18,11 @@ A leaner release pipeline and a tidier repository.
   jobs only upload to it. Cutting a release is now: write the section here, bump the version, tag.
 - **A smaller, faster Windows build**: NSIS only (no WiX), a size-optimised release profile
   (`opt-level = "s"`, `strip`, `panic = "abort"`), an `rlib`-only library and no logging plugin.
+  Measured with a warm cache: the Windows job went from 238s to 131s, the Linux job from 179s to 82s; the
+  installers shrank about 10% (Windows 7.5 → 6.8 MB, macOS 8.7 → 7.8 MB). The Flatpak (~7 min, no build
+  cache) is now the slowest job.
+- **A release with no notes fails loudly.** The workflow reads the tag's section of this file, and stops if
+  it is missing instead of publishing an empty release.
 
 ### Repository
 

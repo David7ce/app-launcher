@@ -38,6 +38,12 @@ jobs:
             prerelease=false
             # This version's section of docs/RELEASES.md, without its heading.
             notes=$(awk -v h="## $tag" 'index($0, h) == 1 { on = 1; next } on && /^---$/ { exit } on' docs/RELEASES.md)
+            if [[ -z "${notes//[[:space:]]/}" ]]; then
+              echo "::error::docs/RELEASES.md has no '## $tag' section - write the release notes before tagging."
+              exit 1
+            fi
+            # Relative links to sibling docs would break on the Releases page.
+            notes=${notes//](ROADMAP.md)/](https://github.com/$GITHUB_REPOSITORY/blob/master/docs/ROADMAP.md)}
           else
             tag="dev-$GITHUB_RUN_NUMBER"
             prerelease=true
