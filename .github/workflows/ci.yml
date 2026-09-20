@@ -64,3 +64,27 @@ jobs:
           python-version: "3.13"
       - name: Catalog/scan tests
         run: python -m unittest discover -s tools/tests
+
+      # The Flatpak builds offline from this list, so it must track Cargo.lock.
+      - name: Flatpak cargo-sources.json matches Cargo.lock
+        run: |
+          pip install --quiet aiohttp PyYAML tomlkit
+          curl -sSfL -o /tmp/generator.py https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/f03a673abe6ce189cea1c2857e2b44af2dd79d1f/cargo/flatpak-cargo-generator.py
+          python /tmp/generator.py src-tauri/Cargo.lock -o /tmp/cargo-sources.json
+          diff /tmp/cargo-sources.json packaging/flatpak/cargo-sources.json
+
+  # src/main.js under jsdom with a stubbed Tauri bridge: the pills, column layout,
+  # editor, override migration and icon fallback. Test-only; nothing here ships.
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tools/tests/frontend/package-lock.json
+      - run: npm ci
+        working-directory: tools/tests/frontend
+      - run: npm test
+        working-directory: tools/tests/frontend

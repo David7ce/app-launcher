@@ -12,3 +12,6 @@ tools/icons/cache/
 
 # Local build output
 build.log
+
+# Frontend test dependencies
+node_modules/

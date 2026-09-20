@@ -1,0 +1,12 @@
+{
+  "name": "app-launcher-frontend-tests",
+  "private": true,
+  "type": "module",
+  "description": "Runs src/main.js under jsdom with a stubbed Tauri bridge. Test-only; nothing here ships.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.0"
+  }
+}
