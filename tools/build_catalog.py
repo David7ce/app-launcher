@@ -259,9 +259,23 @@ def place_scan_icons(entries: list[dict]) -> tuple[int, int]:
     """
     import shutil
 
+    def slugify(value: str) -> str:
+        slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+        return slug or "app"
+
     placed = 0
     for entry in entries:
         staged = entry.pop("_scan_icon", None)
+        # A scan only supplies icons for apps it discovered itself. Anything
+        # that resolved some other way — e.g. an Office app found via the
+        # registry's App Paths key rather than the Uninstall keys — has no
+        # staged icon from that path, but `backfill_icons.py` may have put one
+        # in the cache keyed by the entry's own id. Use it when the entry
+        # still has no icon file on disk.
+        if not staged and not (ICONS_DIR / f"{entry['id']}.png").exists():
+            candidate = ICON_CACHE / f"{slugify(entry['id'])}.png"
+            if candidate.exists():
+                staged = candidate.name
         if not staged:
             continue
         src = ICON_CACHE / staged
