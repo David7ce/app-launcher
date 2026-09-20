@@ -72,7 +72,7 @@ def main() -> None:
         # invalid XML that silently fails to render.
         svg = SVG_TEMPLATE.format(color=color, label=escape(label), font_size=font_size)
         write_glyph(category, svg)
-    write_glyph("cli-tool", CLI_SVG)
+    write_glyph("CLI-tool", CLI_SVG)
     print(f"wrote {len(GLYPHS)} category glyphs + 1 CLI-tool glyph "
           f"to {OUT.relative_to(ROOT)} (SVG sources in {GLYPH_SOURCES.relative_to(ROOT)})")
 

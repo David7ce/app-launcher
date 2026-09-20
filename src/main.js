@@ -79,7 +79,7 @@ function iconPath(app) {
 // What a tile shows when it has no icon of its own: CLI tools get the terminal
 // glyph, everything else its category's.
 function fallbackIconPath(app) {
-  return app.cli ? "assets/icons/category/cli-tool.png" : categoryIconPath(app.category);
+  return app.cli ? "assets/icons/category/CLI-tool.png" : categoryIconPath(app.category);
 }
 
 function effective(app) {

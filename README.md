@@ -15,11 +15,11 @@ Built with Tauri (Rust backend, plain HTML/CSS/JS frontend, no npm framework). L
 
 Download from the [Releases page](https://github.com/David7ce/app-launcher/releases):
 
-| Platform | File |
-|---|---|
-| Windows | `app-launcher_<version>_x64-setup.exe` (NSIS installer) |
-| macOS (Apple silicon only) | `app-launcher_<version>_aarch64.dmg` |
-| Linux | `app-launcher-<version>-linux-x86_64.tar.gz` (needs GTK 3 and WebKitGTK 4.1) or `app-launcher.flatpak` |
+| Platform                   | File                                                                                                   |
+|----------------------------|--------------------------------------------------------------------------------------------------------|
+| Windows                    | `app-launcher_<version>_x64-setup.exe` (NSIS installer)                                                |
+| macOS (Apple silicon only) | `app-launcher_<version>_aarch64.dmg`                                                                   |
+| Linux                      | `app-launcher-<version>-linux-x86_64.tar.gz` (needs GTK 3 and WebKitGTK 4.1) or `app-launcher.flatpak` |
 
 ## Building from source
 
@@ -66,13 +66,13 @@ docs/           RELEASES.md, ROADMAP.md, SPEC.md
 The code is MIT-licensed ([`LICENSE`](LICENSE)). The icons in `src/assets/icons/` are not part of
 that grant — they are other people's artwork, used only to identify the app they belong to:
 
-| Source | Used for | License |
-|---|---|---|
-| [dashboard-icons](https://github.com/homarr-labs/dashboard-icons) | most app icons | Apache-2.0 |
-| [Simple Icons](https://github.com/simple-icons/simple-icons) (via Iconify) | brand marks | CC0-1.0 for the collection |
-| [KDE breeze-icons](https://github.com/KDE/breeze-icons) | KDE application icons | LGPL-2.1 |
-| Extracted from installed apps | icons taken from an app's own executable or package at build time | the app's own license |
-| Hand-drawn category and CLI glyphs (`category/`) | the fallback tiles | MIT, like the code |
+| Source                                                                     | Used for                                                          | License                    |
+|----------------------------------------------------------------------------|-------------------------------------------------------------------|----------------------------|
+| [dashboard-icons](https://github.com/homarr-labs/dashboard-icons)          | most app icons                                                    | Apache-2.0                 |
+| [Simple Icons](https://github.com/simple-icons/simple-icons) (via Iconify) | brand marks                                                       | CC0-1.0 for the collection |
+| [KDE breeze-icons](https://github.com/KDE/breeze-icons)                    | KDE application icons                                             | LGPL-2.1                   |
+| Extracted from installed apps                                              | icons taken from an app's own executable or package at build time | the app's own license      |
+| Hand-drawn category and CLI glyphs (`category/`)                           | the fallback tiles                                                | MIT, like the code         |
 
 All product names, logos and trademarks belong to their respective owners; their presence here
 implies no affiliation or endorsement. If you are a rights holder and want an icon removed, open
@@ -80,11 +80,11 @@ an issue.
 
 ## Platform status
 
-| Platform | Status |
-|---|---|
-| Linux | Verified — full run, launch, icons, packaging |
-| Windows | **Verified** — app runs, 68 installed apps detected with real icons, click-to-launch works |
-| macOS | Code complete, CI-built only — never run on real hardware |
+| Platform | Status                                                                                     |
+|----------|--------------------------------------------------------------------------------------------|
+| Linux    | Verified — full run, launch, icons, packaging                                              |
+| Windows  | **Verified** — app runs, 68 installed apps detected with real icons, click-to-launch works |
+| macOS    | Code complete, CI-built only — never run on real hardware                                  |
 
 Run `tools/scan_system_apps_windows.py` on Windows to pick up what's actually
 installed on that machine (it reads the registry's Uninstall keys and pulls
