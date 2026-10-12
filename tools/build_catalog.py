@@ -171,6 +171,12 @@ BIN_OVERRIDES: dict[str, dict[str, str]] = {
     # Store *stub* in WindowsApps (present even when Python isn't installed);
     # the real interpreter is python.exe.
     "python": {"windows": "python.exe"},
+    # The Linux bin is "llama.cpp" (its AUR package name), which guess_windows_bin()
+    # rejects for the dot and falls back to "" (find-by-Start-Menu-name). But
+    # llama.cpp ships as a bare zip of exes with no installer and no Start Menu
+    # entry, so it could never resolve and never appeared in the list. It's
+    # distributed as llama-cli.exe since the pre-b3516 "main.exe" rename.
+    "llama-cpp": {"windows": "llama-cli.exe"},
 }
 
 

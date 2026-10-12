@@ -384,7 +384,7 @@
     "category": "Development",
     "bin": {
       "linux": "llama.cpp",
-      "windows": "",
+      "windows": "llama-cli.exe",
       "macos": "Llama.cpp"
     },
     "icon": "llama-cpp.png",
