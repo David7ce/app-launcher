@@ -53,13 +53,13 @@ tools/          catalog and icon maintenance; never run by the app
   tests/             the Python tests; tests/frontend/ runs src/main.js under jsdom
   dev/               drive_app.js: run JS in the real, running window
 packaging/      Flatpak manifest and the Linux tarball's files
-docs/           RELEASES.md, ROADMAP.md, SPEC.md
+docs/           RELEASES.md, SPEC.md
 ```
 
 ## Docs
 
 - [`docs/RELEASES.md`](docs/RELEASES.md) — what has shipped, per release.
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) — pending work only.
+- Pending work: AgenticHub/projects/working/ROADMAP.md.
 - [`docs/SPEC.md`](docs/SPEC.md) — technical spec: categories, catalog schema, Rust commands, icon pipeline.
 
 ## Third-party assets and licenses
