@@ -59,7 +59,7 @@ docs/           RELEASES.md, SPEC.md
 ## Docs
 
 - [`docs/RELEASES.md`](docs/RELEASES.md) — what has shipped, per release.
-- Pending work: AgenticHub/projects/working/ROADMAP.md.
+- Pending work: AgenticHub/workspace-panel/working/ROADMAP.md.
 - [`docs/SPEC.md`](docs/SPEC.md) — technical spec: categories, catalog schema, Rust commands, icon pipeline.
 
 ## Third-party assets and licenses
